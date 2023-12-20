@@ -1,9 +1,9 @@
-
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![npm version](https://badge.fury.io/js/primevue.svg)](https://badge.fury.io/js/primevue)
 [![Discord Chat](https://img.shields.io/discord/557940238991753223.svg?color=7289da&label=chat&logo=discord)](https://discord.gg/gzKFYnpmCY)
+[![Prime Discussions](https://img.shields.io/github/discussions-search?query=org%3Aprimefaces&logo=github&label=Prime%20Discussions&link=https%3A%2F%2Fgithub.com%2Forgs%2Fprimefaces%2Fdiscussions)](https://github.com/orgs/primefaces/discussions)
 
-[![PrimeVue Hero](https://user-images.githubusercontent.com/686247/138925407-2a7e916d-c674-4fb5-b721-1dd41a8eeebc.jpg)](https://primevue.org/)
+[![PrimeVue Hero](https://www.primefaces.org/static/social/primevue-preview.jpg)](https://primevue.org/)
 
 # PrimeVue
 
@@ -13,20 +13,23 @@ PrimeVue is a rich set of open source UI Components for Vue. See [PrimeVue homep
 
 PrimeVue is available at [npm](https://www.npmjs.com/package/primevue).
 
-````
-// with npm
+```
+# Using npm
 npm install primevue
 
-// with yarn
+# Using yarn
 yarn add primevue
-````
+
+# Using pnpm
+pnpm add primevue
+```
 
 ## Plugin
 
 PrimeVue plugin is required to be installed with the **use** function to set up the default [configuration](https://primevue.org/theming).
 
 ```javascript
-import {createApp} from 'vue';
+import { createApp } from 'vue';
 import PrimeVue from 'primevue/config';
 const app = createApp(App);
 
@@ -34,6 +37,7 @@ app.use(PrimeVue);
 ```
 
 ## Theming
+
 PrimeVue has two theming has modes; styled or unstyled.
 
 **Styled Mode**
@@ -42,15 +46,7 @@ Styled mode is based on pre-skinned components with opinionated themes like Mate
 
 ```javascript
 // theme
-import 'primevue/resources/themes/lara-light-blue/theme.css';
-```
-
-Each PrimeVue theme has its own font family so it is suggested to apply it to your application for a unified look.
-
-```
-body {
-    font-family: var(--font-family);
-}
+import 'primevue/resources/themes/lara-light-green/theme.css';
 ```
 
 **Unstyled Mode**
@@ -58,8 +54,8 @@ body {
 Unstyled mode is disabled by default for all components. Using the PrimeVue plugin during installation, set `unstyled` as true to enable it globally. Visit the [Unstyled mode](https://primevue.org/unstyled) documentation for more information and examples.
 
 ```javascript
-import { createApp } from "vue";
-import PrimeVue from "primevue/config";
+import { createApp } from 'vue';
+import PrimeVue from 'primevue/config';
 const app = createApp(App);
 
 app.use(PrimeVue, { unstyled: true });
@@ -70,16 +66,15 @@ app.use(PrimeVue, { unstyled: true });
 Each component can be imported individually so that you only bundle what you use. Import path is available in the documentation of the corresponding component.
 
 ```javascript
-import Button from "primevue/button"
+import Button from 'primevue/button';
 
 const app = createApp(App);
 app.component('Button', Button);
 ```
 
-
 ## Prop Cases
 
-Component prop names are described as camel case throughout the documentation however kebap-case is also fully supported. Events on the other hand should always be kebap-case.
+Component prop names are described as camel case throughout the documentation however kebab-case is also fully supported. Events on the other hand should always be kebab-case.
 
 ```vue
 <Dialog :showHeader="false"></Dialog>
@@ -89,65 +84,69 @@ Component prop names are described as camel case throughout the documentation ho
 <Dialog :show-header="false"></Dialog>
 ```
 
-
 ## Nuxt Integration
 
-PrimeVue can easily be used with Nuxt 3 using a custom plugin.
+The [nuxt-primevue](https://www.npmjs.com/package/nuxt-primevue) package is the official module by PrimeTek.
 
-**nuxt.config.js**
+```
+# Using npm
+npm install --save-dev nuxt-primevue
 
-Open the nuxt configuration file and add the css dependencies.
+# Using yarn
+yarn add --dev nuxt-primevue
+
+# Using pnpm
+pnpm add -D nuxt-primevue
+```
+
+The module is enabled by adding `nuxt-primevue` to the modules option. Configuration values are defined with the `primevue` property.
 
 ```javascript
 export default defineNuxtConfig({
-    css: [
-        "primevue/resources/themes/lara-light-blue/theme.css"
-    ],
-    build: {
-      transpile: ["primevue"]
+    modules: ['nuxt-primevue'],
+    primevue: {
+        /* Options */
     }
-})
-```
-
-**primevue.js**
-
-Create a file like **primevue.js** under the plugins directory for the configuration.
-
-```javascript
-import { defineNuxtPlugin } from "#app";
-import PrimeVue from "primevue/config";
-import Button from "primevue/button";
-
-export default defineNuxtPlugin((nuxtApp) => {
-    nuxtApp.vueApp.use(PrimeVue, {ripple: true});
-    nuxtApp.vueApp.component('Button', Button);
-    //other components that you need
 });
 ```
+
+Whether to install the PrimeVue plugin, defaults to true. Disable this option if you prefer to configure PrimeVue manually e.g. with a Nuxt plugin.
+
+```javascript
+primevue: {
+    usePrimeVue: true;
+}
+```
+
+The names of the components, directives and composables to import and register are provided using the include property. When the value is ignored or set using the \* alias, all of the components, directives and composables are registered respectively.
+
+```javascript
+primevue: {
+    components: {
+        include: ['Button', 'DataTable']
+    },
+    directives: {
+        include: ['Ripple', 'Tooltip']
+    },
+    composables: {
+        include: ['useStyle']
+    }
+}
+```
+
+In styled mode, the theme can be defined at Nuxt configuration with the css property. Note that this only applies to styled mode, in unstyled mode a theme file is not required as styling is done externally.
+
+```javascript
+export default defineNuxtConfig({
+    css: ['primevue/resources/themes/lara-dark-green/theme.css']
+});
+```
+
+For detailed [information](https://primevue.org/nuxt)
 
 ## Example
 
 We've created various samples for the popular options in the Vue ecosystem. Visit the [primevue-examples](https://github.com/primefaces/primevue-examples) repository for the samples.
-
-### Vite
-<a href="https://github.com/primefaces/primevue-examples/tree/main/vite-quickstart">
-  <img src="https://primefaces.org/cdn/primevue/images/logos/vite.svg" alt="vite" width="112" height="112">
-</a>
-
-### Nuxt
-<a href="https://github.com/primefaces/primevue-examples/tree/main/nuxt3-quickstart">
-  <img src="https://primefaces.org/cdn/primevue/images/logos/nuxt.svg" alt="nuxt" width="112" height="112">
-</a>
-
-### Vue-CLI
-<a href="https://github.com/primefaces/primevue-quickstart">
-  <img src="https://primefaces.org/cdn/primevue/images/logos/vue.svg" alt="vue-cli" width="112" height="112">
-</a>
-
-### Astro
-<a href="https://github.com/primefaces/primevue-examples/tree/main/astro-quickstart">
-  <img src="https://primefaces.org/cdn/primevue/images/logos/astro.svg" alt="astro" width="112" height="112">
-</a>
 
 ## Contributors
 

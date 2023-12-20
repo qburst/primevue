@@ -9,7 +9,8 @@
  */
 import { TransitionProps, VNode } from 'vue';
 import { ComponentHooks } from '../basecomponent';
-import { ClassComponent, GlobalComponentConstructor, PTOptions } from '../ts-helpers';
+import { PassThroughOptions } from '../passthrough';
+import { ClassComponent, GlobalComponentConstructor, PassThrough } from '../ts-helpers';
 
 export declare type SidebarPassThroughOptionType = SidebarPassThroughAttributes | ((options: SidebarPassThroughMethodOptions) => SidebarPassThroughAttributes | string) | string | null | undefined;
 
@@ -19,9 +20,30 @@ export declare type SidebarPassThroughTransitionType = TransitionProps | ((optio
  * Custom passthrough(pt) option method.
  */
 export interface SidebarPassThroughMethodOptions {
+    /**
+     * Defines instance.
+     */
     instance: any;
+    /**
+     * Defines valid properties.
+     */
     props: SidebarProps;
+    /**
+     * Defines current inline state.
+     */
     state: SidebarState;
+    /**
+     * Defines valid attributes.
+     */
+    attrs: any;
+    /**
+     * Defines parent options.
+     */
+    parent: any;
+    /**
+     * Defines passthrough(pt) options in global config.
+     */
+    global: object | undefined;
 }
 
 /**
@@ -40,7 +62,7 @@ export interface SidebarPassThroughOptions {
     /**
      * Used to pass attributes to the header content's DOM element.
      */
-    headerContent?: SidebarPassThroughOptionType;
+    title?: SidebarPassThroughOptionType;
     /**
      * Used to pass attributes to the close button's DOM element.
      */
@@ -58,7 +80,7 @@ export interface SidebarPassThroughOptions {
      */
     mask?: SidebarPassThroughOptionType;
     /**
-     * Used to manage all lifecycle hooks
+     * Used to manage all lifecycle hooks.
      * @see {@link BaseComponent.ComponentHooks}
      */
     hooks?: ComponentHooks;
@@ -101,6 +123,10 @@ export interface SidebarProps {
      */
     position?: 'left' | 'right' | 'top' | 'bottom' | 'full' | undefined;
     /**
+     * Title content of the dialog.
+     */
+    header?: string | undefined;
+    /**
      * Base zIndex value to use in layering.
      * @defaultValue 0
      */
@@ -139,7 +165,12 @@ export interface SidebarProps {
      * Used to pass attributes to DOM elements inside the component.
      * @type {SidebarPassThroughOptions}
      */
-    pt?: PTOptions<SidebarPassThroughOptions>;
+    pt?: PassThrough<SidebarPassThroughOptions>;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false
@@ -157,8 +188,14 @@ export interface SidebarSlots {
     default(): VNode[];
     /**
      * Custom header template.
+     *  @param {Object} scope - header slot's params.
      */
-    header(): VNode[];
+    header(scope: {
+        /**
+         * Style class of the header title
+         */
+        class: any;
+    }): VNode[];
     /**
      * Custom close icon template.
      * @param {Object} scope - close icon slot's params.
@@ -168,6 +205,21 @@ export interface SidebarSlots {
          * Style class of the close icon
          */
         class: any;
+    }): VNode[];
+    /**
+     * Custom container slot.
+     * @param {Object} scope - container slot's params.
+     */
+    container(scope: {
+        /**
+         * Close sidebar function.
+         * @deprecated since v3.39.0. Use 'closeCallback' property instead.
+         */
+        onClose: () => void;
+        /**
+         * Close sidebar function.
+         */
+        closeCallback: () => void;
     }): VNode[];
 }
 

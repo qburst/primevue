@@ -25,14 +25,17 @@ export default {
     data() {
         return {
             code: {
-                basic: `<Button label="Check" icon="pi pi-check" unstyled
+                basic: `
+<Button label="Check" icon="pi pi-check" unstyled
     :pt="{
         root: { class: 'bg-teal-500 hover:bg-teal-700 cursor-pointer text-white p-3 border-round border-none flex gap-2' },
         label: { class: 'text-white font-bold text-xl' },
         icon: 'text-white text-2xl' // OR { class: 'text-white text-2xl' }
     }"
-/>`,
-                options: `<template>
+/>
+`,
+                options: `
+<template>
     <div class="card">
         <Button label="Check" icon="pi pi-check" unstyled
             :pt="{
@@ -45,8 +48,10 @@ export default {
 </template>
 
 <script>
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <Button label="Check" icon="pi pi-check" unstyled
         :pt="{
             root: { class: 'bg-teal-500 hover:bg-teal-700 cursor-pointer text-white p-3 border-round border-none flex gap-2' },
@@ -57,7 +62,8 @@ export default {
 </template>
 
 <script setup>
-<\/script>`
+<\/script>
+`
             }
         };
     }

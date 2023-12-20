@@ -14,8 +14,11 @@ export default {
         return {
             value: null,
             code: {
-                basic: `<InputNumber v-model="value" class="p-invalid" mode="decimal" :minFractionDigits="2" />`,
-                options: `<template>
+                basic: `
+<InputNumber v-model="value" class="p-invalid" mode="decimal" :minFractionDigits="2" />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <InputNumber v-model="value" class="p-invalid" mode="decimal" :minFractionDigits="2" />
     </div>
@@ -29,8 +32,10 @@ export default {
         }
     }
 }
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <InputNumber v-model="value" class="p-invalid" mode="decimal" :minFractionDigits="2" />
     </div>
@@ -40,7 +45,8 @@ export default {
 import { ref } from "vue";
 
 const value = ref();
-<\/script>`
+<\/script>
+`
             }
         };
     }

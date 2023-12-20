@@ -8,7 +8,8 @@
  *
  */
 import { ComponentHooks } from '../basecomponent';
-import { ClassComponent, GlobalComponentConstructor, PTOptions } from '../ts-helpers';
+import { PassThroughOptions } from '../passthrough';
+import { ClassComponent, GlobalComponentConstructor, PassThrough } from '../ts-helpers';
 
 export declare type AvatarGroupPassThroughOptionType = AvatarGroupPassThroughAttributes | null | undefined;
 
@@ -29,7 +30,7 @@ export interface AvatarGroupPassThroughOptions {
      */
     root?: AvatarGroupPassThroughOptionType;
     /**
-     * Used to manage all lifecycle hooks
+     * Used to manage all lifecycle hooks.
      * @see {@link BaseComponent.ComponentHooks}
      */
     hooks?: ComponentHooks;
@@ -43,7 +44,12 @@ export interface AvatarGroupProps {
      * Used to pass attributes to DOM elements inside the component.
      * @type {AvatarGroupPassThroughOptions}
      */
-    pt?: PTOptions<AvatarGroupPassThroughOptions>;
+    pt?: PassThrough<AvatarGroupPassThroughOptions>;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false

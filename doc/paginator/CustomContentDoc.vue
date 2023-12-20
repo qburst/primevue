@@ -18,7 +18,8 @@ export default {
     data() {
         return {
             code: {
-                basic: `<Paginator :rows="10" :totalRecords="120" :rowsPerPageOptions="[10, 20, 30]">
+                basic: `
+<Paginator :rows="10" :totalRecords="120" :rowsPerPageOptions="[10, 20, 30]">
     <template #start="slotProps">
         Page: {{ slotProps.state.page }}
         First: {{ slotProps.state.first }}
@@ -27,8 +28,10 @@ export default {
     <template #end>
         <Button type="button" icon="pi pi-search" />
     </template>
-</Paginator>`,
-                options: `<template>
+</Paginator>
+`,
+                options: `
+<template>
     <div class="card">
         <Paginator :rows="10" :totalRecords="120" :rowsPerPageOptions="[10, 20, 30]">
             <template #start="slotProps">
@@ -44,8 +47,10 @@ export default {
 </template>
 
 <script>
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <Paginator :rows="10" :totalRecords="120" :rowsPerPageOptions="[10, 20, 30]">
             <template #start="slotProps">
@@ -61,7 +66,8 @@ export default {
 </template>
 
 <script setup>
-<\/script>`
+<\/script>
+`
             }
         };
     }

@@ -114,7 +114,7 @@ export default {
 
     index(element) {
         if (element) {
-            let children = element.parentNode.childNodes;
+            let children = this.getParentNode(element)?.childNodes;
             let num = 0;
 
             for (let i = 0; i < children.length; i++) {
@@ -126,9 +126,21 @@ export default {
         return -1;
     },
 
-    addMultipleClasses(element, className) {
-        if (element && className) {
-            className.split(' ').forEach((style) => this.addClass(element, style));
+    addMultipleClasses(element, classNames) {
+        if (element && classNames) {
+            [classNames]
+                .flat()
+                .filter(Boolean)
+                .forEach((cNames) => cNames.split(' ').forEach((className) => this.addClass(element, className)));
+        }
+    },
+
+    removeMultipleClasses(element, classNames) {
+        if (element && classNames) {
+            [classNames]
+                .flat()
+                .filter(Boolean)
+                .forEach((cNames) => cNames.split(' ').forEach((className) => this.removeClass(element, className)));
         }
     },
 
@@ -351,8 +363,49 @@ export default {
         }
     },
 
+    nestedPosition(element, level) {
+        if (element) {
+            const parentItem = element.parentElement;
+            const elementOffset = this.getOffset(parentItem);
+            const viewport = this.getViewport();
+            const sublistWidth = element.offsetParent ? element.offsetWidth : this.getHiddenElementOuterWidth(element);
+            const itemOuterWidth = this.getOuterWidth(parentItem.children[0]);
+            let left;
+
+            if (parseInt(elementOffset.left, 10) + itemOuterWidth + sublistWidth > viewport.width - this.calculateScrollbarWidth()) {
+                if (parseInt(elementOffset.left, 10) < sublistWidth) {
+                    // for too small screens
+                    if (level % 2 === 1) {
+                        left = parseInt(elementOffset.left, 10) ? '-' + parseInt(elementOffset.left, 10) + 'px' : '100%';
+                    } else if (level % 2 === 0) {
+                        left = viewport.width - sublistWidth - this.calculateScrollbarWidth() + 'px';
+                    }
+                } else {
+                    left = '-100%';
+                }
+            } else {
+                left = '100%';
+            }
+
+            element.style.top = '0px';
+            element.style.left = left;
+        }
+    },
+
+    getParentNode(element) {
+        let parent = element?.parentNode;
+
+        if (parent && parent.host) {
+            parent = parent.host;
+        }
+
+        return parent;
+    },
+
     getParents(element, parents = []) {
-        return element['parentNode'] === null ? parents : this.getParents(element.parentNode, parents.concat([element.parentNode]));
+        const parent = this.getParentNode(element);
+
+        return parent === null ? parents : this.getParents(parent, parents.concat([parent]));
     },
 
     getScrollableParents(element) {
@@ -564,6 +617,10 @@ export default {
         return scrollbarWidth;
     },
 
+    calculateBodyScrollbarWidth() {
+        return window.innerWidth - document.documentElement.offsetWidth;
+    },
+
     getBrowser() {
         if (!this.browser) {
             let matched = this.resolveUserAgent();
@@ -604,7 +661,7 @@ export default {
     },
 
     isExist(element) {
-        return !!(element !== null && typeof element !== 'undefined' && element.nodeName && element.parentNode);
+        return !!(element !== null && typeof element !== 'undefined' && element.nodeName && this.getParentNode(element));
     },
 
     isClient() {
@@ -666,6 +723,34 @@ export default {
         const nextIndex = index > -1 && focusableElements.length >= index + 1 ? index + 1 : -1;
 
         return nextIndex > -1 ? focusableElements[nextIndex] : null;
+    },
+
+    getPreviousElementSibling(element, selector) {
+        let previousElement = element.previousElementSibling;
+
+        while (previousElement) {
+            if (previousElement.matches(selector)) {
+                return previousElement;
+            } else {
+                previousElement = previousElement.previousElementSibling;
+            }
+        }
+
+        return null;
+    },
+
+    getNextElementSibling(element, selector) {
+        let nextElement = element.nextElementSibling;
+
+        while (nextElement) {
+            if (nextElement.matches(selector)) {
+                return nextElement;
+            } else {
+                nextElement = nextElement.nextElementSibling;
+            }
+        }
+
+        return null;
     },
 
     isClickable(element) {
@@ -755,5 +840,15 @@ export default {
                 window.open(encodeURI(csv));
             }
         }
+    },
+
+    blockBodyScroll(className = 'p-overflow-hidden') {
+        document.body.style.setProperty('--scrollbar-width', this.calculateBodyScrollbarWidth() + 'px');
+        this.addClass(document.body, className);
+    },
+
+    unblockBodyScroll(className = 'p-overflow-hidden') {
+        document.body.style.removeProperty('--scrollbar-width');
+        this.removeClass(document.body, className);
     }
 };

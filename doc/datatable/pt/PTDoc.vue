@@ -57,7 +57,8 @@ export default {
         return {
             products: null,
             code: {
-                basic: `<DataTable
+                basic: `
+<DataTable
     :value="products"
     sortMode="multiple"
     :pt="{
@@ -100,8 +101,10 @@ export default {
             headerCell: { style: { width: '25%' } }
         }"
     />
-</DataTable>`,
-                options: `<template>
+</DataTable>
+`,
+                options: `
+<template>
     <div class="card">
         <DataTable
             :value="products"
@@ -163,8 +166,10 @@ export default {
         ProductService.getProductsMini().then((data) => (this.products = data));
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <DataTable
             :value="products"
@@ -223,7 +228,8 @@ onMounted(() => {
 
 const products = ref();
 
-<\/script>`,
+<\/script>
+`,
                 data: `
 {
     id: '1000',

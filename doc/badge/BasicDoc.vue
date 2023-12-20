@@ -13,8 +13,11 @@ export default {
     data() {
         return {
             code: {
-                basic: `<Badge value="2"></Badge>`,
-                options: `<template>
+                basic: `
+<Badge value="2"></Badge>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <Badge value="2"></Badge>
     </div>
@@ -22,8 +25,10 @@ export default {
 
 <script>
 
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <Badge value="2"></Badge>
     </div>
@@ -31,7 +36,8 @@ export default {
 
 <script setup>
 
-<\/script>`
+<\/script>
+`
             }
         };
     }

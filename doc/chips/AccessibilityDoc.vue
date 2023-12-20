@@ -71,13 +71,15 @@ export default {
     data() {
         return {
             code: {
-                basic: `<label for="chips1">Tags</label>
+                basic: `
+<label for="chips1">Tags</label>
 <Chips inputId="chips1" />
 
 <span id="chips2">Tags</span>
 <Chips aria-labelledby="chips2" />
 
-<Chips aria-label="Tags" />`
+<Chips aria-label="Tags" />
+`
             }
         };
     }

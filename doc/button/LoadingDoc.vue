@@ -14,8 +14,11 @@ export default {
         return {
             loading: false,
             code: {
-                basic: `<Button type="button" label="Search" icon="pi pi-search" :loading="loading" @click="load" />`,
-                options: `<template>
+                basic: `
+<Button type="button" label="Search" icon="pi pi-search" :loading="loading" @click="load" />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <Button type="button" label="Search" icon="pi pi-search" :loading="loading" @click="load" />
     </div>
@@ -37,8 +40,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <Button type="button" label="Search" icon="pi pi-search" :loading="loading" @click="load" />
     </div>
@@ -55,7 +60,8 @@ const load = () => {
         loading.value = false;
     }, 2000);
 };
-<\/script>`
+<\/script>
+`
             }
         };
     },

@@ -56,15 +56,18 @@ export default {
                 }
             ],
             code: {
-                basic: `<MultiSelect v-model="selectedCities" :options="groupedCities" optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" display="chip" placeholder="Select Cities" class="w-full md:w-20rem">
+                basic: `
+<MultiSelect v-model="selectedCities" :options="groupedCities" optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" display="chip" placeholder="Select Cities" class="w-full md:w-20rem">
     <template #optiongroup="slotProps">
         <div class="flex align-items-center">
             <img :alt="slotProps.option.label" src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png" :class="\`flag flag-\${slotProps.option.code.toLowerCase()} mr-2\`" style="width: 18px" />
             <div>{{ slotProps.option.label }}</div>
         </div>
     </template>
-</MultiSelect>`,
-                options: `<template>
+</MultiSelect>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <MultiSelect v-model="selectedCities" :options="groupedCities" optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" display="chip" placeholder="Select Cities" class="w-full md:w-20rem">
             <template #optiongroup="slotProps">
@@ -117,8 +120,10 @@ export default {
         };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <MultiSelect v-model="selectedCities" :options="groupedCities" optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" display="chip" placeholder="Select Cities" class="w-full md:w-20rem">
             <template #optiongroup="slotProps">
@@ -167,7 +172,8 @@ const groupedCities = ref([
         ]
     }
 ]);
-<\/script>`
+<\/script>
+`
             }
         };
     }

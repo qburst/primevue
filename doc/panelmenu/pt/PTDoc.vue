@@ -119,7 +119,7 @@ export default {
                             ]
                         },
                         {
-                            label: 'Archieve',
+                            label: 'Archive',
                             icon: 'pi pi-fw pi-calendar-times',
                             items: [
                                 {
@@ -132,13 +132,16 @@ export default {
                 }
             ],
             code: {
-                basic: `<PanelMenu
+                basic: `
+<PanelMenu
     :model="items"
     :pt="{
         root: { class: 'w-full md:w-25rem' }
     }"
-/>`,
-                options: `<template>
+/>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <PanelMenu
             :model="items"
@@ -257,7 +260,7 @@ export default {
                             ]
                         },
                         {
-                            label: 'Archieve',
+                            label: 'Archive',
                             icon: 'pi pi-fw pi-calendar-times',
                             items: [
                                 {
@@ -272,8 +275,10 @@ export default {
         };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <PanelMenu
             :model="items"
@@ -391,7 +396,7 @@ const items = ref([
                 ]
             },
             {
-                label: 'Archieve',
+                label: 'Archive',
                 icon: 'pi pi-fw pi-calendar-times',
                 items: [
                     {
@@ -403,7 +408,8 @@ const items = ref([
         ]
     }
 ]);
-<\/script>`
+<\/script>
+`
             }
         };
     }

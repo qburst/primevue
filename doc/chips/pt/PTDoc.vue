@@ -19,15 +19,18 @@ export default {
         return {
             value: null,
             code: {
-                basic: `<Chips
+                basic: `
+<Chips
     v-model="value"
     :pt="{
         root: { class: 'flex' },
         container: { class: 'flex-1' },
         token: { class: 'bg-primary' }
     }"
-/>`,
-                options: `<template>
+/>
+`,
+                options: `
+<template>
     <div class="card">
         <Chips
             v-model="value"
@@ -48,8 +51,10 @@ export default {
         };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <Chips
             v-model="value"
@@ -66,7 +71,8 @@ export default {
 import { ref } from "vue";
 
 const value = ref();
-<\/script>`
+<\/script>
+`
             }
         };
     }

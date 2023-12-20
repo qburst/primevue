@@ -13,20 +13,32 @@ export default {
     data() {
         return {
             code: {
-                basic: `import Button from "primevue/button"
+                basic: `
+import Button from "primevue/button"
 
 const app = createApp(App);
-app.component('Button', Button);`,
-                options: `<template>
+app.component('Button', Button);
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <Button label="Check" icon="pi pi-check" />
     </div>
-</template>`,
-                composition: `<template>
+</template>
+
+<script>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <Button label="Check" icon="pi pi-check" />
     </div>
-</template>`
+</template>
+
+<script setup>
+<\/script>
+`
             }
         };
     }

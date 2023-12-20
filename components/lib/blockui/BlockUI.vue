@@ -50,7 +50,7 @@ export default {
                 });
 
                 document.body.appendChild(this.mask);
-                DomHandler.addClass(document.body, 'p-overflow-hidden');
+                DomHandler.blockBodyScroll();
                 document.activeElement.blur();
             } else {
                 this.mask = DomHandler.createElement('div', {
@@ -91,7 +91,7 @@ export default {
 
             if (this.fullScreen) {
                 document.body.removeChild(this.mask);
-                DomHandler.removeClass(document.body, 'p-overflow-hidden');
+                DomHandler.unblockBodyScroll();
             } else {
                 this.$refs.container.removeChild(this.mask);
             }

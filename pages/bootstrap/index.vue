@@ -9,7 +9,7 @@
             <div class="doc-main">
                 <div class="doc-intro">
                     <h1>Bootstrap</h1>
-                    <p><a href="https://getbootstrap.com" class="font-semibold hover:underline text-primary">Bootstrap</a> is a well-known CSS library to build responsive and mobile first web projects.</p>
+                    <p><a href="https://getbootstrap.com" class="font-medium hover:underline text-primary">Bootstrap</a> is a well-known CSS library to build responsive and mobile first web projects.</p>
                 </div>
                 <DocSections :docs="docs" />
             </div>
@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import ExampleDoc from '@/doc/bootstrap/ExampleDoc';
-import SetupDoc from '@/doc/bootstrap/SetupDoc';
+import ExampleDoc from '@/doc/bootstrap/ExampleDoc.vue';
+import SetupDoc from '@/doc/bootstrap/SetupDoc.vue';
 
 export default {
     data() {

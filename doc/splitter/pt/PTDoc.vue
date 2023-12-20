@@ -14,15 +14,18 @@ export default {
     data() {
         return {
             code: {
-                basic: `<Splitter
+                basic: `
+<Splitter
     :pt="{
         root: { style: { height: '300px' } },
         gutterHandler: { class: 'bg-primary' }
     }">
     <SplitterPanel :pt="{ root: { class: 'flex align-items-center justify-content-center' } }"> Panel 1 </SplitterPanel>
     <SplitterPanel :pt="{ root: { class: 'flex align-items-center justify-content-center' } }"> Panel 2 </SplitterPanel>
-</Splitter>`,
-                options: `<template>
+</Splitter>
+`,
+                options: `
+<template>
     <div class="card">
         <Splitter
             :pt="{
@@ -33,8 +36,10 @@ export default {
             <SplitterPanel :pt="{ root: { class: 'flex align-items-center justify-content-center' } }"> Panel 2 </SplitterPanel>
         </Splitter>
     </div>
-</template>`,
-                composition: `<template>
+</template>
+`,
+                composition: `
+<template>
     <div class="card">
         <Splitter
             :pt="{
@@ -45,7 +50,8 @@ export default {
             <SplitterPanel :pt="{ root: { class: 'flex align-items-center justify-content-center' } }"> Panel 2 </SplitterPanel>
         </Splitter>
     </div>
-</template>`
+</template>
+`
             }
         };
     }

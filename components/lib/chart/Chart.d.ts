@@ -9,7 +9,8 @@
  */
 import { CanvasHTMLAttributes } from 'vue';
 import { ComponentHooks } from '../basecomponent';
-import { ClassComponent, GlobalComponentConstructor, PTOptions } from '../ts-helpers';
+import { PassThroughOptions } from '../passthrough';
+import { ClassComponent, GlobalComponentConstructor, PassThrough } from '../ts-helpers';
 
 export declare type ChartPassThroughOptionType = ChartPassThroughAttributes | ((options: ChartPassThroughMethodOptions) => ChartPassThroughAttributes | string) | string | null | undefined;
 
@@ -17,8 +18,26 @@ export declare type ChartPassThroughOptionType = ChartPassThroughAttributes | ((
  * Custom passthrough(pt) option method.
  */
 export interface ChartPassThroughMethodOptions {
+    /**
+     * Defines instance.
+     */
     instance: any;
+    /**
+     * Defines valid properties.
+     */
     props: ChartProps;
+    /**
+     * Defines valid attributes.
+     */
+    attrs: any;
+    /**
+     * Defines parent options.
+     */
+    parent: any;
+    /**
+     * Defines passthrough(pt) options in global config.
+     */
+    global: object | undefined;
 }
 
 /**
@@ -35,7 +54,7 @@ export interface ChartPassThroughOptions {
      */
     canvas?: ChartPassThroughOptionType;
     /**
-     * Used to manage all lifecycle hooks
+     * Used to manage all lifecycle hooks.
      * @see {@link BaseComponent.ComponentHooks}
      */
     hooks?: ComponentHooks;
@@ -105,7 +124,12 @@ export interface ChartProps {
      * Used to pass attributes to DOM elements inside the component.
      * @type {ChartPassThroughOptions}
      */
-    pt?: PTOptions<ChartPassThroughOptions>;
+    pt?: PassThrough<ChartPassThroughOptions>;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false

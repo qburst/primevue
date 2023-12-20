@@ -13,12 +13,15 @@ export default {
     data() {
         return {
             items: [
-                { label: 'New', icon: 'pi pi-fw pi-plus' },
-                { label: 'Delete', icon: 'pi pi-fw pi-trash' }
+                { label: 'New', icon: 'pi pi-plus' },
+                { label: 'Search', icon: 'pi pi-search' }
             ],
             code: {
-                basic: `<Menu :model="items" />`,
-                options: `<template>
+                basic: `
+<Menu :model="items" />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <Menu :model="items" />
     </div>
@@ -29,14 +32,16 @@ export default {
     data() {
         return {
             items: [
-                { label: 'New', icon: 'pi pi-fw pi-plus' },
-                { label: 'Delete', icon: 'pi pi-fw pi-trash' }
+                { label: 'New', icon: 'pi pi-plus' },
+                { label: 'Search', icon: 'pi pi-search' }
             ]
         };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <Menu :model="items" />
     </div>
@@ -46,10 +51,11 @@ export default {
 import { ref } from "vue";
 
 const items = ref([
-    { label: 'New', icon: 'pi pi-fw pi-plus' },
-    { label: 'Delete', icon: 'pi pi-fw pi-trash' }
+    { label: 'New', icon: 'pi pi-plus' },
+    { label: 'Search', icon: 'pi pi-search' }
 ]);
-<\/script>`
+<\/script>
+`
             }
         };
     }

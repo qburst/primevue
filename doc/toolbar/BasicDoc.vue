@@ -5,17 +5,19 @@
     <div class="card">
         <Toolbar>
             <template #start>
-                <Button label="New" icon="pi pi-plus" class="mr-2" />
-                <Button label="Upload" icon="pi pi-upload" severity="success" />
-                <i class="pi pi-bars p-toolbar-separator mr-2" />
-                <SplitButton label="Save" icon="pi pi-check" :model="items" severity="warning"></SplitButton>
+                <Button icon="pi pi-plus" class="mr-2" />
+                <Button icon="pi pi-print" class="mr-2" />
+                <Button icon="pi pi-upload" />
             </template>
 
-            <template #end>
-                <Button icon="pi pi-search" class="mr-2" />
-                <Button icon="pi pi-calendar" severity="success" class="mr-2" />
-                <Button icon="pi pi-times" severity="danger" />
+            <template #center>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search" />
+                    <InputText placeholder="Search" />
+                </span>
             </template>
+
+            <template #end> <SplitButton label="Save" icon="pi pi-check" :model="items"></SplitButton></template>
         </Toolbar>
     </div>
     <DocSectionCode :code="code" />
@@ -33,52 +35,45 @@ export default {
                 {
                     label: 'Delete',
                     icon: 'pi pi-times'
-                },
-                {
-                    label: 'Vue Website',
-                    icon: 'pi pi-external-link',
-                    command: () => {
-                        window.location.href = 'https://vuejs.org/';
-                    }
-                },
-                {
-                    label: 'Upload',
-                    icon: 'pi pi-upload',
-                    command: () => {
-                        this.$router.push('fileupload');
-                    }
                 }
             ],
             code: {
-                basic: `<Toolbar>
+                basic: `
+<Toolbar>
     <template #start>
-        <Button label="New" icon="pi pi-plus" class="mr-2" />
-        <Button label="Upload" icon="pi pi-upload" severity="success" />
-        <i class="pi pi-bars p-toolbar-separator mr-2" />
-        <SplitButton label="Save" icon="pi pi-check" :model="items" severity="warning"></SplitButton>
+        <Button icon="pi pi-plus" class="mr-2" />
+        <Button icon="pi pi-print" class="mr-2" />
+        <Button icon="pi pi-upload" />
     </template>
 
-    <template #end>
-        <Button icon="pi pi-search" class="mr-2" />
-        <Button icon="pi pi-calendar" severity="success" class="mr-2" />
-        <Button icon="pi pi-times" severity="danger" />
+    <template #center>
+        <span class="p-input-icon-left">
+            <i class="pi pi-search" />
+            <InputText placeholder="Search" />
+        </span>
     </template>
-</Toolbar>`,
-                options: `<template>
+
+    <template #end> <SplitButton label="Save" icon="pi pi-check" :model="items"></SplitButton></template>
+</Toolbar>
+`,
+                options: `
+<template>
     <div class="card">
         <Toolbar>
             <template #start>
-                <Button label="New" icon="pi pi-plus" class="mr-2" />
-                <Button label="Upload" icon="pi pi-upload" severity="success" />
-                <i class="pi pi-bars p-toolbar-separator mr-2" />
-                <SplitButton label="Save" icon="pi pi-check" :model="items" severity="warning"></SplitButton>
+                <Button icon="pi pi-plus" class="mr-2" />
+                <Button icon="pi pi-print" class="mr-2" />
+                <Button icon="pi pi-upload" />
             </template>
 
-            <template #end>
-                <Button icon="pi pi-search" class="mr-2" />
-                <Button icon="pi pi-calendar" severity="success" class="mr-2" />
-                <Button icon="pi pi-times" severity="danger" />
+            <template #center>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search" />
+                    <InputText placeholder="Search" />
+                </span>
             </template>
+
+            <template #end> <SplitButton label="Save" icon="pi pi-check" :model="items"></SplitButton></template>
         </Toolbar>
     </div>
 </template>
@@ -95,41 +90,31 @@ export default {
                 {
                     label: 'Delete',
                     icon: 'pi pi-times'
-                },
-                {
-                    label: 'Vue Website',
-                    icon: 'pi pi-external-link',
-                    command: () => {
-                        window.location.href = 'https://vuejs.org/';
-                    }
-                },
-                {
-                    label: 'Upload',
-                    icon: 'pi pi-upload',
-                    command: () => {
-                        this.$router.push('fileupload');
-                    }
                 }
             ]
         };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <Toolbar>
             <template #start>
-                <Button label="New" icon="pi pi-plus" class="mr-2" />
-                <Button label="Upload" icon="pi pi-upload" severity="success" />
-                <i class="pi pi-bars p-toolbar-separator mr-2" />
-                <SplitButton label="Save" icon="pi pi-check" :model="items" severity="warning"></SplitButton>
+                <Button icon="pi pi-plus" class="mr-2" />
+                <Button icon="pi pi-print" class="mr-2" />
+                <Button icon="pi pi-upload" />
             </template>
 
-            <template #end>
-                <Button icon="pi pi-search" class="mr-2" />
-                <Button icon="pi pi-calendar" severity="success" class="mr-2" />
-                <Button icon="pi pi-times" severity="danger" />
+            <template #center>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search" />
+                    <InputText placeholder="Search" />
+                </span>
             </template>
+
+            <template #end> <SplitButton label="Save" icon="pi pi-check" :model="items"></SplitButton></template>
         </Toolbar>
     </div>
 </template>
@@ -145,23 +130,10 @@ const items = ref([
     {
         label: 'Delete',
         icon: 'pi pi-times'
-    },
-    {
-        label: 'Vue Website',
-        icon: 'pi pi-external-link',
-        command: () => {
-            window.location.href = 'https://vuejs.org/';
-        }
-    },
-    {
-        label: 'Upload',
-        icon: 'pi pi-upload',
-        command: () => {
-            this.$router.push('fileupload');
-        }
     }
 ])
-<\/script>`
+<\/script>
+`
             }
         };
     }

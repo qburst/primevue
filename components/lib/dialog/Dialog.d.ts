@@ -9,79 +9,97 @@
  */
 import { HTMLAttributes, TransitionProps, VNode } from 'vue';
 import { ComponentHooks } from '../basecomponent';
-import { ClassComponent, GlobalComponentConstructor, PTOptions } from '../ts-helpers';
+import { PassThroughOptions } from '../passthrough';
+import { ClassComponent, GlobalComponentConstructor, PassThrough } from '../ts-helpers';
 
-export declare type DialogPassThroughOptionType = DialogPassThroughAttributes | ((options: DialogPassThroughMethodOptions) => DialogPassThroughAttributes | string) | string | null | undefined;
+export declare type DialogPassThroughOptionType<T = any> = DialogPassThroughAttributes | ((options: DialogPassThroughMethodOptions<T>) => DialogPassThroughAttributes | string) | string | null | undefined;
 
-export declare type DialogPassThroughTransitionType = TransitionProps | ((options: DialogPassThroughMethodOptions) => TransitionProps) | undefined;
+export declare type DialogPassThroughTransitionType<T = any> = TransitionProps | ((options: DialogPassThroughMethodOptions<T>) => TransitionProps) | undefined;
 
 /**
  * Custom passthrough(pt) option method.
  */
-export interface DialogPassThroughMethodOptions {
+export interface DialogPassThroughMethodOptions<T> {
+    /**
+     * Defines instance.
+     */
     instance: any;
+    /**
+     * Defines valid properties.
+     */
     props: DialogProps;
+    /**
+     * Defines current inline state.
+     */
     state: DialogState;
+    /**
+     * Defines parent instance.
+     */
+    parent: T;
+    /**
+     * Defines passthrough(pt) options in global config.
+     */
+    global: object | undefined;
 }
 
 /**
  * Custom passthrough(pt) options.
  * @see {@link DialogProps.pt}
  */
-export interface DialogPassThroughOptions {
+export interface DialogPassThroughOptions<T = any> {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: DialogPassThroughOptionType;
+    root?: DialogPassThroughOptionType<T>;
     /**
      * Used to pass attributes to the header's DOM element.
      */
-    header?: DialogPassThroughOptionType;
+    header?: DialogPassThroughOptionType<T>;
     /**
      * Used to pass attributes to the header title's DOM element.
      */
-    headerTitle?: DialogPassThroughOptionType;
+    title?: DialogPassThroughOptionType<T>;
     /**
      * Used to pass attributes to the header icons' DOM element.
      */
-    headerIcons?: DialogPassThroughOptionType;
+    icons?: DialogPassThroughOptionType<T>;
     /**
      * Used to pass attributes to the maximizable button's DOM element.
      */
-    maximizableButton?: DialogPassThroughOptionType;
+    maximizableButton?: DialogPassThroughOptionType<T>;
     /**
      * Used to pass attributes to the maximizable icon's DOM element.
      */
-    maximizableIcon?: DialogPassThroughOptionType;
+    maximizableIcon?: DialogPassThroughOptionType<T>;
     /**
      * Used to pass attributes to the close button's component.
      */
-    closeButton?: DialogPassThroughOptionType;
+    closeButton?: DialogPassThroughOptionType<T>;
     /**
      * Used to pass attributes to the close button icon's component.
      */
-    closeButtonIcon?: DialogPassThroughOptionType;
+    closeButtonIcon?: DialogPassThroughOptionType<T>;
     /**
      * Used to pass attributes to the content's DOM element.
      */
-    content?: DialogPassThroughOptionType;
+    content?: DialogPassThroughOptionType<T>;
     /**
      * Used to pass attributes to the footer's DOM element.
      */
-    footer?: DialogPassThroughOptionType;
+    footer?: DialogPassThroughOptionType<T>;
     /**
      * Used to pass attributes to the mask's DOM element.
      */
-    mask?: DialogPassThroughOptionType;
+    mask?: DialogPassThroughOptionType<T>;
     /**
-     * Used to manage all lifecycle hooks
+     * Used to manage all lifecycle hooks.
      * @see {@link BaseComponent.ComponentHooks}
      */
     hooks?: ComponentHooks;
     /**
      * Used to control Vue Transition API.
      */
-    transition?: DialogPassThroughTransitionType;
+    transition?: DialogPassThroughTransitionType<T>;
 }
 
 /**
@@ -189,6 +207,11 @@ export interface DialogProps {
      */
     showHeader?: boolean | undefined;
     /**
+     * Whether background scroll should be blocked when dialog is visible.
+     * @defaultValue false
+     */
+    blockScroll?: boolean | undefined;
+    /**
      * Base zIndex value to use in layering.
      * @defaultValue 0
      */
@@ -260,7 +283,12 @@ export interface DialogProps {
      * Used to pass attributes to DOM elements inside the component.
      * @type {DialogPassThroughOptions}
      */
-    pt?: PTOptions<DialogPassThroughOptions>;
+    pt?: PassThrough<DialogPassThroughOptions>;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false
@@ -307,6 +335,32 @@ export interface DialogSlots {
          * Style class of the maximize icon
          */
         class: any;
+    }): VNode[];
+    /**
+     * Custom container slot.
+     * @param {Object} scope - container slot's params.
+     */
+    container(scope: {
+        /**
+         * Close dialog function.
+         * @deprecated since v3.39.0. Use 'closeCallback' property instead.
+         */
+        onClose: () => void;
+        /**
+         * Maximize/minimize dialog function.
+         * @param {Event} event - Browser event
+         * @deprecated since v3.39.0. Use 'maximizeCallback' property instead.
+         */
+        onMaximize: (event: Event) => void;
+        /**
+         * Close dialog function.
+         */
+        closeCallback: () => void;
+        /**
+         * Maximize/minimize dialog function.
+         * @param {Event} event - Browser event
+         */
+        maximizeCallback: (event: Event) => void;
     }): VNode[];
 }
 

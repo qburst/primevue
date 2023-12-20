@@ -22,13 +22,16 @@ export default {
             nodes: null,
             expandedKeys: {},
             code: {
-                basic: `<Button @click="toggleApplications" label="Toggle Applications" />
+                basic: `
+<Button @click="toggleApplications" label="Toggle Applications" />
 <TreeTable v-model:expandedKeys="expandedKeys" :value="nodes">
     <Column field="name" header="Name" expander></Column>
     <Column field="size" header="Size"></Column>
     <Column field="type" header="Type"></Column>
-</TreeTable>`,
-                options: `<template>
+</TreeTable>
+`,
+                options: `
+<template>
     <div class="card">
         <Button @click="toggleApplications" label="Toggle Applications" />
         <TreeTable v-model:expandedKeys="expandedKeys" :value="nodes">
@@ -63,8 +66,10 @@ export default {
         }
     }
 }
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <Button @click="toggleApplications" label="Toggle Applications" />
         <TreeTable v-model:expandedKeys="expandedKeys" :value="nodes">
@@ -93,7 +98,8 @@ const toggleApplications = () => {
 
     expandedKeys.value = _expandedKeys;
 }
-<\/script>`,
+<\/script>
+`,
                 data: `
 {
     key: '0',

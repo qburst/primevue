@@ -16,11 +16,14 @@ export default {
     data() {
         return {
             code: {
-                basic: `<ProgressBar :value="50"
+                basic: `
+<ProgressBar :value="50"
     :pt="{
         value: { style: { background: 'linear-gradient(to right, #8e2de2, #4a00e0)' } }
-    }" />`,
-                options: `<template>
+    }" />
+`,
+                options: `
+<template>
     <div class="card">
         <ProgressBar :value="50"
             :pt="{
@@ -30,8 +33,10 @@ export default {
 </template>
 
 <script>
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <ProgressBar :value="50"
             :pt="{
@@ -41,7 +46,8 @@ export default {
 </template>
 
 <script setup>
-<\/script>`
+<\/script>
+`
             }
         };
     }

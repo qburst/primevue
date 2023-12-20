@@ -34,15 +34,18 @@ export default {
             selectedProduct: null,
             metaKey: true,
             code: {
-                basic: `<InputSwitch v-model="metaKey" inputId="input-metakey" />
+                basic: `
+<InputSwitch v-model="metaKey" inputId="input-metakey" />
 
 <DataTable v-model:selection="selectedProduct" :value="products" selectionMode="single" :metaKeySelection="metaKey" dataKey="id" tableStyle="min-width: 50rem">
     <Column field="code" header="Code"></Column>
     <Column field="name" header="Name"></Column>
     <Column field="category" header="Category"></Column>
     <Column field="quantity" header="Quantity"></Column>
-</DataTable>`,
-                options: `<template>
+</DataTable>
+`,
+                options: `
+<template>
     <div class="card">
         <div class="flex justify-content-center align-items-center mb-4 gap-2">
             <InputSwitch v-model="metaKey" inputId="input-metakey" />
@@ -72,8 +75,10 @@ export default {
         ProductService.getProductsMini().then((data) => (this.products = data));
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <div class="flex justify-content-center align-items-center mb-4 gap-2">
             <InputSwitch v-model="metaKey" inputId="input-metakey" />
@@ -100,7 +105,8 @@ const products = ref();
 const selectedProduct = ref();
 const metaKey = ref(true);
 
-<\/script>`,
+<\/script>
+`,
                 data: `
 {
     id: '1000',

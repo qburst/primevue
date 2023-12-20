@@ -13,8 +13,11 @@ export default {
     data() {
         return {
             code: {
-                basic: `<Tag value="New"></Tag>`,
-                options: `<template>
+                basic: `
+<Tag value="New"></Tag>
+`,
+                options: `
+<template>
     <div class="flex justify-content-center">
         <Tag value="New"></Tag>
     </div>
@@ -22,8 +25,10 @@ export default {
 
 <script>
 
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="flex justify-content-center">
         <Tag value="New"></Tag>
     </div>
@@ -31,7 +36,8 @@ export default {
 
 <script setup>
 
-<\/script>`
+<\/script>
+`
             }
         };
     }

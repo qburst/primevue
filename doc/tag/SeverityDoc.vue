@@ -17,12 +17,15 @@ export default {
     data() {
         return {
             code: {
-                basic: `<Tag value="Primary"></Tag>
+                basic: `
+<Tag value="Primary"></Tag>
 <Tag severity="success" value="Success"></Tag>
 <Tag severity="info" value="Info"></Tag>
 <Tag severity="warning" value="Warning"></Tag>
-<Tag severity="danger" value="Danger"></Tag>`,
-                options: `<template>
+<Tag severity="danger" value="Danger"></Tag>
+`,
+                options: `
+<template>
     <div class="flex flex-wrap justify-content-center gap-2">
         <Tag value="Primary"></Tag>
         <Tag severity="success" value="Success"></Tag>
@@ -34,8 +37,10 @@ export default {
 
 <script>
 
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="flex flex-wrap justify-content-center gap-2">
         <Tag value="Primary"></Tag>
         <Tag severity="success" value="Success"></Tag>

@@ -36,7 +36,8 @@ export default {
         return {
             nodes: null,
             code: {
-                basic: `<TreeTable :value="nodes">
+                basic: `
+<TreeTable :value="nodes">
     <template #header>
         <div class="text-xl font-bold">File Viewer</div>
     </template>
@@ -56,8 +57,10 @@ export default {
             <Button icon="pi pi-refresh" label="Reload" severity="warning" />
         </div>
     </template>
-</TreeTable>`,
-                options: `<template>
+</TreeTable>
+`,
+                options: `
+<template>
     <div class="card">
         <TreeTable :value="nodes">
             <template #header>
@@ -96,8 +99,10 @@ export default {
         NodeService.getTreeTableNodes().then((data) => (this.nodes = data));
     }
 }
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <TreeTable :value="nodes">
             <template #header>
@@ -132,7 +137,8 @@ onMounted(() => {
 });
 
 const nodes = ref();
-<\/script>`,
+<\/script>
+`,
                 data: `
 {
     key: '0',

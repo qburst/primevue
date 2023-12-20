@@ -55,7 +55,8 @@ export default {
                 { name: 'Paris', code: 'PRS' }
             ],
             code: {
-                basic: `<template>
+                basic: `
+<template>
     <div class="card flex justify-content-center">
         <form @submit="onSubmit" class="flex flex-column align-items-center gap-2">
             <MultiSelect v-model="value" :class="{ 'p-invalid': errorMessage }" :options="cities" optionLabel="name" placeholder="Select Cities" :maxSelectedLabels="3" class="w-full md:w-20rem" aria-describedby="text-error" />
@@ -64,8 +65,10 @@ export default {
         </form>
         <Toast />
     </div>
-</template>`,
-                options: `<template>
+</template>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <form @submit="onSubmit" class="flex flex-column align-items-center gap-2">
             <MultiSelect v-model="value" :class="{ 'p-invalid': errorMessage }" :options="cities" optionLabel="name" placeholder="Select Cities" :maxSelectedLabels="3" class="w-full md:w-20rem" aria-describedby="text-error" />
@@ -121,8 +124,10 @@ export default {
         };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <form @submit="onSubmit" class="flex flex-column align-items-center gap-2">
             <MultiSelect v-model="value" :class="{ 'p-invalid': errorMessage }" :options="cities" optionLabel="name" placeholder="Select Cities" :maxSelectedLabels="3" class="w-full md:w-20rem" aria-describedby="text-error" />

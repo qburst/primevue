@@ -1,12 +1,12 @@
 <template>
     <DocSectionText v-bind="$attrs">
-        <p>Location of the messages is customized with the <i>position</i> property.</p>
+        <p>A message can be targeted to a certain Toast component by matching the <i>group</i> keys whereas location is customized with the <i>position</i>.</p>
     </DocSectionText>
     <div class="card flex justify-content-center">
         <div class="flex flex-wrap gap-2">
-            <Button label="Top Left" class="mr-2" @click="showTopLeft" />
+            <Button label="Top Left" @click="showTopLeft" />
             <Button label="Bottom Left" severity="warning" @click="showBottomLeft" />
-            <Button label="Bottom Right" severity="success" @click="showBottomRight" />
+            <Button label="Bottom Right" severity="help" @click="showBottomRight" />
         </div>
     </div>
     <DocSectionCode :code="code" />
@@ -17,25 +17,26 @@ export default {
     data() {
         return {
             code: {
-                basic: `<Toast position="top-left" group="tl" />
+                basic: `
+<Toast position="top-left" group="tl" />
 <Toast position="bottom-left" group="bl" />
 <Toast position="bottom-right" group="br" />
 
-<div class="flex flex-wrap gap-2">
-    <Button label="Top Left" class="mr-2" @click="showTopLeft" />
-    <Button label="Bottom Left" severity="warning" @click="showBottomLeft" />
-    <Button label="Bottom Right" severity="success" @click="showBottomRight" />
-</div>`,
-                options: `<template>
+<Button label="Top Left" @click="showTopLeft" />
+<Button label="Bottom Left" severity="warning" @click="showBottomLeft" />
+<Button label="Bottom Right" severity="help" @click="showBottomRight" />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <Toast position="top-left" group="tl" />
         <Toast position="bottom-left" group="bl" />
         <Toast position="bottom-right" group="br" />
 
         <div class="flex flex-wrap gap-2">
-            <Button label="Top Left" class="mr-2" @click="showTopLeft" />
+            <Button label="Top Left" @click="showTopLeft" />
             <Button label="Bottom Left" severity="warning" @click="showBottomLeft" />
-            <Button label="Bottom Right" severity="success" @click="showBottomRight" />
+            <Button label="Bottom Right" severity="help" @click="showBottomRight" />
         </div>
     </div>
 </template>
@@ -54,17 +55,19 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <Toast position="top-left" group="tl" />
         <Toast position="bottom-left" group="bl" />
         <Toast position="bottom-right" group="br" />
         
         <div class="flex flex-wrap gap-2">
-            <Button label="Top Left" class="mr-2" @click="showTopLeft" />
+            <Button label="Top Left" @click="showTopLeft" />
             <Button label="Bottom Left" severity="warning" @click="showBottomLeft" />
-            <Button label="Bottom Right" severity="success" @click="showBottomRight" />
+            <Button label="Bottom Right" severity="help" @click="showBottomRight" />
         </div>
     </div>
 </template>
@@ -84,7 +87,8 @@ const showBottomLeft = () => {
 const showBottomRight = () => {
     toast.add({ severity: 'success', summary: 'Success Message', detail: 'Message Content', group: 'br', life: 3000 });
 };
-<\/script>`
+<\/script>
+`
             }
         };
     },

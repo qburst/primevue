@@ -21,8 +21,11 @@ export default {
             selectedCountry: null,
             filteredCountries: null,
             code: {
-                basic: `<AutoComplete v-model="selectedCountry" optionLabel="name" :suggestions="filteredCountries" @complete="search" />`,
-                options: `<template>
+                basic: `
+<AutoComplete v-model="selectedCountry" optionLabel="name" :suggestions="filteredCountries" @complete="search" />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <AutoComplete v-model="selectedCountry" optionLabel="name" :suggestions="filteredCountries" @complete="search" />
     </div>
@@ -56,8 +59,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <AutoComplete v-model="selectedCountry" optionLabel="name" :suggestions="filteredCountries" @complete="search" />
     </div>
@@ -87,7 +92,8 @@ const search = (event) => {
         }
     }, 250);
 }
-<\/script>`
+<\/script>
+`
             }
         };
     },

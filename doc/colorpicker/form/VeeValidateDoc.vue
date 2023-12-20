@@ -41,7 +41,8 @@ export default {
     data() {
         return {
             code: {
-                basic: `<template>
+                basic: `
+<template>
     <div class="card flex justify-content-center">
         <form @submit="onSubmit" class="flex flex-column align-items-center gap-2">
             <ColorPicker v-model="value" :class="{ 'p-invalid': errorMessage }" aria-describedby="cp-error" />
@@ -50,8 +51,10 @@ export default {
         </form>
         <Toast />
     </div>
-</template>`,
-                options: `<template>
+</template>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <form @submit="onSubmit" class="flex flex-column align-items-center gap-2">
             <ColorPicker v-model="value" :class="{ 'p-invalid': errorMessage }" aria-describedby="cp-error" />
@@ -89,8 +92,10 @@ export default {
         return { value, handleSubmit, onSubmit, errorMessage };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <form @submit="onSubmit" class="flex flex-column align-items-center gap-2">
             <ColorPicker v-model="value" :class="{ 'p-invalid': errorMessage }" aria-describedby="cp-error" />

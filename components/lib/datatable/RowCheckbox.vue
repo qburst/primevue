@@ -55,6 +55,7 @@ export default {
             const columnMetaData = {
                 props: this.column.props,
                 parent: {
+                    instance: this,
                     props: this.$props,
                     state: this.$data
                 },
@@ -82,6 +83,7 @@ export default {
             }
 
             event.preventDefault();
+            event.stopPropagation();
         },
         onFocus() {
             this.focused = true;

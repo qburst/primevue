@@ -126,7 +126,8 @@ export default {
             ],
             statuses: ['unqualified', 'qualified', 'new', 'negotiation', 'renewal', 'proposal'],
             code: {
-                basic: `<DataTable v-model:filters="filters" v-model:selection="selectedCustomers" :value="customers" paginator :rows="10" dataKey="id" filterDisplay="menu"
+                basic: `
+<DataTable v-model:filters="filters" v-model:selection="selectedCustomers" :value="customers" paginator :rows="10" dataKey="id" filterDisplay="menu"
     :globalFilterFields="['name', 'country.name', 'representative.name', 'balance', 'status']">
     <template #header>
         <div class="flex justify-content-between">
@@ -221,8 +222,10 @@ export default {
             <Button type="button" icon="pi pi-cog" rounded />
         </template>
     </Column>
-</DataTable>`,
-                options: `<template>
+</DataTable>
+`,
+                options: `
+<template>
     <div class="card">
         <DataTable v-model:filters="filters" v-model:selection="selectedCustomers" :value="customers" paginator :rows="10" dataKey="id" filterDisplay="menu"
             :globalFilterFields="['name', 'country.name', 'representative.name', 'balance', 'status']">
@@ -410,8 +413,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <DataTable v-model:filters="filters" v-model:selection="selectedCustomers" :value="customers" paginator :rows="10" dataKey="id" filterDisplay="menu"
             :globalFilterFields="['name', 'country.name', 'representative.name', 'balance', 'status']">
@@ -595,7 +600,8 @@ const getSeverity = (status) => {
             return null;
     }
 };
-<\/script>`,
+<\/script>
+`,
                 data: `
 {
     id: 1000,

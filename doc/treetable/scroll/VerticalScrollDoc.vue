@@ -3,7 +3,7 @@
         <p>Adding <i>scrollable</i> property along with a <i>scrollHeight</i> for the data viewport enables vertical scrolling with fixed headers.</p>
     </DocSectionText>
     <div class="card">
-        <TreeTable :value="nodes" scrollable scrollHeight="200px">
+        <TreeTable :value="nodes" scrollable scrollHeight="270px">
             <Column field="name" header="Name" expander></Column>
             <Column field="size" header="Size"></Column>
             <Column field="type" header="Type"></Column>
@@ -20,14 +20,17 @@ export default {
         return {
             nodes: null,
             code: {
-                basic: `<TreeTable :value="nodes" scrollable scrollHeight="200px">
+                basic: `
+<TreeTable :value="nodes" scrollable scrollHeight="270px">
     <Column field="name" header="Name" expander></Column>
     <Column field="size" header="Size"></Column>
     <Column field="type" header="Type"></Column>
-</TreeTable>`,
-                options: `<template>
+</TreeTable>
+`,
+                options: `
+<template>
     <div class="card">
-        <TreeTable :value="nodes" scrollable scrollHeight="200px">
+        <TreeTable :value="nodes" scrollable scrollHeight="270px">
             <Column field="name" header="Name" expander></Column>
             <Column field="size" header="Size"></Column>
             <Column field="type" header="Type"></Column>
@@ -48,10 +51,12 @@ export default {
         NodeService.getTreeTableNodes().then((data) => (this.nodes = data));
     }
 }
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
-        <TreeTable :value="nodes" scrollable scrollHeight="200px">
+        <TreeTable :value="nodes" scrollable scrollHeight="270px">
             <Column field="name" header="Name" expander></Column>
             <Column field="size" header="Size"></Column>
             <Column field="type" header="Type"></Column>
@@ -68,7 +73,8 @@ onMounted(() => {
 });
 
 const nodes = ref();
-<\/script>`,
+<\/script>
+`,
                 data: `
 {
     key: '0',

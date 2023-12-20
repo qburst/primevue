@@ -18,15 +18,18 @@ export default {
     data() {
         return {
             code: {
-                basic: `<Chip
+                basic: `
+<Chip
     label="Amy Elsner"
     image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png"
     :pt="{
         root: { style: { background: 'linear-gradient(to right, #8e2de2, #4a00e0)', borderRadius: '24px' } },
         label: { class: 'text-white' }
     }"
-/>`,
-                options: `<template>
+/>
+`,
+                options: `
+<template>
     <Chip
         label="Amy Elsner"
         image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png"
@@ -35,8 +38,10 @@ export default {
             label: { class: 'text-white' }
         }"
     />
-</template>`,
-                composition: `<template>
+</template>
+`,
+                composition: `
+<template>
     <Chip
         label="Amy Elsner"
         image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png"
@@ -45,7 +50,8 @@ export default {
             label: { class: 'text-white' }
         }"
     />
-</template>`
+</template>
+`
             }
         };
     }

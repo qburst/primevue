@@ -8,10 +8,12 @@
  *
  */
 import { VNode } from 'vue';
+import { BadgePassThroughOptions } from '../badge';
 import { ComponentHooks } from '../basecomponent';
 import { ButtonPassThroughOptions } from '../button';
 import { MessagePassThroughOptions } from '../message';
-import { ClassComponent, GlobalComponentConstructor, PTOptions } from '../ts-helpers';
+import { PassThroughOptions } from '../passthrough';
+import { ClassComponent, GlobalComponentConstructor, PassThrough } from '../ts-helpers';
 
 export declare type FileUploadPassThroughOptionType = FileUploadPassThroughAttributes | ((options: FileUploadPassThroughMethodOptions) => FileUploadPassThroughAttributes | string) | string | null | undefined;
 
@@ -19,8 +21,43 @@ export declare type FileUploadPassThroughOptionType = FileUploadPassThroughAttri
  * Custom passthrough(pt) option method.
  */
 export interface FileUploadPassThroughMethodOptions {
+    /**
+     * Defines instance.
+     */
     instance: any;
+    /**
+     * Defines valid properties.
+     */
     props: FileUploadProps;
+    /**
+     * Defines current inline state.
+     */
+    state: FileUploadState;
+    /**
+     * Defines valid attributes.
+     */
+    attrs: any;
+    /**
+     * Defines parent options.
+     */
+    parent: any;
+    /**
+     * Defines passthrough(pt) options in global config.
+     */
+    global: object | undefined;
+}
+
+/**
+ * Custom shared passthrough(pt) option method.
+ */
+export interface FileUploadPassThroughMethodOptions {
+    /**
+     * Defines valid properties.
+     */
+    props: FileUploadProps;
+    /**
+     * Defines current inline state.
+     */
     state: FileUploadState;
 }
 
@@ -185,12 +222,12 @@ export interface FileUploadPassThroughOptions {
      * Used to pass attributes to the upload button's DOM element.
      * @see {@link ButtonPassThroughOptions}
      */
-    uploadButton?: ButtonPassThroughOptions;
+    uploadButton?: ButtonPassThroughOptions<FileUploadPassThroughMethodOptions>;
     /**
      * Used to pass attributes to the cancel button's DOM element.
      * @see {@link ButtonPassThroughOptions}
      */
-    cancelButton?: ButtonPassThroughOptions;
+    cancelButton?: ButtonPassThroughOptions<FileUploadPassThroughMethodOptions>;
     /**
      * Used to pass attributes to the content's DOM element.
      */
@@ -203,7 +240,7 @@ export interface FileUploadPassThroughOptions {
      * Used to pass attributes to the messages' DOM element.
      * @see {@link MessagePassThroughOptions}
      */
-    message?: MessagePassThroughOptions;
+    message?: MessagePassThroughOptions<FileUploadPassThroughMethodOptions>;
     /**
      * Used to pass attributes to the file's DOM element.
      */
@@ -225,9 +262,10 @@ export interface FileUploadPassThroughOptions {
      */
     fileSize?: FileUploadPassThroughOptionType;
     /**
-     * Used to pass attributes to the badge's DOM element.
+     * Used to pass attributes to the Badge component.
+     * @see {@link BadgePassThroughOptions}
      */
-    badge?: FileUploadPassThroughOptionType;
+    badge?: BadgePassThroughOptions<FileUploadPassThroughMethodOptions>;
     /**
      * Used to pass attributes to the actions's DOM element.
      */
@@ -236,7 +274,7 @@ export interface FileUploadPassThroughOptions {
      * Used to pass attributes to the remove button's DOM element.
      * @see {@link ButtonPassThroughOptions}
      */
-    removeButton?: ButtonPassThroughOptions;
+    removeButton?: ButtonPassThroughOptions<FileUploadPassThroughMethodOptions>;
     /**
      * Used to pass attributes to the empty's DOM element.
      */
@@ -250,7 +288,7 @@ export interface FileUploadPassThroughOptions {
      */
     uploadIcon?: FileUploadPassThroughOptionType;
     /**
-     * Used to manage all lifecycle hooks
+     * Used to manage all lifecycle hooks.
      * @see {@link BaseComponent.ComponentHooks}
      */
     hooks?: ComponentHooks;
@@ -413,7 +451,12 @@ export interface FileUploadProps {
      * Used to pass attributes to DOM elements inside the component.
      * @type {FileUploadPassThroughOptions}
      */
-    pt?: PTOptions<FileUploadPassThroughOptions>;
+    pt?: PassThrough<FileUploadPassThroughOptions>;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false

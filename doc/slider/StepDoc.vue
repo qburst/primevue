@@ -14,8 +14,11 @@ export default {
         return {
             value: 20,
             code: {
-                basic: `<Slider v-model="value" :step="20" class="w-14rem" />`,
-                options: `<template>
+                basic: `
+<Slider v-model="value" :step="20" class="w-14rem" />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <Slider v-model="value" :step="20" class="w-14rem" />
     </div>
@@ -29,8 +32,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <Slider v-model="value" :step="20" class="w-14rem" />
     </div>
@@ -40,7 +45,8 @@ export default {
 import { ref } from 'vue';
 
 const value = ref(20);
-<\/script>`
+<\/script>
+`
             }
         };
     }

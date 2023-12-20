@@ -1,25 +1,6 @@
 <script>
 import BaseComponent from 'primevue/basecomponent';
-
-const classes = {
-    root: ({ instance, props }) => [
-        'p-radiobutton p-component',
-        {
-            'p-radiobutton-checked': instance.checked,
-            'p-radiobutton-disabled': props.disabled,
-            'p-radiobutton-focused': instance.focused
-        }
-    ],
-    input: ({ instance, props }) => [
-        'p-radiobutton-box',
-        {
-            'p-highlight': instance.checked,
-            'p-disabled': props.disabled,
-            'p-focus': instance.focused
-        }
-    ],
-    icon: 'p-radiobutton-icon'
-};
+import RadioButtonStyle from 'primevue/radiobutton/style';
 
 export default {
     name: 'BaseRadioButton',
@@ -51,18 +32,16 @@ export default {
             type: null,
             default: null
         },
-        'aria-labelledby': {
+        ariaLabelledby: {
             type: String,
             default: null
         },
-        'aria-label': {
+        ariaLabel: {
             type: String,
             default: null
         }
     },
-    css: {
-        classes
-    },
+    style: RadioButtonStyle,
     provide() {
         return {
             $parentInstance: this

@@ -1,9 +1,6 @@
 <template>
     <DocSectionText v-bind="$attrs">
-        <p>
-            More than one row is selectable by setting <i>selectionMode</i> to <i>multiple</i>. By default in multiple selection mode, metaKey press (e.g. <i>⌘</i>) is necessary to add to existing selections however this can be configured with
-            disabling the <i>metaKeySelection</i> property. Note that in touch enabled devices, DataTable always ignores metaKey.
-        </p>
+        <p>Specifying <i>selectionMode</i> as <i>multiple</i> on a Column, displays a checkbox inside that column for selection.</p>
         <p>The header checkbox toggles the selection state of the whole dataset by default, when paginator is enabled you may add <i>selectAll</i> property and <i>select-all-change</i> event to only control the selection of visible rows.</p>
     </DocSectionText>
     <div class="card">
@@ -28,14 +25,17 @@ export default {
             selectedProduct: null,
             metaKey: true,
             code: {
-                basic: `<DataTable v-model:selection="selectedProduct" :value="products" dataKey="id" tableStyle="min-width: 50rem">
+                basic: `
+<DataTable v-model:selection="selectedProduct" :value="products" dataKey="id" tableStyle="min-width: 50rem">
     <Column selectionMode="multiple" headerStyle="width: 3rem"></Column>
     <Column field="code" header="Code"></Column>
     <Column field="name" header="Name"></Column>
     <Column field="category" header="Category"></Column>
     <Column field="quantity" header="Quantity"></Column>
-</DataTable>`,
-                options: `<template>
+</DataTable>
+`,
+                options: `
+<template>
     <div class="card">
         <DataTable v-model:selection="selectedProduct" :value="products" dataKey="id" tableStyle="min-width: 50rem">
             <Column selectionMode="multiple" headerStyle="width: 3rem"></Column>
@@ -62,8 +62,10 @@ export default {
         ProductService.getProductsMini().then((data) => (this.products = data));
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <DataTable v-model:selection="selectedProduct" :value="products" dataKey="id" tableStyle="min-width: 50rem">
             <Column selectionMode="multiple" headerStyle="width: 3rem"></Column>
@@ -87,7 +89,8 @@ const products = ref();
 const selectedProduct = ref();
 const metaKey = ref(true);
 
-<\/script>`,
+<\/script>
+`,
                 data: `
 {
     id: '1000',

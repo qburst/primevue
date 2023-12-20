@@ -6,7 +6,7 @@
             <i>aria-modal</i> is added since focus is kept within the popup.
         </p>
         <p>
-            When <i>require</i> method of the <i>$confirm</i> instance is used and a trigger is passed as a parameter, ConfirmDialog adds <i>aria-expanded</i> state attribute and <i>aria-controls</i> to the trigger so that the relation between the
+            When <i>require</i> method of the <i>$confirm</i> instance is used and a trigger is passed as a parameter, ConfirmPopup adds <i>aria-expanded</i> state attribute and <i>aria-controls</i> to the trigger so that the relation between the
             trigger and the dialog is defined.
         </p>
         <DocSectionCode :code="code1" hideToggleCode hideCodeSandbox hideStackBlitz v-bind="$attrs" />
@@ -74,12 +74,15 @@ export default {
     data() {
         return {
             code1: {
-                basic: `<ConfirmPopup id="confirm" aria-label="popup" />
+                basic: `
+<ConfirmPopup id="confirm" aria-label="popup" />
 
-<Button @click="openPopup($event)" label="Confirm" id="confirmButton" :aria-expanded="isVisible" :aria-controls="isVisible ? 'confirm' : null" />`
+<Button @click="openPopup($event)" label="Confirm" id="confirmButton" :aria-expanded="isVisible" :aria-controls="isVisible ? 'confirm' : null" />
+`
             },
             code2: {
-                basic: `<script setup>
+                basic: `
+<script setup>
 const confirm = useConfirm();
 const isVisible = ref(false);
 const openPopup = (event) => {
@@ -95,7 +98,8 @@ const openPopup = (event) => {
         }
     });
 }
-<\/script>`
+<\/script>
+`
             }
         };
     }

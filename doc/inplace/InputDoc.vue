@@ -21,15 +21,18 @@ export default {
         return {
             text: null,
             code: {
-                basic: `<Inplace :closable="true">
+                basic: `
+<Inplace :closable="true">
     <template #display>
         {{ text || 'Click to Edit' }}
     </template>
     <template #content>
         <InputText v-model="text" autofocus />
     </template>
-</Inplace>`,
-                options: `<template>
+</Inplace>
+`,
+                options: `
+<template>
     <div class="card">
         <Inplace :closable="true">
             <template #display>
@@ -50,8 +53,10 @@ export default {
         }
     }
 }
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <Inplace :closable="true">
             <template #display>
@@ -68,7 +73,8 @@ export default {
 import { ref } from "vue";
 
 const text = ref();
-<\/script>`
+<\/script>
+`
             }
         };
     }

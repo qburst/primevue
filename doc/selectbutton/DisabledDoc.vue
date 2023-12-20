@@ -21,9 +21,12 @@ export default {
                 { name: 'Option 2', value: 2, constant: true }
             ],
             code: {
-                basic: `<SelectButton v-model="value" :options="options" disabled />
-<SelectButton v-model="value" :options="options2" optionDisabled="constant" optionLabel="name" />`,
-                options: `<template>
+                basic: `
+<SelectButton v-model="value" :options="options" disabled />
+<SelectButton v-model="value" :options="options2" optionDisabled="constant" optionLabel="name" />
+`,
+                options: `
+<template>
     <div class="card flex flex-wrap justify-content-center flex-wrap gap-3">
         <SelectButton v-model="value" :options="options" disabled />
         <SelectButton v-model="value" :options="options2" optionDisabled="constant" optionLabel="name" />
@@ -38,14 +41,16 @@ export default {
             value2: null,
             options1: ['Off', 'On'],
             options2: [
-                { name: 'Option 1', value: 1 },
+                { name: 'Option 1', value: 1, constant: false },
                 { name: 'Option 2', value: 2, constant: true }
             ]
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex flex-wrap justify-content-center flex-wrap gap-3">
         <SelectButton v-model="value" :options="options" disabled />
         <SelectButton v-model="value" :options="options2" optionDisabled="constant" optionLabel="name" />
@@ -59,10 +64,11 @@ const value1 = ref('Off');
 const value2 = ref();
 const options1 = ref(['Off', 'On']);
 const options2 = ref([
-                { name: 'Option 1', value: 1 },
-                { name: 'Option 2', value: 2, constant: true }
-            ]);
-<\/script>`
+    { name: 'Option 1', value: 1, constant: false },
+    { name: 'Option 2', value: 2, constant: true }
+]);
+<\/script>
+`
             }
         };
     }

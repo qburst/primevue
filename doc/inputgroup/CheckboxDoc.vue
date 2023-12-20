@@ -3,29 +3,29 @@
         <p>Checkbox and RadioButton components can be combined with an input element under the same group.</p>
     </DocSectionText>
     <div class="card flex flex-column md:flex-row gap-3">
-        <div class="p-inputgroup flex-1">
+        <InputGroup>
             <InputText placeholder="Price" />
-            <span class="p-inputgroup-addon">
+            <InputGroupAddon>
                 <RadioButton v-model="radioValue1" name="rb1" value="rb1" />
-            </span>
-        </div>
+            </InputGroupAddon>
+        </InputGroup>
 
-        <div class="p-inputgroup flex-1">
-            <span class="p-inputgroup-addon">
+        <InputGroup>
+            <InputGroupAddon>
                 <Checkbox v-model="checked1" :binary="true" />
-            </span>
+            </InputGroupAddon>
             <InputText placeholder="Username" />
-        </div>
+        </InputGroup>
 
-        <div class="p-inputgroup flex-1">
-            <span class="p-inputgroup-addon">
+        <InputGroup>
+            <InputGroupAddon>
                 <Checkbox v-model="checked2" :binary="true" />
-            </span>
+            </InputGroupAddon>
             <InputText placeholder="Website" />
-            <span class="p-inputgroup-addon">
+            <InputGroupAddon>
                 <RadioButton v-model="radioValue2" name="rb2" value="rb2" />
-            </span>
-        </div>
+            </InputGroupAddon>
+        </InputGroup>
     </div>
     <DocSectionCode :code="code" />
 </template>
@@ -39,54 +39,57 @@ export default {
             radioValue1: '',
             radioValue2: '',
             code: {
-                basic: `<div class="p-inputgroup flex-1">
+                basic: `
+<InputGroup>
     <InputText placeholder="Price" />
-    <span class="p-inputgroup-addon">
+    <InputGroupAddon>
         <RadioButton v-model="radioValue1" name="rb1" value="rb1" />
-    </span>
-</div>
+    </InputGroupAddon>
+</InputGroup>
 
-<div class="p-inputgroup flex-1">
-    <span class="p-inputgroup-addon">
+<InputGroup>
+    <InputGroupAddon>
         <Checkbox v-model="checked1" :binary="true" />
-    </span>
+    </InputGroupAddon>
     <InputText placeholder="Username" />
-</div>
+</InputGroup>
 
-<div class="p-inputgroup flex-1">
-    <span class="p-inputgroup-addon">
+<InputGroup>
+    <InputGroupAddon>
         <Checkbox v-model="checked2" :binary="true" />
-    </span>
+    </InputGroupAddon>
     <InputText placeholder="Website" />
-    <span class="p-inputgroup-addon">
+    <InputGroupAddon>
         <RadioButton v-model="radioValue2" name="rb2" value="rb2" />
-    </span>
-</div>`,
-                options: `<template>
+    </InputGroupAddon>
+</InputGroup>
+`,
+                options: `
+<template>
     <div class="card flex flex-column md:flex-row gap-3">
-        <div class="p-inputgroup flex-1">
+        <InputGroup>
             <InputText placeholder="Price" />
-            <span class="p-inputgroup-addon">
+            <InputGroupAddon>
                 <RadioButton v-model="radioValue1" name="rb1" value="rb1" />
-            </span>
-        </div>
+            </InputGroupAddon>
+        </InputGroup>
 
-        <div class="p-inputgroup flex-1">
-            <span class="p-inputgroup-addon">
+        <InputGroup>
+            <InputGroupAddon>
                 <Checkbox v-model="checked1" :binary="true" />
-            </span>
+            </InputGroupAddon>
             <InputText placeholder="Username" />
-        </div>
+        </InputGroup>
 
-        <div class="p-inputgroup flex-1">
-            <span class="p-inputgroup-addon">
+        <InputGroup>
+            <InputGroupAddon>
                 <Checkbox v-model="checked2" :binary="true" />
-            </span>
+            </InputGroupAddon>
             <InputText placeholder="Website" />
-            <span class="p-inputgroup-addon">
+            <InputGroupAddon>
                 <RadioButton v-model="radioValue2" name="rb2" value="rb2" />
-            </span>
-        </div>
+            </InputGroupAddon>
+        </InputGroup>
     </div>
 </template>
 
@@ -101,32 +104,34 @@ export default {
         };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex flex-column md:flex-row gap-3">
-        <div class="p-inputgroup flex-1">
+        <InputGroup>
             <InputText placeholder="Price" />
-            <span class="p-inputgroup-addon">
+            <InputGroupAddon>
                 <RadioButton v-model="radioValue1" name="rb1" value="rb1" />
-            </span>
-        </div>
+            </InputGroupAddon>
+        </InputGroup>
 
-        <div class="p-inputgroup flex-1">
-            <span class="p-inputgroup-addon">
+        <InputGroup>
+            <InputGroupAddon>
                 <Checkbox v-model="checked1" :binary="true" />
-            </span>
+            </InputGroupAddon>
             <InputText placeholder="Username" />
-        </div>
+        </InputGroup>
 
-        <div class="p-inputgroup flex-1">
-            <span class="p-inputgroup-addon">
+        <InputGroup>
+            <InputGroupAddon>
                 <Checkbox v-model="checked2" :binary="true" />
-            </span>
+            </InputGroupAddon>
             <InputText placeholder="Website" />
-            <span class="p-inputgroup-addon">
+            <InputGroupAddon>
                 <RadioButton v-model="radioValue2" name="rb2" value="rb2" />
-            </span>
-        </div>
+            </InputGroupAddon>
+        </InputGroup>
     </div>
 </template>
 
@@ -137,7 +142,8 @@ const checked1 = ref(false);
 const checked2 = ref(false);
 const radioValue1 = ref('');
 const radioValue2 = ref('');
-<\/script>`
+<\/script>
+`
             }
         };
     }

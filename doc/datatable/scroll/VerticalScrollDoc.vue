@@ -21,13 +21,16 @@ export default {
         return {
             customers: null,
             code: {
-                basic: `<DataTable :value="customers" scrollable scrollHeight="400px" tableStyle="min-width: 50rem">
+                basic: `
+<DataTable :value="customers" scrollable scrollHeight="400px" tableStyle="min-width: 50rem">
     <Column field="name" header="Name"></Column>
     <Column field="country.name" header="Country"></Column>
     <Column field="representative.name" header="Representative"></Column>
     <Column field="company" header="Company"></Column>
-</DataTable>`,
-                options: `<template>
+</DataTable>
+`,
+                options: `
+<template>
     <div class="card">
         <DataTable :value="customers" scrollable scrollHeight="400px" tableStyle="min-width: 50rem">
             <Column field="name" header="Name"></Column>
@@ -53,8 +56,10 @@ export default {
         });
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <DataTable :value="customers" scrollable scrollHeight="400px" tableStyle="min-width: 50rem">
             <Column field="name" header="Name"></Column>
@@ -76,7 +81,8 @@ onMounted(() => {
         customers.value = data;
     });
 });
-<\/script>`,
+<\/script>
+`,
                 data: `
 {
     id: 1000,

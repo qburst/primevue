@@ -9,7 +9,8 @@
  */
 import { TransitionProps, VNode } from 'vue';
 import { ComponentHooks } from '../basecomponent';
-import { ClassComponent, GlobalComponentConstructor, PTOptions } from '../ts-helpers';
+import { PassThroughOptions } from '../passthrough';
+import { ClassComponent, GlobalComponentConstructor, PassThrough } from '../ts-helpers';
 
 export declare type OverlayPanelPassThroughOptionType = OverlayPanelPassThroughAttributes | ((options: OverlayPanelPassThroughMethodOptions) => OverlayPanelPassThroughAttributes | string) | string | null | undefined;
 
@@ -19,9 +20,30 @@ export declare type OverlayPanelPassThroughTransitionType = TransitionProps | ((
  * Custom passthrough(pt) option method.
  */
 export interface OverlayPanelPassThroughMethodOptions {
+    /**
+     * Defines instance.
+     */
     instance: any;
+    /**
+     * Defines valid properties.
+     */
     props: OverlayPanelProps;
+    /**
+     * Defines current inline state.
+     */
     state: OverlayPanelState;
+    /**
+     * Defines valid attributes.
+     */
+    attrs: any;
+    /**
+     * Defines parent options.
+     */
+    parent: any;
+    /**
+     * Defines passthrough(pt) options in global config.
+     */
+    global: object | undefined;
 }
 
 /**
@@ -46,7 +68,7 @@ export interface OverlayPanelPassThroughOptions {
      */
     closeIcon?: OverlayPanelPassThroughOptionType;
     /**
-     * Used to manage all lifecycle hooks
+     * Used to manage all lifecycle hooks.
      * @see {@link BaseComponent.ComponentHooks}
      */
     hooks?: ComponentHooks;
@@ -138,12 +160,22 @@ export interface OverlayPanelProps {
      * Used to pass attributes to DOM elements inside the component.
      * @type {OverlayPanelPassThroughOptions}
      */
-    pt?: PTOptions<OverlayPanelPassThroughOptions>;
+    pt?: PassThrough<OverlayPanelPassThroughOptions>;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false
      */
     unstyled?: boolean;
+    /**
+     * Specifies if pressing escape key should hide the dialog.
+     * @defaultValue true
+     */
+    closeOnEscape?: boolean | undefined;
 }
 
 /**
@@ -158,6 +190,32 @@ export interface OverlayPanelSlots {
      * Custom close icon template.
      */
     closeicon(): VNode[];
+    /**
+     * Custom container slot.
+     * @param {Object} scope - container slot's params.
+     */
+    container(scope: {
+        /**
+         * Close overlay panel function.
+         * @deprecated since v3.39.0. Use 'closeCallback' property instead.
+         */
+        onClose: () => void;
+        /**
+         * Close button keydown function.
+         * @param {Event} event - Browser event
+         * @deprecated since v3.39.0. Use 'keydownCallback' property instead.
+         */
+        onKeydown: (event: Event) => void;
+        /**
+         * Close overlay panel function.
+         */
+        closeCallback: () => void;
+        /**
+         * Close button keydown function.
+         * @param {Event} event - Browser event
+         */
+        keydownCallback: (event: Event) => void;
+    }): VNode[];
 }
 
 /**

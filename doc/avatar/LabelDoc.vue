@@ -20,7 +20,7 @@
 
             <div class="flex-auto">
                 <h5>Badge</h5>
-                <Avatar v-badge="4" label="U" size="xlarge" style="background-color: #4caf4f; color: #ffffff" />
+                <Avatar v-badge="4" label="U" size="xlarge" />
             </div>
         </div>
     </div>
@@ -32,7 +32,8 @@ export default {
     data() {
         return {
             code: {
-                basic: `<Avatar label="P" class="mr-2" size="xlarge" />
+                basic: `
+<Avatar label="P" class="mr-2" size="xlarge" />
 <Avatar label="V" class="mr-2" size="large" style="background-color:#2196F3; color: #ffffff"/>
 <Avatar label="U" class="mr-2" style="background-color:#9c27b0; color: #ffffff" />
 
@@ -40,8 +41,10 @@ export default {
 <Avatar label="V" class="mr-2" size="large" style="background-color:#2196F3; color: #ffffff" shape="circle"  />
 <Avatar label="U" class="mr-2" style="background-color:#9c27b0; color: #ffffff" shape="circle" />
 
-<Avatar label="U" size="xlarge" style="background-color:#4caf4f; color: #ffffff" v-badge="4" />`,
-                options: `<template>
+<Avatar v-badge="4" label="U" size="xlarge" />
+`,
+                options: `
+<template>
     <div class="flex flex-wrap gap-5">
         <div class="flex-auto">
             <h5>Label</h5>
@@ -59,15 +62,17 @@ export default {
 
         <div class="flex-auto">
             <h5>Badge</h5>
-            <Avatar v-badge="4" label="U" size="xlarge" style="background-color: #4caf4f; color: #ffffff" />
+            <Avatar v-badge="4" label="U" size="xlarge" />
         </div>
     </div>
 </template>
 
 <script>
 
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="flex flex-wrap gap-5">
         <div class="flex-auto">
             <h5>Label</h5>
@@ -85,14 +90,15 @@ export default {
 
         <div class="flex-auto">
             <h5>Badge</h5>
-            <Avatar v-badge="4" label="U" size="xlarge" style="background-color: #4caf4f; color: #ffffff" />
+            <Avatar v-badge="4" label="U" size="xlarge" />
         </div>
     </div>
 </template>
 
 <script setup>
 
-<\/script>`
+<\/script>
+`
             }
         };
     }

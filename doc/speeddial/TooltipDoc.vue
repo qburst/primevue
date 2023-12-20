@@ -1,6 +1,6 @@
 <template>
     <DocSectionText v-bind="$attrs">
-        <p>Items display a tooltip on hober when a standalone <PrimeVueNuxtLink to="/tooltip">Tooltip</PrimeVueNuxtLink> is present with a target that matches the items.</p>
+        <p>Items display a tooltip on hover when a standalone <PrimeVueNuxtLink to="/tooltip">Tooltip</PrimeVueNuxtLink> is present with a target that matches the items.</p>
     </DocSectionText>
     <div class="card">
         <div :style="{ position: 'relative', height: '350px' }">
@@ -53,9 +53,12 @@ export default {
                 }
             ],
             code: {
-                basic: `<SpeedDial :model="items" direction="up" class="right-0 bottom-0" buttonClass="p-button-help" :tooltipOptions="{ position: 'left' }" />
-<SpeedDial :model="items" direction="up" class="left-0 bottom-0" buttonClass="p-button-danger" :tooltipOptions="{ position: 'right' }" />`,
-                options: `<template>
+                basic: `
+<SpeedDial :model="items" direction="up" class="right-0 bottom-0" buttonClass="p-button-help" :tooltipOptions="{ position: 'left' }" />
+<SpeedDial :model="items" direction="up" class="left-0 bottom-0" buttonClass="p-button-danger" :tooltipOptions="{ position: 'right' }" />
+`,
+                options: `
+<template>
     <div class="card">
         <div :style="{ position: 'relative', height: '350px' }">
             <SpeedDial :model="items" direction="up" class="right-0 bottom-0" buttonClass="p-button-help" :tooltipOptions="{ position: 'left' }" />
@@ -109,8 +112,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <div :style="{ position: 'relative', height: '350px' }">
             <SpeedDial :model="items" direction="up" class="right-0 bottom-0" buttonClass="p-button-help" :tooltipOptions="{ position: 'left' }" />
@@ -165,7 +170,8 @@ const items = ref([
         }
     }
 ])
-<\/script>`
+<\/script>
+`
             }
         };
     }

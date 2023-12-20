@@ -31,7 +31,8 @@ export default {
         return {
             events: ['2020', '2021', '2022', '2023'],
             code: {
-                basic: `<Timeline :value="events" layout="horizontal" align="top">
+                basic: `
+<Timeline :value="events" layout="horizontal" align="top">
     <template #content="slotProps">
         {{ slotProps.item }}
     </template>
@@ -48,8 +49,10 @@ export default {
     <template #content="slotProps">
         {{ slotProps.item }}
     </template>
-</Timeline>`,
-                options: `<template>
+</Timeline>
+`,
+                options: `
+<template>
     <div class="card flex flex-column gap-3">
         <Timeline :value="events" layout="horizontal" align="top">
             <template #content="slotProps">
@@ -80,8 +83,10 @@ export default {
         };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex flex-column gap-3">
         <Timeline :value="events" layout="horizontal" align="top">
             <template #content="slotProps">
@@ -108,7 +113,8 @@ export default {
 import { ref } from "vue";
 
 const events = ref(['2020', '2021', '2022', '2023']);
-<\/script>`
+<\/script>
+`
             }
         };
     }

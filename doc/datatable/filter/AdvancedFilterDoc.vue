@@ -139,7 +139,8 @@ export default {
             statuses: ['unqualified', 'qualified', 'new', 'negotiation', 'renewal', 'proposal'],
             loading: true,
             code: {
-                basic: `<DataTable v-model:filters="filters" :value="customers" paginator showGridlines :rows="10" dataKey="id"
+                basic: `
+<DataTable v-model:filters="filters" :value="customers" paginator showGridlines :rows="10" dataKey="id"
         filterDisplay="menu" :loading="loading" :globalFilterFields="['name', 'country.name', 'representative.name', 'balance', 'status']">
     <template #header>
         <div class="flex justify-content-between">
@@ -247,8 +248,10 @@ export default {
             <TriStateCheckbox v-model="filterModel.value" inputId="verified-filter" />
         </template>
     </Column>
-</DataTable>`,
-                options: `<template>
+</DataTable>
+`,
+                options: `
+<template>
     <div class="card">
         <DataTable v-model:filters="filters" :value="customers" paginator showGridlines :rows="10" dataKey="id"
                 filterDisplay="menu" :loading="loading" :globalFilterFields="['name', 'country.name', 'representative.name', 'balance', 'status']">
@@ -450,8 +453,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <DataTable v-model:filters="filters" :value="customers" paginator showGridlines :rows="10" dataKey="id"
                 filterDisplay="menu" :loading="loading" :globalFilterFields="['name', 'country.name', 'representative.name', 'balance', 'status']">
@@ -649,7 +654,8 @@ const getSeverity = (status) => {
             return null;
     }
 };
-<\/script>`,
+<\/script>
+`,
                 data: `
 {
     id: 1000,

@@ -9,16 +9,19 @@
 </template>
 
 <script>
+import EventBus from '@/layouts/AppEventBus';
+
 export default {
     data() {
         return {
             chartData: null,
-            chartOptions: {
-                cutout: '60%'
-            },
+            chartOptions: null,
             code: {
-                basic: `<Chart type="doughnut" :data="chartData" :options="chartOptions" class="w-full md:w-30rem" />`,
-                options: `<template>
+                basic: `
+<Chart type="doughnut" :data="chartData" :options="chartOptions" class="w-full md:w-30rem" />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <Chart type="doughnut" :data="chartData" :options="chartOptions" class="w-full md:w-30rem" />
     </div>
@@ -36,6 +39,7 @@ export default {
     },
     mounted() {
         this.chartData = this.setChartData();
+        this.chartOptions = this.setChartOptions();
     },
     methods: {
         setChartData() {
@@ -51,11 +55,28 @@ export default {
                     }
                 ]
             };
+        },
+        setChartOptions() {
+            const documentStyle = getComputedStyle(document.documentElement);
+            const textColor = documentStyle.getPropertyValue('--text-color');
+
+            return {
+                plugins: {
+                    legend: {
+                        labels: {
+                            cutout: '60%',
+                            color: textColor
+                        }
+                    }
+                }
+            };
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <Chart type="doughnut" :data="chartData" :options="chartOptions" class="w-full md:w-30rem" />
     </div>
@@ -66,12 +87,11 @@ import { ref, onMounted } from "vue";
 
 onMounted(() => {
     chartData.value = setChartData();
+    chartOptions.value = setChartOptions();
 });
 
 const chartData = ref();
-const chartOptions = ref({
-    cutout: '60%'
-});
+const chartOptions = ref(null);
 
 const setChartData = () => {
     const documentStyle = getComputedStyle(document.body);
@@ -87,16 +107,40 @@ const setChartData = () => {
         ]
     };
 };
-<\/script>`
+
+const setChartOptions = () => {
+    const documentStyle = getComputedStyle(document.documentElement);
+    const textColor = documentStyle.getPropertyValue('--text-color');
+
+    return {
+        plugins: {
+            legend: {
+                labels: {
+                    cutout: '60%',
+                    color: textColor
+                }
+            }
+        }
+    };
+};
+<\/script>
+`
             }
         };
     },
     mounted() {
         this.chartData = this.setChartData();
+        this.chartOptions = this.setChartOptions();
+
+        this.themeChangeListener = () => {
+            this.chartOptions = this.setChartOptions();
+        };
+
+        EventBus.on('theme-change-complete', this.themeChangeListener);
     },
     methods: {
         setChartData() {
-            const documentStyle = getComputedStyle(document.body);
+            const documentStyle = getComputedStyle(document.documentElement);
 
             return {
                 labels: ['A', 'B', 'C'],
@@ -107,6 +151,21 @@ const setChartData = () => {
                         hoverBackgroundColor: [documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--yellow-400'), documentStyle.getPropertyValue('--green-400')]
                     }
                 ]
+            };
+        },
+        setChartOptions() {
+            const documentStyle = getComputedStyle(document.documentElement);
+            const textColor = documentStyle.getPropertyValue('--text-color');
+
+            return {
+                plugins: {
+                    legend: {
+                        labels: {
+                            cutout: '60%',
+                            color: textColor
+                        }
+                    }
+                }
             };
         }
     }

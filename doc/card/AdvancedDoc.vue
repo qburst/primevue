@@ -10,7 +10,7 @@
             <template #title> Advanced Card </template>
             <template #subtitle> Card subtitle </template>
             <template #content>
-                <p>
+                <p class="m-0">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
                     quas!
                 </p>
@@ -29,14 +29,15 @@ export default {
     data() {
         return {
             code: {
-                basic: `<Card style="width: 25em">
+                basic: `
+<Card style="width: 25em">
     <template #header>
         <img alt="user header" src="/images/usercard.png" />
     </template>
     <template #title> Advanced Card </template>
     <template #subtitle> Card subtitle </template>
     <template #content>
-        <p>
+        <p class="m-0">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
             quas!
         </p>
@@ -45,8 +46,10 @@ export default {
         <Button icon="pi pi-check" label="Save" />
         <Button icon="pi pi-times" label="Cancel" severity="secondary" style="margin-left: 0.5em" />
     </template>
-</Card>`,
-                options: `<template>
+</Card>
+`,
+                options: `
+<template>
     <div class="card flex align-items-center justify-content-center">
         <Card style="width: 25em">
             <template #header>
@@ -55,7 +58,7 @@ export default {
             <template #title> Advanced Card </template>
             <template #subtitle> Card subtitle </template>
             <template #content>
-                <p>
+                <p class="m-0">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
                     quas!
                 </p>
@@ -69,8 +72,10 @@ export default {
 </template>
 
 <script>
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex align-items-center justify-content-center">
         <Card style="width: 25em">
             <template #header>
@@ -79,7 +84,7 @@ export default {
             <template #title> Advanced Card </template>
             <template #subtitle> Card subtitle </template>
             <template #content>
-                <p>
+                <p class="m-0">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
                     quas!
                 </p>
@@ -93,7 +98,8 @@ export default {
 </template>
 
 <script setup>
-<\/script>`
+<\/script>
+`
             }
         };
     }

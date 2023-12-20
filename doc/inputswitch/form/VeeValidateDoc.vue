@@ -43,7 +43,8 @@ export default {
     data() {
         return {
             code: {
-                basic: `<template>
+                basic: `
+<template>
     <div class="card flex justify-content-center">
         <form @submit="onSubmit" class="flex flex-column gap-2">
             <div>I've read and accept the terms & conditions.</div>
@@ -52,8 +53,10 @@ export default {
             <Button type="submit" label="Submit" />
         </form>
     </div>
-</template>`,
-                options: `<template>
+</template>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <form @submit="onSubmit" class="flex flex-column gap-2">
             <div>I've read and accept the terms & conditions.</div>
@@ -93,8 +96,10 @@ export default {
         return { value, handleSubmit, onSubmit, errorMessage };
     },
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <form @submit="onSubmit" class="flex flex-column gap-2">
             <div>I've read and accept the terms & conditions.</div>

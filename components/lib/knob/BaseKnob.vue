@@ -1,36 +1,6 @@
 <script>
 import BaseComponent from 'primevue/basecomponent';
-import { useStyle } from 'primevue/usestyle';
-
-const styles = `
-@keyframes dash-frame {
-    100% {
-        stroke-dashoffset: 0;
-    }
-}
-.p-knob-range {
-    fill: none;
-    transition: stroke 0.1s ease-in;
-}
-.p-knob-value {
-    animation-name: dash-frame;
-    animation-fill-mode: forwards;
-    fill: none;
-}
-.p-knob-text {
-    font-size: 1.3rem;
-    text-align: center;
-}
-`;
-
-const classes = {
-    root: ({ props }) => ['p-knob p-component', { 'p-disabled': props.disabled }],
-    range: 'p-knob-range',
-    value: 'p-knob-value',
-    label: 'p-knob-text'
-};
-
-const { load: loadStyle } = useStyle(styles, { name: 'knob', manual: true });
+import KnobStyle from 'primevue/knob/style';
 
 export default {
     name: 'BaseKnob',
@@ -92,19 +62,16 @@ export default {
             type: Number,
             default: 0
         },
-        'aria-labelledby': {
+        ariaLabelledby: {
             type: String,
             default: null
         },
-        'aria-label': {
+        ariaLabel: {
             type: String,
             default: null
         }
     },
-    css: {
-        classes,
-        loadStyle
-    },
+    style: KnobStyle,
     provide() {
         return {
             $parentInstance: this

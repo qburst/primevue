@@ -43,7 +43,8 @@ export default {
     data() {
         return {
             code: {
-                basic: `<template>
+                basic: `
+<template>
     <div class="card flex justify-content-center">
         <form @submit="onSubmit" class="flex flex-column gap-2">
             <label for="date">Date</label>
@@ -53,8 +54,10 @@ export default {
         </form>
         <Toast />
     </div>
-</template>`,
-                options: `<template>
+</template>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <form @submit="onSubmit" class="flex flex-column gap-2">
             <label for="date">Date</label>
@@ -94,8 +97,10 @@ export default {
         return { value, handleSubmit, onSubmit, errorMessage };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <form @submit="onSubmit" class="flex flex-column gap-2">
             <label for="date">Date</label>

@@ -43,14 +43,17 @@ export default {
         return {
             nodes: null,
             code: {
-                basic: `<div class="card flex justify-content-center">
+                basic: `
+<div class="card flex justify-content-center">
     <form @submit="onSubmit" class="flex flex-column align-items-center gap-2 w-full md:w-20rem">
         <TreeSelect v-model="value" :class="['w-full md:w-20rem', { 'p-invalid': errorMessage }]" aria-describedby="text-error" :options="nodes" placeholder="Select Item" />
         <small id="text-error" class="p-error">{{ errorMessage || '&nbsp;' }}</small>
         <Button type="submit" label="Submit" />
     </form>
-</div>`,
-                options: `<template>
+</div>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <form @submit="onSubmit" class="flex flex-column align-items-center gap-2 w-full md:w-20rem">
             <TreeSelect v-model="value" :class="['w-full md:w-20rem', { 'p-invalid': errorMessage }]" aria-describedby="text-error" :options="nodes" placeholder="Select Item" />
@@ -98,8 +101,10 @@ export default {
         NodeService.getTreeNodes().then((data) => (this.nodes = data));
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <form @submit="onSubmit" class="flex flex-column align-items-center gap-2 w-full md:w-20rem">
             <TreeSelect v-model="value" :class="['w-full md:w-20rem', { 'p-invalid': errorMessage }]" aria-describedby="text-error" :options="nodes" placeholder="Select Item" />
@@ -140,7 +145,8 @@ const onSubmit = handleSubmit((values) => {
         resetForm();
     }
 });
-<\/script>`
+<\/script>
+`
             }
         };
     },

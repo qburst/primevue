@@ -14,8 +14,11 @@ export default {
         return {
             color: null,
             code: {
-                basic: `<ColorPicker v-model="color" />`,
-                options: `<template>
+                basic: `
+<ColorPicker v-model="color" />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <ColorPicker v-model="color" />
     </div>
@@ -29,8 +32,10 @@ export default {
         };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <ColorPicker v-model="color" />
     </div>
@@ -40,7 +45,8 @@ export default {
 import { ref } from "vue";
 
 const color = ref();
-<\/script>`
+<\/script>
+`
             }
         };
     }

@@ -11,11 +11,12 @@
 </template>
 
 <script>
-import AccessibilityDoc from '@/doc/menubar/AccessibilityDoc';
-import BasicDoc from '@/doc/menubar/BasicDoc';
-import ImportDoc from '@/doc/menubar/ImportDoc';
-import RouterDoc from '@/doc/menubar/RouterDoc';
-import TemplateDoc from '@/doc/menubar/TemplateDoc';
+import AccessibilityDoc from '@/doc/menubar/AccessibilityDoc.vue';
+import BasicDoc from '@/doc/menubar/BasicDoc.vue';
+import CommandDoc from '@/doc/menubar/CommandDoc.vue';
+import ImportDoc from '@/doc/menubar/ImportDoc.vue';
+import RouterDoc from '@/doc/menubar/RouterDoc.vue';
+import TemplateDoc from '@/doc/menubar/TemplateDoc.vue';
 import PTComponent from '@/doc/menubar/pt/index.vue';
 import ThemingDoc from '@/doc/menubar/theming/index.vue';
 
@@ -37,6 +38,11 @@ export default {
                     id: 'template',
                     label: 'Template',
                     component: TemplateDoc
+                },
+                {
+                    id: 'command',
+                    label: 'Command',
+                    component: CommandDoc
                 },
                 {
                     id: 'router',

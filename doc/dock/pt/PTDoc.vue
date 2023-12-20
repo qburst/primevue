@@ -35,7 +35,8 @@ export default {
                 }
             ],
             code: {
-                basic: `<Dock :model="items" position="bottom"
+                basic: `
+<Dock :model="items" position="bottom"
     :pt="{ 
         container: {
             style: { background: 'linear-gradient(to right,#056BAE, #673976, #056BAE)', borderRadius: '12px' }
@@ -45,8 +46,10 @@ export default {
     <template #icon="{ item }">
         <img :alt="item.label" :src="item.icon" style="width: 100%" />
     </template>
-</Dock>`,
-                options: `<template>
+</Dock>
+`,
+                options: `
+<template>
     <div class="card dock-demo">
         <div class="dock-window">
             <Dock :model="items" position="bottom"
@@ -105,8 +108,10 @@ export default {
 .dock-demo > .p-dock {
     z-index: 1000;
 }
-</style>`,
-                composition: `<template>
+</style>
+`,
+                composition: `
+<template>
     <div class="card dock-demo">
         <div class="dock-window" style="backgroundimage: 'url(https://primefaces.org/cdn/primevue/images/dock/window.jpg))'">
             <Dock :model="items" position="bottom"
@@ -162,7 +167,8 @@ const items = ref([
 .dock-demo > .p-dock {
     z-index: 1000;
 }
-</style>`
+</style>
+`
             }
         };
     }

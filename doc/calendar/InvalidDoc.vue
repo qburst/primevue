@@ -14,8 +14,11 @@ export default {
         return {
             date: null,
             code: {
-                basic: `<Calendar v-model="date" class="p-invalid" />`,
-                options: `<template>
+                basic: `
+<Calendar v-model="date" class="p-invalid" />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <Calendar v-model="date" class="p-invalid" />
     </div>
@@ -29,8 +32,10 @@ export default {
         };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <Calendar v-model="date" class="p-invalid" />
     </div>
@@ -40,7 +45,8 @@ export default {
 import { ref } from "vue";
 
 const date = ref();
-<\/script>`
+<\/script>
+`
             }
         };
     }

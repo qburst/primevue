@@ -20,15 +20,18 @@ export default {
         return {
             value: null,
             code: {
-                basic: `<TriStateCheckbox
+                basic: `
+<TriStateCheckbox
     v-model="value"
     :pt="{
         checkbox: {
             class: value ? 'bg-teal-500 border-white' : undefined
         }
     }"
-/>`,
-                options: `<template>
+/>
+`,
+                options: `
+<template>
     <div class="card flex flex-column align-items-center gap-3">
         <TriStateCheckbox
             v-model="value"
@@ -50,8 +53,10 @@ export default {
         }
     }
 }
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex flex-column align-items-center gap-3">
         <TriStateCheckbox
             v-model="value"
@@ -69,7 +74,8 @@ export default {
 import { ref } from 'vue';
 
 const value = ref(null);
-<\/script>`
+<\/script>
+`
             }
         };
     }

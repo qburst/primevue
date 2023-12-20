@@ -34,7 +34,8 @@ export default {
         return {
             nodes: null,
             code: {
-                basic: `<TreeTable :value="nodes" :paginator="true" :rows="5" :rowsPerPageOptions="[5, 10, 25, 50]"
+                basic: `
+<TreeTable :value="nodes" :paginator="true" :rows="5" :rowsPerPageOptions="[5, 10, 25, 50]"
     paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
     currentPageReportTemplate="{first} to {last} of {totalRecords}">
     <template #paginatorstart>
@@ -46,8 +47,10 @@ export default {
     <template #paginatorend>
         <Button type="button" icon="pi pi-download" text />
     </template>
-</TreeTable>`,
-                options: `<template>
+</TreeTable>
+`,
+                options: `
+<template>
     <div class="card">
         <TreeTable :value="nodes" :paginator="true" :rows="5" :rowsPerPageOptions="[5, 10, 25, 50]"
             paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
@@ -101,8 +104,10 @@ export default {
         this.nodes = files;
     }
 }
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <TreeTable :value="nodes" :paginator="true" :rows="5" :rowsPerPageOptions="[5, 10, 25, 50]"
             paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
@@ -151,7 +156,8 @@ for (let i = 0; i < 50; i++) {
 
 nodes.value = files;
     
-<\/script>`
+<\/script>
+`
             }
         };
     },

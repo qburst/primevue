@@ -18,7 +18,7 @@
             :value="customers"
             lazy
             paginator
-            :first="0"
+            :first="first"
             :rows="10"
             dataKey="id"
             :totalRecords="totalRecords"
@@ -83,6 +83,7 @@ export default {
             customers: null,
             selectedCustomers: null,
             selectAll: false,
+            first: 0,
             filters: {
                 name: { value: '', matchMode: 'contains' },
                 'country.name': { value: '', matchMode: 'contains' },
@@ -97,7 +98,8 @@ export default {
                 { field: 'representative.name', header: 'Representative' }
             ],
             code: {
-                basic: `<DataTable :value="customers" lazy paginator :first="0" :rows="10" v-model:filters="filters" ref="dt" dataKey="id"
+                basic: `
+<DataTable :value="customers" lazy paginator :first="first" :rows="10" v-model:filters="filters" ref="dt" dataKey="id"
         :totalRecords="totalRecords" :loading="loading" @page="onPage($event)" @sort="onSort($event)" @filter="onFilter($event)" filterDisplay="row"
         :globalFilterFields="['name','country.name', 'company', 'representative.name']"
         v-model:selection="selectedCustomers" :selectAll="selectAll" @select-all-change="onSelectAllChange" @row-select="onRowSelect" @row-unselect="onRowUnselect" tableStyle="min-width: 75rem">
@@ -108,6 +110,12 @@ export default {
         </template>
     </Column>
     <Column field="country.name" header="Country" filterField="country.name" filterMatchMode="contains" sortable>
+        <template #body="{ data }">
+            <div class="flex align-items-center gap-2">
+                <img alt="flag" src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png" :class="\`flag flag-\${data.country.code}\`" style="width: 24px" />
+                <span>{{ data.country.name }}</span>
+            </div>
+        </template>
         <template #filter="{filterModel,filterCallback}">
             <InputText type="text" v-model="filterModel.value" @keydown.enter="filterCallback()" class="p-column-filter" placeholder="Search"/>
         </template>
@@ -118,17 +126,25 @@ export default {
         </template>
     </Column>
     <Column field="representative.name" header="Representative" filterField="representative.name" sortable>
+        <template #body="{ data }">
+            <div class="flex align-items-center gap-2">
+                <img :alt="data.representative.name" :src="\`https://primefaces.org/cdn/primevue/images/avatar/\${data.representative.image}\`" style="width: 32px" />
+                <span>{{ data.representative.name }}</span>
+            </div>
+        </template>
         <template #filter="{filterModel,filterCallback}">
             <InputText type="text" v-model="filterModel.value" @keydown.enter="filterCallback()" class="p-column-filter" placeholder="Search"/>
         </template>
     </Column>
-</DataTable>`,
-                options: `<template>
+</DataTable>
+`,
+                options: `
+<template>
 	<div class="card p-fluid">
-        <DataTable :value="customers" lazy paginator :first="0" :rows="10" v-model:filters="filters" ref="dt" dataKey="id"
-                :totalRecords="totalRecords" :loading="loading" @page="onPage($event)" @sort="onSort($event)" @filter="onFilter($event)" filterDisplay="row"
-                :globalFilterFields="['name','country.name', 'company', 'representative.name']"
-                v-model:selection="selectedCustomers" :selectAll="selectAll" @select-all-change="onSelectAllChange" @row-select="onRowSelect" @row-unselect="onRowUnselect" tableStyle="min-width: 75rem">
+        <DataTable :value="customers" lazy paginator :first="first" :rows="10" v-model:filters="filters" ref="dt" dataKey="id"
+            :totalRecords="totalRecords" :loading="loading" @page="onPage($event)" @sort="onSort($event)" @filter="onFilter($event)" filterDisplay="row"
+            :globalFilterFields="['name','country.name', 'company', 'representative.name']"
+            v-model:selection="selectedCustomers" :selectAll="selectAll" @select-all-change="onSelectAllChange" @row-select="onRowSelect" @row-unselect="onRowUnselect" tableStyle="min-width: 75rem">
             <Column selectionMode="multiple" headerStyle="width: 3rem"></Column>
             <Column field="name" header="Name" filterMatchMode="startsWith" sortable>
                 <template #filter="{filterModel,filterCallback}">
@@ -136,6 +152,12 @@ export default {
                 </template>
             </Column>
             <Column field="country.name" header="Country" filterField="country.name" filterMatchMode="contains" sortable>
+                <template #body="{ data }">
+                    <div class="flex align-items-center gap-2">
+                        <img alt="flag" src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png" :class="\`flag flag-\${data.country.code}\`" style="width: 24px" />
+                        <span>{{ data.country.name }}</span>
+                    </div>
+                </template>
                 <template #filter="{filterModel,filterCallback}">
                     <InputText type="text" v-model="filterModel.value" @keydown.enter="filterCallback()" class="p-column-filter" placeholder="Search"/>
                 </template>
@@ -146,6 +168,12 @@ export default {
                 </template>
             </Column>
             <Column field="representative.name" header="Representative" filterField="representative.name" sortable>
+                <template #body="{ data }">
+                    <div class="flex align-items-center gap-2">
+                        <img :alt="data.representative.name" :src="\`https://primefaces.org/cdn/primevue/images/avatar/\${data.representative.image}\`" style="width: 32px" />
+                        <span>{{ data.representative.name }}</span>
+                    </div>
+                </template>
                 <template #filter="{filterModel,filterCallback}">
                     <InputText type="text" v-model="filterModel.value" @keydown.enter="filterCallback()" class="p-column-filter" placeholder="Search"/>
                 </template>
@@ -165,6 +193,7 @@ export default {
             customers: null,
             selectedCustomers: null,
             selectAll: false,
+            first: 0,
             filters: {
                 'name': {value: '', matchMode: 'contains'},
                 'country.name': {value: '', matchMode: 'contains'},
@@ -196,6 +225,7 @@ export default {
     methods: {
         loadLazyData() {
             this.loading = true;
+            this.lazyParams = { ...this.lazyParams, first: event?.first || this.first };
 
             setTimeout(() => {
                 CustomerService.getCustomers({ lazyEvent: JSON.stringify(this.lazyParams) }).then((data) => {
@@ -207,15 +237,15 @@ export default {
         },
         onPage(event) {
             this.lazyParams = event;
-            this.loadLazyData();
+            this.loadLazyData(event);
         },
         onSort(event) {
             this.lazyParams = event;
-            this.loadLazyData();
+            this.loadLazyData(event);
         },
-        onFilter() {
+        onFilter(event) {
             this.lazyParams.filters = this.filters;
-            this.loadLazyData();
+            this.loadLazyData(event);
         },
         onSelectAllChange(event) {
             const selectAll = event.checked;
@@ -240,10 +270,12 @@ export default {
     }
 }
 <\/script>
+
 `,
-                composition: `<template>
+                composition: `
+<template>
 	<div class="card p-fluid">
-        <DataTable :value="customers" lazy paginator :first="0" :rows="10" v-model:filters="filters" ref="dt" dataKey="id"
+        <DataTable :value="customers" lazy paginator :first="first" :rows="10" v-model:filters="filters" ref="dt" dataKey="id"
             :totalRecords="totalRecords" :loading="loading" @page="onPage($event)" @sort="onSort($event)" @filter="onFilter($event)" filterDisplay="row"
             :globalFilterFields="['name','country.name', 'company', 'representative.name']"
             v-model:selection="selectedCustomers" :selectAll="selectAll" @select-all-change="onSelectAllChange" @row-select="onRowSelect" @row-unselect="onRowUnselect" tableStyle="min-width: 75rem">
@@ -254,6 +286,12 @@ export default {
                 </template>
             </Column>
             <Column field="country.name" header="Country" filterField="country.name" filterMatchMode="contains" sortable>
+                <template #body="{ data }">
+                    <div class="flex align-items-center gap-2">
+                        <img alt="flag" src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png" :class="\`flag flag-\${data.country.code}\`" style="width: 24px" />
+                        <span>{{ data.country.name }}</span>
+                    </div>
+                </template>
                 <template #filter="{filterModel,filterCallback}">
                     <InputText type="text" v-model="filterModel.value" @keydown.enter="filterCallback()" class="p-column-filter" placeholder="Search"/>
                 </template>
@@ -264,6 +302,12 @@ export default {
                 </template>
             </Column>
             <Column field="representative.name" header="Representative" filterField="representative.name" sortable>
+                <template #body="{ data }">
+                    <div class="flex align-items-center gap-2">
+                        <img :alt="data.representative.name" :src="\`https://primefaces.org/cdn/primevue/images/avatar/\${data.representative.image}\`" style="width: 32px" />
+                        <span>{{ data.representative.name }}</span>
+                    </div>
+                </template>
                 <template #filter="{filterModel,filterCallback}">
                     <InputText type="text" v-model="filterModel.value" @keydown.enter="filterCallback()" class="p-column-filter" placeholder="Search"/>
                 </template>
@@ -296,6 +340,7 @@ const totalRecords = ref(0);
 const customers = ref();
 const selectedCustomers = ref();
 const selectAll = ref(false);
+const first = ref(0);
 const filters = ref({
     'name': {value: '', matchMode: 'contains'},
     'country.name': {value: '', matchMode: 'contains'},
@@ -310,8 +355,9 @@ const columns = ref([
     {field: 'representative.name', header: 'Representative'}
 ]);
 
-const loadLazyData = () => {
+const loadLazyData = (event) => {
     loading.value = true;
+    lazyParams.value = { ...lazyParams.value, first: event?.first || first.value };
 
     setTimeout(() => {
         CustomerService.getCustomers({ lazyEvent: JSON.stringify(lazyParams.value) }).then((data) => {
@@ -323,15 +369,15 @@ const loadLazyData = () => {
 };
 const onPage = (event) => {
     lazyParams.value = event;
-    loadLazyData();
+    loadLazyData(event);
 };
 const onSort = (event) => {
     lazyParams.value = event;
-    loadLazyData();
+    loadLazyData(event);
 };
-const onFilter = () => {
+const onFilter = (event) => {
     lazyParams.value.filters = filters.value ;
-    loadLazyData();
+    loadLazyData(event);
 };
 const onSelectAllChange = (event) => {
     selectAll.value = event.checked;
@@ -393,8 +439,9 @@ const onRowUnselect = () => {
         this.loadLazyData();
     },
     methods: {
-        loadLazyData() {
+        loadLazyData(event) {
             this.loading = true;
+            this.lazyParams = { ...this.lazyParams, first: event?.first || this.first };
 
             setTimeout(() => {
                 CustomerService.getCustomers({ lazyEvent: JSON.stringify(this.lazyParams) }).then((data) => {
@@ -406,15 +453,15 @@ const onRowUnselect = () => {
         },
         onPage(event) {
             this.lazyParams = event;
-            this.loadLazyData();
+            this.loadLazyData(event);
         },
         onSort(event) {
             this.lazyParams = event;
-            this.loadLazyData();
+            this.loadLazyData(event);
         },
-        onFilter() {
+        onFilter(event) {
             this.lazyParams.filters = this.filters;
-            this.loadLazyData();
+            this.loadLazyData(event);
         },
         onSelectAllChange(event) {
             const selectAll = event.checked;

@@ -10,7 +10,7 @@
                 </span>
             </template>
             <template #content="slotProps">
-                <Card>
+                <Card class="mt-3">
                     <template #title>
                         {{ slotProps.item.status }}
                     </template>
@@ -43,14 +43,15 @@ export default {
                 { status: 'Delivered', date: '16/10/2020 10:00', icon: 'pi pi-check', color: '#607D8B' }
             ],
             code: {
-                basic: `<Timeline :value="events" align="alternate" class="customized-timeline">
+                basic: `
+<Timeline :value="events" align="alternate" class="customized-timeline">
     <template #marker="slotProps">
         <span class="flex w-2rem h-2rem align-items-center justify-content-center text-white border-circle z-1 shadow-1" :style="{ backgroundColor: slotProps.item.color }">
             <i :class="slotProps.item.icon"></i>
         </span>
     </template>
     <template #content="slotProps">
-        <Card>
+        <Card class="mt-3">
             <template #title>
                 {{ slotProps.item.status }}
             </template>
@@ -67,8 +68,10 @@ export default {
             </template>
         </Card>
     </template>
-</Timeline>`,
-                options: `<template>
+</Timeline>
+`,
+                options: `
+<template>
     <div class="card">
         <Timeline :value="events" align="alternate" class="customized-timeline">
             <template #marker="slotProps">
@@ -77,7 +80,7 @@ export default {
                 </span>
             </template>
             <template #content="slotProps">
-                <Card>
+                <Card class="mt-3">
                     <template #title>
                         {{ slotProps.item.status }}
                     </template>
@@ -127,14 +130,12 @@ export default {
         .p-timeline-event-opposite {
             flex: 0;
         }
-
-        .p-card {
-            margin-top: 1rem;
-        }
     }
 }
-</style>`,
-                composition: `<template>
+</style>
+`,
+                composition: `
+<template>
     <div class="card">
         <Timeline :value="events" align="alternate" class="customized-timeline">
             <template #marker="slotProps">
@@ -143,7 +144,7 @@ export default {
                 </span>
             </template>
             <template #content="slotProps">
-                <Card>
+                <Card class="mt-3">
                     <template #title>
                         {{ slotProps.item.status }}
                     </template>
@@ -190,15 +191,30 @@ const events = ref([
         .p-timeline-event-opposite {
             flex: 0;
         }
-
-        .p-card {
-            margin-top: 1rem;
-        }
     }
 }
-</style>`
+</style>
+`
             }
         };
     }
 };
 </script>
+
+<style lang="scss" scoped>
+@media screen and (max-width: 960px) {
+    ::v-deep(.customized-timeline) {
+        .p-timeline-event:nth-child(even) {
+            flex-direction: row !important;
+
+            .p-timeline-event-content {
+                text-align: left !important;
+            }
+        }
+
+        .p-timeline-event-opposite {
+            flex: 0;
+        }
+    }
+}
+</style>

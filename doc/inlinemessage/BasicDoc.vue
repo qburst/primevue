@@ -13,23 +13,29 @@ export default {
     data() {
         return {
             code: {
-                basic: `<InlineMessage severity="info">Username is required</InlineMessage>`,
-                options: `<template>
+                basic: `
+<InlineMessage severity="info">Username is required</InlineMessage>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <InlineMessage severity="info">Username is required</InlineMessage>
     </div>
 </template>
 
 <script>
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <InlineMessage severity="info">Username is required</InlineMessage>
     </div>
 </template>
 
 <script setup>
-<\/script>`
+<\/script>
+`
             }
         };
     }

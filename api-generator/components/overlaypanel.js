@@ -48,6 +48,12 @@ const OverlayPanelProps = [
         description: 'Display a custom close icon for the message.'
     },
     {
+        name: 'closeOnEscape',
+        type: 'boolean',
+        default: 'true',
+        description: 'Specifies if pressing escape key should hide the dialog.'
+    },
+    {
         name: 'pt',
         type: 'any',
         default: 'null',
@@ -76,6 +82,10 @@ const OverlayPanelEvents = [
     {
         name: 'hide',
         description: 'Callback to invoke before the overlay is hidden.'
+    },
+    {
+        name: 'container',
+        description: 'Custom container template.'
     }
 ];
 

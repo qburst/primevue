@@ -101,7 +101,7 @@ import ChevronLeftIcon from 'primevue/icons/chevronleft';
 import ChevronRightIcon from 'primevue/icons/chevronright';
 import ChevronUpIcon from 'primevue/icons/chevronup';
 import Ripple from 'primevue/ripple';
-import { DomHandler, UniqueComponentId } from 'primevue/utils';
+import { DomHandler, ObjectUtils, UniqueComponentId } from 'primevue/utils';
 import BaseCarousel from './BaseCarousel.vue';
 
 export default {
@@ -126,6 +126,12 @@ export default {
     },
     watch: {
         page(newValue) {
+            if (newValue > this.d_page) {
+                this.navForward({}, newValue);
+            } else if (newValue < this.d_page) {
+                this.navBackward({}, newValue);
+            }
+
             this.d_page = newValue;
         },
         circular(newValue) {
@@ -447,6 +453,8 @@ export default {
 
                 case 'ArrowUp':
                 case 'ArrowDown':
+                case 'PageUp':
+                case 'PageDown':
                     event.preventDefault();
                     break;
 
@@ -475,7 +483,7 @@ export default {
             this.changedFocusedIndicator(activeIndex, 0);
         },
         onEndKey() {
-            const indicators = [...DomHandler.find(this.$refs.indicatorContent, '[data-pc-section="indicator"]r')];
+            const indicators = [...DomHandler.find(this.$refs.indicatorContent, '[data-pc-section="indicator"]')];
             const activeIndex = this.findFocusedIndicatorIndex();
 
             this.changedFocusedIndicator(activeIndex, indicators.length - 1);
@@ -548,20 +556,13 @@ export default {
 
             if (this.responsiveOptions && !this.isUnstyled) {
                 let _responsiveOptions = [...this.responsiveOptions];
-                const comparer = new Intl.Collator(undefined, { numeric: true }).compare;
+                const comparer = ObjectUtils.localeComparator();
 
                 _responsiveOptions.sort((data1, data2) => {
                     const value1 = data1.breakpoint;
                     const value2 = data2.breakpoint;
-                    let result = null;
 
-                    if (value1 == null && value2 != null) result = -1;
-                    else if (value1 != null && value2 == null) result = 1;
-                    else if (value1 == null && value2 == null) result = 0;
-                    else if (typeof value1 === 'string' && typeof value2 === 'string') result = comparer(value1, value2);
-                    else result = value1 < value2 ? -1 : value1 > value2 ? 1 : 0;
-
-                    return -1 * result;
+                    return ObjectUtils.sort(value1, value2, -1, comparer);
                 });
 
                 for (let i = 0; i < _responsiveOptions.length; i++) {

@@ -24,7 +24,8 @@ export default {
         return {
             value: null,
             code: {
-                basic: `<Rating v-model="value">
+                basic: `
+<Rating v-model="value">
     <template #cancelicon>
         <img src="/images/rating/cancel.png" height="24" width="24" />
     </template>
@@ -34,8 +35,10 @@ export default {
     <template #officon>
         <img src="/images/rating/custom-officon.png" height="24" width="24" />
     </template>
-</Rating>`,
-                options: `<template>
+</Rating>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <Rating v-model="value">
             <template #cancelicon>
@@ -59,8 +62,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <Rating v-model="value">
             <template #cancelicon>
@@ -80,7 +85,8 @@ export default {
 import { ref } from 'vue';
 
 const value = ref(null);
-<\/script>`
+<\/script>
+`
             }
         };
     }

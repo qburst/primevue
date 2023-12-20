@@ -18,14 +18,15 @@ export default {
     data() {
         return {
             code: {
-                basic: `<Toast />
-<div class="flex flex-wrap gap-2">
-    <Button label="Success" severity="success" @click="showSuccess" />
-    <Button label="Info" severity="info" @click="showInfo" />
-    <Button label="Warn" severity="warning" @click="showWarn" />
-    <Button label="Error" severity="danger" @click="showError" />
-</div>`,
-                options: `<template>
+                basic: `
+<Toast />
+<Button label="Success" severity="success" @click="showSuccess" />
+<Button label="Info" severity="info" @click="showInfo" />
+<Button label="Warn" severity="warning" @click="showWarn" />
+<Button label="Error" severity="danger" @click="showError" />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <Toast />
         <div class="flex flex-wrap gap-2">
@@ -54,8 +55,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <Toast />
         <div class="flex flex-wrap gap-2">
@@ -86,7 +89,8 @@ const showWarn = () => {
 const showError = () => {
     toast.add({ severity: 'error', summary: 'Error Message', detail: 'Message Content', life: 3000 });
 };
-<\/script>`
+<\/script>
+`
             }
         };
     },

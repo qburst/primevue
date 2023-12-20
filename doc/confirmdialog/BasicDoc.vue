@@ -1,11 +1,11 @@
 <template>
     <DocSectionText v-bind="$attrs">
-        <p>ConfirmDialog is displayed by calling the <i>require</i> method of the <i>$confirm</i> instance by passing the options to customize the Dialog. <i>target</i> attribute is mandatory to align the popup to its caller.</p>
+        <p>ConfirmDialog is displayed by calling the <i>require</i> method of the <i>$confirm</i> instance by passing the options to customize the Dialog. The <i>target</i> attribute is mandatory to align the popup to its referrer.</p>
     </DocSectionText>
     <ConfirmDialog></ConfirmDialog>
     <div class="card flex flex-wrap gap-2 justify-content-center">
         <Button @click="confirm1()" icon="pi pi-check" label="Confirm"></Button>
-        <Button @click="confirm2()" icon="pi pi-times" label="Delete"></Button>
+        <Button @click="confirm2()" icon="pi pi-times" label="Delete" severity="danger"></Button>
     </div>
     <DocSectionCode :code="code" />
 </template>
@@ -15,15 +15,18 @@ export default {
     data() {
         return {
             code: {
-                basic: `<ConfirmDialog></ConfirmDialog>>
+                basic: `
+<ConfirmDialog></ConfirmDialog>
 <Button @click="confirm1()" icon="pi pi-check" label="Confirm"></Button>
-<Button @click="confirm2()" icon="pi pi-times" label="Delete"></Button>`,
-                options: `<template>
+<Button @click="confirm2()" icon="pi pi-times" label="Delete" severity="danger"></Button>
+`,
+                options: `
+<template>
     <Toast />
     <ConfirmDialog></ConfirmDialog>
     <div class="card flex flex-wrap gap-2 justify-content-center">
         <Button @click="confirm1()" icon="pi pi-check" label="Confirm"></Button>
-        <Button @click="confirm2()" icon="pi pi-times" label="Delete"></Button>
+        <Button @click="confirm2()" icon="pi pi-times" label="Delete" severity="danger"></Button>
     </div>
 </template>
 
@@ -48,7 +51,8 @@ export default {
                 message: 'Do you want to delete this record?',
                 header: 'Delete Confirmation',
                 icon: 'pi pi-info-circle',
-                acceptClass: 'p-button-danger',
+                rejectClass: 'p-button-text p-button-text',
+                acceptClass: 'p-button-danger p-button-text',
                 accept: () => {
                     this.$toast.add({ severity: 'info', summary: 'Confirmed', detail: 'Record deleted', life: 3000 });
                 },
@@ -59,13 +63,15 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <Toast />
     <ConfirmDialog></ConfirmDialog>
     <div class="card flex flex-wrap gap-2 justify-content-center">
         <Button @click="confirm1()" icon="pi pi-check" label="Confirm"></Button>
-        <Button @click="confirm2()" icon="pi pi-times" label="Delete"></Button>
+        <Button @click="confirm2()" icon="pi pi-times" label="Delete" severity="danger"></Button>
     </div>
 </template>
 
@@ -95,7 +101,8 @@ const confirm2 = () => {
         message: 'Do you want to delete this record?',
         header: 'Delete Confirmation',
         icon: 'pi pi-info-circle',
-        acceptClass: 'p-button-danger',
+        rejectClass: 'p-button-text p-button-text',
+        acceptClass: 'p-button-danger p-button-text',
         accept: () => {
             toast.add({ severity: 'info', summary: 'Confirmed', detail: 'Record deleted', life: 3000 });
         },
@@ -104,7 +111,8 @@ const confirm2 = () => {
         }
     });
 };
-<\/script>`
+<\/script>
+`
             }
         };
     },
@@ -127,7 +135,8 @@ const confirm2 = () => {
                 message: 'Do you want to delete this record?',
                 header: 'Delete Confirmation',
                 icon: 'pi pi-info-circle',
-                acceptClass: 'p-button-danger',
+                rejectClass: 'p-button-text p-button-text',
+                acceptClass: 'p-button-danger p-button-text',
                 accept: () => {
                     this.$toast.add({ severity: 'info', summary: 'Confirmed', detail: 'Record deleted', life: 3000 });
                 },

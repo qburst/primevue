@@ -2,8 +2,8 @@
     <DocSectionText v-bind="$attrs">
         <p>Galleria can be controlled programmatically using a binding to <i>activeIndex</i>.</p>
     </DocSectionText>
-    <div class="card flex flex-column md:align-items-center">
-        <div class="mb-3 align-self-center">
+    <div class="card">
+        <div class="mb-3">
             <Button icon="pi pi-minus" @click="prev" />
             <Button icon="pi pi-plus" @click="next" severity="secondary" class="ml-2" />
         </div>
@@ -30,12 +30,8 @@ export default {
             activeIndex: 2,
             responsiveOptions: [
                 {
-                    breakpoint: '991px',
+                    breakpoint: '1300px',
                     numVisible: 4
-                },
-                {
-                    breakpoint: '767px',
-                    numVisible: 3
                 },
                 {
                     breakpoint: '575px',
@@ -43,7 +39,8 @@ export default {
                 }
             ],
             code: {
-                basic: `<div>
+                basic: `
+<div>
     <Button icon="pi pi-minus" @click="prev" />
     <Button icon="pi pi-plus" @click="next" severity="secondary" class="ml-2" />
 </div>
@@ -55,10 +52,12 @@ export default {
     <template #thumbnail="slotProps">
         <img :src="slotProps.item.thumbnailImageSrc" :alt="slotProps.item.alt" />
     </template>
-</Galleria>`,
-                options: `<template>
-    <div class="card flex flex-column md:align-items-center">
-        <div class="mb-3 align-self-center">
+</Galleria>
+`,
+                options: `
+<template>
+    <div class="card">
+        <div class="mb-3">
             <Button icon="pi pi-minus" @click="prev" />
             <Button icon="pi pi-plus" @click="next" severity="secondary" class="ml-2" />
         </div>
@@ -84,12 +83,8 @@ export default {
             activeIndex: 2,
             responsiveOptions: [
                 {
-                    breakpoint: '991px',
+                    breakpoint: '1300px',
                     numVisible: 4
-                },
-                {
-                    breakpoint: '767px',
-                    numVisible: 3
                 },
                 {
                     breakpoint: '575px',
@@ -110,10 +105,12 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
-    <div class="card flex flex-column md:align-items-center">
-        <div class="mb-3 align-self-center">
+<\/script>
+`,
+                composition: `
+<template>
+    <div class="card">
+        <div class="mb-3">
             <Button icon="pi pi-minus" @click="prev" />
             <Button icon="pi pi-plus" @click="next" severity="secondary" class="ml-2" />
         </div>
@@ -141,12 +138,8 @@ const images = ref();
 const activeIndex = ref(2);
 const responsiveOptions = ref([
     {
-        breakpoint: '991px',
+        breakpoint: '1300px',
         numVisible: 4
-    },
-    {
-        breakpoint: '767px',
-        numVisible: 3
     },
     {
         breakpoint: '575px',
@@ -160,7 +153,8 @@ const next = () => {
 const prev = () => {
     activeIndex.value = activeIndex.value === 0 ? 0 : activeIndex.value - 1;
 };
-<\/script>`,
+<\/script>
+`,
                 data: `
 /* PhotoService */
 {

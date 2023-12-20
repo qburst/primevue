@@ -26,7 +26,8 @@ export default {
         return {
             products: null,
             code: {
-                basic: `<DataTable :value="products" ref="dt" tableStyle="min-width: 50rem">
+                basic: `
+<DataTable :value="products" ref="dt" tableStyle="min-width: 50rem">
     <template #header>
         <div style="text-align: left">
             <Button icon="pi pi-external-link" label="Export" @click="exportCSV($event)" />
@@ -36,8 +37,10 @@ export default {
     <Column field="name" header="Name"></Column>
     <Column field="category" header="Category"></Column>
     <Column field="quantity" header="Quantity"></Column>
-</DataTable>`,
-                options: `<template>
+</DataTable>
+`,
+                options: `
+<template>
     <div>
         <DataTable :value="products" ref="dt" tableStyle="min-width: 50rem">
             <template #header>
@@ -72,8 +75,10 @@ export default {
     }
 }
 <\/script>
+
 `,
-                composition: `<template>
+                composition: `
+<template>
     <div>
         <DataTable :value="products" ref="dt" tableStyle="min-width: 50rem">
             <template #header>

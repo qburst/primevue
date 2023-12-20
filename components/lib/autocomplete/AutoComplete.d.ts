@@ -9,8 +9,9 @@
  */
 import { HTMLAttributes, InputHTMLAttributes, TransitionProps, VNode } from 'vue';
 import { ComponentHooks } from '../basecomponent';
-import { ButtonPassThroughOptionType } from '../button';
-import { ClassComponent, GlobalComponentConstructor, PTOptions } from '../ts-helpers';
+import { ButtonPassThroughOptions } from '../button';
+import { PassThroughOptions } from '../passthrough';
+import { ClassComponent, GlobalComponentConstructor, PassThrough } from '../ts-helpers';
 import { VirtualScrollerItemOptions, VirtualScrollerPassThroughOptionType, VirtualScrollerProps } from '../virtualscroller';
 
 export declare type AutoCompletePassThroughOptionType = AutoCompletePassThroughAttributes | ((options: AutoCompletePassThroughMethodOptions) => AutoCompletePassThroughAttributes | string) | string | null | undefined;
@@ -21,10 +22,48 @@ export declare type AutoCompletePassThroughTransitionType = TransitionProps | ((
  * Custom passthrough(pt) option method.
  */
 export interface AutoCompletePassThroughMethodOptions {
+    /**
+     * Defines instance.
+     */
     instance: any;
+    /**
+     * Defines valid properties.
+     */
     props: AutoCompleteProps;
+    /**
+     * Defines current inline state.
+     */
     state: AutoCompleteState;
+    /**
+     * Defines current options.
+     */
     context: AutoCompleteContext;
+    /**
+     * Defines valid attributes.
+     */
+    attrs: any;
+    /**
+     * Defines parent options.
+     */
+    parent: any;
+    /**
+     * Defines passthrough(pt) options in global config.
+     */
+    global: object | undefined;
+}
+
+/**
+ * Custom shared passthrough(pt) option method.
+ */
+export interface AutoCompleteSharedPassThroughMethodOptions {
+    /**
+     * Defines valid properties.
+     */
+    props: AutoCompleteProps;
+    /**
+     * Defines current inline state.
+     */
+    state: AutoCompleteState;
 }
 
 /**
@@ -133,8 +172,9 @@ export interface AutoCompletePassThroughOptions {
     loadingIcon?: AutoCompletePassThroughOptionType;
     /**
      * Used to pass attributes to the Button component.
+     * @see {@link ButtonPassThroughOptions}
      */
-    dropdownButton?: ButtonPassThroughOptionType;
+    dropdownButton?: ButtonPassThroughOptions<AutoCompleteSharedPassThroughMethodOptions>;
     /**
      * Used to pass attributes to the panel's DOM element.
      */
@@ -169,7 +209,7 @@ export interface AutoCompletePassThroughOptions {
      */
     selectedMessage?: AutoCompletePassThroughOptionType;
     /**
-     * Used to manage all lifecycle hooks
+     * Used to manage all lifecycle hooks.
      * @see {@link BaseComponent.ComponentHooks}
      */
     hooks?: ComponentHooks;
@@ -438,16 +478,21 @@ export interface AutoCompleteProps {
     /**
      * Defines a string value that labels an interactive element.
      */
-    'aria-label'?: string | undefined;
+    ariaLabel?: string | undefined;
     /**
      * Identifier of the underlying input element.
      */
-    'aria-labelledby'?: string | undefined;
+    ariaLabelledby?: string | undefined;
     /**
      * Used to pass attributes to DOM elements inside the component.
      * @type {AutoCompletePassThroughOptions}
      */
-    pt?: PTOptions<AutoCompletePassThroughOptions>;
+    pt?: PassThrough<AutoCompletePassThroughOptions>;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false
@@ -609,8 +654,14 @@ export interface AutoCompleteSlots {
         /**
          * Remove token icon function.
          * @param {Event} event - Browser event
+         * @deprecated since v3.39.0. Use 'removeCallback' property instead.
          */
         onClick: (event: Event, index: number) => void;
+        /**
+         * Remove token icon function.
+         * @param {Event} event - Browser event
+         */
+        removeCallback: (event: Event, index: number) => void;
     }): VNode[];
     /**
      * Custom loading icon template.

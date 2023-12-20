@@ -24,9 +24,12 @@ export default {
                 { name: 'Paris', code: 'PRS' }
             ],
             code: {
-                basic: `<MultiSelect v-model="selectedCities" :options="cities" filter optionLabel="name" placeholder="Select Cities"
-    :maxSelectedLabels="3" class="w-full md:w-20rem" />`,
-                options: `<template>
+                basic: `
+<MultiSelect v-model="selectedCities" :options="cities" filter optionLabel="name" placeholder="Select Cities"
+    :maxSelectedLabels="3" class="w-full md:w-20rem" />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <MultiSelect v-model="selectedCities" :options="cities" filter optionLabel="name" placeholder="Select Cities"  
             :maxSelectedLabels="3" class="w-full md:w-20rem" />
@@ -48,8 +51,10 @@ export default {
         };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <MultiSelect v-model="selectedCities" :options="cities" filter optionLabel="name" placeholder="Select Cities"
             :maxSelectedLabels="3" class="w-full md:w-20rem" />
@@ -67,7 +72,8 @@ const cities = ref([
     { name: 'Istanbul', code: 'IST' },
     { name: 'Paris', code: 'PRS' }
 ]);
-<\/script>`
+<\/script>
+`
             }
         };
     }

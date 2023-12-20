@@ -15,8 +15,11 @@ export default {
             value: '',
             items: [],
             code: {
-                basic: `<AutoComplete v-model="value" multiple :suggestions="items" @complete="search" />`,
-                options: `<template>
+                basic: `
+<AutoComplete v-model="value" multiple :suggestions="items" @complete="search" />
+`,
+                options: `
+<template>
     <div class="card p-fluid">
         <AutoComplete v-model="value" multiple :suggestions="items" @complete="search" />
     </div>
@@ -36,8 +39,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card p-fluid">
         <AutoComplete v-model="value" multiple :suggestions="items" @complete="search" />
     </div>
@@ -52,7 +57,8 @@ const items = ref([]);
 const search = (event) => {
     items.value = [...Array(10).keys()].map((item) => event.query + '-' + item);
 }
-<\/script>`
+<\/script>
+`
             }
         };
     },

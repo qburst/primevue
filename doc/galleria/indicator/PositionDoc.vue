@@ -2,7 +2,7 @@
     <DocSectionText v-bind="$attrs">
         <p>Indicators can be placed at four different sides using the <i>indicatorsPosition</i> property. In addition, enabling <i>showIndicatorsOnItem</i> moves the indicators inside the image section.</p>
     </DocSectionText>
-    <div class="card flex flex-column align-items-center">
+    <div class="card">
         <div class="flex flex-wrap gap-3 mb-5">
             <div v-for="option in positionOptions" :key="option.label" class="flex align-items-center">
                 <RadioButton v-model="position" :inputId="option.label" name="option" :value="option.value" />
@@ -50,14 +50,17 @@ export default {
                 }
             ],
             code: {
-                basic: `<Galleria :value="images" :numVisible="5" containerStyle="max-width: 640px" :showThumbnails="false"
+                basic: `
+<Galleria :value="images" :numVisible="5" containerStyle="max-width: 640px" :showThumbnails="false"
     :showIndicators="true" :changeItemOnIndicatorHover="true" :showIndicatorsOnItem="inside" :indicatorsPosition="position">
     <template #item="slotProps">
         <img :src="slotProps.item.itemImageSrc" :alt="slotProps.item.alt" style="width: 100%; display: block" />
     </template>
-</Galleria>`,
-                options: `<template>
-    <div class="card flex justify-content-center">
+</Galleria>
+`,
+                options: `
+<template>
+    <div class="card">
         <div class="flex flex-wrap gap-3 mb-5">
             <div v-for="option in positionOptions" :key="option.label" class="flex align-items-center">
                 <RadioButton :value="option.value" />
@@ -109,9 +112,11 @@ export default {
         PhotoService.getImages().then((data) => (this.images = data));
     }
 };
-<\/script>`,
-                composition: `<template>
-    <div class="card flex justify-content-center">
+<\/script>
+`,
+                composition: `
+<template>
+    <div class="card">
         <div class="flex flex-wrap gap-3 mb-5">
             <div v-for="option in positionOptions" :key="option.label" class="flex align-items-center">
                 <RadioButton :value="option.value" />
@@ -161,7 +166,8 @@ const positionOptions = ref([
     }
 ]);
 
-<\/script>`,
+<\/script>
+`,
                 data: `
 /* PhotoService */
 {

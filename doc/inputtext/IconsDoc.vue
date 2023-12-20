@@ -23,7 +23,8 @@ export default {
             value1: null,
             value2: null,
             code: {
-                basic: `<span class="p-input-icon-left">
+                basic: `
+<span class="p-input-icon-left">
     <i class="pi pi-search" />
     <InputText v-model="value1" placeholder="Search" />
 </span>
@@ -31,8 +32,10 @@ export default {
 <span class="p-input-icon-right">
     <i class="pi pi-spin pi-spinner" />
     <InputText v-model="value2" />
-</span>`,
-                options: `<template>
+</span>
+`,
+                options: `
+<template>
     <div class="card flex flex-wrap justify-content-center gap-3">
         <span class="p-input-icon-left">
             <i class="pi pi-search" />
@@ -55,8 +58,10 @@ export default {
         }
     }
 }
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex flex-wrap justify-content-center gap-3">
         <span class="p-input-icon-left">
             <i class="pi pi-search" />
@@ -75,7 +80,8 @@ import { ref } from 'vue';
 
 const value1 = ref(null);
 const value2 = ref(null);
-<\/script>`
+<\/script>
+`
             }
         };
     }

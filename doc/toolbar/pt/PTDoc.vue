@@ -20,7 +20,8 @@ export default {
     data() {
         return {
             code: {
-                basic: `<TabView>
+                basic: `
+<TabView>
     <Toolbar
         :pt="{
             root: { style: { background: 'linear-gradient(to right, #8e2de2, #4a00e0)', borderRadius: '24px' } }
@@ -34,8 +35,10 @@ export default {
             <Button icon="pi pi-times" severity="danger" />
         </template>
     </Toolbar>
-</TabView>`,
-                options: `<template>
+</TabView>
+`,
+                options: `
+<template>
     <div class="card">
         <Toolbar
             :pt="{
@@ -51,8 +54,10 @@ export default {
             </template>
         </Toolbar>
     </div>
-</template>`,
-                composition: `<template>
+</template>
+`,
+                composition: `
+<template>
     <div class="card">
         <Toolbar
             :pt="{
@@ -68,7 +73,8 @@ export default {
             </template>
         </Toolbar>
     </div>
-</template>`
+</template>
+`
             }
         };
     }

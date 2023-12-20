@@ -10,7 +10,6 @@
         :items="processedItems"
         :templates="templates"
         :activeItemPath="activeItemPath"
-        :exact="exact"
         @focus="onFocus"
         @blur="onBlur"
         @keydown="onKeyDown"
@@ -47,10 +46,6 @@ export default {
         expandedKeys: {
             type: Object,
             default: null
-        },
-        exact: {
-            type: Boolean,
-            default: true
         }
     },
     searchTimeout: null,
@@ -131,6 +126,7 @@ export default {
                     break;
 
                 case 'Enter':
+                case 'NumpadEnter':
                     this.onEnterKey(event);
                     break;
 
@@ -241,7 +237,7 @@ export default {
             return !!processedItem && (processedItem.level === 0 || this.isItemActive(processedItem)) && this.isItemVisible(processedItem);
         },
         isValidItem(processedItem) {
-            return !!processedItem && !this.isItemDisabled(processedItem);
+            return !!processedItem && !this.isItemDisabled(processedItem) && !this.getItemProp(processedItem, 'separator');
         },
         findFirstItem() {
             return this.visibleItems.find((processedItem) => this.isValidItem(processedItem));

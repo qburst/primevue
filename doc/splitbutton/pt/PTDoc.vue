@@ -44,7 +44,8 @@ export default {
                 { label: 'Upload', icon: 'pi pi-upload', to: '/fileupload' }
             ],
             code: {
-                basic: `<SplitButton label="Save"
+                basic: `
+<SplitButton label="Save"
     @click="save"
     :model="items"
     :pt="{
@@ -52,8 +53,10 @@ export default {
             root: { class: 'surface-ground' }
         }
     }"
-/>`,
-                options: `<template>
+/>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <SplitButton
             label="Save"
@@ -106,8 +109,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <SplitButton
             label="Save"
@@ -156,7 +161,8 @@ const items = [
 const save = () => {
     toast.add({ severity: 'success', summary: 'Success', detail: 'Data Saved', life: 3000 });
 };
-<\/script>`
+<\/script>
+`
             }
         };
     },

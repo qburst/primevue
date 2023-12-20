@@ -20,7 +20,8 @@ export default {
         return {
             value: '',
             code: {
-                basic: `<Textarea
+                basic: `
+<Textarea
     v-model="value"
     :pt="{
         root: {
@@ -28,8 +29,10 @@ export default {
             cols: 30
         }
     }"
-/>`,
-                options: `<template>
+/>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <Textarea
             v-model="value"
@@ -51,8 +54,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <Textarea
             v-model="value"
@@ -70,7 +75,8 @@ export default {
 import { ref } from 'vue';
 
 const value = ref('');
-<\/script>`
+<\/script>
+`
             }
         };
     }

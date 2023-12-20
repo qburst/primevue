@@ -16,7 +16,6 @@
                     :items="processedItems"
                     :templates="$slots"
                     :activeItemPath="activeItemPath"
-                    :exact="exact"
                     :aria-labelledby="ariaLabelledby"
                     :aria-label="ariaLabel"
                     :level="0"
@@ -71,17 +70,10 @@ export default {
             if (ObjectUtils.isNotEmpty(newPath)) {
                 this.bindOutsideClickListener();
                 this.bindResizeListener();
-                this.bindDocumentContextMenuListener();
             } else if (!this.visible) {
                 this.unbindOutsideClickListener();
                 this.unbindResizeListener();
-                this.unbindDocumentContextMenuListener();
             }
-        }
-    },
-    beforeMount() {
-        if (!this.$slots.item) {
-            console.warn('In future versions, vue-router support will be removed. Item templating should be used.');
         }
     },
     mounted() {
@@ -189,6 +181,7 @@ export default {
                     break;
 
                 case 'Enter':
+                case 'NumpadEnter':
                     this.onEnterKey(event);
                     break;
 
@@ -358,7 +351,6 @@ export default {
         onAfterEnter() {
             this.bindOutsideClickListener();
             this.bindResizeListener();
-            this.bindDocumentContextMenuListener();
 
             this.$emit('show');
             DomHandler.focus(this.list);
@@ -374,7 +366,6 @@ export default {
 
             this.unbindOutsideClickListener();
             this.unbindResizeListener();
-            this.unbindDocumentContextMenuListener();
         },
         position() {
             let left = this.pageX + 1;
@@ -446,7 +437,7 @@ export default {
         bindDocumentContextMenuListener() {
             if (!this.documentContextMenuListener) {
                 this.documentContextMenuListener = (event) => {
-                    event.button !== 2 ? this.show(event) : this.hide();
+                    event.button === 2 && this.show(event);
                 };
 
                 document.addEventListener('contextmenu', this.documentContextMenuListener);

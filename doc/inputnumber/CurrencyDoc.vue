@@ -32,11 +32,14 @@ export default {
             value3: 4250,
             value4: 5002,
             code: {
-                basic: `<InputNumber v-model="value1" inputId="currency-us" mode="currency" currency="USD" locale="en-US" />
+                basic: `
+<InputNumber v-model="value1" inputId="currency-us" mode="currency" currency="USD" locale="en-US" />
 <InputNumber v-model="value2" inputId="currency-germany" mode="currency" currency="EUR" locale="de-DE" />
 <InputNumber v-model="value3" inputId="currency-india" mode="currency" currency="INR" currencyDisplay="code" locale="en-IN" />
-<InputNumber v-model="value4" inputId="currency-japan" mode="currency" currency="JPY" locale="jp-JP" />`,
-                options: `<template>
+<InputNumber v-model="value4" inputId="currency-japan" mode="currency" currency="JPY" locale="jp-JP" />
+`,
+                options: `
+<template>
     <div class="card flex flex-wrap gap-3 p-fluid">
         <div class="flex-auto">
             <label for="currency-us" class="font-bold block mb-2"> United States </label>
@@ -68,8 +71,10 @@ export default {
         };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex flex-wrap gap-3 p-fluid">
         <div class="flex-auto">
             <label for="currency-us" class="font-bold block mb-2"> United States </label>
@@ -97,7 +102,8 @@ const value1 = ref(1500);
 const value2 = ref(2500);
 const value3 = ref(4250);
 const value4 = ref(5002);
-<\/script>`
+<\/script>
+`
             }
         };
     }

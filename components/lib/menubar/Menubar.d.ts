@@ -10,7 +10,8 @@
 import { ButtonHTMLAttributes, VNode } from 'vue';
 import { ComponentHooks } from '../basecomponent';
 import { MenuItem } from '../menuitem';
-import { ClassComponent, GlobalComponentConstructor, PTOptions } from '../ts-helpers';
+import { PassThroughOptions } from '../passthrough';
+import { ClassComponent, GlobalComponentConstructor, PassThrough } from '../ts-helpers';
 
 export declare type MenubarPassThroughOptionType = MenubarPassThroughAttributes | ((options: MenubarPassThroughMethodOptions) => MenubarPassThroughAttributes | string) | string | null | undefined;
 
@@ -18,10 +19,34 @@ export declare type MenubarPassThroughOptionType = MenubarPassThroughAttributes 
  * Custom passthrough(pt) option method.
  */
 export interface MenubarPassThroughMethodOptions {
+    /**
+     * Defines instance.
+     */
     instance: any;
+    /**
+     * Defines valid properties.
+     */
     props: MenubarProps;
+    /**
+     * Defines current inline state.
+     */
     state: MenubarState;
+    /**
+     * Defines current options.
+     */
     context: MenubarContext;
+    /**
+     * Defines valid attributes.
+     */
+    attrs: any;
+    /**
+     * Defines parent options.
+     */
+    parent: any;
+    /**
+     * Defines passthrough(pt) options in global config.
+     */
+    global: object | undefined;
 }
 
 /**
@@ -66,13 +91,13 @@ export interface MenubarPassThroughOptions {
      */
     separator?: MenubarPassThroughOptionType;
     /**
-     * Used to pass attributes to the mobile popup menu button's DOM element.
+     * Used to pass attributes to the mobile menu button's DOM element.
      */
     button?: MenubarPassThroughOptionType;
     /**
-     * Used to pass attributes to the mobile popup menu button icon's DOM element.
+     * Used to pass attributes to the mobile menu button icon's DOM element.
      */
-    popupIcon?: MenubarPassThroughOptionType;
+    menubuttonicon?: MenubarPassThroughOptionType;
     /**
      * Used to pass attributes to the submenu's DOM element.
      */
@@ -86,7 +111,7 @@ export interface MenubarPassThroughOptions {
      */
     end?: MenubarPassThroughOptionType;
     /**
-     * Used to manage all lifecycle hooks
+     * Used to manage all lifecycle hooks.
      * @see {@link BaseComponent.ComponentHooks}
      */
     hooks?: ComponentHooks;
@@ -170,6 +195,11 @@ export interface MenubarContext {
      */
     focused: boolean;
     /**
+     * Current disabled state of menuitem as a boolean.
+     * @defaultValue false
+     */
+    disabled: boolean;
+    /**
      * Current level of the menuitem.
      */
     level: number;
@@ -206,7 +236,13 @@ export interface MenubarProps {
      */
     model?: MenuItem[] | undefined;
     /**
+     * The breakpoint to define the maximum width boundary.
+     * @defaultValue 960px
+     */
+    breakpoint?: string | undefined;
+    /**
      * Whether to apply 'router-link-active-exact' class if route exactly matches the item path.
+     * @deprecated since v3.40.0.
      * @defaultValue true
      */
     exact?: boolean | undefined;
@@ -217,16 +253,21 @@ export interface MenubarProps {
     /**
      * Defines a string value that labels an interactive element.
      */
-    'aria-label'?: string | undefined;
+    ariaLabel?: string | undefined;
     /**
      * Identifier of the underlying input element.
      */
-    'aria-labelledby'?: string | undefined;
+    ariaLabelledby?: string | undefined;
     /**
      * Used to pass attributes to DOM elements inside the component.
      * @type {MenubarPassThroughOptions}
      */
-    pt?: PTOptions<MenubarPassThroughOptions>;
+    pt?: PassThrough<MenubarPassThroughOptions>;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false
@@ -273,9 +314,33 @@ export interface MenubarSlots {
         hasSubmenu: boolean;
     }): VNode[];
     /**
+     * Custom menu button template on responsive mode.
+     * @param {Object} scope - menu button slot's params.
+     */
+    menubutton(scope: {
+        /**
+         * Current id state as a string
+         */
+        id: string;
+        /**
+         * Style class of component
+         */
+        class: string;
+        /**
+         *
+         * Toggle event
+         */
+        toggleCallback: () => void;
+    }): VNode[];
+    /**
      * Custom popup icon template on responsive mode.
+     * @deprecated since v3.42.0. Use 'menubuttonicon' slot instead.
      */
     popupicon(): VNode[];
+    /**
+     * Custom menu button icon template on responsive mode.
+     */
+    menubuttonicon(): VNode[];
     /**
      * Custom submenu icon template.
      * @param {Object} scope - submenuicon slot's params.

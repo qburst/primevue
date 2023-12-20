@@ -13,23 +13,29 @@ export default {
     data() {
         return {
             code: {
-                basic: `<Button label="Submit" disabled />`,
-                options: `<template>
+                basic: `
+<Button label="Submit" disabled />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <Button label="Submit" disabled />
     </div>
 </template>
 
 <script>
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <Button label="Submit" disabled />
     </div>
 </template>
 
 <script setup>
-<\/script>`
+<\/script>
+`
             }
         };
     }

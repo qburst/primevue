@@ -55,7 +55,8 @@ export default {
                 }
             ],
             code: {
-                basic: `<Menu
+                basic: `
+<Menu
     :model="items"
     :pt="{
         submenuHeader: { class: 'text-surface-900' },
@@ -63,8 +64,10 @@ export default {
             class: context.focused ? 'bg-primary-400' : undefined
         })
     }"
-/>`,
-                options: `<template>
+/>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <Menu
             :model="items"
@@ -122,8 +125,10 @@ export default {
         };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <Menu
             :model="items"
@@ -179,7 +184,8 @@ const items = ref([
         ]
     }
 ]);
-<\/script>`
+<\/script>
+`
             }
         };
     }

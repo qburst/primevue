@@ -20,41 +20,60 @@ export default {
     data() {
         return {
             code: {
-                basic: `<InputText
+                basic: `
+<InputText
     v-tooltip.right="{
         value: \`PrimeVue Rocks!\`,
         pt: {
-            text: 'bg-primary'
+            arrow: {
+                style: {
+                    borderRightColor: 'var(--primary-color)'
+                }
+            },
+            text: 'bg-primary font-medium'
         }
     }"
     type="text"
     placeholder="PassThrough Tooltip"
-/>`,
+/>
+`,
                 options: `<div class="card flex flex-wrap justify-content-center gap-2">
     <InputText
         v-tooltip.right="{
             value: \`PrimeVue Rocks!\`,
             pt: {
-                text: 'bg-primary'
+                arrow: {
+                    style: {
+                        borderRightColor: 'var(--primary-color)'
+                    }
+                },
+                text: 'bg-primary font-medium'
             }
         }"
         type="text"
         placeholder="PassThrough Tooltip"
     />
-</div>`,
+</div>
+`,
                 composition: `
                 <div class="card flex flex-wrap justify-content-center gap-2">
     <InputText
         v-tooltip.right="{
             value: \`PrimeVue Rocks!\`,
             pt: {
-                text: 'bg-primary'
+                arrow: {
+                    style: {
+                        borderRightColor: 'var(--primary-color)'
+                    }
+                },
+                text: 'bg-primary font-medium'
             }
         }"
         type="text"
         placeholder="PassThrough Tooltip"
     />
-</div>`
+</div>
+`
             }
         };
     }

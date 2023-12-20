@@ -11,8 +11,9 @@ import { ButtonHTMLAttributes, VNode } from 'vue';
 import { ComponentHooks } from '../basecomponent';
 import { ButtonPassThroughOptions } from '../button';
 import { MenuItem } from '../menuitem';
-import { TieredMenuPassThroughOptions } from '../tieredmenu';
-import { ClassComponent, GlobalComponentConstructor, PTOptions } from '../ts-helpers';
+import { PassThroughOptions } from '../passthrough';
+import { TieredMenuPassThroughOptions, TieredMenuRouterBindProps } from '../tieredmenu';
+import { ClassComponent, GlobalComponentConstructor, PassThrough } from '../ts-helpers';
 
 export declare type SplitButtonPassThroughOptionType = SplitButtonPassThroughAttributes | ((options: SplitButtonPassThroughMethodOptions) => SplitButtonPassThroughAttributes | string) | string | null | undefined;
 
@@ -20,8 +21,43 @@ export declare type SplitButtonPassThroughOptionType = SplitButtonPassThroughAtt
  * Custom passthrough(pt) option method.
  */
 export interface SplitButtonPassThroughMethodOptions {
+    /**
+     * Defines instance.
+     */
     instance: any;
+    /**
+     * Defines valid properties.
+     */
     props: SplitButtonProps;
+    /**
+     * Defines current inline state.
+     */
+    state: SplitButtonState;
+    /**
+     * Defines valid attributes.
+     */
+    attrs: any;
+    /**
+     * Defines parent options.
+     */
+    parent: any;
+    /**
+     * Defines passthrough(pt) options in global config.
+     */
+    global: object | undefined;
+}
+
+/**
+ * Custom shared passthrough(pt) option method.
+ */
+export interface SplitButtonSharedPassThroughMethodOptions {
+    /**
+     * Defines valid properties.
+     */
+    props: SplitButtonProps;
+    /**
+     * Defines current inline state.
+     */
     state: SplitButtonState;
 }
 
@@ -42,14 +78,14 @@ export interface SplitButtonPassThroughOptions {
      * Used to pass attributes to the Button component.
      * @see {@link ButtonPassThroughOptions}
      */
-    menuButton?: ButtonPassThroughOptions;
+    menuButton?: ButtonPassThroughOptions<SplitButtonSharedPassThroughMethodOptions>;
     /**
      * Used to pass attributes to the TieredMenu component.
      * @see {@link TieredMenuPassThroughOptions}
      */
-    menu?: TieredMenuPassThroughOptions;
+    menu?: TieredMenuPassThroughOptions<SplitButtonSharedPassThroughMethodOptions>;
     /**
-     * Used to manage all lifecycle hooks
+     * Used to manage all lifecycle hooks.
      * @see {@link BaseComponent.ComponentHooks}
      */
     hooks?: ComponentHooks;
@@ -169,7 +205,12 @@ export interface SplitButtonProps {
      * Used to pass attributes to DOM elements inside the component.
      * @type {SplitButtonPassThroughOptions}
      */
-    pt?: PTOptions<SplitButtonPassThroughOptions>;
+    pt?: PassThrough<SplitButtonPassThroughOptions>;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false
@@ -186,7 +227,11 @@ export interface SplitButtonSlots {
      */
     default(): VNode[];
     /**
-     * Custom menu button icon template.
+     * Command button part of the content can easily be customized with the button content slot.
+     */
+    buttoncontent(): VNode[];
+    /**
+     * Custom button icon template.
      * @param {Object} scope - icon slot's params.
      */
     icon(scope: {
@@ -218,6 +263,28 @@ export interface SplitButtonSlots {
          * Style class of the item icon element.
          */
         class: any;
+    }): VNode[];
+    /**
+     * Custom content for each menu item.
+     * @param {Object} scope - item slot's params.
+     */
+    item(scope: {
+        /**
+         * Menuitem instance
+         */
+        item: MenuItem;
+        /**
+         * Label property of the menuitem
+         */
+        label: string | ((...args: any) => string) | undefined;
+        /**
+         * Binding properties of the menuitem
+         */
+        props: TieredMenuRouterBindProps;
+        /**
+         * Whether or not there is a submenu
+         */
+        hasSubmenu: boolean;
     }): VNode[];
 }
 

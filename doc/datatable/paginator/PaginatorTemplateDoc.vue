@@ -38,7 +38,8 @@ export default {
         return {
             customers: null,
             code: {
-                basic: `<DataTable :value="customers" paginator :rows="5" :rowsPerPageOptions="[5, 10, 20, 50]" tableStyle="min-width: 50rem"
+                basic: `
+<DataTable :value="customers" paginator :rows="5" :rowsPerPageOptions="[5, 10, 20, 50]" tableStyle="min-width: 50rem"
         paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
         currentPageReportTemplate="{first} to {last} of {totalRecords}">
     <template #paginatorstart>
@@ -51,8 +52,10 @@ export default {
     <Column field="country.name" header="Country" style="width: 25%"></Column>
     <Column field="company" header="Company" style="width: 25%"></Column>
     <Column field="representative.name" header="Representative" style="width: 25%"></Column>
-</DataTable>`,
-                options: `<template>
+</DataTable>
+`,
+                options: `
+<template>
     <div class="card">
         <DataTable :value="customers" paginator :rows="5" :rowsPerPageOptions="[5, 10, 20, 50]" tableStyle="min-width: 50rem"
                 paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
@@ -84,8 +87,10 @@ export default {
         CustomerService.getCustomersMedium().then((data) => (this.customers = data));
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <DataTable :value="customers" paginator :rows="5" :rowsPerPageOptions="[5, 10, 20, 50]" tableStyle="min-width: 50rem"
                 paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
@@ -114,7 +119,8 @@ onMounted(() => {
 
 const customers = ref();
 
-<\/script>`,
+<\/script>
+`,
                 data: `
                 {
     id: 1000,

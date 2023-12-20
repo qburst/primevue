@@ -3,11 +3,9 @@
         <p>Custom content inside a button is defined as children.</p>
     </DocSectionText>
     <div class="card flex justify-content-center">
-        <SplitButton :model="items" icon="pi pi-plus" class="bg-primary border-round">
-            <Button @click="save">
-                <img alt="logo" src="https://primefaces.org/cdn/primevue/images/logo.svg" style="width: 1rem" />
-                <span class="ml-2 flex align-items-center font-bold">PrimeVue</span>
-            </Button>
+        <SplitButton :model="items" icon="pi pi-plus" class="bg-primary border-round" @click="save">
+            <img alt="logo" src="https://primefaces.org/cdn/primevue/images/logo.svg" style="width: 3rem" class="px-3" />
+            <span class="mr-2 flex align-items-center font-bold">PrimeVue</span>
         </SplitButton>
     </div>
     <DocSectionCode :code="code" />
@@ -42,20 +40,19 @@ export default {
                 { label: 'Upload', icon: 'pi pi-upload', to: '/fileupload' }
             ],
             code: {
-                basic: `<SplitButton :model="items" icon="pi pi-plus" class="bg-primary border-round">
-    <Button @click="save">
-        <img alt="logo" src="/images/logo.svg" style="width: 1rem" />
-        <span class="ml-2 flex align-items-center font-bold">PrimeVue</span>
-    </Button>
-</SplitButton>`,
-                options: `<template>
+                basic: `
+<SplitButton :model="items" icon="pi pi-plus" class="bg-primary border-round" @click="save">
+    <img alt="logo" src="https://primefaces.org/cdn/primevue/images/logo.svg" style="width: 3rem" class="px-3" />
+    <span class="mr-2 flex align-items-center font-bold">PrimeVue</span>
+</SplitButton>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <Toast />
-        <SplitButton :model="items" icon="pi pi-plus" class="bg-primary border-round">
-            <Button @click="save">
-                <img alt="logo" src="https://primefaces.org/cdn/primevue/images/logo.svg" style="width: 1rem" />
-                <span class="ml-2 flex align-items-center font-bold">PrimeVue</span>
-            </Button>
+        <SplitButton :model="items" icon="pi pi-plus" class="bg-primary border-round" @click="save">
+            <img alt="logo" src="https://primefaces.org/cdn/primevue/images/logo.svg" style="width: 3rem" class="px-3" />
+            <span class="mr-2 flex align-items-center font-bold">PrimeVue</span>
         </SplitButton>
     </div>
 </template>
@@ -96,15 +93,15 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <Toast />
-        <SplitButton :model="items" icon="pi pi-plus" class="bg-primary border-round">
-            <Button @click="save">
-                <img alt="logo" src="https://primefaces.org/cdn/primevue/images/logo.svg" style="width: 1rem" />
-                <span class="ml-2 flex align-items-center font-bold">PrimeVue</span>
-            </Button>
+        <SplitButton :model="items" icon="pi pi-plus" class="bg-primary border-round" @click="save">
+            <img alt="logo" src="https://primefaces.org/cdn/primevue/images/logo.svg" style="width: 3rem" class="px-3" />
+            <span class="mr-2 flex align-items-center font-bold">PrimeVue</span>
         </SplitButton>
     </div>
 </template>
@@ -141,7 +138,8 @@ const items = [
 const save = () => {
     toast.add({ severity: 'success', summary: 'Success', detail: 'Data Saved', life: 3000 });
 };
-<\/script>`
+<\/script>
+`
             }
         };
     },

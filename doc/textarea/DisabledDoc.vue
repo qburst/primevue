@@ -14,8 +14,11 @@ export default {
         return {
             value: 'Disabled',
             code: {
-                basic: `<Textarea v-model="value" rows="5" cols="30" disabled />`,
-                options: `<template>
+                basic: `
+<Textarea v-model="value" rows="5" cols="30" disabled />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <Textarea v-model="value" rows="5" cols="30" disabled />
     </div>
@@ -29,8 +32,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <Textarea v-model="value" rows="5" cols="30" disabled />
     </div>
@@ -40,7 +45,8 @@ export default {
 import { ref } from 'vue';
 
 const value = ref('Disabled');
-<\/script>`
+<\/script>
+`
             }
         };
     }

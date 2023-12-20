@@ -19,15 +19,18 @@ export default {
         return {
             checked: false,
             code: {
-                basic: `<ToggleButton
+                basic: `
+<ToggleButton
     v-model="checked"
     :pt="{
         root: {
             class: ['w-8rem', { 'bg-teal-400 border-white': checked }]
         }
     }"
-/>`,
-                options: `<template>
+/>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <ToggleButton
             v-model="checked"
@@ -48,8 +51,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <ToggleButton
             v-model="checked"
@@ -66,7 +71,8 @@ export default {
 import { ref } from 'vue';
 
 const checked = ref(false);
-<\/script>`
+<\/script>
+`
             }
         };
     }

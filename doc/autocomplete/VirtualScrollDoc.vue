@@ -19,9 +19,12 @@ export default {
             selectedItem: null,
             filteredItems: null,
             code: {
-                basic: `<AutoComplete v-model="selectedItem" :suggestions="filteredItems" @complete="searchItems"
-    :virtualScrollerOptions="{ itemSize: 38 }" optionLabel="label" dropdown />`,
-                options: `<template>
+                basic: `
+<AutoComplete v-model="selectedItem" :suggestions="filteredItems" @complete="searchItems"
+    :virtualScrollerOptions="{ itemSize: 38 }" optionLabel="label" dropdown />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <AutoComplete v-model="selectedItem" :suggestions="filteredItems" @complete="searchItems" :virtualScrollerOptions="{ itemSize: 38 }" optionLabel="label" dropdown />
     </div>
@@ -54,8 +57,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <AutoComplete v-model="selectedItem" :suggestions="filteredItems" @complete="searchItems" :virtualScrollerOptions="{ itemSize: 38 }" optionLabel="label" dropdown />
     </div>
@@ -82,7 +87,8 @@ const searchItems = (event) => {
 
     filteredItems.value = _filteredItems;
 };
-<\/script>`
+<\/script>
+`
             }
         };
     },

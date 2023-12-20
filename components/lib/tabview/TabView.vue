@@ -154,6 +154,7 @@ export default {
             const tabMetaData = {
                 props: tab.props,
                 parent: {
+                    instance: this,
                     props: this.$props,
                     state: this.$data
                 },
@@ -219,6 +220,7 @@ export default {
                     break;
 
                 case 'Enter':
+                case 'NumpadEnter':
                 case 'Space':
                     this.onTabEnterKey(event, tab, index);
                     break;

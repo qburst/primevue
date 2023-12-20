@@ -17,13 +17,16 @@ export default {
         return {
             value: null,
             code: {
-                basic: `<Rating
+                basic: `
+<Rating
     v-model="value"
     :pt="{
         onIcon: { class: 'text-orange-400' }
     }"
-/>`,
-                options: `<template>
+/>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <Rating
             v-model="value"
@@ -42,8 +45,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <Rating
             v-model="value"
@@ -58,7 +63,8 @@ export default {
 import { ref } from 'vue';
 
 const value = ref(null);
-<\/script>`
+<\/script>
+`
             }
         };
     }

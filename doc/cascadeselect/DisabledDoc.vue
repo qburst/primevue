@@ -13,8 +13,11 @@ export default {
     data() {
         return {
             code: {
-                basic: `<CascadeSelect disabled placeholder="Disabled" style="min-width: 14rem" />`,
-                options: `<template>
+                basic: `
+<CascadeSelect disabled placeholder="Disabled" style="min-width: 14rem" />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <CascadeSelect disabled placeholder="Disabled" style="min-width: 14rem" />
     </div>
@@ -22,8 +25,10 @@ export default {
 
 <script>
 
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <CascadeSelect disabled placeholder="Disabled" style="min-width: 14rem" />
     </div>
@@ -31,7 +36,8 @@ export default {
 
 <script setup>
 
-<\/script>`
+<\/script>
+`
             }
         };
     }

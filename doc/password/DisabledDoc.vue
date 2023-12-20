@@ -14,8 +14,11 @@ export default {
         return {
             value: null,
             code: {
-                basic: `<Password disabled placeholder="Disabled" />`,
-                options: `<template>
+                basic: `
+<Password disabled placeholder="Disabled" />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <Password disabled placeholder="Disabled" />
     </div>
@@ -29,8 +32,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <Password disabled placeholder="Disabled" />
     </div>
@@ -40,7 +45,8 @@ export default {
 import { ref } from 'vue';
 
 const value = ref(null);
-<\/script>`
+<\/script>
+`
             }
         };
     }

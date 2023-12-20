@@ -13,23 +13,29 @@ export default {
     data() {
         return {
             code: {
-                basic: `<Message>Message Content</Message>`,
-                options: `<template>
+                basic: `
+<Message>Message Content</Message>
+`,
+                options: `
+<template>
     <div class="card">
         <Message>Message Content</Message>
     </div>
 </template>
 
 <script>
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <Message>Message Content</Message>
     </div>
 </template>
 
 <script setup>
-<\/script>`
+<\/script>
+`
             }
         };
     }

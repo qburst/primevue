@@ -352,7 +352,17 @@ if (project) {
                                 readonly: prop.flags.isReadonly,
                                 type: prop.type.toString(),
                                 default: prop.comment && prop.comment.getTag('@defaultValue') ? prop.comment.getTag('@defaultValue').content[0].text : '', // TODO: Check
-                                description: prop.comment && prop.comment.summary.map((s) => s.text || '').join(' '),
+                                description:
+                                    prop.comment &&
+                                    prop.comment.summary
+                                        .map((s) => {
+                                            if (s.text.indexOf('[here]') > -1) {
+                                                return `${s.text.slice(0, s.text.indexOf('[here]'))} <a target="_blank" href="${s.text.slice(s.text.indexOf('(') + 1, s.text.indexOf(')'))}">here</a> ${s.text.slice(s.text.indexOf(')') + 1)}`;
+                                            }
+
+                                            return s.text || '';
+                                        })
+                                        .join(' '),
                                 deprecated: prop.comment && prop.comment.getTag('@deprecated') ? parseText(prop.comment.getTag('@deprecated').content[0].text) : undefined
                             });
                         });
@@ -378,27 +388,31 @@ if (project) {
                                                     const childSinature = child.signatures[0];
                                                     const parameters = childSinature.parameters.reduce((acc, { name, type }, index) => (index === 0 ? `${name}: ${type.name}` : `${acc}, ${name}: ${type.name}`), '');
 
-                                                    type += ` \t <b>${childSinature.name}(${parameters})</b>: ${childSinature.type?.name}, // ${childSinature.comment?.summary[0]?.text}\n `;
+                                                    type += ` \t <span class="font-medium">${childSinature.name}(${parameters})</span>: ${childSinature.type?.name}, // ${childSinature.comment?.summary[0]?.text}\n `;
                                                 } else {
                                                     if (child.type?.declaration?.signatures) {
                                                         let functionParameters = '';
 
                                                         child.type?.declaration?.signatures[0]?.parameters.map((param, index) => {
                                                             if (index !== 0) functionParameters += `, `;
-                                                            functionParameters += `${param.name}: ${param.type?.name}`;
+                                                            functionParameters += `<span class="text-primary-700">${param.name}</span>: ${param.type?.name}`;
                                                         });
 
-                                                        type += `\t <b>${child.name}</b>: (${functionParameters}) &rArr; ${child.type?.declaration?.signatures[0]?.type?.name}, // ${child.type?.declaration?.signatures[0]?.comment.summary[0]?.text}\n`;
+                                                        if (child.type?.declaration?.signatures[0]?.comment?.getTag('@deprecated')?.content[0]?.text) {
+                                                            type += `\t <span class="ml-3 text-primary-700 line-through">${child.name}</span>: <span class="text-primary-500 line-through">(${functionParameters}) &rArr; ${child.type?.declaration?.signatures[0]?.type?.name}</span>, <span class="text-primary-300 line-through">// ${child.type?.declaration?.signatures[0]?.comment.summary[0]?.text}</span>\n`;
+                                                        } else {
+                                                            type += `\t <span class="ml-3 text-primary-700">${child.name}</span>: <span class="text-primary-500">(${functionParameters}) &rArr; ${child.type?.declaration?.signatures[0]?.type?.name}</span>, <span class="text-primary-300">// ${child.type?.declaration?.signatures[0]?.comment.summary[0]?.text}</span>\n`;
+                                                        }
                                                     } else {
                                                         const childType = child.type.elementType ? child.type.elementType.name : child.type.name;
 
-                                                        type += ` \t <b>${child.name}</b>: ${childType}, // ${child.comment?.summary[0]?.text}\n `;
+                                                        type += ` \t <span class="ml-3 text-primary-700">${child.name}</span>: <span class="text-primary-500">${childType}</span>, <span class="text-primary-300">// ${child.comment?.summary[0]?.text}</span>\n `;
                                                     }
                                                 }
                                             });
                                         }
 
-                                        type = `{\n ${type} }`;
+                                        type = `{\n ${type}}`;
                                     }
 
                                     return {

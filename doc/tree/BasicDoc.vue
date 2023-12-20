@@ -15,8 +15,11 @@ export default {
         return {
             nodes: null,
             code: {
-                basic: `<Tree :value="nodes" class="w-full md:w-30rem"></Tree>`,
-                options: `<template>
+                basic: `
+<Tree :value="nodes" class="w-full md:w-30rem"></Tree>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <Tree :value="nodes" class="w-full md:w-30rem"></Tree>
     </div>
@@ -35,8 +38,10 @@ export default {
         NodeService.getTreeNodes().then((data) => (this.nodes = data));
     } 
 }
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <Tree :value="nodes" class="w-full md:w-30rem"></Tree>
     </div>
@@ -51,7 +56,8 @@ const nodes = ref(null);
 onMounted(() => {
     NodeService.getTreeNodes().then((data) => (nodes.value = data));
 });
-<\/script>`,
+<\/script>
+`,
                 data: `
 {
     key: '0',

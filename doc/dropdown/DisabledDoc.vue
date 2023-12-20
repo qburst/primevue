@@ -13,8 +13,11 @@ export default {
     data() {
         return {
             code: {
-                basic: `<Dropdown disabled placeholder="Select a City" class="w-full md:w-14rem" />`,
-                options: `<template>
+                basic: `
+<Dropdown disabled placeholder="Select a City" class="w-full md:w-14rem" />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <Dropdown disabled placeholder="Select a City" class="w-full md:w-14rem" />
     </div>
@@ -22,8 +25,10 @@ export default {
 
 <script>
 
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <Dropdown disabled placeholder="Select a City" class="w-full md:w-14rem" />
     </div>
@@ -31,7 +36,8 @@ export default {
 
 <script setup>
 
-<\/script>`
+<\/script>
+`
             }
         };
     }

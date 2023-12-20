@@ -28,11 +28,15 @@ export default {
         partialChecked: false,
         checked: true
     }
-}`
+}
+`
             },
             code: {
-                basic: `<TreeSelect v-model="selectedValue" :options="nodes" selectionMode="checkbox" placeholder="Select Item" class="md:w-20rem w-full" />`,
-                options: `<template>
+                basic: `
+<TreeSelect v-model="selectedValue" :options="nodes" selectionMode="checkbox" placeholder="Select Item" class="md:w-20rem w-full" />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <TreeSelect v-model="selectedValue" :options="nodes" selectionMode="checkbox" placeholder="Select Item" class="md:w-20rem w-full" />
     </div>
@@ -52,8 +56,10 @@ export default {
         NodeService.getTreeNodes().then((data) => (this.nodes = data));
     }
 }
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <TreeSelect v-model="selectedValue" :options="nodes" selectionMode="checkbox" placeholder="Select Item" class="md:w-20rem w-full" />
     </div>
@@ -69,7 +75,8 @@ const selectedValue = ref(null);
 onMounted(() => {
     NodeService.getTreeNodes().then((data) => (nodes.value = data));
 });
-<\/script>`,
+<\/script>
+`,
                 data: `
 {
     key: '0',

@@ -3,19 +3,22 @@
         <div v-if="containerVisible" :ref="maskRef" @mousedown="onMaskClick" :class="cx('mask')" :style="sx('mask', true, { position })" v-bind="ptm('mask')">
             <transition name="p-sidebar" @enter="onEnter" @after-enter="onAfterEnter" @before-leave="onBeforeLeave" @leave="onLeave" @after-leave="onAfterLeave" appear v-bind="ptm('transition')">
                 <div v-if="visible" :ref="containerRef" v-focustrap :class="cx('root')" role="complementary" :aria-modal="modal" @keydown="onKeydown" v-bind="{ ...$attrs, ...ptm('root') }">
-                    <div :ref="headerContainerRef" :class="cx('header')" v-bind="ptm('header')">
-                        <div v-if="$slots.header" :class="cx('headerContent')" v-bind="ptm('headerContent')">
-                            <slot name="header"></slot>
-                        </div>
-                        <button v-if="showCloseIcon" :ref="closeButtonRef" v-ripple autofocus type="button" :class="cx('closeButton')" :aria-label="closeAriaLabel" @click="hide" v-bind="ptm('closeButton')" data-pc-group-section="iconcontainer">
-                            <slot name="closeicon" :class="cx('closeIcon')">
-                                <component :is="closeIcon ? 'span' : 'TimesIcon'" :class="[cx('closeIcon'), closeIcon]" v-bind="ptm('closeIcon')"></component>
+                    <slot v-if="$slots.container" name="container" :onClose="hide" :closeCallback="hide"></slot>
+                    <template v-else>
+                        <div :ref="headerContainerRef" :class="cx('header')" v-bind="ptm('header')">
+                            <slot name="header" :class="cx('title')">
+                                <div v-if="header" :class="cx('title')" v-bind="ptm('title')">{{ header }}</div>
                             </slot>
-                        </button>
-                    </div>
-                    <div :ref="contentRef" :class="cx('content')" v-bind="ptm('content')">
-                        <slot></slot>
-                    </div>
+                            <button v-if="showCloseIcon" :ref="closeButtonRef" v-ripple type="button" :class="cx('closeButton')" :aria-label="closeAriaLabel" @click="hide" v-bind="ptm('closeButton')" data-pc-group-section="iconcontainer">
+                                <slot name="closeicon" :class="cx('closeIcon')">
+                                    <component :is="closeIcon ? 'span' : 'TimesIcon'" :class="[cx('closeIcon'), closeIcon]" v-bind="ptm('closeIcon')"></component>
+                                </slot>
+                            </button>
+                        </div>
+                        <div :ref="contentRef" :class="cx('content')" v-bind="ptm('content')">
+                            <slot></slot>
+                        </div>
+                    </template>
                 </div>
             </transition>
         </div>
@@ -103,17 +106,17 @@ export default {
                 return container && container.querySelector('[autofocus]');
             };
 
-            let focusTarget = this.$slots.default && findFocusableElement(this.content);
+            let focusTarget = this.$slots.header && findFocusableElement(this.headerContainer);
 
             if (!focusTarget) {
-                focusTarget = this.$slots.header && findFocusableElement(this.headerContainer);
+                focusTarget = this.$slots.default && findFocusableElement(this.container);
 
                 if (!focusTarget) {
-                    focusTarget = findFocusableElement(this.container);
+                    focusTarget = this.closeButton;
                 }
             }
 
-            focusTarget && focusTarget.focus();
+            focusTarget && DomHandler.focus(focusTarget);
         },
         enableDocumentSettings() {
             if (this.dismissable && !this.modal) {
@@ -121,14 +124,14 @@ export default {
             }
 
             if (this.blockScroll) {
-                DomHandler.addClass(document.body, 'p-overflow-hidden');
+                DomHandler.blockBodyScroll();
             }
         },
         disableDocumentSettings() {
             this.unbindOutsideClickListener();
 
             if (this.blockScroll) {
-                DomHandler.removeClass(document.body, 'p-overflow-hidden');
+                DomHandler.unblockBodyScroll();
             }
         },
         onKeydown(event) {

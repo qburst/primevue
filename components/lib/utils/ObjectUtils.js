@@ -203,13 +203,15 @@ export default {
     },
 
     getVNodeProp(vnode, prop) {
-        let props = vnode.props;
+        if (vnode) {
+            let props = vnode.props;
 
-        if (props) {
-            let kebapProp = prop.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
-            let propName = Object.prototype.hasOwnProperty.call(props, kebapProp) ? kebapProp : prop;
+            if (props) {
+                let kebabProp = prop.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+                let propName = Object.prototype.hasOwnProperty.call(props, kebabProp) ? kebabProp : prop;
 
-            return vnode.type.extends.props[prop].type === Boolean && props[propName] === '' ? true : props[propName];
+                return vnode.type.extends.props[prop].type === Boolean && props[propName] === '' ? true : props[propName];
+            }
         }
 
         return null;
@@ -302,6 +304,37 @@ export default {
         return index;
     },
 
+    sort(value1, value2, order = 1, comparator, nullSortOrder = 1) {
+        const result = this.compare(value1, value2, comparator, order);
+        let finalSortOrder = order;
+
+        // nullSortOrder == 1 means Excel like sort nulls at bottom
+        if (this.isEmpty(value1) || this.isEmpty(value2)) {
+            finalSortOrder = nullSortOrder === 1 ? order : nullSortOrder;
+        }
+
+        return finalSortOrder * result;
+    },
+
+    compare(value1, value2, comparator, order = 1) {
+        let result = -1;
+        const emptyValue1 = this.isEmpty(value1);
+        const emptyValue2 = this.isEmpty(value2);
+
+        if (emptyValue1 && emptyValue2) result = 0;
+        else if (emptyValue1) result = order;
+        else if (emptyValue2) result = -order;
+        else if (typeof value1 === 'string' && typeof value2 === 'string') result = comparator(value1, value2);
+        else result = value1 < value2 ? -1 : value1 > value2 ? 1 : 0;
+
+        return result;
+    },
+
+    localeComparator() {
+        //performance gain using Int.Collator. It is not recommended to use localeCompare against large arrays.
+        return new Intl.Collator(undefined, { numeric: true }).compare;
+    },
+
     nestedKeys(obj = {}, parentKey = '') {
         return Object.entries(obj).reduce((o, [key, value]) => {
             const currentKey = parentKey ? `${parentKey}.${key}` : key;
@@ -310,5 +343,29 @@ export default {
 
             return o;
         }, []);
+    },
+
+    stringify(value, indent = 2, currentIndent = 0) {
+        const currentIndentStr = ' '.repeat(currentIndent);
+        const nextIndentStr = ' '.repeat(currentIndent + indent);
+
+        if (this.isArray(value)) {
+            return '[' + value.map((v) => this.stringify(v, indent, currentIndent + indent)).join(', ') + ']';
+        } else if (this.isDate(value)) {
+            return value.toISOString();
+        } else if (this.isFunction(value)) {
+            return value.toString();
+        } else if (this.isObject(value)) {
+            return (
+                '{\n' +
+                Object.entries(value)
+                    .map(([k, v]) => `${nextIndentStr}${k}: ${this.stringify(v, indent, currentIndent + indent)}`)
+                    .join(',\n') +
+                `\n${currentIndentStr}` +
+                '}'
+            );
+        } else {
+            return JSON.stringify(value);
+        }
     }
 };

@@ -19,15 +19,18 @@ export default {
         return {
             checked: false,
             code: {
-                basic: `<InputSwitch
+                basic: `
+<InputSwitch
     v-model="checked"
     :pt="{
         slider: ({ props }) => ({
             class: props.modelValue ? 'bg-teal-400' : 'bg-red-400'
         })
     }"
-/>`,
-                options: `<template>
+/>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <InputSwitch
             v-model="checked"
@@ -48,8 +51,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <InputSwitch
             v-model="checked"
@@ -66,7 +71,8 @@ export default {
 import { ref } from 'vue';
 
 const checked = ref(false);
-<\/script>`
+<\/script>
+`
             }
         };
     }

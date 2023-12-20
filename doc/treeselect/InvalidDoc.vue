@@ -17,8 +17,11 @@ export default {
             nodes: null,
             selectedValue: null,
             code: {
-                basic: `<TreeSelect v-model="selectedValue" class="md:w-20rem w-full p-invalid" :options="nodes" placeholder="TreeSelect" />`,
-                options: `<template>
+                basic: `
+<TreeSelect v-model="selectedValue" class="md:w-20rem w-full p-invalid" :options="nodes" placeholder="TreeSelect" />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <TreeSelect v-model="selectedValue" class="md:w-20rem w-full p-invalid" :options="nodes" placeholder="TreeSelect" />
     </div>
@@ -38,8 +41,10 @@ export default {
         NodeService.getTreeNodes().then((data) => (this.nodes = data));
     }
 }
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <TreeSelect v-model="selectedValue" class="md:w-20rem w-full p-invalid" :options="nodes" placeholder="TreeSelect" />
     </div>
@@ -55,7 +60,8 @@ const selectedValue = ref(null);
 onMounted(() => {
     NodeService.getTreeNodes().then((data) => (nodes.value = data));
 });
-<\/script>`,
+<\/script>
+`,
                 data: `
 {
     key: '0',

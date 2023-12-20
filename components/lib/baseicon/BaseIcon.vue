@@ -1,44 +1,11 @@
 <script>
-import { useStyle } from 'primevue/usestyle';
+import BaseComponent from 'primevue/basecomponent';
+import BaseIconStyle from 'primevue/baseicon/style';
 import { ObjectUtils } from 'primevue/utils';
-
-const styles = `
-.p-icon {
-    display: inline-block;
-}
-
-.p-icon-spin {
-    -webkit-animation: p-icon-spin 2s infinite linear;
-    animation: p-icon-spin 2s infinite linear;
-}
-
-@-webkit-keyframes p-icon-spin {
-    0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(359deg);
-        transform: rotate(359deg);
-    }
-}
-
-@keyframes p-icon-spin {
-    0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(359deg);
-        transform: rotate(359deg);
-    }
-}
-`;
-
-const { load: loadStyle } = useStyle(styles, { name: 'baseicon', manual: true });
 
 export default {
     name: 'BaseIcon',
+    extends: BaseComponent,
     props: {
         label: {
             type: String,
@@ -49,8 +16,9 @@ export default {
             default: false
         }
     },
+    style: BaseIconStyle,
     beforeMount() {
-        loadStyle(undefined, { nonce: this.$config?.csp?.nonce });
+        BaseIconStyle.loadStyle({ nonce: this.$config?.csp?.nonce });
     },
     methods: {
         pti() {

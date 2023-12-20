@@ -6,7 +6,7 @@
         <div class="flex justify-content-center mb-4">
             <SelectButton v-model="size" :options="sizeOptions" optionLabel="label" dataKey="label" />
         </div>
-        <DataTable :value="products" :class="`p-datatable-${size.class}`" tableStyle="min-width: 50rem">
+        <DataTable :value="products" :size="size.value" tableStyle="min-width: 50rem">
             <Column field="code" header="Code"></Column>
             <Column field="name" header="Name"></Column>
             <Column field="category" header="Category"></Column>
@@ -23,26 +23,29 @@ export default {
     data() {
         return {
             products: null,
-            size: { label: 'Normal', value: 'normal' },
+            size: { label: 'Normal', value: 'null' },
             sizeOptions: [
-                { label: 'Small', value: 'small', class: 'sm' },
-                { label: 'Normal', value: 'normal' },
-                { label: 'Large', value: 'large', class: 'lg' }
+                { label: 'Small', value: 'small' },
+                { label: 'Normal', value: 'null' },
+                { label: 'Large', value: 'large' }
             ],
             code: {
-                basic: `<SelectButton v-model="size" :options="sizeOptions" optionLabel="label" dataKey="label" />
-<DataTable :value="products" :class="\`p-datatable-\${size.class}\`" tableStyle="min-width: 50rem">
+                basic: `
+<SelectButton v-model="size" :options="sizeOptions" optionLabel="label" dataKey="label" />
+<DataTable :value="products" :size="size.value" tableStyle="min-width: 50rem">
     <Column field="code" header="Code"></Column>
     <Column field="name" header="Name"></Column>
     <Column field="category" header="Category"></Column>
     <Column field="quantity" header="Quantity"></Column>
-</DataTable>`,
-                options: `<template>
+</DataTable>
+`,
+                options: `
+<template>
     <div class="card">
         <div class="flex justify-content-center mb-4">
             <SelectButton v-model="size" :options="sizeOptions" optionLabel="label" dataKey="label" />
         </div>
-        <DataTable :value="products" :class="\`p-datatable-\${size.class}\`" tableStyle="min-width: 50rem">
+        <DataTable :value="products" :size="size.value" tableStyle="min-width: 50rem">
             <Column field="code" header="Code"></Column>
             <Column field="name" header="Name"></Column>
             <Column field="category" header="Category"></Column>
@@ -58,11 +61,11 @@ export default {
     data() {
         return {
             products: null,
-            size: { label: 'Normal', value: 'normal' },
+            size: { label: 'Normal', value: 'null' },
             sizeOptions: [
-                { label: 'Small', value: 'small', class: 'sm' },
-                { label: 'Normal', value: 'normal' },
-                { label: 'Large', value: 'large', class: 'lg' }
+                { label: 'Small', value: 'small' },
+                { label: 'Normal', value: 'null' },
+                { label: 'Large', value: 'large' }
             ]
         };
     },
@@ -70,13 +73,15 @@ export default {
         ProductService.getProductsMini().then((data) => (this.products = data));
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <div class="flex justify-content-center mb-4">
             <SelectButton v-model="size" :options="sizeOptions" optionLabel="label" dataKey="label" />
         </div>
-        <DataTable :value="products" :class="\`p-datatable-\${size.class}\`" tableStyle="min-width: 50rem">
+        <DataTable :value="products" :size="size.value" tableStyle="min-width: 50rem">
             <Column field="code" header="Code"></Column>
             <Column field="name" header="Name"></Column>
             <Column field="category" header="Category"></Column>
@@ -94,14 +99,15 @@ onMounted(() => {
 });
 
 const products = ref();
-const size = ref({ label: 'Normal', value: 'normal' });
+const size = ref({ label: 'Normal', value: 'null' });
 const sizeOptions = ref([
-    { label: 'Small', value: 'small', class: 'sm' },
-    { label: 'Normal', value: 'normal' },
-    { label: 'Large', value: 'large', class: 'lg' }
+    { label: 'Small', value: 'small' },
+    { label: 'Normal', value: 'null' },
+    { label: 'Large', value: 'large' }
 ]);
 
-<\/script>`,
+<\/script>
+`,
                 data: `
 {
     id: '1000',

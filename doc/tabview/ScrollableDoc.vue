@@ -5,7 +5,7 @@
     <div class="card">
         <TabView :scrollable="true">
             <TabPanel v-for="tab in scrollableTabs" :key="tab.title" :header="tab.title">
-                <p>{{ tab.content }}</p>
+                <p class="m-0">{{ tab.content }}</p>
             </TabPanel>
         </TabView>
     </div>
@@ -18,16 +18,19 @@ export default {
         return {
             scrollableTabs: Array.from({ length: 50 }, (_, i) => ({ title: `Tab ${i + 1}`, content: `Tab ${i + 1} Content` })),
             code: {
-                basic: `<TabView :scrollable="true">
+                basic: `
+<TabView :scrollable="true">
     <TabPanel v-for="tab in scrollableTabs" :key="tab.title" :header="tab.title">
-        <p>{{ tab.content }}</p>
+        <p class="m-0">{{ tab.content }}</p>
     </TabPanel>
-</TabView>`,
-                options: `<template>
+</TabView>
+`,
+                options: `
+<template>
     <div class="card">
         <TabView :scrollable="true">
             <TabPanel v-for="tab in scrollableTabs" :key="tab.title" :header="tab.title">
-                <p>{{ tab.content }}</p>
+                <p class="m-0">{{ tab.content }}</p>
             </TabPanel>
         </TabView>
     </div>
@@ -41,12 +44,14 @@ export default {
         };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <TabView :scrollable="true">
             <TabPanel v-for="tab in scrollableTabs" :key="tab.title" :header="tab.title">
-                <p>{{ tab.content }}</p>
+                <p class="m-0">{{ tab.content }}</p>
             </TabPanel>
         </TabView>
     </div>
@@ -56,7 +61,8 @@ export default {
 import { ref } from 'vue';
 
 const scrollableTabs = ref(Array.from({ length: 50 }, (_, i) => ({ title: \`Tab \${i + 1}\`, content: \`Tab \${i + 1} Content\` })));
-<\/script>`
+<\/script>
+`
             }
         };
     }

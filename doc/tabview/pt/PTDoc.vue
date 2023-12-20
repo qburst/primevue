@@ -28,7 +28,8 @@ export default {
                 content: `Tab ${i + 1} Content`
             })),
             code: {
-                basic: `<TabView>
+                basic: `
+<TabView>
     <TabPanel v-for="(tab, index) in tabs" :key="tab.title" :header="tab.title"
         :pt="{
             headerAction: ({ props, parent }) => ({
@@ -37,8 +38,10 @@ export default {
         }">
         <p>{{ tab.content }}</p>
     </TabPanel>
-</TabView>`,
-                options: `<template>
+</TabView>
+`,
+                options: `
+<template>
     <div class="card">
         <TabView>
             <TabPanel v-for="(tab, index) in tabs" :key="tab.title" :header="tab.title"
@@ -73,8 +76,10 @@ export default {
         }
     }
 }
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <TabView>
             <TabPanel v-for="(tab, index) in tabs" :key="tab.title" :header="tab.title"
@@ -104,7 +109,8 @@ const panelClass = (props, parent, index) => {
         }
     ];
 };
-<\/script>`
+<\/script>
+`
             }
         };
     },

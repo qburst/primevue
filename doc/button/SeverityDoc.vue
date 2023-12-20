@@ -19,14 +19,17 @@ export default {
     data() {
         return {
             code: {
-                basic: `<Button label="Primary" />
+                basic: `
+<Button label="Primary" />
 <Button label="Secondary" severity="secondary" />
 <Button label="Success" severity="success" />
 <Button label="Info" severity="info" />
 <Button label="Warning" severity="warning" />
 <Button label="Help" severity="help" />
-<Button label="Danger" severity="danger" />`,
-                options: `<template>
+<Button label="Danger" severity="danger" />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center flex-wrap gap-3">
         <Button label="Primary" />
         <Button label="Secondary" severity="secondary" />
@@ -39,8 +42,10 @@ export default {
 </template>
 
 <script>
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center flex-wrap gap-3">
         <Button label="Primary" />
         <Button label="Secondary" severity="secondary" />
@@ -53,7 +58,8 @@ export default {
 </template>
 
 <script setup>
-<\/script>`
+<\/script>
+`
             }
         };
     }

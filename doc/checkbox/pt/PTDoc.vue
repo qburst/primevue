@@ -20,7 +20,8 @@ export default {
         return {
             checked: false,
             code: {
-                basic: `<Checkbox
+                basic: `
+<Checkbox
     v-model="checked"
     binary
     :pt="{
@@ -28,8 +29,10 @@ export default {
             class: state.focused ? 'border-orange-400' : undefined
         })
     }"
-/>`,
-                options: `<template>
+/>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <Checkbox
             v-model="checked"
@@ -51,8 +54,10 @@ export default {
         };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <Checkbox
             v-model="checked"
@@ -70,7 +75,8 @@ export default {
 import { ref } from "vue";
 
 const checked = ref(false);
-<\/script>`
+<\/script>
+`
             }
         };
     }

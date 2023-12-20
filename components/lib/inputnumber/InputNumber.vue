@@ -22,7 +22,8 @@
             @click="onInputClick"
             @focus="onInputFocus"
             @blur="onInputBlur"
-            v-bind="{ ...inputProps, ...ptm('input') }"
+            v-bind="inputProps"
+            :pt="ptm('input')"
             :unstyled="unstyled"
             data-pc-section="input"
         />
@@ -33,13 +34,14 @@
                 :disabled="disabled"
                 :tabindex="-1"
                 aria-hidden="true"
-                v-bind="{ ...incrementButtonProps, ...ptm('incrementButton') }"
+                v-bind="incrementButtonProps"
+                :pt="ptm('incrementButton')"
                 :unstyled="unstyled"
                 data-pc-section="incrementbutton"
             >
                 <template #icon>
                     <slot name="incrementbuttonicon">
-                        <component :is="incrementButtonIcon ? 'span' : 'AngleUpIcon'" :class="incrementButtonIcon" v-bind="ptm('incrementButton')['icon']" />
+                        <component :is="incrementButtonIcon ? 'span' : 'AngleUpIcon'" :class="incrementButtonIcon" v-bind="ptm('incrementButton')['icon']" data-pc-section="incrementbuttonicon" />
                     </slot>
                 </template>
             </INButton>
@@ -49,13 +51,14 @@
                 :disabled="disabled"
                 :tabindex="-1"
                 aria-hidden="true"
-                v-bind="{ ...decrementButtonProps, ...ptm('decrementButton') }"
+                v-bind="decrementButtonProps"
+                :pt="ptm('decrementButton')"
                 :unstyled="unstyled"
                 data-pc-section="decrementbutton"
             >
                 <template #icon>
                     <slot name="decrementbuttonicon">
-                        <component :is="decrementButtonIcon ? 'span' : 'AngleDownIcon'" :class="decrementButtonIcon" v-bind="ptm('decrementButton')['icon']" />
+                        <component :is="decrementButtonIcon ? 'span' : 'AngleDownIcon'" :class="decrementButtonIcon" v-bind="ptm('decrementButton')['icon']" data-pc-section="decrementbuttonicon" />
                     </slot>
                 </template>
             </INButton>
@@ -67,13 +70,14 @@
             :disabled="disabled"
             :tabindex="-1"
             aria-hidden="true"
-            v-bind="{ ...incrementButtonProps, ...ptm('incrementButton') }"
+            v-bind="incrementButtonProps"
+            :pt="ptm('incrementButton')"
             :unstyled="unstyled"
             data-pc-section="incrementbutton"
         >
             <template #icon>
                 <slot name="incrementbuttonicon">
-                    <component :is="incrementButtonIcon ? 'span' : 'AngleUpIcon'" :class="incrementButtonIcon" v-bind="ptm('incrementButton')['icon']" />
+                    <component :is="incrementButtonIcon ? 'span' : 'AngleUpIcon'" :class="incrementButtonIcon" v-bind="ptm('incrementButton')['icon']" data-pc-section="incrementbuttonicon" />
                 </slot>
             </template>
         </INButton>
@@ -84,13 +88,14 @@
             :disabled="disabled"
             :tabindex="-1"
             aria-hidden="true"
-            v-bind="{ ...decrementButtonProps, ...ptm('decrementButton') }"
+            v-bind="decrementButtonProps"
+            :pt="ptm('decrementButton')"
             :unstyled="unstyled"
             data-pc-section="decrementbutton"
         >
             <template #icon>
                 <slot name="decrementbuttonicon">
-                    <component :is="decrementButtonIcon ? 'span' : 'AngleDownIcon'" :class="decrementButtonIcon" v-bind="ptm('decrementButton')['icon']" />
+                    <component :is="decrementButtonIcon ? 'span' : 'AngleDownIcon'" :class="decrementButtonIcon" v-bind="ptm('decrementButton')['icon']" data-pc-section="decrementbuttonicon" />
                 </slot>
             </template>
         </INButton>

@@ -30,15 +30,18 @@ export default {
                 }
             },
             code: {
-                basic: `<Chart
+                basic: `
+<Chart
     type="pie"
     :data="chartData"
     :options="chartOptions"
     :pt="{
         root: { class: 'w-full md:w-30rem' }
     }"
-/>`,
-                options: `<template>
+/>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <Chart
             type="pie"
@@ -87,8 +90,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <Chart
             type="pie"
@@ -133,7 +138,8 @@ const setChartData = () => {
         ]
     };
 };
-<\/script>`
+<\/script>
+`
             }
         };
     },

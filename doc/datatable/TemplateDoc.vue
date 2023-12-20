@@ -46,7 +46,8 @@ export default {
         return {
             products: null,
             code: {
-                basic: `<DataTable :value="products" tableStyle="min-width: 50rem">
+                basic: `
+<DataTable :value="products" tableStyle="min-width: 50rem">
     <template #header>
         <div class="flex flex-wrap align-items-center justify-content-between gap-2">
             <span class="text-xl text-900 font-bold">Products</span>
@@ -76,8 +77,10 @@ export default {
         </template>
     </Column>
     <template #footer> In total there are {{ products ? products.length : 0 }} products. </template>
-</DataTable>`,
-                options: `<template>
+</DataTable>
+`,
+                options: `
+<template>
     <div class="card">
         <DataTable :value="products" tableStyle="min-width: 50rem">
             <template #header>
@@ -146,8 +149,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <DataTable :value="products" tableStyle="min-width: 50rem">
             <template #header>
@@ -211,7 +216,8 @@ const getSeverity = (product) => {
     }
 };
 
-<\/script>`,
+<\/script>
+`,
                 data: `
 {
     id: '1000',

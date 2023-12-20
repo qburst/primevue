@@ -29,12 +29,15 @@ export default {
                 { label: 'Large', value: 'large', class: 'lg' }
             ],
             code: {
-                basic: `<TreeTable :value="nodes" :class="\`p-treetable-\${size.class}\`">
+                basic: `
+<TreeTable :value="nodes" :class="\`p-treetable-\${size.class}\`">
     <Column field="name" header="Name" expander></Column>
     <Column field="size" header="Size"></Column>
     <Column field="type" header="Type"></Column>
-</TreeTable>`,
-                options: `<template>
+</TreeTable>
+`,
+                options: `
+<template>
     <div class="card">
         <TreeTable :value="nodes" :class="\`p-treetable-\${size.class}\`">
             <Column field="name" header="Name" expander></Column>
@@ -63,8 +66,10 @@ export default {
         NodeService.getTreeTableNodes().then((data) => (this.nodes = data));
     }
 }
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <TreeTable :value="nodes" :class="\`p-treetable-\${size.class}\`">
             <Column field="name" header="Name" expander></Column>
@@ -89,7 +94,8 @@ const sizeOptions = ref([
     { label: 'Normal', value: 'normal' },
     { label: 'Large', value: 'large', class: 'lg' }
 ]);
-<\/script>`,
+<\/script>
+`,
                 data: `
 {
     key: '0',

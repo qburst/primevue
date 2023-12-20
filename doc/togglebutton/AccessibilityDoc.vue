@@ -39,10 +39,12 @@ export default {
     data() {
         return {
             code: {
-                basic: `<span id="rememberme">Remember Me</span>
+                basic: `
+<span id="rememberme">Remember Me</span>
 <ToggleButton aria-labelledby="rememberme" />
 
-<ToggleButton aria-label="Remember Me" />`
+<ToggleButton aria-label="Remember Me" />
+`
             }
         };
     }

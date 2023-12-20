@@ -13,8 +13,11 @@ export default {
     data() {
         return {
             code: {
-                basic: `<FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" customUpload @uploader="customBase64Uploader" />`,
-                options: `<template>
+                basic: `
+<FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" customUpload @uploader="customBase64Uploader" />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" customUpload @uploader="customBase64Uploader" />
     </div>
@@ -36,8 +39,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" customUpload @uploader="customBase64Uploader" />
     </div>
@@ -55,7 +60,8 @@ const customBase64Uploader = async (event) => {
         const base64data = reader.result;
     };
 };
-<\/script>`
+<\/script>
+`
             }
         };
     },

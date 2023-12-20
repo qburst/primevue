@@ -186,7 +186,8 @@ export default {
                 { label: 'OUTOFSTOCK', value: 'outofstock' }
             ],
             code: {
-                basic: `<Toolbar class="mb-4">
+                basic: `
+<Toolbar class="mb-4">
     <template #start>
         <Button label="New" icon="pi pi-plus" severity="success" class="mr-2" @click="openNew" />
         <Button label="Delete" icon="pi pi-trash" severity="danger" @click="confirmDeleteSelected" :disabled="!selectedProducts || !selectedProducts.length" />
@@ -239,8 +240,10 @@ export default {
             <Button icon="pi pi-trash" outlined rounded severity="danger" @click="confirmDeleteProduct(slotProps.data)" />
         </template>
     </Column>
-</DataTable>`,
-                options: `<template>
+</DataTable>
+`,
+                options: `
+<template>
     <div>
         <div class="card">
             <Toolbar class="mb-4">
@@ -526,8 +529,10 @@ export default {
     }
 }
 <\/script>
+
 `,
-                composition: `<template>
+                composition: `
+<template>
     <div>
         <div class="card">
             <Toolbar class="mb-4">

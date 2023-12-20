@@ -1,13 +1,13 @@
 <template>
     <DocSectionText v-bind="$attrs">
-        <p>Legend section can also be defined with custom content instead of primitive values.</p>
+        <p>Legend section can be customized with custom content using templating.</p>
     </DocSectionText>
     <div class="card">
         <Fieldset>
             <template #legend>
-                <div class="flex align-items-center text-primary">
-                    <span class="pi pi-user mr-2"></span>
-                    <span class="font-bold text-lg">User Details</span>
+                <div class="flex align-items-center gap-2 px-2">
+                    <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
+                    <span class="font-bold">Amy Elsner</span>
                 </div>
             </template>
             <p class="m-0">
@@ -24,25 +24,28 @@ export default {
     data() {
         return {
             code: {
-                basic: `<Fieldset>
+                basic: `
+<Fieldset>
     <template #legend>
-        <div class="flex align-items-center text-primary">
-            <span class="pi pi-user mr-2"></span>
-            <span class="font-bold text-lg">User Details</span>
+        <div class="flex align-items-center gap-2 px-2">
+            <Avatar image="/images/avatar/amyelsner.png" shape="circle" />
+            <span class="font-bold">Amy Elsner</span>
         </div>
     </template>
     <p class="m-0">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     </p>
-</Fieldset>`,
-                options: `<template>
+</Fieldset>
+`,
+                options: `
+<template>
     <div class="card">
         <Fieldset>
             <template #legend>
-                <div class="flex align-items-center text-primary">
-                    <span class="pi pi-user mr-2"></span>
-                    <span class="font-bold text-lg">User Details</span>
+                <div class="flex align-items-center gap-2 px-2">
+                    <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
+                    <span class="font-bold">Amy Elsner</span>
                 </div>
             </template>
             <p class="m-0">
@@ -54,14 +57,16 @@ export default {
 </template>
 
 <script>
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <Fieldset>
             <template #legend>
-                <div class="flex align-items-center text-primary">
-                    <span class="pi pi-user mr-2"></span>
-                    <span class="font-bold text-lg">User Details</span>
+                <div class="flex align-items-center gap-2 px-2">
+                    <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
+                    <span class="font-bold">Amy Elsner</span>
                 </div>
             </template>
             <p class="m-0">
@@ -73,7 +78,8 @@ export default {
 </template>
 
 <script setup>
-<\/script>`
+<\/script>
+`
             }
         };
     }

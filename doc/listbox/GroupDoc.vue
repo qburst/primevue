@@ -56,15 +56,18 @@ export default {
                 }
             ],
             code: {
-                basic: `<Listbox v-model="selectedCity" :options="groupedCities" optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" class="w-full md:w-14rem" listStyle="max-height:250px">
+                basic: `
+<Listbox v-model="selectedCity" :options="groupedCities" optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" class="w-full md:w-14rem" listStyle="max-height:250px">
     <template #optiongroup="slotProps">
         <div class="flex align-items-center">
             <img :alt="slotProps.option.name" src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png" :class="\`flag flag-\${slotProps.option.code.toLowerCase()} mr-2\`" style="width: 18px" />
             <div>{{ slotProps.option.label }}</div>
         </div>
     </template>
-</Listbox>`,
-                options: `<template>
+</Listbox>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <Listbox v-model="selectedCity" :options="groupedCities" optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" class="w-full md:w-14rem" listStyle="max-height:250px">
             <template #optiongroup="slotProps">
@@ -117,8 +120,10 @@ export default {
         };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <Listbox v-model="selectedCity" :options="groupedCities" optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" class="w-full md:w-14rem" listStyle="max-height:250px">
             <template #optiongroup="slotProps">
@@ -167,7 +172,8 @@ const groupedCities = ref([
         ]
     }
 ]);
-<\/script>`
+<\/script>
+`
             }
         };
     }

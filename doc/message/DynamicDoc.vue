@@ -19,12 +19,15 @@ export default {
             messages: [],
             count: 0,
             code: {
-                basic: `<Button label="Show" @click="addMessages()" />
+                basic: `
+<Button label="Show" @click="addMessages()" />
 <Button label="Clear" severity="secondary" class="ml-2" @click="clearMessages()" />
 <transition-group name="p-message" tag="div">
     <Message v-for="msg of messages" :key="msg.id" :severity="msg.severity">{{ msg.content }}</Message>
-</transition-group>`,
-                options: `<template>
+</transition-group>
+`,
+                options: `
+<template>
     <div class="card">
         <Button label="Show" @click="addMessages()" />
         <Button label="Clear" severity="secondary" class="ml-2" @click="clearMessages()" />
@@ -56,8 +59,10 @@ export default {
     }
 };
 }
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <Button label="Show" @click="addMessages()" />
         <Button label="Clear" severity="secondary" class="ml-2" @click="clearMessages()" />
@@ -84,7 +89,8 @@ const addMessages = () => {
 const clearMessages = () => {
     messages.value = [];
 };
-<\/script>`
+<\/script>
+`
             }
         };
     },

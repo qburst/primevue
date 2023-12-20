@@ -37,13 +37,15 @@ export default {
     data() {
         return {
             code: {
-                basic: `<label for="chkbox1">Remember Me</label>
+                basic: `
+<label for="chkbox1">Remember Me</label>
 <Checkbox inputId="chkbox1" />
 
 <span id="chkbox2">Remember Me</span>
 <Checkbox aria-labelledby="chkbox2" />
 
-<Checkbox aria-label="Remember Me" />`
+<Checkbox aria-label="Remember Me" />
+`
             }
         };
     }

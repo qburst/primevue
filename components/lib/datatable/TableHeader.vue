@@ -36,7 +36,6 @@
                         @constraint-add="$emit('constraint-add', $event)"
                         @constraint-remove="$emit('constraint-remove', $event)"
                         @apply-click="$emit('apply-click', $event)"
-                        :headerCheckboxIconTemplate="headerCheckboxIconTemplate"
                         :pt="pt"
                     />
                 </template>
@@ -119,7 +118,6 @@
                         @constraint-add="$emit('constraint-add', $event)"
                         @constraint-remove="$emit('constraint-remove', $event)"
                         @apply-click="$emit('apply-click', $event)"
-                        :headerCheckboxIconTemplate="headerCheckboxIconTemplate"
                         :pt="pt"
                     />
                 </template>
@@ -226,10 +224,6 @@ export default {
         filterInputProps: {
             type: null,
             default: null
-        },
-        headerCheckboxIconTemplate: {
-            type: Function,
-            default: null
         }
     },
     methods: {
@@ -240,6 +234,7 @@ export default {
             const columnGroupMetaData = {
                 props: this.getColumnGroupProps(),
                 parent: {
+                    instance: this,
                     props: this.$props,
                     state: this.$data
                 },
@@ -258,6 +253,7 @@ export default {
             const rowMetaData = {
                 props: row.props,
                 parent: {
+                    instance: this,
                     props: this.$props,
                     state: this.$data
                 },
@@ -275,6 +271,7 @@ export default {
             const columnMetaData = {
                 props: column.props,
                 parent: {
+                    instance: this,
                     props: this.$props,
                     state: this.$data
                 },

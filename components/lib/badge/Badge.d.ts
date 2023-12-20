@@ -9,16 +9,31 @@
  */
 import { VNode } from 'vue';
 import { ComponentHooks } from '../basecomponent';
-import { ClassComponent, GlobalComponentConstructor, PTOptions } from '../ts-helpers';
+import { PassThroughOptions } from '../passthrough';
+import { ClassComponent, GlobalComponentConstructor, PassThrough } from '../ts-helpers';
 
-export declare type BadgePassThroughOptionType = BadgePassThroughAttributes | ((options: BadgePassThroughMethodOptions) => BadgePassThroughAttributes | string) | string | null | undefined;
+export declare type BadgePassThroughOptionType<T = any> = BadgePassThroughAttributes | ((options: BadgePassThroughMethodOptions<T>) => BadgePassThroughAttributes | string) | string | null | undefined;
 
 /**
  * Custom passthrough(pt) option method.
  */
-export interface BadgePassThroughMethodOptions {
+export interface BadgePassThroughMethodOptions<T> {
+    /**
+     * Defines instance.
+     */
     instance: any;
+    /**
+     * Defines valid properties.
+     */
     props: BadgeProps;
+    /**
+     * Defines passthrough(pt) options in global config.
+     */
+    global: object | undefined;
+    /**
+     * Defines parent instance.
+     */
+    parent: T;
 }
 
 /**
@@ -32,13 +47,13 @@ export interface BadgePassThroughAttributes {
  * Custom passthrough(pt) options.
  * @see {@link BadgeProps.pt}
  */
-export interface BadgePassThroughOptions {
+export interface BadgePassThroughOptions<T = any> {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: BadgePassThroughOptionType;
+    root?: BadgePassThroughOptionType<T>;
     /**
-     * Used to manage all lifecycle hooks
+     * Used to manage all lifecycle hooks.
      * @see {@link BaseComponent.ComponentHooks}
      */
     hooks?: ComponentHooks;
@@ -64,7 +79,12 @@ export interface BadgeProps {
      * Used to pass attributes to DOM elements inside the component.
      * @type {BadgePassThroughOptions}
      */
-    pt?: PTOptions<BadgePassThroughOptions>;
+    pt?: PassThrough<BadgePassThroughOptions>;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false

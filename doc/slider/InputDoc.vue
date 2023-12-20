@@ -17,9 +17,12 @@ export default {
         return {
             value: 50,
             code: {
-                basic: `<InputText v-model.number="value" />
-<Slider v-model="value" />`,
-                options: `<template>
+                basic: `
+<InputText v-model.number="value" />
+<Slider v-model="value" />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <div class="w-14rem">
             <InputText v-model.number="value" class="w-full" />
@@ -36,8 +39,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <div class="w-14rem">
             <InputText v-model.number="value" class="w-full" />
@@ -50,7 +55,8 @@ export default {
 import { ref } from 'vue';
 
 const value = ref(50);
-<\/script>`
+<\/script>
+`
             }
         };
     }

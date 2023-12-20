@@ -20,12 +20,15 @@ export default {
         return {
             nodes: null,
             code: {
-                basic: `<TreeTable :value="nodes" :resizableColumns="true" columnResizeMode="expand" showGridlines :tableProps="{ style: { minWidth: '50rem' } }">
+                basic: `
+<TreeTable :value="nodes" :resizableColumns="true" columnResizeMode="expand" showGridlines :tableProps="{ style: { minWidth: '50rem' } }">
     <Column field="name" header="Name" expander></Column>
     <Column field="size" header="Size"></Column>
     <Column field="type" header="Type"></Column>
-</TreeTable>`,
-                options: `<template>
+</TreeTable>
+`,
+                options: `
+<template>
     <div class="card">
         <TreeTable :value="nodes" :resizableColumns="true" columnResizeMode="expand" showGridlines :tableProps="{ style: { minWidth: '50rem' } }">
             <Column field="name" header="Name" expander></Column>
@@ -48,8 +51,10 @@ export default {
         NodeService.getTreeTableNodes().then((data) => (this.nodes = data));
     }
 }
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <TreeTable :value="nodes" :resizableColumns="true" columnResizeMode="expand" showGridlines :tableProps="{ style: { minWidth: '50rem' } }">
             <Column field="name" header="Name" expander></Column>
@@ -68,7 +73,8 @@ onMounted(() => {
 });
 
 const nodes = ref();
-<\/script>`,
+<\/script>
+`,
                 data: `
 {
     key: '0',

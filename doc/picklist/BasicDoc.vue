@@ -3,7 +3,7 @@
         <p>PickList requires a multidimensional array as its value bound with the <i>v-model </i>directive and a template for its content that gets the <i>item</i> instance and the index via slotProps.</p>
     </DocSectionText>
     <div class="card">
-        <PickList v-model="products" listStyle="height:342px" dataKey="id">
+        <PickList v-model="products" listStyle="height:342px" dataKey="id" breakpoint="1400px">
             <template #sourceheader> Available </template>
             <template #targetheader> Selected </template>
             <template #item="slotProps">
@@ -32,7 +32,8 @@ export default {
         return {
             products: null,
             code: {
-                basic: `<PickList v-model="products" listStyle="height:342px" dataKey="id">
+                basic: `
+<PickList v-model="products" listStyle="height:342px" dataKey="id" breakpoint="1400px">
     <template #sourceheader> Available </template>
     <template #targetheader> Selected </template>
     <template #item="slotProps">
@@ -48,10 +49,12 @@ export default {
             <span class="font-bold text-900">$ {{ slotProps.item.price }}</span>
         </div>
     </template>
-</PickList>`,
-                options: `<template>
+</PickList>
+`,
+                options: `
+<template>
     <div class="card">
-        <PickList v-model="products" listStyle="height:342px" dataKey="id">
+        <PickList v-model="products" listStyle="height:342px" dataKey="id" breakpoint="1400px">
             <template #sourceheader> Available </template>
             <template #targetheader> Selected </template>
             <template #item="slotProps">
@@ -83,10 +86,12 @@ export default {
         ProductService.getProductsSmall().then((data) => (this.products = [data, []]));
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
-        <PickList v-model="products" listStyle="height:342px" dataKey="id">
+        <PickList v-model="products" listStyle="height:342px" dataKey="id" breakpoint="1400px">
             <template #sourceheader> Available </template>
             <template #targetheader> Selected </template>
             <template #item="slotProps">
@@ -115,7 +120,8 @@ const products = ref(null);
 onMounted(() => {
     ProductService.getProductsSmall().then((data) => (products.value = [data, []]));
 });
-<\/script>`,
+<\/script>
+`,
                 data: `
 /* ProductService */
 {

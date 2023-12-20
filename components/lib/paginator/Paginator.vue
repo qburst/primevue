@@ -5,10 +5,10 @@
                 <slot name="start" :state="currentState"></slot>
             </div>
             <template v-for="item in value" :key="item">
-                <FirstPageLink v-if="item === 'FirstPageLink'" :aria-label="getAriaLabel('firstPageLabel')" :template="$slots.firstpagelinkicon" @click="changePageToFirst($event)" :disabled="isFirstPage || empty" :pt="pt" />
-                <PrevPageLink v-else-if="item === 'PrevPageLink'" :aria-label="getAriaLabel('prevPageLabel')" :template="$slots.prevpagelinkicon" @click="changePageToPrev($event)" :disabled="isFirstPage || empty" :pt="pt" />
-                <NextPageLink v-else-if="item === 'NextPageLink'" :aria-label="getAriaLabel('nextPageLabel')" :template="$slots.nextpagelinkicon" @click="changePageToNext($event)" :disabled="isLastPage || empty" :pt="pt" />
-                <LastPageLink v-else-if="item === 'LastPageLink'" :aria-label="getAriaLabel('lastPageLabel')" :template="$slots.lastpagelinkicon" @click="changePageToLast($event)" :disabled="isLastPage || empty" :pt="pt" />
+                <FirstPageLink v-if="item === 'FirstPageLink'" :aria-label="getAriaLabel('firstPageLabel')" :template="$slots.firstpagelinkicon" @click="changePageToFirst($event)" :disabled="isFirstPage || empty" :unstyled="unstyled" :pt="pt" />
+                <PrevPageLink v-else-if="item === 'PrevPageLink'" :aria-label="getAriaLabel('prevPageLabel')" :template="$slots.prevpagelinkicon" @click="changePageToPrev($event)" :disabled="isFirstPage || empty" :unstyled="unstyled" :pt="pt" />
+                <NextPageLink v-else-if="item === 'NextPageLink'" :aria-label="getAriaLabel('nextPageLabel')" :template="$slots.nextpagelinkicon" @click="changePageToNext($event)" :disabled="isLastPage || empty" :unstyled="unstyled" :pt="pt" />
+                <LastPageLink v-else-if="item === 'LastPageLink'" :aria-label="getAriaLabel('lastPageLabel')" :template="$slots.lastpagelinkicon" @click="changePageToLast($event)" :disabled="isLastPage || empty" :unstyled="unstyled" :pt="pt" />
                 <PageLinks v-else-if="item === 'PageLinks'" :aria-label="getAriaLabel('pageLabel')" :value="pageLinks" :page="page" @click="changePageLink($event)" :pt="pt" />
                 <CurrentPageReport
                     v-else-if="item === 'CurrentPageReport'"
@@ -20,6 +20,7 @@
                     :first="d_first"
                     :rows="d_rows"
                     :totalRecords="totalRecords"
+                    :unstyled="unstyled"
                     :pt="pt"
                 />
                 <RowsPerPageDropdown
@@ -29,6 +30,7 @@
                     :options="rowsPerPageOptions"
                     @rows-change="onRowChange($event)"
                     :disabled="empty"
+                    :templates="$slots"
                     :unstyled="unstyled"
                     :pt="pt"
                 />
@@ -39,6 +41,7 @@
                     :pageCount="pageCount"
                     @page-change="changePage($event)"
                     :disabled="empty"
+                    :templates="$slots"
                     :unstyled="unstyled"
                     :pt="pt"
                 />
@@ -157,7 +160,15 @@ export default {
                 });
 
                 for (const [index, [key]] of Object.entries(Object.entries(sortedBreakpoints))) {
-                    const minValue = Object.entries(sortedBreakpoints)[index - 1] ? `and (min-width:${Object.keys(sortedBreakpoints)[index - 1]})` : '';
+                    let minValue, calculatedMinValue;
+
+                    if (key !== 'default' && typeof Object.keys(sortedBreakpoints)[index - 1] === 'string') {
+                        calculatedMinValue = Number(Object.keys(sortedBreakpoints)[index - 1].slice(0, -2)) + 1 + 'px';
+                    } else {
+                        calculatedMinValue = Object.keys(sortedBreakpoints)[index - 1];
+                    }
+
+                    minValue = Object.entries(sortedBreakpoints)[index - 1] ? `and (min-width:${calculatedMinValue})` : '';
 
                     if (key === 'default') {
                         innerHTML += `
@@ -170,18 +181,18 @@ export default {
                         `;
                     } else {
                         innerHTML += `
-                        .paginator[${this.attributeSelector}], .p-paginator-${key} {
-                                display: none !important;
-                            }
-                        @media screen ${minValue} and (max-width: ${key}) {
-                            .paginator[${this.attributeSelector}], .p-paginator-${key} {
-                                display: flex !important;
-                            }
-                            .paginator[${this.attributeSelector}],
-                            .p-paginator-default{
-                                display: none !important;
-                            }
-                        }
+.paginator[${this.attributeSelector}], .p-paginator-${key} {
+    display: none !important;
+}
+@media screen ${minValue} and (max-width: ${key}) {
+    .paginator[${this.attributeSelector}], .p-paginator-${key} {
+        display: flex !important;
+    }
+    .paginator[${this.attributeSelector}],
+    .p-paginator-default{
+        display: none !important;
+    }
+}
                     `;
                     }
                 }

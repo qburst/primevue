@@ -32,11 +32,14 @@ export default {
             value3: 635524,
             value4: 732762,
             code: {
-                basic: `<InputNumber v-model="value1" inputId="locale-user" :minFractionDigits="2" />
+                basic: `
+<InputNumber v-model="value1" inputId="locale-user" :minFractionDigits="2" />
 <InputNumber v-model="value2" inputId="locale-us" locale="en-US" :minFractionDigits="2" />
 <InputNumber v-model="value3" inputId="locale-german" locale="de-DE" :minFractionDigits="2" />
-<InputNumber v-model="value4" inputId="locale-indian" locale="en-IN" :minFractionDigits="2" />`,
-                options: `<template>
+<InputNumber v-model="value4" inputId="locale-indian" locale="en-IN" :minFractionDigits="2" />
+`,
+                options: `
+<template>
     <div class="card flex flex-wrap gap-3 p-fluid">
         <div class="flex-auto">
             <label for="locale-user" class="font-bold block mb-2"> User Locale </label>
@@ -68,8 +71,10 @@ export default {
         };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex flex-wrap gap-3 p-fluid">
         <div class="flex-auto">
             <label for="locale-user" class="font-bold block mb-2"> User Locale </label>
@@ -97,7 +102,8 @@ const value1 = ref(151351);
 const value2 = ref(115744);
 const value3 = ref(635524);
 const value4 = ref(732762);
-<\/script>`
+<\/script>
+`
             }
         };
     }

@@ -52,7 +52,8 @@ export default {
                 { name: 'Paris', code: 'PRS' }
             ],
             code: {
-                basic: `<template>
+                basic: `
+<template>
     <div class="card flex justify-content-center">
         <form @submit="onSubmit" class="flex flex-column gap-2">
             <span class="p-float-label">
@@ -65,8 +66,10 @@ export default {
         </form>
         <Toast />
     </div>
-</template>`,
-                options: `<template>
+</template>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <form @submit="onSubmit" class="flex flex-column gap-2">
             <span class="p-float-label">
@@ -120,8 +123,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <form @submit="onSubmit" class="flex flex-column gap-2">
             <span class="p-float-label">

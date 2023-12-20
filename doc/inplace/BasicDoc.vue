@@ -21,7 +21,8 @@ export default {
     data() {
         return {
             code: {
-                basic: `<Inplace>
+                basic: `
+<Inplace>
     <template #display> View Content </template>
     <template #content>
         <p class="m-0">
@@ -29,8 +30,10 @@ export default {
             consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
     </template>
-</Inplace>`,
-                options: `<template>
+</Inplace>
+`,
+                options: `
+<template>
     <div class="card">
         <Inplace>
             <template #display> View Content </template>
@@ -46,8 +49,10 @@ export default {
 
 <script>
 
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <Inplace>
             <template #display> View Content </template>
@@ -63,7 +68,8 @@ export default {
 
 <script setup>
 
-<\/script>`
+<\/script>
+`
             }
         };
     }

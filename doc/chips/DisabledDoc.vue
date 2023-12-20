@@ -14,8 +14,11 @@ export default {
         return {
             value: null,
             code: {
-                basic: `<Chips v-model="value" disabled />`,
-                options: `<template>
+                basic: `
+<Chips v-model="value" disabled />
+`,
+                options: `
+<template>
     <div class="card p-fluid">
         <Chips v-model="value" disabled />
     </div>
@@ -29,8 +32,10 @@ export default {
         };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card p-fluid">
         <Chips v-model="value" disabled />
     </div>
@@ -40,7 +45,8 @@ export default {
 import { ref } from "vue";
 
 const value = ref();
-<\/script>`
+<\/script>
+`
             }
         };
     }

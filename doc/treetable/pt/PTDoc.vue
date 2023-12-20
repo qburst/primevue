@@ -40,7 +40,8 @@ export default {
         return {
             nodes: null,
             code: {
-                basic: `<TreeTable :value="nodes" sortMode="multiple">
+                basic: `
+<TreeTable :value="nodes" sortMode="multiple">
     <Column
         field="name"
         header="Name"
@@ -66,8 +67,10 @@ export default {
             sortBadge: { class: 'text-orange-400' }
         }"
     />
-</TreeTable>`,
-                options: `<template>
+</TreeTable>
+`,
+                options: `
+<template>
     <div class="card">
         <TreeTable :value="nodes" sortMode="multiple">
             <Column
@@ -112,8 +115,10 @@ export default {
         NodeService.getTreeTableNodes().then((data) => (this.nodes = data));
     }
 }
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <TreeTable :value="nodes" sortMode="multiple">
             <Column
@@ -154,7 +159,8 @@ onMounted(() => {
 });
 
 const nodes = ref();
-<\/script>`,
+<\/script>
+`,
                 data: `
 {
     key: '0',

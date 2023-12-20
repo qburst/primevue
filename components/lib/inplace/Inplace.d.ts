@@ -11,7 +11,8 @@
 import { ButtonHTMLAttributes, HTMLAttributes, VNode } from 'vue';
 import { ComponentHooks } from '../basecomponent';
 import { ButtonPassThroughOptions } from '../button';
-import { ClassComponent, GlobalComponentConstructor, PTOptions } from '../ts-helpers';
+import { PassThroughOptions } from '../passthrough';
+import { ClassComponent, GlobalComponentConstructor, PassThrough } from '../ts-helpers';
 
 export declare type InplacePassThroughOptionType = InplacePassThroughAttributes | ((options: InplacePassThroughMethodOptions) => InplacePassThroughAttributes | string) | string | null | undefined;
 
@@ -19,8 +20,43 @@ export declare type InplacePassThroughOptionType = InplacePassThroughAttributes 
  * Custom passthrough(pt) option method.
  */
 export interface InplacePassThroughMethodOptions {
+    /**
+     * Defines instance.
+     */
     instance: any;
+    /**
+     * Defines valid properties.
+     */
     props: InplaceProps;
+    /**
+     * Defines current inline state.
+     */
+    state: InplaceState;
+    /**
+     * Defines valid attributes.
+     */
+    attrs: any;
+    /**
+     * Defines parent options.
+     */
+    parent: any;
+    /**
+     * Defines passthrough(pt) options in global config.
+     */
+    global: object | undefined;
+}
+
+/**
+ * Custom shared passthrough(pt) option method.
+ */
+export interface InplaceSharedPassThroughMethodOptions {
+    /**
+     * Defines valid properties.
+     */
+    props: InplaceProps;
+    /**
+     * Defines current inline state.
+     */
     state: InplaceState;
 }
 
@@ -45,9 +81,9 @@ export interface InplacePassThroughOptions {
      * Used to pass attributes to the Button component.
      * @see {@link ButtonPassThroughOptions}
      */
-    closeButton?: ButtonPassThroughOptions;
+    closeButton?: ButtonPassThroughOptions<InplaceSharedPassThroughMethodOptions>;
     /**
-     * Used to manage all lifecycle hooks
+     * Used to manage all lifecycle hooks.
      * @see {@link BaseComponent.ComponentHooks}
      */
     hooks?: ComponentHooks;
@@ -107,7 +143,12 @@ export interface InplaceProps {
      * Used to pass attributes to DOM elements inside the component.
      * @type {InplacePassThroughOptions}
      */
-    pt?: PTOptions<InplacePassThroughOptions>;
+    pt?: PassThrough<InplacePassThroughOptions>;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false

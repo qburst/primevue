@@ -125,10 +125,12 @@ export default {
     data() {
         return {
             code: {
-                basic: `<span id="lb">Options</span>
+                basic: `
+<span id="lb">Options</span>
 <OrderList aria-labelledby="lb" />
 
-<OrderList aria-label="City" />`
+<OrderList aria-label="City" />
+`
             }
         };
     }

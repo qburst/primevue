@@ -1,16 +1,16 @@
 <template>
     <span :class="containerClass" :style="style" v-bind="ptm('root')" data-pc-name="image">
-        <slot name="image" :onError="onError">
+        <slot name="image" :onError="onError" :errorCallback="onError">
             <img :style="imageStyle" :class="[cx('image'), imageClass]" @error="onError" v-bind="{ ...$attrs, ...ptm('image') }" />
         </slot>
-        <button v-if="preview" ref="previewButton" type="button" :class="cx('button')" @click="onImageClick" v-bind="{ ...previewButtonProps, ...ptm('button') }">
+        <button v-if="preview" ref="previewButton" :aria-label="zoomImageAriaLabel" type="button" :class="cx('button')" @click="onImageClick" v-bind="{ ...previewButtonProps, ...ptm('button') }">
             <slot name="indicatoricon">
                 <component :is="indicatorIcon ? 'i' : 'EyeIcon'" :class="cx('icon')" v-bind="ptm('icon')" />
             </slot>
         </button>
         <Portal>
             <div v-if="maskVisible" :ref="maskRef" v-focustrap role="dialog" :class="cx('mask')" :aria-modal="maskVisible" @click="onMaskClick" @keydown="onMaskKeydown" v-bind="ptm('mask')">
-                <div class="p-image-toolbar" v-bind="ptm('toolbar')">
+                <div :class="cx('toolbar')" v-bind="ptm('toolbar')">
                     <button :class="cx('rotateRightButton')" @click="rotateRight" type="button" :aria-label="rightAriaLabel" v-bind="ptm('rotateRightButton')" data-pc-group-section="action">
                         <slot name="refresh">
                             <RefreshIcon v-bind="ptm('rotateRightIcon')" />
@@ -43,7 +43,7 @@
                 </div>
                 <transition name="p-image-preview" @before-enter="onBeforeEnter" @enter="onEnter" @leave="onLeave" @before-leave="onBeforeLeave" @after-leave="onAfterLeave" v-bind="ptm('transition')">
                     <div v-if="previewVisible" v-bind="ptm('previewContainer')">
-                        <slot name="preview" :class="cx('preview')" :style="imagePreviewStyle" :onClick="onPreviewImageClick">
+                        <slot name="preview" :class="cx('preview')" :style="imagePreviewStyle" :onClick="onPreviewImageClick" :previewCallback="onPreviewImageClick">
                             <img :src="$attrs.src" :class="cx('preview')" :style="imagePreviewStyle" @click="onPreviewImageClick" v-bind="ptm('preview')" />
                         </slot>
                     </div>
@@ -93,7 +93,7 @@ export default {
         },
         onImageClick() {
             if (this.preview) {
-                DomHandler.addClass(document.body, 'p-overflow-hidden');
+                DomHandler.blockBodyScroll();
                 this.maskVisible = true;
                 setTimeout(() => {
                     this.previewVisible = true;
@@ -163,6 +163,7 @@ export default {
             !this.isUnstyled && DomHandler.addClass(this.mask, 'p-component-overlay-leave');
         },
         onLeave() {
+            DomHandler.unblockBodyScroll();
             this.$emit('hide');
         },
         onAfterLeave(el) {
@@ -180,7 +181,7 @@ export default {
             this.previewVisible = false;
             this.rotate = 0;
             this.scale = 1;
-            DomHandler.removeClass(document.body, 'p-overflow-hidden');
+            DomHandler.unblockBodyScroll();
         }
     },
     computed: {
@@ -210,6 +211,9 @@ export default {
         },
         zoomOutAriaLabel() {
             return this.$primevue.config.locale.aria ? this.$primevue.config.locale.aria.zoomOut : undefined;
+        },
+        zoomImageAriaLabel() {
+            return this.$primevue.config.locale.aria ? this.$primevue.config.locale.aria.zoomImage : undefined;
         },
         closeAriaLabel() {
             return this.$primevue.config.locale.aria ? this.$primevue.config.locale.aria.close : undefined;

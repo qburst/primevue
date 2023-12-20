@@ -14,9 +14,12 @@ export default {
         return {
             checked: false,
             code: {
-                basic: `<ToggleButton v-model="checked" disabled onIcon="pi pi-check" offIcon="pi pi-times"
-    class="w-full sm:w-10rem" aria-label="Confirmation" />`,
-                options: `<template>
+                basic: `
+<ToggleButton v-model="checked" disabled onIcon="pi pi-check" offIcon="pi pi-times"
+    class="w-full sm:w-10rem" aria-label="Confirmation" />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <ToggleButton v-model="checked" disabled onIcon="pi pi-check" offIcon="pi pi-times"
             class="w-full sm:w-10rem" aria-label="Confirmation" />
@@ -31,8 +34,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <ToggleButton v-model="checked" disabled onIcon="pi pi-check" offIcon="pi pi-times"
             class="w-full sm:w-10rem" aria-label="Confirmation" />
@@ -43,7 +48,8 @@ export default {
 import { ref } from 'vue';
 
 const checked = ref(false);
-<\/script>`
+<\/script>
+`
             }
         };
     }

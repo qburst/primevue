@@ -87,7 +87,7 @@
                                     :pt="getColumnPT('filterMatchModeDropdown')"
                                     data-pc-section="filtermatchmodedropdown"
                                 ></CFDropdown>
-                                <component v-if="display === 'menu'" :is="filterElement" :field="field" :filterModel="fieldConstraint" :filterCallback="filterCallback" />
+                                <component v-if="display === 'menu'" :is="filterElement" :field="field" :filterModel="fieldConstraint" :filterCallback="filterCallback" :applyFilter="applyFilter" />
                                 <div v-bind="getColumnPT('filterRemove')">
                                     <CFButton
                                         v-if="showRemoveIcon"
@@ -330,6 +330,7 @@ export default {
             const columnMetaData = {
                 props: this.column.props,
                 parent: {
+                    instance: this,
                     props: this.$props,
                     state: this.$data
                 },
@@ -401,6 +402,7 @@ export default {
         onToggleButtonKeyDown(event) {
             switch (event.code) {
                 case 'Enter':
+                case 'NumpadEnter':
                 case 'Space':
                     this.toggleMenu(event);
 

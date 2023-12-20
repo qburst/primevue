@@ -9,8 +9,8 @@
  */
 import { AnchorHTMLAttributes, HTMLAttributes, LiHTMLAttributes, VNode } from 'vue';
 import { ComponentHooks } from '../basecomponent';
-import { TabViewPassThroughOptions } from '../tabview';
-import { ClassComponent, GlobalComponentConstructor, PTOptions } from '../ts-helpers';
+import { PassThroughOptions } from '../passthrough';
+import { ClassComponent, GlobalComponentConstructor, PassThrough } from '../ts-helpers';
 
 export declare type TabPanelPassThroughOptionType = TabPanelPassThroughAttributes | ((options: TabPanelPassThroughMethodOptions) => TabPanelPassThroughAttributes | string) | string | null | undefined;
 
@@ -18,10 +18,30 @@ export declare type TabPanelPassThroughOptionType = TabPanelPassThroughAttribute
  * Custom passthrough(pt) option method.
  */
 export interface TabPanelPassThroughMethodOptions {
+    /**
+     * Defines instance.
+     */
     instance: any;
+    /**
+     * Defines valid properties.
+     */
     props: TabPanelProps;
-    parent: TabViewPassThroughOptions;
+    /**
+     * Defines current options.
+     */
     context: TabPanelContext;
+    /**
+     * Defines valid attributes.
+     */
+    attrs: any;
+    /**
+     * Defines parent options.
+     */
+    parent: any;
+    /**
+     * Defines passthrough(pt) options in global config.
+     */
+    global: object | undefined;
 }
 
 /**
@@ -50,7 +70,7 @@ export interface TabPanelPassThroughOptions {
      */
     content?: TabPanelPassThroughOptionType;
     /**
-     * Used to manage all lifecycle hooks
+     * Used to manage all lifecycle hooks.
      * @see {@link BaseComponent.ComponentHooks}
      */
     hooks?: ComponentHooks;
@@ -108,7 +128,12 @@ export interface TabPanelProps {
      * Used to pass attributes to DOM elements inside the component.
      * @type {TabPanelPassThroughOptions}
      */
-    pt?: PTOptions<TabPanelPassThroughOptions>;
+    pt?: PassThrough<TabPanelPassThroughOptions>;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
 }
 
 /**

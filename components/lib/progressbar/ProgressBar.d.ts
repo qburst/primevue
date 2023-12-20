@@ -9,37 +9,52 @@
  */
 import { VNode } from 'vue';
 import { ComponentHooks } from '../basecomponent';
-import { ClassComponent, GlobalComponentConstructor, PTOptions } from '../ts-helpers';
+import { PassThroughOptions } from '../passthrough';
+import { ClassComponent, GlobalComponentConstructor, PassThrough } from '../ts-helpers';
 
-export declare type ProgressBarPassThroughOptionType = ProgressBarPassThroughAttributes | ((options: ProgressBarPassThroughMethodOptions) => ProgressBarPassThroughAttributes | string) | string | null | undefined;
+export declare type ProgressBarPassThroughOptionType<T = any> = ProgressBarPassThroughAttributes | ((options: ProgressBarPassThroughMethodOptions<T>) => ProgressBarPassThroughAttributes | string) | string | null | undefined;
 
 /**
  * Custom passthrough(pt) option method.
  */
-export interface ProgressBarPassThroughMethodOptions {
+export interface ProgressBarPassThroughMethodOptions<T> {
+    /**
+     * Defines instance.
+     */
     instance: any;
+    /**
+     * Defines valid properties.
+     */
     props: ProgressBarProps;
+    /**
+     * Defines passthrough(pt) options in global config.
+     */
+    global: object | undefined;
+    /**
+     * Defines parent instance.
+     */
+    parent: T;
 }
 
 /**
  * Custom passthrough(pt) options.
  * @see {@link ProgressBarProps.pt}
  */
-export interface ProgressBarPassThroughOptions {
+export interface ProgressBarPassThroughOptions<T = any> {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: ProgressBarPassThroughOptionType;
+    root?: ProgressBarPassThroughOptionType<T>;
     /**
      * Used to pass attributes to the value's DOM element.
      */
-    value?: ProgressBarPassThroughOptionType;
+    value?: ProgressBarPassThroughOptionType<T>;
     /**
      * Used to pass attributes to the label's DOM element.
      */
-    label?: ProgressBarPassThroughOptionType;
+    label?: ProgressBarPassThroughOptionType<T>;
     /**
-     * Used to manage all lifecycle hooks
+     * Used to manage all lifecycle hooks.
      * @see {@link BaseComponent.ComponentHooks}
      */
     hooks?: ComponentHooks;
@@ -74,7 +89,12 @@ export interface ProgressBarProps {
      * Used to pass attributes to DOM elements inside the component.
      * @type {ProgressBarPassThroughOptions}
      */
-    pt?: PTOptions<ProgressBarPassThroughOptions>;
+    pt?: PassThrough<ProgressBarPassThroughOptions>;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false

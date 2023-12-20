@@ -61,7 +61,8 @@ export default {
     data() {
         return {
             code: {
-                basic: `<Button icon="pi pi-check" aria-label="Filter" />
+                basic: `
+<Button icon="pi pi-check" aria-label="Filter" />
 <Button icon="pi pi-bookmark" severity="secondary" aria-label="Bookmark" />
 <Button icon="pi pi-search" severity="success" aria-label="Search" />
 <Button icon="pi pi-user" severity="info" aria-label="User" />
@@ -99,8 +100,10 @@ export default {
 <Button icon="pi pi-user" severity="info" text rounded aria-label="User" />
 <Button icon="pi pi-bell" severity="warning" text rounded aria-label="Notification" />
 <Button icon="pi pi-heart" severity="help" text rounded aria-label="Favorite" />
-<Button icon="pi pi-times" severity="danger" text rounded aria-label="Cancel" />`,
-                options: `<template>
+<Button icon="pi pi-times" severity="danger" text rounded aria-label="Cancel" />
+`,
+                options: `
+<template>
     <div class="card">
         <div class="flex flex-wrap justify-content-center gap-3 mb-4">
             <Button icon="pi pi-check" aria-label="Filter" />
@@ -155,8 +158,10 @@ export default {
 </template>
 
 <script>
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <div class="flex flex-wrap justify-content-center gap-3 mb-4">
             <Button icon="pi pi-check" aria-label="Filter" />
@@ -211,7 +216,8 @@ export default {
 </template>
 
 <script setup>
-<\/script>`
+<\/script>
+`
             }
         };
     }

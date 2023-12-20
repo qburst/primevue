@@ -14,8 +14,11 @@ export default {
         return {
             value: 5,
             code: {
-                basic: `<Rating v-model="value" disabled />`,
-                options: `<template>
+                basic: `
+<Rating v-model="value" disabled />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <Rating v-model="value" disabled />
     </div>
@@ -29,8 +32,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <Rating v-model="value" disabled />
     </div>
@@ -40,7 +45,8 @@ export default {
 import { ref } from 'vue';
 
 const value = ref(5);
-<\/script>`
+<\/script>
+`
             }
         };
     }

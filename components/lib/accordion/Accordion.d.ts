@@ -10,7 +10,8 @@
 import { VNode } from 'vue';
 import { AccordionTabPassThroughOptionType } from '../accordiontab';
 import { ComponentHooks } from '../basecomponent';
-import { ClassComponent, GlobalComponentConstructor, PTOptions } from '../ts-helpers';
+import { PassThroughOptions } from '../passthrough';
+import { ClassComponent, GlobalComponentConstructor, PassThrough } from '../ts-helpers';
 
 export declare type AccordionPassThroughOptionType = AccordionPassThroughAttributes | ((options: AccordionPassThroughMethodOptions) => AccordionPassThroughAttributes | string) | string | null | undefined;
 
@@ -18,9 +19,30 @@ export declare type AccordionPassThroughOptionType = AccordionPassThroughAttribu
  * Custom passthrough(pt) option method.
  */
 export interface AccordionPassThroughMethodOptions {
+    /**
+     * Defines instance.
+     */
     instance: any;
+    /**
+     * Defines valid properties.
+     */
     props: AccordionProps;
+    /**
+     * Defines current inline state.
+     */
     state: AccordionState;
+    /**
+     * Defines valid attributes.
+     */
+    attrs: any;
+    /**
+     * Defines parent options.
+     */
+    parent: any;
+    /**
+     * Defines passthrough(pt) options in global config.
+     */
+    global: object | undefined;
 }
 /**
  * Custom tab open event.
@@ -71,7 +93,7 @@ export interface AccordionPassThroughOptions {
      */
     accordiontab?: AccordionTabPassThroughOptionType;
     /**
-     * Used to manage all lifecycle hooks
+     * Used to manage all lifecycle hooks.
      * @see {@link BaseComponent.ComponentHooks}
      */
     hooks?: ComponentHooks;
@@ -139,7 +161,12 @@ export interface AccordionProps {
      * Used to pass attributes to DOM elements inside the component.
      * @type {AccordionPassThroughOptions}
      */
-    pt?: PTOptions<AccordionPassThroughOptions>;
+    pt?: PassThrough<AccordionPassThroughOptions>;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false
@@ -155,6 +182,14 @@ export interface AccordionSlots {
      * Default slot to detect AccordionTab components.
      */
     default(): VNode[];
+    /**
+     * Custom collapse icon template.
+     */
+    collapseicon(): VNode[];
+    /**
+     * Custom expand icon template.
+     */
+    expandicon(): VNode[];
 }
 
 /**

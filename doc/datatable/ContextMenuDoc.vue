@@ -5,7 +5,7 @@
         </p>
     </DocSectionText>
     <div class="card">
-        <ContextMenu ref="cm" :model="menuModel" />
+        <ContextMenu ref="cm" :model="menuModel" @hide="selectedProduct = null" />
         <DataTable v-model:contextMenuSelection="selectedProduct" :value="products" contextMenu @row-contextmenu="onRowContextMenu" tableStyle="min-width: 50rem">
             <Column field="code" header="Code"></Column>
             <Column field="name" header="Name"></Column>
@@ -33,7 +33,8 @@ export default {
                 { label: 'Delete', icon: 'pi pi-fw pi-times', command: () => this.deleteProduct(this.selectedProduct) }
             ],
             code: {
-                basic: `<ContextMenu ref="cm" :model="menuModel" />
+                basic: `
+<ContextMenu ref="cm" :model="menuModel" @hide="selectedProduct = null" />
 <DataTable v-model:contextMenuSelection="selectedProduct" :value="products" contextMenu
         @row-contextmenu="onRowContextMenu" tableStyle="min-width: 50rem">
     <Column field="code" header="Code"></Column>
@@ -44,10 +45,12 @@ export default {
             {{ formatCurrency(slotProps.data.price) }}
         </template>
     </Column>
-</DataTable>`,
-                options: `<template>
-    <div>
-        <ContextMenu ref="cm" :model="menuModel" />
+</DataTable>
+`,
+                options: `
+<template>
+    <div class="card">
+        <ContextMenu ref="cm" :model="menuModel" @hide="selectedProduct = null" />
         <DataTable :value="products" contextMenu v-model:contextMenuSelection="selectedProduct" 
                 @rowContextmenu="onRowContextMenu" tableStyle="min-width: 50rem">
             <Column field="code" header="Code"></Column>
@@ -98,10 +101,12 @@ export default {
     }
 }
 <\/script>
+
 `,
-                composition: `<template>
-    <div>
-        <ContextMenu ref="cm" :model="menuModel" />
+                composition: `
+<template>
+    <div class="card">
+        <ContextMenu ref="cm" :model="menuModel" @hide="selectedProduct = null" />
         <DataTable :value="products" contextMenu v-model:contextMenuSelection="selectedProduct"
                 @rowContextmenu="onRowContextMenu" tableStyle="min-width: 50rem">
             <Column field="code" header="Code"></Column>

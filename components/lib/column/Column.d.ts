@@ -11,10 +11,11 @@
 
 import { VNode } from 'vue';
 import { ComponentHooks } from '../basecomponent';
-import { ButtonPassThroughOptionType } from '../button';
+import { ButtonPassThroughOptions } from '../button';
 import { DataTablePassThroughOptions } from '../datatable';
 import { DropdownPassThroughOptionType } from '../dropdown';
-import { ClassComponent, GlobalComponentConstructor, PTOptions } from '../ts-helpers';
+import { PassThroughOptions } from '../passthrough';
+import { ClassComponent, GlobalComponentConstructor, PassThrough } from '../ts-helpers';
 import { VirtualScrollerLoaderOptions } from '../virtualscroller';
 
 export declare type ColumnPassThroughOptionType = ColumnPassThroughAttributes | ((options: ColumnPassThroughMethodOptions) => ColumnPassThroughAttributes | string) | string | null | undefined;
@@ -23,10 +24,44 @@ export declare type ColumnPassThroughOptionType = ColumnPassThroughAttributes | 
  * Custom passthrough(pt) option method.
  */
 export interface ColumnPassThroughMethodOptions {
+    /**
+     * Defines instance.
+     */
     instance: any;
+    /**
+     * Defines valid properties.
+     */
     props: ColumnProps;
-    parent: DataTablePassThroughOptions;
+    /**
+     * Defines valid attributes.
+     */
+    attrs: any;
+    /**
+     * Defines parent options.
+     */
+    parent: any;
+    /**
+     * Defines current options.
+     */
     context: ColumnContext;
+    /**
+     * Defines passthrough(pt) options in global config.
+     */
+    global: object | undefined;
+}
+
+/**
+ * Custom shared passthrough(pt) option method.
+ */
+export interface ColumnSharedPassThroughMethodOptions {
+    /**
+     * Defines valid properties.
+     */
+    props: ColumnProps;
+    /**
+     * Defines parent instance.
+     */
+    parent: DataTablePassThroughOptions;
 }
 
 /**
@@ -77,7 +112,7 @@ export interface ColumnLoadingOptions extends VirtualScrollerLoaderOptions {
     /**
      * Column instance
      */
-    column: Column;
+    column: ColumnNode;
     /**
      * Column field
      */
@@ -177,7 +212,7 @@ export interface ColumnPassThroughOptions {
      * Used to pass attributes to the Dropdown component.
      * @see {@link DropdownPassThroughOptionType}
      */
-    filterOperatorDropdown?: DropdownPassThroughOptionType;
+    filterOperatorDropdown?: DropdownPassThroughOptionType<ColumnSharedPassThroughMethodOptions>;
     /**
      * Used to pass attributes to the filter constraints' DOM element.
      */
@@ -190,39 +225,39 @@ export interface ColumnPassThroughOptions {
      * Used to pass attributes to the Dropdown component.
      * @see {@link DropdownPassThroughOptionType}
      */
-    filterMatchModeDropdown?: DropdownPassThroughOptionType;
+    filterMatchModeDropdown?: DropdownPassThroughOptionType<ColumnSharedPassThroughMethodOptions>;
     /**
      * Used to pass attributes to the filter remove button container's DOM element.
      */
     filterRemove?: ColumnPassThroughOptionType;
     /**
      * Used to pass attributes to the Button component.
-     * @see {@link ButtonPassThroughOptionType}
+     * @see {@link ButtonPassThroughOptions}
      */
-    filterRemoveButton?: ButtonPassThroughOptionType;
+    filterRemoveButton?: ButtonPassThroughOptions<ColumnSharedPassThroughMethodOptions>;
     /**
      * Used to pass attributes to the filter add rule's DOM element.
      */
     filterAddRule?: ColumnPassThroughOptionType;
     /**
      * Used to pass attributes to the Button component.
-     * @see {@link ButtonPassThroughOptionType}
+     * @see {@link ButtonPassThroughOptions}
      */
-    filterAddRuleButton?: ButtonPassThroughOptionType;
+    filterAddRuleButton?: ButtonPassThroughOptions<ColumnSharedPassThroughMethodOptions>;
     /**
      * Used to pass attributes to the filter buttonbar's DOM element.
      */
     filterButtonbar?: ColumnPassThroughOptionType;
     /**
      * Used to pass attributes to the Button component.
-     * @see {@link ButtonPassThroughOptionType}
+     * @see {@link ButtonPassThroughOptions}
      */
-    filterClearButton?: ButtonPassThroughOptionType;
+    filterClearButton?: ButtonPassThroughOptions<ColumnSharedPassThroughMethodOptions>;
     /**
      * Used to pass attributes to the Button component.
-     * @see {@link ButtonPassThroughOptionType}
+     * @see {@link ButtonPassThroughOptions}
      */
-    filterApplyButton?: ButtonPassThroughOptionType;
+    filterApplyButton?: ButtonPassThroughOptions<ColumnSharedPassThroughMethodOptions>;
     /**
      * Used to pass attributes to the body cell's DOM element.
      */
@@ -320,7 +355,7 @@ export interface ColumnPassThroughOptions {
      */
     hiddenInput?: ColumnPassThroughOptionType;
     /**
-     * Used to manage all lifecycle hooks
+     * Used to manage all lifecycle hooks.
      * @see {@link BaseComponent.ComponentHooks}
      */
     hooks?: ComponentHooks;
@@ -567,7 +602,12 @@ export interface ColumnProps {
      * Used to pass attributes to DOM elements inside the component.
      * @type {ColumnPassThroughOptions}
      */
-    pt?: PTOptions<ColumnPassThroughOptions>;
+    pt?: PassThrough<ColumnPassThroughOptions>;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false
@@ -664,7 +704,7 @@ export interface ColumnSlots {
         /**
          * Column node.
          */
-        column: Column;
+        column: ColumnNode;
         /**
          * Column field.
          */
@@ -691,7 +731,7 @@ export interface ColumnSlots {
         /**
          * Column node.
          */
-        column: Column;
+        column: ColumnNode;
     }): VNode[];
     /**
      * Custom footer template.
@@ -701,7 +741,7 @@ export interface ColumnSlots {
         /**
          * Column node.
          */
-        column: Column;
+        column: ColumnNode;
     }): VNode[];
     /**
      * Custom editor template.
@@ -715,7 +755,7 @@ export interface ColumnSlots {
         /**
          * Column node.
          */
-        column: Column;
+        column: ColumnNode;
         /**
          * Column field.
          */
@@ -757,6 +797,10 @@ export interface ColumnSlots {
          * Callback function
          */
         filterCallback: () => void;
+        /**
+         * Callback function (closes the overlay)
+         */
+        applyFilter: () => void;
     }): VNode[];
     /**
      * Custom filter header template.
@@ -846,7 +890,7 @@ export interface ColumnSlots {
         /**
          * Column node.
          */
-        column: Column;
+        column: ColumnNode;
         /**
          * Column field.
          */
@@ -870,6 +914,10 @@ export interface ColumnSlots {
      * @param {Object} scope - row toggler icon slot's params.
      */
     rowtogglericon(scope: {
+        /**
+         * Style class of the row toggler icon.
+         */
+        class: string;
         /**
          * Current row expanded state.
          */
@@ -919,6 +967,10 @@ export interface ColumnSlots {
      */
     sorticon(scope: {
         /**
+         * Style class of the sort icon.
+         */
+        class: string;
+        /**
          * Current sort state.
          */
         sorted: boolean;
@@ -957,6 +1009,8 @@ export interface ColumnEmits {}
  * @group Component
  */
 declare class Column extends ClassComponent<ColumnProps, ColumnSlots, ColumnEmits> {}
+
+export type ColumnNode = Column & { props: Column['$props'] };
 
 declare module '@vue/runtime-core' {
     interface GlobalComponents {

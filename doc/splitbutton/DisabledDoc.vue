@@ -37,8 +37,11 @@ export default {
                 { label: 'Upload', icon: 'pi pi-upload', to: '/fileupload' }
             ],
             code: {
-                basic: `<SplitButton label="Save" icon="pi pi-plus" @click="save" :model="items" disabled />`,
-                options: `<template>
+                basic: `
+<SplitButton label="Save" icon="pi pi-plus" @click="save" :model="items" disabled />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <Toast />
         <SplitButton label="Save" icon="pi pi-plus" @click="save" :model="items" disabled />
@@ -80,8 +83,10 @@ export default {
             this.$toast.add({ severity: 'success', summary: 'Success', detail: 'Data Saved', life: 3000 });
         }
     }
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <Toast />
         <SplitButton label="Save" icon="pi pi-plus" @click="save" :model="items" disabled />
@@ -120,7 +125,8 @@ const items = [
 const save = () => {
     toast.add({ severity: 'success', summary: 'Success', detail: 'Data Saved', life: 3000 });
 };
-<\/script>`
+<\/script>
+`
             }
         };
     },

@@ -25,7 +25,8 @@ export default {
     data() {
         return {
             code: {
-                basic: `<FileUpload
+                basic: `
+<FileUpload
     name="demo[]"
     url="./upload.php"
     @upload="onAdvancedUpload($event)"
@@ -39,8 +40,10 @@ export default {
     <template #empty>
         <p>Drag and drop files to here to upload.</p>
     </template>
-</FileUpload>`,
-                options: `<template>
+</FileUpload>
+`,
+                options: `
+<template>
     <div class="card">
         <FileUpload
             name="demo[]"
@@ -69,8 +72,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <FileUpload
             name="demo[]"
@@ -98,7 +103,8 @@ const toast = useToast();
 const onAdvancedUpload = () => {
     toast.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 3000 });
 };
-<\/script>`
+<\/script>
+`
             }
         };
     },

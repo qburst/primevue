@@ -3,7 +3,7 @@
         <p>FileUpload basic <i>mode</i> provides a simpler UI as an alternative to default advanced mode.</p>
     </DocSectionText>
     <div class="card flex justify-content-center">
-        <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" :maxFileSize="1000000" @upload="onUpload" />
+        <FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" :maxFileSize="1000000" @upload="onUpload" />
     </div>
     <DocSectionCode :code="code" />
 </template>
@@ -13,11 +13,14 @@ export default {
     data() {
         return {
             code: {
-                basic: `<FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" :maxFileSize="1000000" @upload="onUpload" />`,
-                options: `<template>
+                basic: `
+<FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" :maxFileSize="1000000" @upload="onUpload" />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <Toast />
-        <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" :maxFileSize="1000000" @upload="onUpload" />
+        <FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" :maxFileSize="1000000" @upload="onUpload" />
     </div>
 </template>
 
@@ -29,11 +32,13 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <Toast />
-        <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" :maxFileSize="1000000" @upload="onUpload" />
+        <FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" :maxFileSize="1000000" @upload="onUpload" />
     </div>
 </template>
 
@@ -44,7 +49,8 @@ const toast = useToast();
 const onUpload = () => {
     toast.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 3000 });
 };
-<\/script>`
+<\/script>
+`
             }
         };
     },

@@ -8,7 +8,8 @@
  */
 import { DirectiveBinding, ObjectDirective } from 'vue';
 import { DirectiveHooks } from '../basedirective';
-import { PTOptions } from '../ts-helpers';
+import { PassThroughOptions } from '../passthrough';
+import { PassThrough } from '../ts-helpers';
 
 /**
  * Defines options of StyleClass.
@@ -20,28 +21,38 @@ export interface StyleClassOptions {
     selector?: '@next' | '@prev' | '@parent' | '@grandparent' | string | undefined;
     /**
      * Style class to add when item begins to get displayed.
+     * @deprecated since v3.41.0. Use 'enterFromClass' option instead.
      */
-    enterClassName?: string | undefined;
-    /**
-     * Style class to add during enter animation.
-     */
-    enterActiveClassName?: string | undefined;
+    enterClass?: string | undefined;
     /**
      * Style class to add when item begins to get displayed.
      */
-    enterToClassName?: string | undefined;
+    enterFromClass?: string | undefined;
+    /**
+     * Style class to add during enter animation.
+     */
+    enterActiveClass?: string | undefined;
+    /**
+     * Style class to add when item begins to get displayed.
+     */
+    enterToClass?: string | undefined;
+    /**
+     * Style class to add when item begins to get hidden.
+     * @deprecated since v3.41.0. Use 'leaveFromClass' option instead.
+     */
+    leaveClass?: string | undefined;
     /**
      * Style class to add when item begins to get hidden.
      */
-    leaveClassName?: string | undefined;
+    leaveFromClass?: string | undefined;
     /**
      * Style class to add during leave animation.
      */
-    leaveActiveClassName?: string | undefined;
+    leaveActiveClass?: string | undefined;
     /**
      * Style class to add when leave animation is completed.
      */
-    leaveToClassName?: string | undefined;
+    leaveToClass?: string | undefined;
     /**
      * Whether to trigger leave animation when outside of the element is clicked.
      * @defaultValue false
@@ -55,7 +66,12 @@ export interface StyleClassOptions {
      * Used to pass attributes to DOM elements inside the component.
      * @type {StyleClassDirectivePassThroughOptions}
      */
-    pt?: PTOptions<StyleClassDirectivePassThroughOptions>;
+    pt?: PassThrough<StyleClassDirectivePassThroughOptions>;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
 }
 
 /**
@@ -63,7 +79,7 @@ export interface StyleClassOptions {
  */
 export interface StyleClassDirectivePassThroughOptions {
     /**
-     * Used to manage all lifecycle hooks
+     * Used to manage all lifecycle hooks.
      * @see {@link BaseDirective.DirectiveHooks}
      */
     hooks?: DirectiveHooks;

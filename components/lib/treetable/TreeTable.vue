@@ -1,6 +1,6 @@
 <template>
     <div :class="cx('root')" data-scrollselectors=".p-treetable-scrollable-body" role="table" v-bind="ptm('root')" data-pc-name="treetable">
-        <div v-if="loading" :class="cx('loadingWrapper')" v-bind="ptm('loadingWrapper')">
+        <div v-if="loading && loadingMode === 'mask'" :class="cx('loadingWrapper')" v-bind="ptm('loadingWrapper')">
             <div :class="cx('loadingOverlay')" v-bind="ptm('loadingOverlay')">
                 <slot name="loadingicon" :class="cx('loadingIcon')">
                     <component :is="loadingIcon ? 'span' : 'SpinnerIcon'" spin :class="[cx('loadingIcon'), loadingIcon]" v-bind="ptm('loadingIcon')" />
@@ -32,17 +32,23 @@
             <template v-if="$slots.paginatorend" #end>
                 <slot name="paginatorend"></slot>
             </template>
-            <template v-if="$slots.paginatorfirstpagelinkicon" #firstpagelinkicon>
-                <slot name="paginatorfirstpagelinkicon"></slot>
+            <template v-if="$slots.paginatorfirstpagelinkicon" #firstpagelinkicon="slotProps">
+                <slot name="paginatorfirstpagelinkicon" :class="slotProps.class"></slot>
             </template>
-            <template v-if="$slots.paginatorprevpagelinkicon" #prevpagelinkicon>
-                <slot name="paginatorprevpagelinkicon"></slot>
+            <template v-if="$slots.paginatorprevpagelinkicon" #prevpagelinkicon="slotProps">
+                <slot name="paginatorprevpagelinkicon" :class="slotProps.class"></slot>
             </template>
-            <template v-if="$slots.paginatornextpagelinkicon" #nextpagelinkicon>
-                <slot name="paginatornextpagelinkicon"></slot>
+            <template v-if="$slots.paginatornextpagelinkicon" #nextpagelinkicon="slotProps">
+                <slot name="paginatornextpagelinkicon" :class="slotProps.class"></slot>
             </template>
-            <template v-if="$slots.paginatorlastpagelinkicon" #lastpagelinkicon>
-                <slot name="paginatorlastpagelinkicon"></slot>
+            <template v-if="$slots.paginatorlastpagelinkicon" #lastpagelinkicon="slotProps">
+                <slot name="paginatorlastpagelinkicon" :class="slotProps.class"></slot>
+            </template>
+            <template v-if="$slots.paginatorjumptopagedropdownicon" #jumptopagedropdownicon="slotProps">
+                <slot name="paginatorjumptopagedropdownicon" :class="slotProps.class"></slot>
+            </template>
+            <template v-if="$slots.paginatorrowsperpagedropdownicon" #rowsperpagedropdownicon="slotProps">
+                <slot name="paginatorrowsperpagedropdownicon" :class="slotProps.class"></slot>
             </template>
         </TTPaginator>
         <div :class="cx('wrapper')" :style="{ maxHeight: scrollHeight }" v-bind="ptm('wrapper')">
@@ -77,7 +83,8 @@
                     <template v-if="!empty">
                         <TTRow
                             v-for="(node, index) of dataToRender"
-                            :key="node.key"
+                            :key="nodeKey(node)"
+                            :dataKey="dataKey"
                             :columns="columns"
                             :node="node"
                             :level="0"
@@ -88,6 +95,7 @@
                             :ariaSetSize="dataToRender.length"
                             :ariaPosInset="index + 1"
                             :tabindex="setTabindex(node, index)"
+                            :loadingMode="loadingMode"
                             :templates="$slots"
                             @node-toggle="onNodeToggle"
                             @node-click="onNodeClick"
@@ -123,7 +131,7 @@
             @page="onPage($event)"
             :alwaysShow="alwaysShowPaginator"
             :unstyled="unstyled"
-            :pt="pt"
+            :pt="ptm('paginator')"
             data-pc-section="paginator"
         >
             <template v-if="$slots.paginatorstart" #start>
@@ -132,17 +140,23 @@
             <template v-if="$slots.paginatorend" #end>
                 <slot name="paginatorend"></slot>
             </template>
-            <template v-if="$slots.paginatorfirstpagelinkicon" #firstpagelinkicon>
-                <slot name="paginatorfirstpagelinkicon"></slot>
+            <template v-if="$slots.paginatorfirstpagelinkicon" #firstpagelinkicon="slotProps">
+                <slot name="paginatorfirstpagelinkicon" :class="slotProps.class"></slot>
             </template>
-            <template v-if="$slots.paginatorprevpagelinkicon" #prevpagelinkicon>
-                <slot name="paginatorprevpagelinkicon"></slot>
+            <template v-if="$slots.paginatorprevpagelinkicon" #prevpagelinkicon="slotProps">
+                <slot name="paginatorprevpagelinkicon" :class="slotProps.class"></slot>
             </template>
-            <template v-if="$slots.paginatornextpagelinkicon" #nextpagelinkicon>
-                <slot name="paginatornextpagelinkicon"></slot>
+            <template v-if="$slots.paginatornextpagelinkicon" #nextpagelinkicon="slotProps">
+                <slot name="paginatornextpagelinkicon" :class="slotProps.class"></slot>
             </template>
-            <template v-if="$slots.paginatorlastpagelinkicon" #lastpagelinkicon>
-                <slot name="paginatorlastpagelinkicon"></slot>
+            <template v-if="$slots.paginatorlastpagelinkicon" #lastpagelinkicon="slotProps">
+                <slot name="paginatorlastpagelinkicon" :class="slotProps.class"></slot>
+            </template>
+            <template v-if="$slots.paginatorjumptopagedropdownicon" #jumptopagedropdownicon="slotProps">
+                <slot name="paginatorjumptopagedropdownicon" :class="slotProps.class"></slot>
+            </template>
+            <template v-if="$slots.paginatorrowsperpagedropdownicon" #rowsperpagedropdownicon="slotProps">
+                <slot name="paginatorrowsperpagedropdownicon" :class="slotProps.class"></slot>
             </template>
         </TTPaginator>
         <div v-if="$slots.footer" :class="cx('footer')" v-bind="ptm('footer')">
@@ -239,7 +253,7 @@ export default {
             };
         },
         onNodeToggle(node) {
-            const key = node.key;
+            const key = this.nodeKey(node);
 
             if (this.d_expandedKeys[key]) {
                 delete this.d_expandedKeys[key];
@@ -260,9 +274,13 @@ export default {
                 this.$emit('update:selectionKeys', _selectionKeys);
             }
         },
+        nodeKey(node) {
+            return ObjectUtils.resolveFieldData(node, this.dataKey);
+        },
         handleSelectionWithMetaKey(event) {
             const originalEvent = event.originalEvent;
             const node = event.node;
+            const nodeKey = this.nodeKey(node);
             const metaKey = originalEvent.metaKey || originalEvent.ctrlKey;
             const selected = this.isNodeSelected(node);
             let _selectionKeys;
@@ -272,7 +290,7 @@ export default {
                     _selectionKeys = {};
                 } else {
                     _selectionKeys = { ...this.selectionKeys };
-                    delete _selectionKeys[node.key];
+                    delete _selectionKeys[nodeKey];
                 }
 
                 this.$emit('node-unselect', node);
@@ -283,7 +301,7 @@ export default {
                     _selectionKeys = !metaKey ? {} : this.selectionKeys ? { ...this.selectionKeys } : {};
                 }
 
-                _selectionKeys[node.key] = true;
+                _selectionKeys[nodeKey] = true;
                 this.$emit('node-select', node);
             }
 
@@ -291,6 +309,7 @@ export default {
         },
         handleSelectionWithoutMetaKey(event) {
             const node = event.node;
+            const nodeKey = this.nodeKey(node);
             const selected = this.isNodeSelected(node);
             let _selectionKeys;
 
@@ -300,18 +319,18 @@ export default {
                     this.$emit('node-unselect', node);
                 } else {
                     _selectionKeys = {};
-                    _selectionKeys[node.key] = true;
+                    _selectionKeys[nodeKey] = true;
                     this.$emit('node-select', node);
                 }
             } else {
                 if (selected) {
                     _selectionKeys = { ...this.selectionKeys };
-                    delete _selectionKeys[node.key];
+                    delete _selectionKeys[nodeKey];
 
                     this.$emit('node-unselect', node);
                 } else {
                     _selectionKeys = this.selectionKeys ? { ...this.selectionKeys } : {};
-                    _selectionKeys[node.key] = true;
+                    _selectionKeys[nodeKey] = true;
 
                     this.$emit('node-select', node);
                 }
@@ -340,6 +359,8 @@ export default {
             pageEvent.pageCount = event.pageCount;
             pageEvent.page = event.page;
 
+            this.d_expandedKeys = {};
+            this.$emit('update:expandedKeys', this.d_expandedKeys);
             this.$emit('update:first', this.d_first);
             this.$emit('update:rows', this.d_rows);
             this.$emit('page', pageEvent);
@@ -417,20 +438,13 @@ export default {
         },
         sortNodesSingle(nodes) {
             let _nodes = [...nodes];
-            const comparer = new Intl.Collator(undefined, { numeric: true }).compare;
+            const comparer = ObjectUtils.localeComparator();
 
             _nodes.sort((node1, node2) => {
                 const value1 = ObjectUtils.resolveFieldData(node1.data, this.d_sortField);
                 const value2 = ObjectUtils.resolveFieldData(node2.data, this.d_sortField);
-                let result = null;
 
-                if (value1 == null && value2 != null) result = -1;
-                else if (value1 != null && value2 == null) result = 1;
-                else if (value1 == null && value2 == null) result = 0;
-                else if (typeof value1 === 'string' && typeof value2 === 'string') result = comparer(value1, value2);
-                else result = value1 < value2 ? -1 : value1 > value2 ? 1 : 0;
-
-                return this.d_sortOrder * result;
+                return ObjectUtils.sort(value1, value2, this.d_sortOrder, comparer);
             });
 
             return _nodes;
@@ -450,22 +464,13 @@ export default {
         multisortField(node1, node2, index) {
             const value1 = ObjectUtils.resolveFieldData(node1.data, this.d_multiSortMeta[index].field);
             const value2 = ObjectUtils.resolveFieldData(node2.data, this.d_multiSortMeta[index].field);
-            let result = null;
+            const comparer = ObjectUtils.localeComparator();
 
-            if (value1 == null && value2 != null) result = -1;
-            else if (value1 != null && value2 == null) result = 1;
-            else if (value1 == null && value2 == null) result = 0;
-            else {
-                if (value1 === value2) {
-                    return this.d_multiSortMeta.length - 1 > index ? this.multisortField(node1, node2, index + 1) : 0;
-                } else {
-                    if ((typeof value1 === 'string' || value1 instanceof String) && (typeof value2 === 'string' || value2 instanceof String))
-                        return this.d_multiSortMeta[index].order * new Intl.Collator(undefined, { numeric: true }).compare(value1, value2);
-                    else result = value1 < value2 ? -1 : 1;
-                }
+            if (value1 === value2) {
+                return this.d_multiSortMeta.length - 1 > index ? this.multisortField(node1, node2, index + 1) : 0;
             }
 
-            return this.d_multiSortMeta[index].order * result;
+            return ObjectUtils.sort(value1, value2, this.d_multiSortMeta[index].order, comparer);
         },
         filter(value) {
             let filteredNodes = [];
@@ -573,7 +578,7 @@ export default {
             return matched;
         },
         isNodeSelected(node) {
-            return this.selectionMode && this.selectionKeys ? this.selectionKeys[node.key] === true : false;
+            return this.selectionMode && this.selectionKeys ? this.selectionKeys[this.nodeKey(node)] === true : false;
         },
         isNodeLeaf(node) {
             return node.leaf === false ? false : !(node.children && node.children.length);
@@ -713,7 +718,7 @@ export default {
             }
         },
         onColumnKeyDown(event, col) {
-            if (event.code === 'Enter' && event.currentTarget.nodeName === 'TH' && DomHandler.getAttribute(event.currentTarget, 'data-p-sortable-column')) {
+            if ((event.code === 'Enter' || event.code === 'NumpadEnter') && event.currentTarget.nodeName === 'TH' && DomHandler.getAttribute(event.currentTarget, 'data-p-sortable-column')) {
                 this.onColumnHeaderClick(event, col);
             }
         },

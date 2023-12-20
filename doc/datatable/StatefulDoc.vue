@@ -43,7 +43,7 @@
                     <InputText v-model="filterModel.value" type="text" class="p-column-filter" placeholder="Search by country" />
                 </template>
             </Column>
-            <Column header="Representative" sortable filterField="representative" :showFilterMatchModes="false" :filterMenuStyle="{ width: '14rem' }" style="width: 25%">
+            <Column header="Representative" sortable sortField="representative.name" filterField="representative" :showFilterMatchModes="false" :filterMenuStyle="{ width: '14rem' }" style="width: 25%">
                 <template #body="{ data }">
                     <div class="flex align-items-center gap-2">
                         <img :alt="data.representative.name" :src="`https://primefaces.org/cdn/primevue/images/avatar/${data.representative.image}`" style="width: 32px" />
@@ -103,7 +103,8 @@ export default {
             ],
             statuses: ['unqualified', 'qualified', 'new', 'negotiation', 'renewal', 'proposal'],
             code: {
-                basic: `<DataTable v-model:filters="filters" v-model:selection="selectedCustomer" :value="customers"
+                basic: `
+<DataTable v-model:filters="filters" v-model:selection="selectedCustomer" :value="customers"
     stateStorage="session" stateKey="dt-state-demo-session" paginator :rows="5" filterDisplay="menu"
     selectionMode="single" dataKey="id" :globalFilterFields="['name', 'country.name', 'representative.name', 'status']" tableStyle="min-width: 50rem">
     <template #header>
@@ -128,7 +129,7 @@ export default {
             <InputText v-model="filterModel.value" type="text" class="p-column-filter" placeholder="Search by country" />
         </template>
     </Column>
-    <Column header="Representative" sortable filterField="representative" :showFilterMatchModes="false" :filterMenuStyle="{ width: '14rem' }" style="width: 25%">
+    <Column header="Representative" sortable sortField="representative.name" filterField="representative" :showFilterMatchModes="false" :filterMenuStyle="{ width: '14rem' }" style="width: 25%">
         <template #body="{ data }">
             <div class="flex align-items-center gap-2">
                 <img :alt="data.representative.name" :src="\`https://primefaces.org/cdn/primevue/images/avatar/\${data.representative.image}\`" style="width: 32px" />
@@ -159,8 +160,10 @@ export default {
         </template>
     </Column>
     <template #empty> No customers found. </template>
-</DataTable>`,
-                options: `<template>
+</DataTable>
+`,
+                options: `
+<template>
     <div class="card">
         <DataTable v-model:filters="filters" v-model:selection="selectedCustomer" :value="customers"
                 stateStorage="session" stateKey="dt-state-demo-session" paginator :rows="5" filterDisplay="menu"
@@ -187,7 +190,7 @@ export default {
                     <InputText v-model="filterModel.value" type="text" class="p-column-filter" placeholder="Search by country" />
                 </template>
             </Column>
-            <Column header="Representative" sortable filterField="representative" :showFilterMatchModes="false" :filterMenuStyle="{ width: '14rem' }" style="width: 25%">
+            <Column header="Representative" sortable sortField="representative.name" filterField="representative" :showFilterMatchModes="false" :filterMenuStyle="{ width: '14rem' }" style="width: 25%">
                 <template #body="{ data }">
                     <div class="flex align-items-center gap-2">
                         <img :alt="data.representative.name" :src="\`https://primefaces.org/cdn/primevue/images/avatar/\${data.representative.image}\`" style="width: 32px" />
@@ -283,8 +286,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <DataTable v-model:filters="filters" v-model:selection="selectedCustomer" :value="customers"
                 stateStorage="session" stateKey="dt-state-demo-session" paginator :rows="5" filterDisplay="menu"
@@ -311,7 +316,7 @@ export default {
                     <InputText v-model="filterModel.value" type="text" class="p-column-filter" placeholder="Search by country" />
                 </template>
             </Column>
-            <Column header="Representative" sortable filterField="representative" :showFilterMatchModes="false" :filterMenuStyle="{ width: '14rem' }" style="width: 25%">
+            <Column header="Representative" sortable sortField="representative.name" filterField="representative" :showFilterMatchModes="false" :filterMenuStyle="{ width: '14rem' }" style="width: 25%">
                 <template #body="{ data }">
                     <div class="flex align-items-center gap-2">
                         <img :alt="data.representative.name" :src="\`https://primefaces.org/cdn/primevue/images/avatar/\${data.representative.image}\`" style="width: 32px" />
@@ -399,7 +404,8 @@ const getSeverity = (status) => {
     }
 };
 
-<\/script>`,
+<\/script>
+`,
                 data: `
 /* CustomerService */
 {

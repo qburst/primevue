@@ -1,8 +1,7 @@
 <template>
     <DocSectionText v-bind="$attrs"> </DocSectionText>
     <div class="card flex justify-content-center">
-        <Sidebar v-model:visible="visible" :pt="{ root: { class: 'w-25rem' } }">
-            <h2>Sidebar</h2>
+        <Sidebar v-model:visible="visible" header="Sidebar" :pt="{ root: { class: 'w-25rem' } }">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
         </Sidebar>
         <Button icon="pi pi-arrow-right" @click="visible = true" />
@@ -16,23 +15,26 @@ export default {
         return {
             visible: false,
             code: {
-                basic: `<Sidebar v-model:visible="visible"
+                basic: `
+<Sidebar v-model:visible="visible"
+    header="Sidebar"
     :pt="{
         root: { class: 'w-25rem' }
-    }
+    }"
 >
-    <h2>Sidebar</h2>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 </Sidebar>
-<Button icon="pi pi-arrow-right" @click="visible = true" />`,
-                options: `<template>
+<Button icon="pi pi-arrow-right" @click="visible = true" />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <Sidebar v-model:visible="visible"
+            header="Sidebar"
             :pt="{
                 root: { class: 'w-25rem' }
-            }
+            }"
         >
-            <h2>Sidebar</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
         </Sidebar>
         <Button icon="pi pi-arrow-right" @click="visible = true" />
@@ -47,15 +49,17 @@ export default {
         }
     }
 }
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <Sidebar v-model:visible="visible"
+            header="Sidebar"
             :pt="{
                 root: { class: 'w-25rem' }
-            }
+            }"
         >
-            <h2>Sidebar</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
         </Sidebar>
         <Button icon="pi pi-arrow-right" @click="visible = true" />
@@ -66,7 +70,8 @@ export default {
 import { ref } from "vue";
 
 const visible = ref(false);
-<\/script>`
+<\/script>
+`
             }
         };
     }

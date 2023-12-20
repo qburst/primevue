@@ -30,10 +30,13 @@ export default {
             colorRGB: { r: 100, g: 102, b: 241 },
             colorHSB: { h: 239, s: 59, b: 95 },
             code: {
-                basic: `<ColorPicker v-model="colorHEX" inputId="cp-hex" format="hex" class="mb-3" />
+                basic: `
+<ColorPicker v-model="colorHEX" inputId="cp-hex" format="hex" class="mb-3" />
 <ColorPicker v-model="colorRGB" inputId="cp-rgb" format="rgb" class="mb-3" />
-<ColorPicker v-model="colorHSB" inputId="cp-hsb" format="hsb" class="mb-3" />`,
-                options: `<template>
+<ColorPicker v-model="colorHSB" inputId="cp-hsb" format="hsb" class="mb-3" />
+`,
+                options: `
+<template>
     <div class="card flex flex-wrap gap-3">
         <div class="flex-1 flex flex-column align-items-center">
             <label for="cp-hex" class="font-bold block mb-2"> HEX </label>
@@ -63,8 +66,10 @@ export default {
         };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex flex-wrap gap-3">
         <div class="flex-1 flex flex-column align-items-center">
             <label for="cp-hex" class="font-bold block mb-2"> HEX </label>
@@ -90,7 +95,8 @@ import { ref } from "vue";
 const colorHEX = ref('6466f1');
 const colorRGB = ref({ r: 100, g: 102, b: 241 });
 const colorHSB = ref({ h: 239, s: 59, b: 95 });
-<\/script>`
+<\/script>
+`
             }
         };
     }

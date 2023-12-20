@@ -60,7 +60,8 @@ export default {
     data() {
         return {
             code: {
-                basic: `<div class="card flex justify-content-center">
+                basic: `
+<div class="card flex justify-content-center">
     <form @submit="onSubmit" class="flex flex-column gap-2">
         <div>Please choose your ingredient.</div>
         <div class="flex flex-wrap gap-3">
@@ -85,8 +86,10 @@ export default {
         <small id="text-error" class="p-error">{{ errorMessage || '&nbsp;' }}</small>
         <Button type="submit" label="Submit" />
     </form>
-</div>`,
-                options: `<template>
+</div>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <form @submit="onSubmit" class="flex flex-column gap-2">
             <div>Please choose your ingredient.</div>
@@ -143,8 +146,10 @@ export default {
         return { value, handleSubmit, onSubmit, errorMessage };
     },
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <form @submit="onSubmit" class="flex flex-column gap-2">
             <div>Please choose your ingredient.</div>
@@ -195,7 +200,8 @@ const onSubmit = handleSubmit((values) => {
         resetForm();
     }
 });
-<\/script>`
+<\/script>
+`
             }
         };
     }

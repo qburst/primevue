@@ -47,7 +47,8 @@ export default {
             customers: null,
             expandedRowGroups: null,
             code: {
-                basic: `<DataTable :value="customers" rowGroupMode="rowspan" groupRowsBy="representative.name" sortMode="single" sortField="representative.name" :sortOrder="1" tableStyle="min-width: 50rem">
+                basic: `
+<DataTable :value="customers" rowGroupMode="rowspan" groupRowsBy="representative.name" sortMode="single" sortField="representative.name" :sortOrder="1" tableStyle="min-width: 50rem">
     <Column header="#" headerStyle="width:3rem">
         <template #body="slotProps">
             {{ slotProps.index + 1 }}
@@ -77,8 +78,10 @@ export default {
         </template>
     </Column>
     <Column field="date" header="Date" style="min-width: 100px"></Column>
-</DataTable>`,
-                options: `<template>
+</DataTable>
+`,
+                options: `
+<template>
     <div class="card">
         <DataTable :value="customers" rowGroupMode="rowspan" groupRowsBy="representative.name" sortMode="single" sortField="representative.name" :sortOrder="1" tableStyle="min-width: 50rem">
             <Column header="#" headerStyle="width:3rem">
@@ -147,8 +150,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <DataTable :value="customers" rowGroupMode="rowspan" groupRowsBy="representative.name" sortMode="single" sortField="representative.name" :sortOrder="1" tableStyle="min-width: 50rem">
             <Column header="#" headerStyle="width:3rem">
@@ -212,7 +217,8 @@ const getSeverity = (status) => {
             return null;
     }
 };
-<\/script>`,
+<\/script>
+`,
                 data: `
 {
     id: 1000,

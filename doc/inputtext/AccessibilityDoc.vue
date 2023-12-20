@@ -35,13 +35,15 @@ export default {
     data() {
         return {
             code: {
-                basic: `<label for="firstname">Firstname</label>
+                basic: `
+<label for="firstname">Firstname</label>
 <InputText id="firstname" />
 
 <span id="lastname">Lastname</span>
 <InputText aria-labelledby="lastname" />
 
-<InputText aria-label="Age"/>`
+<InputText aria-label="Age"/>
+`
             }
         };
     }

@@ -4,7 +4,7 @@
     </DocSectionText>
     <div class="card flex justify-content-center">
         <div class="p-float-label">
-            <Dropdown v-model="selectedCity" inputId="dd-city" :options="cities" optionLabel="name" placeholder="Select a City" class="w-full md:w-14rem" />
+            <Dropdown v-model="selectedCity" inputId="dd-city" :options="cities" optionLabel="name" class="w-full md:w-14rem" />
             <label for="dd-city">Select a City</label>
         </div>
     </div>
@@ -24,14 +24,17 @@ export default {
                 { name: 'Paris', code: 'PRS' }
             ],
             code: {
-                basic: `<div class="p-float-label">
-    <Dropdown v-model="selectedCity" inputId="dd-city" :options="cities" optionLabel="name" placeholder="Select a City" class="w-full md:w-14rem" />
+                basic: `
+<div class="p-float-label">
+    <Dropdown v-model="selectedCity" inputId="dd-city" :options="cities" optionLabel="name" class="w-full md:w-14rem" />
     <label for="dd-city">Select a City</label>
-</div>`,
-                options: `<template>
+</div>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <div class="p-float-label">
-            <Dropdown v-model="selectedCity" inputId="dd-city" :options="cities" optionLabel="name" placeholder="Select a City" class="w-full md:w-14rem" />
+            <Dropdown v-model="selectedCity" inputId="dd-city" :options="cities" optionLabel="name" class="w-full md:w-14rem" />
             <label for="dd-city">Select a City</label>
         </div>
     </div>
@@ -52,11 +55,13 @@ export default {
         };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <div class="p-float-label">
-            <Dropdown v-model="selectedCity" inputId="dd-city" :options="cities" optionLabel="name" placeholder="Select a City" class="w-full md:w-14rem" />
+            <Dropdown v-model="selectedCity" inputId="dd-city" :options="cities" optionLabel="name" class="w-full md:w-14rem" />
             <label for="dd-city">Select a City</label>
         </div>
     </div>
@@ -73,7 +78,8 @@ const cities = ref([
     { name: 'Istanbul', code: 'IST' },
     { name: 'Paris', code: 'PRS' }
 ]);
-<\/script>`
+<\/script>
+`
             }
         };
     }

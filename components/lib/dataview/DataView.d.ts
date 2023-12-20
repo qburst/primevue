@@ -10,7 +10,8 @@
 import { VNode } from 'vue';
 import { ComponentHooks } from '../basecomponent';
 import { PaginatorPassThroughOptionType } from '../paginator';
-import { ClassComponent, GlobalComponentConstructor, PTOptions } from '../ts-helpers';
+import { PassThroughOptions } from '../passthrough';
+import { ClassComponent, GlobalComponentConstructor, PassThrough } from '../ts-helpers';
 
 export declare type DataViewPassThroughOptionType = DataViewPassThroughAttributes | ((options: DataViewPassThroughMethodOptions) => DataViewPassThroughAttributes | string) | string | null | undefined;
 
@@ -18,10 +19,46 @@ export declare type DataViewPassThroughOptionType = DataViewPassThroughAttribute
  * Custom passthrough(pt) option method.
  */
 export interface DataViewPassThroughMethodOptions {
+    /**
+     * Defines instance.
+     */
     instance: any;
+    /**
+     * Defines valid properties.
+     */
     props: DataViewProps;
+    /**
+     * Defines current inline state.
+     */
+    state: DataViewState;
+    /**
+     * Defines valid attributes.
+     */
+    attrs: any;
+    /**
+     * Defines parent options.
+     */
+    parent: any;
+    /**
+     * Defines passthrough(pt) options in global config.
+     */
+    global: object | undefined;
+}
+
+/**
+ * Custom shared passthrough(pt) option method.
+ */
+export interface DataViewSharedPassThroughMethodOptions {
+    /**
+     * Defines valid properties.
+     */
+    props: DataViewProps;
+    /**
+     * Defines current inline state.
+     */
     state: DataViewState;
 }
+
 /**
  * Custom page event.
  * @see {@link DataViewEmits.page}
@@ -62,19 +99,11 @@ export interface DataViewPassThroughOptions {
      * Used to pass attributes to the Paginator component.
      * @see {@link PaginatorPassThroughOptionType}
      */
-    paginator?: PaginatorPassThroughOptionType;
+    paginator?: PaginatorPassThroughOptionType<DataViewSharedPassThroughMethodOptions>;
     /**
      * Used to pass attributes to the content's DOM element.
      */
     content?: DataViewPassThroughOptionType;
-    /**
-     * Used to pass attributes to the grid's DOM element.
-     */
-    grid?: DataViewPassThroughOptionType;
-    /**
-     * Used to pass attributes to the column's DOM element.
-     */
-    column?: DataViewPassThroughOptionType;
     /**
      * Used to pass attributes to the empty message's DOM element.
      */
@@ -84,7 +113,7 @@ export interface DataViewPassThroughOptions {
      */
     footer?: DataViewPassThroughOptionType;
     /**
-     * Used to manage all lifecycle hooks
+     * Used to manage all lifecycle hooks.
      * @see {@link BaseComponent.ComponentHooks}
      */
     hooks?: ComponentHooks;
@@ -212,7 +241,12 @@ export interface DataViewProps {
      * Used to pass attributes to DOM elements inside the component.
      * @type {DataViewPassThroughOptions}
      */
-    pt?: PTOptions<DataViewPassThroughOptions>;
+    pt?: PassThrough<DataViewPassThroughOptions>;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false
@@ -234,8 +268,14 @@ export interface DataViewSlots {
     footer(): VNode[];
     /**
      * Custom empty template.
+     * @param {Object} scope - empty slot's params.
      */
-    empty(): VNode[];
+    empty(scope: {
+        /**
+         * Layout of the items.
+         */
+        layout?: string | undefined;
+    }): VNode[];
     /**
      * Custom paginator start template.
      */
@@ -252,11 +292,7 @@ export interface DataViewSlots {
         /**
          * Value of the component
          */
-        data: any;
-        /**
-         * Index of the grid
-         */
-        index: number;
+        items: any;
     }): VNode[];
     /**
      * Custom list template.
@@ -266,11 +302,7 @@ export interface DataViewSlots {
         /**
          * Value of the component
          */
-        data: any;
-        /**
-         * Index of the grid
-         */
-        index: number;
+        items: any;
     }): VNode[];
 }
 

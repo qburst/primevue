@@ -26,9 +26,12 @@ export default {
             nodes: null,
             selectedKey: null,
             code: {
-                basic: `<Tree v-model:selectionKeys="selectedKey" :value="nodes" selectionMode="single" :metaKeySelection="false" class="w-full md:w-30rem"
-    @nodeSelect="onNodeSelect" @nodeUnselect="onNodeUnselect" @nodeExpand="onNodeExpand" @nodeCollapse="onNodeCollapse" class="w-full md:w-30rem"></Tree>`,
-                options: `<template>
+                basic: `
+<Tree v-model:selectionKeys="selectedKey" :value="nodes" selectionMode="single" :metaKeySelection="false" class="w-full md:w-30rem"
+    @nodeSelect="onNodeSelect" @nodeUnselect="onNodeUnselect" @nodeExpand="onNodeExpand" @nodeCollapse="onNodeCollapse" class="w-full md:w-30rem"></Tree>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <Toast />
         <Tree v-model:selectionKeys="selectedKey" :value="nodes" selectionMode="single" :metaKeySelection="false"
@@ -63,8 +66,10 @@ export default {
         }
     }
 }
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <Toast />
         <Tree v-model:selectionKeys="selectedKey" :value="nodes" selectionMode="single" :metaKeySelection="false"
@@ -100,7 +105,8 @@ const onNodeExpand = (node) => {
 const onNodeCollapse (node) => {
     toast.add({ severity: 'error', summary: 'Node Collapsed', detail: node.label, life: 3000 });
 };
-<\/script>`,
+<\/script>
+`,
                 data: `
 {
     key: '0',

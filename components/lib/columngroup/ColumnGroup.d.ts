@@ -6,8 +6,8 @@
  * @module columngroup
  */
 import { ComponentHooks } from '../basecomponent';
-import { DataTablePassThroughOptions } from '../datatable';
-import { ClassComponent, GlobalComponentConstructor, PTOptions } from '../ts-helpers';
+import { PassThroughOptions } from '../passthrough';
+import { ClassComponent, GlobalComponentConstructor, PassThrough } from '../ts-helpers';
 
 export declare type ColumnGroupPassThroughOptionType = ColumnGroupPassThroughAttributes | ((options: ColumnGroupPassThroughMethodOptions) => ColumnGroupPassThroughAttributes | string) | string | null | undefined;
 
@@ -15,10 +15,30 @@ export declare type ColumnGroupPassThroughOptionType = ColumnGroupPassThroughAtt
  * Custom passthrough(pt) option method.
  */
 export interface ColumnGroupPassThroughMethodOptions {
+    /**
+     * Defines instance.
+     */
     instance: any;
+    /**
+     * Defines valid properties.
+     */
     props: ColumnGroupProps;
-    parent: DataTablePassThroughOptions;
+    /**
+     * Defines valid attributes.
+     */
+    attrs: any;
+    /**
+     * Defines parent options.
+     */
+    parent: any;
+    /**
+     * Defines current options.
+     */
     context: ColumnGroupContext;
+    /**
+     * Defines passthrough(pt) options in global config.
+     */
+    global: object | undefined;
 }
 
 /**
@@ -31,7 +51,7 @@ export interface ColumnGroupPassThroughOptions {
      */
     root?: ColumnGroupPassThroughOptionType;
     /**
-     * Used to manage all lifecycle hooks
+     * Used to manage all lifecycle hooks.
      * @see {@link BaseComponent.ComponentHooks}
      */
     hooks?: ComponentHooks;
@@ -56,7 +76,12 @@ export interface ColumnGroupProps {
      * Used to pass attributes to DOM elements inside the component.
      * @type {ColumnGroupPassThroughOptions}
      */
-    pt?: PTOptions<ColumnGroupPassThroughOptions>;
+    pt?: PassThrough<ColumnGroupPassThroughOptions>;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false

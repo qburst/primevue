@@ -4,7 +4,7 @@
     </DocSectionText>
     <DocSectionCode :code="code1" hideToggleCode importCode hideCodeSandbox hideStackBlitz />
     <div class="doc-section-description">
-        <p><i>$confirm</i> is available as a property in the application instance for Options API. The service can be injected with the <i>useConfirm</i> function for Composition API.</p>
+        <p>The service is available with the <i>useConfirm</i> function for Composition API or using the <i>$confirm</i> property of the application for Options API.</p>
     </div>
     <DocSectionCode :code="code2" hideToggleCode importCode hideCodeSandbox hideStackBlitz />
 </template>
@@ -14,16 +14,20 @@ export default {
     data() {
         return {
             code1: {
-                basic: `import {createApp} from 'vue';
+                basic: `
+import {createApp} from 'vue';
 import ConfirmationService from 'primevue/confirmationservice';
 
 const app = createApp(App);
-app.use(ConfirmationService);`
+app.use(ConfirmationService);
+`
             },
             code2: {
-                basic: `import { useConfirm } from "primevue/useconfirm";
+                basic: `
+import { useConfirm } from "primevue/useconfirm";
 
-const confirm = useConfirm();`
+const confirm = useConfirm();
+`
             }
         };
     }

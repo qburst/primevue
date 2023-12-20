@@ -7,17 +7,17 @@
     </DocSectionText>
     <div class="card p-fluid flex flex-wrap gap-3">
         <div class="flex-auto">
-            <label for="ssn">SSN</label>
+            <label for="ssn" class="font-bold block mb-2">SSN</label>
             <InputMask id="ssn" v-model="value1" mask="999-99-9999" placeholder="999-99-9999" />
         </div>
 
         <div class="flex-auto">
-            <label for="phone">Phone</label>
+            <label for="phone" class="font-bold block mb-2">Phone</label>
             <InputMask id="phone" v-model="value2" mask="(999) 999-9999" placeholder="(999) 999-9999" />
         </div>
 
         <div class="flex-auto">
-            <label for="serial">Serial</label>
+            <label for="serial" class="font-bold block mb-2">Serial</label>
             <InputMask id="serial" v-model="value3" mask="a*-999-a999" placeholder="a*-999-a999" />
         </div>
     </div>
@@ -32,35 +32,38 @@ export default {
             value2: '',
             value3: '',
             code: {
-                basic: `<div class="flex-auto">
-    <label for="ssn">SSN</label>
+                basic: `
+<div class="flex-auto">
+    <label for="ssn" class="font-bold block mb-2">SSN</label>
     <InputMask id="ssn" v-model="value1" mask="999-99-9999" placeholder="999-99-9999" />
 </div>
 
 <div class="flex-auto">
-    <label for="phone">Phone</label>
-    <InputMask v-model="value2" date="phone" mask="(999) 999-9999" placeholder="(999) 999-9999" />
+    <label for="phone" class="font-bold block mb-2">Phone</label>
+    <InputMask id="phone" v-model="value2" mask="(999) 999-9999" placeholder="(999) 999-9999" />
 </div>
 
 <div class="flex-auto">
-    <label for="serial">Serial</label>
+    <label for="serial" class="font-bold block mb-2">Serial</label>
     <InputMask id="serial" v-model="value3" mask="a*-999-a999" placeholder="a*-999-a999" />
-</div>`,
-                options: `<template>
+</div>
+`,
+                options: `
+<template>
     <div class="card p-fluid flex flex-wrap gap-3">
         <div class="flex-auto">
-            <label for="ssn">SSN</label>
+            <label for="ssn" class="font-bold block mb-2">SSN</label>
             <InputMask id="ssn" v-model="value1" mask="999-99-9999" placeholder="999-99-9999" />
         </div>
 
         <div class="flex-auto">
-            <label for="phone">Phone</label>
-            <InputMask v-model="value2" date="phone" mask="(999) 999-9999" placeholder="(999) 999-9999" />
+            <label for="phone" class="font-bold block mb-2">Phone</label>
+            <InputMask id="phone" v-model="value2" mask="(999) 999-9999" placeholder="(999) 999-9999" />
         </div>
 
         <div class="flex-auto">
-            <label for="serial">Serial</label>
-            <InputMask id="serial" v-model="value2" mask="a*-999-a999" placeholder="a*-999-a999" />
+            <label for="serial" class="font-bold block mb-2">Serial</label>
+            <InputMask id="serial" v-model="value3" mask="a*-999-a999" placeholder="a*-999-a999" />
         </div>
     </div>
 </template>
@@ -76,21 +79,23 @@ export default {
     }
 }
 <\/script>
-        `,
-                composition: `<template>
+
+`,
+                composition: `
+<template>
     <div class="card p-fluid flex flex-wrap gap-3">
         <div class="flex-auto">
-            <label for="ssn">SSN</label>
+            <label for="ssn" class="font-bold block mb-2">SSN</label>
             <InputMask id="ssn" v-model="value1" mask="999-99-9999" placeholder="999-99-9999" />
         </div>
 
         <div class="flex-auto">
-            <label for="phone">Phone</label>
-            <InputMask v-model="value2" date="phone" mask="(999) 999-9999" placeholder="(999) 999-9999" />
+            <label for="phone" class="font-bold block mb-2">Phone</label>
+            <InputMask id="phone" v-model="value2" mask="(999) 999-9999" placeholder="(999) 999-9999" />
         </div>
 
         <div class="flex-auto">
-            <label for="serial">Serial</label>
+            <label for="serial" class="font-bold block mb-2">Serial</label>
             <InputMask id="serial" v-model="value3" mask="a*-999-a999" placeholder="a*-999-a999" />
         </div>
     </div>
@@ -102,7 +107,8 @@ import { ref } from 'vue';
 const value1 = ref('');
 const value2 = ref('');
 const value3 = ref('');
-<\/script>`
+<\/script>
+`
             }
         };
     }

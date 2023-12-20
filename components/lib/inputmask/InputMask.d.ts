@@ -8,7 +8,8 @@
  *
  */
 import { ComponentHooks } from '../basecomponent';
-import { ClassComponent, GlobalComponentConstructor, PTOptions } from '../ts-helpers';
+import { PassThroughOptions } from '../passthrough';
+import { ClassComponent, GlobalComponentConstructor, PassThrough } from '../ts-helpers';
 
 export declare type InputMaskPassThroughOptionType = InputMaskPassThroughAttributes | ((options: InputMaskPassThroughMethodOptions) => InputMaskPassThroughAttributes | string) | string | null | undefined;
 
@@ -16,9 +17,30 @@ export declare type InputMaskPassThroughOptionType = InputMaskPassThroughAttribu
  * Custom passthrough(pt) option method.
  */
 export interface InputMaskPassThroughMethodOptions {
+    /**
+     * Defines instance.
+     */
     instance: any;
+    /**
+     * Defines valid properties.
+     */
     props: InputMaskProps;
+    /**
+     * Defines current options.
+     */
     context: InputMaskContext;
+    /**
+     * Defines valid attributes.
+     */
+    attrs: any;
+    /**
+     * Defines parent options.
+     */
+    parent: any;
+    /**
+     * Defines passthrough(pt) options in global config.
+     */
+    global: object | undefined;
 }
 
 /**
@@ -31,7 +53,7 @@ export interface InputMaskPassThroughOptions {
      */
     root?: InputMaskPassThroughOptionType;
     /**
-     * Used to manage all lifecycle hooks
+     * Used to manage all lifecycle hooks.
      * @see {@link BaseComponent.ComponentHooks}
      */
     hooks?: ComponentHooks;
@@ -96,7 +118,12 @@ export interface InputMaskProps {
      * Used to pass attributes to DOM elements inside the component.
      * @type {InputMaskPassThroughOptions}
      */
-    pt?: PTOptions<InputMaskPassThroughOptions>;
+    pt?: PassThrough<InputMaskPassThroughOptions>;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false

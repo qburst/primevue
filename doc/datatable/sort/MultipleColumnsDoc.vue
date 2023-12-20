@@ -21,13 +21,16 @@ export default {
         return {
             products: null,
             code: {
-                basic: `<DataTable :value="products" sortMode="multiple" tableStyle="min-width: 50rem">
+                basic: `
+<DataTable :value="products" sortMode="multiple" tableStyle="min-width: 50rem">
     <Column field="code" header="Code" sortable style="width: 25%"></Column>
     <Column field="name" header="Name" sortable style="width: 25%"></Column>
     <Column field="category" header="Category" sortable style="width: 25%"></Column>
     <Column field="quantity" header="Quantity" sortable style="width: 25%"></Column>
-</DataTable>`,
-                options: `<template>
+</DataTable>
+`,
+                options: `
+<template>
     <div class="card">
         <DataTable :value="products" sortMode="multiple" tableStyle="min-width: 50rem">
             <Column field="code" header="Code" sortable style="width: 25%"></Column>
@@ -51,8 +54,10 @@ export default {
         ProductService.getProductsMini().then((data) => (this.products = data));
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <DataTable :value="products" sortMode="multiple" tableStyle="min-width: 50rem">
             <Column field="code" header="Code" sortable style="width: 25%"></Column>
@@ -73,7 +78,8 @@ onMounted(() => {
 
 const products = ref();
 
-<\/script>`,
+<\/script>
+`,
                 data: `
 {
     id: '1000',

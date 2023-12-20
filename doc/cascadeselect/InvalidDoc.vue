@@ -88,9 +88,12 @@ export default {
                 }
             ],
             code: {
-                basic: `<CascadeSelect v-model="selectedCity" class="p-invalid" :options="countries" optionLabel="cname" optionGroupLabel="name"
-    :optionGroupChildren="['states', 'cities']" style="min-width: 14rem" placeholder="Select a City" />`,
-                options: `<template>
+                basic: `
+<CascadeSelect v-model="selectedCity" class="p-invalid" :options="countries" optionLabel="cname" optionGroupLabel="name"
+    :optionGroupChildren="['states', 'cities']" style="min-width: 14rem" placeholder="Select a City" />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <CascadeSelect v-model="selectedCity" class="p-invalid" :options="countries" optionLabel="cname" optionGroupLabel="name"
             :optionGroupChildren="['states', 'cities']" style="min-width: 14rem" placeholder="Select a City" />
@@ -179,8 +182,10 @@ export default {
         };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <CascadeSelect v-model="selectedCity" class="p-invalid" :options="countries" optionLabel="cname" optionGroupLabel="name"
             :optionGroupChildren="['states', 'cities']" style="min-width: 14rem" placeholder="Select a City" />
@@ -265,7 +270,8 @@ const countries = ref([
         ]
     }
 ]);
-<\/script>`
+<\/script>
+`
             }
         };
     }

@@ -3,7 +3,7 @@
         <p>Invalid state style is added using the <i>p-invalid</i> class to indicate a failed validation.</p>
     </DocSectionText>
     <div class="card flex justify-content-center">
-        <Checkbox v-model="checked" class="p-invalid" />
+        <Checkbox v-model="checked" class="p-invalid" binary />
     </div>
     <DocSectionCode :code="code" />
 </template>
@@ -14,10 +14,13 @@ export default {
         return {
             checked: false,
             code: {
-                basic: `<Checkbox v-model="checked" class="p-invalid" />`,
-                options: `<template>
+                basic: `
+<Checkbox v-model="checked" class="p-invalid" binary />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
-        <Checkbox v-model="checked" class="p-invalid" />
+        <Checkbox v-model="checked" class="p-invalid" binary />
     </div>
 </template>
 
@@ -29,10 +32,12 @@ export default {
         };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
-        <Checkbox v-model="checked" class="p-invalid" />
+        <Checkbox v-model="checked" class="p-invalid" binary />
     </div>
 </template>
 
@@ -40,7 +45,8 @@ export default {
 import { ref } from "vue";
 
 const checked = ref(false);
-<\/script>`
+<\/script>
+`
             }
         };
     }

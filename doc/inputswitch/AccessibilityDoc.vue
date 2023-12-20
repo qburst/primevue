@@ -36,13 +36,15 @@ export default {
     data() {
         return {
             code: {
-                basic: `<label for="switch1">Remember Me</label>
+                basic: `
+<label for="switch1">Remember Me</label>
 <InputSwitch inputId="switch1" />
 
 <span id="switch2">Remember Me</span>
 <InputSwitch aria-labelledby="switch2" />
 
-<InputSwitch aria-label="Remember Me" />`
+<InputSwitch aria-label="Remember Me" />
+`
             }
         };
     }

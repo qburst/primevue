@@ -30,7 +30,8 @@ export default {
                 { name: 'Paris', code: 'PRS' }
             ],
             code: {
-                basic: `<Dropdown
+                basic: `
+<Dropdown
     v-model="selectedCity"
     :options="cities"
     optionLabel="name"
@@ -41,8 +42,10 @@ export default {
             class: context.selected ? 'bg-primary' : context.focused ? 'bg-blue-100' : undefined
         })
     }"
-/>`,
-                options: `<template>
+/>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <Dropdown
             v-model="selectedCity"
@@ -74,8 +77,10 @@ export default {
         };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <Dropdown
             v-model="selectedCity"
@@ -103,7 +108,8 @@ const cities = ref([
     { name: 'Istanbul', code: 'IST' },
     { name: 'Paris', code: 'PRS' }
 ]);
-<\/script>`
+<\/script>
+`
             }
         };
     }

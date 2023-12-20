@@ -11,8 +11,9 @@ import { VNode } from 'vue';
 import { ComponentHooks } from '../basecomponent';
 import { ColumnPassThroughOptionType } from '../column';
 import { PaginatorPassThroughOptionType } from '../paginator';
-import { TreeNode } from '../tree';
-import { ClassComponent, GlobalComponentConstructor, PTOptions } from '../ts-helpers';
+import { PassThroughOptions } from '../passthrough';
+import { TreeNode } from '../treenode';
+import { ClassComponent, GlobalComponentConstructor, PassThrough } from '../ts-helpers';
 
 export declare type TreeTablePassThroughOptionType = TreeTablePassThroughAttributes | ((options: TreeTablePassThroughMethodOptions) => TreeTablePassThroughAttributes | string) | string | null | undefined;
 
@@ -20,10 +21,48 @@ export declare type TreeTablePassThroughOptionType = TreeTablePassThroughAttribu
  * Custom passthrough(pt) option method.
  */
 export interface TreeTablePassThroughMethodOptions {
+    /**
+     * Defines instance.
+     */
     instance: any;
+    /**
+     * Defines valid properties.
+     */
     props: TreeTableProps;
+    /**
+     * Defines current inline state.
+     */
     state: TreeTableState;
+    /**
+     * Defines current options.
+     */
     context: TreeTableContext;
+    /**
+     * Defines valid attributes.
+     */
+    attrs: any;
+    /**
+     * Defines parent options.
+     */
+    parent: any;
+    /**
+     * Defines passthrough(pt) options in global config.
+     */
+    global: object | undefined;
+}
+
+/**
+ * Custom shared passthrough(pt) option method.
+ */
+export interface TreeTableSharedPassThroughMethodOptions {
+    /**
+     * Defines valid properties.
+     */
+    props: TreeTableProps;
+    /**
+     * Defines current inline state.
+     */
+    state: TreeTableState;
 }
 
 /**
@@ -197,7 +236,7 @@ export interface TreeTablePassThroughOptions {
      * Used to pass attributes to the Paginator component.
      * @see {@link PaginatorPassThroughOptionType}
      */
-    paginator?: PaginatorPassThroughOptionType;
+    paginator?: PaginatorPassThroughOptionType<TreeTableSharedPassThroughMethodOptions>;
     /**
      * Used to pass attributes to the wrapper's DOM element.
      */
@@ -251,7 +290,7 @@ export interface TreeTablePassThroughOptions {
      */
     column?: ColumnPassThroughOptionType;
     /**
-     * Used to manage all lifecycle hooks
+     * Used to manage all lifecycle hooks.
      * @see {@link BaseComponent.ComponentHooks}
      */
     hooks?: ComponentHooks;
@@ -357,6 +396,11 @@ export interface TreeTableProps {
      */
     value?: TreeNode[] | undefined;
     /**
+     * Name of the field that uniquely identifies the a record in the data.
+     * @defaultValue "key"
+     */
+    dataKey?: string | ((item: any) => string) | undefined;
+    /**
      * A map of keys to represent the state of the tree expansion state in controlled mode.
      * @see TreeTableExpandedKeys
      */
@@ -373,7 +417,7 @@ export interface TreeTableProps {
     /**
      * Defines how multiple items can be selected, when true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item can be toggled individually.
      * On touch enabled devices, metaKeySelection is turned off automatically.
-     * @defaultValue true
+     * @defaultValue false
      */
     metaKeySelection?: boolean | undefined;
     /**
@@ -457,6 +501,11 @@ export interface TreeTableProps {
      * @deprecated since v3.27.0. Use 'loadingicon' slot.
      */
     loadingIcon?: string | undefined;
+    /**
+     * Loading mode display.
+     * @defaultValue mask
+     */
+    loadingMode?: 'mask' | 'icon' | undefined;
     /**
      * When enabled, background of the rows change on hover.
      * @defaultValue false
@@ -559,7 +608,12 @@ export interface TreeTableProps {
      * Used to pass attributes to DOM elements inside the component.
      * @type {TreeTablePassThroughOptions}
      */
-    pt?: PTOptions<TreeTablePassThroughOptions>;
+    pt?: PassThrough<TreeTablePassThroughOptions>;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false
@@ -596,43 +650,69 @@ export interface TreeTableSlots {
      */
     loadingicon(): VNode[];
     /**
-     * Custom toggler icon template.
-     */
-    togglericon(): VNode[];
-    /**
      * Custom checkbox icon template.
      */
     checkboxicon(): VNode[];
     /**
-     * Custom sort icon template.
-     * @param {Object} scope - sorticon slot's params.
-     */
-    sorticon(scope: {
-        /**
-         * Whether or not column is sorted
-         */
-        sorted: TreeNode;
-        /**
-         * Current sort order
-         */
-        sortOrder: boolean;
-    }): VNode[];
-    /**
      * Custom paginator first page link icon template.
      */
-    paginatorfirstpagelinkicon(): VNode[];
+    paginatorfirstpagelinkicon(scope: {
+        /**
+         * Style class of the paginator first page link icon.
+         * @param {Object} scope - paginatorfirstpagelinkicon's params.
+         */
+        class: string;
+    }): VNode[];
     /**
      * Custom paginator previous page link icon template.
      */
-    paginatorprevpagelinkicon(): VNode[];
+    paginatorprevpagelinkicon(scope: {
+        /**
+         * Style class of the paginator prev page link icon.
+         * @param {Object} scope - paginatorprevpagelinkicon's params.
+         */
+        class: string;
+    }): VNode[];
     /**
      * Custom paginator next page link icon template.
      */
-    paginatornextpagelinkicon(): VNode[];
+    paginatornextpagelinkicon(scope: {
+        /**
+         * Style class of the paginator next page link icon.
+         * @param {Object} scope - paginatornextpagelinkicon's params.
+         */
+        class: string;
+    }): VNode[];
     /**
      * Custom paginator last page link icon template.
      */
-    paginatorlastpagelinkicon(): VNode[];
+    paginatorlastpagelinkicon(scope: {
+        /**
+         * Style class of the paginator last page link icon.
+         * @param {Object} scope - paginatorlastpagelinkicon's params.
+         */
+        class: string;
+    }): VNode[];
+    /**
+     * Custom paginatorrowsperpagedropdownicon template.
+     * @param {Object} scope - paginatorrowsperpagedropdownicon's params.
+     */
+    paginatorrowsperpagedropdownicon(scope: {
+        /**
+         * Style class of the paginator rows per page dropdown icon.
+         */
+        class: string;
+    }): VNode[];
+    /**
+     * Custom paginatorjumptopagedropdownicon template.
+     * @param {Object} scope - paginatorjumptopagedropdownicon's params.
+     */
+    paginatorjumptopagedropdownicon(scope: {
+        /**
+         * Style class of the paginator jump to page dropdown icon.
+         */
+        class: string;
+    }): VNode[];
 }
 
 /**

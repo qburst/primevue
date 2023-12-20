@@ -19,8 +19,11 @@ export default {
                 { name: 'Option 3', value: 3 }
             ],
             code: {
-                basic: `<SelectButton v-model="value" :options="options" optionLabel="name" multiple aria-labelledby="multiple" />`,
-                options: `<template>
+                basic: `
+<SelectButton v-model="value" :options="options" optionLabel="name" multiple aria-labelledby="multiple" />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <SelectButton v-model="value" :options="options" optionLabel="name" multiple aria-labelledby="multiple" />
     </div>
@@ -39,8 +42,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <SelectButton v-model="value" :options="options" optionLabel="name" multiple aria-labelledby="multiple" />
     </div>
@@ -51,11 +56,12 @@ import { ref } from 'vue';
 
 const value = ref(null);
 const options = ref([
-                { name: 'Option 1', value: 1 },
-                { name: 'Option 2', value: 2 },
-                { name: 'Option 3', value: 3 }
-            ]);
-<\/script>`
+    { name: 'Option 1', value: 1 },
+    { name: 'Option 2', value: 2 },
+    { name: 'Option 3', value: 3 }
+]);
+<\/script>
+`
             }
         };
     }

@@ -25,15 +25,18 @@ export default {
             },
             items: [{ label: 'Computer' }, { label: 'Notebook' }, { label: 'Accessories' }, { label: 'Backpacks' }, { label: 'Item' }],
             code: {
-                basic: `<Breadcrumb :home="home" :model="items"
+                basic: `
+<Breadcrumb :home="home" :model="items"
     :pt="{
         root: { class: 'surface-ground' },
         label: ({ props }) => ({
             class: props.index === items.length - 1 ? 'font-italic' : undefined
         })
     }"
-/>`,
-                options: `<template>
+/>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <Breadcrumb :home="home" :model="items"
             :pt="{
@@ -64,8 +67,10 @@ export default {
         }
     }
 }
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <Breadcrumb :home="home" :model="items"
             :pt="{
@@ -93,7 +98,8 @@ const items = ref([
     {label: 'Backpacks'},
     {label: 'Item'}
 ]);
-<\/script>`
+<\/script>
+`
             }
         };
     }

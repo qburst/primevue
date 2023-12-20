@@ -1,7 +1,9 @@
 <template>
     <DocSectionText v-bind="$attrs">
         <p>Selection of multiple nodes via checkboxes is enabled by configuring <i>selectionMode</i> as <i>checkbox</i>.</p>
-        <p>In checkbox selection mode, value binding should be a key-value pair where key is the node key and value is an object that has <i>checked</i> and <i>partialChecked</i> properties to represent the checked state of a node.</p>
+        <p>
+            In checkbox selection mode, value binding should be a key-value pair where key (or the dataKey) is the node key and value is an object that has <i>checked</i> and <i>partialChecked</i> properties to represent the checked state of a node.
+        </p>
     </DocSectionText>
     <DocSectionCode :code="introCode" hideToggleCode importCode hideCodeSandbox hideStackBlitz />
     <div class="card">
@@ -32,12 +34,15 @@ export default {
 }`
             },
             code: {
-                basic: `<TreeTable v-model:selectionKeys="selectedKey" :value="nodes" selectionMode="checkbox">
+                basic: `
+<TreeTable v-model:selectionKeys="selectedKey" :value="nodes" selectionMode="checkbox">
     <Column field="name" header="Name" expander></Column>
     <Column field="size" header="Size"></Column>
     <Column field="type" header="Type"></Column>
-</TreeTable>`,
-                options: `<template>
+</TreeTable>
+`,
+                options: `
+<template>
     <div class="card">
         <TreeTable v-model:selectionKeys="selectedKey" :value="nodes" selectionMode="checkbox">
             <Column field="name" header="Name" expander></Column>
@@ -61,8 +66,10 @@ export default {
         NodeService.getTreeTableNodes().then((data) => (this.nodes = data));
     }
 }
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <TreeTable v-model:selectionKeys="selectedKey" :value="nodes" selectionMode="checkbox">
             <Column field="name" header="Name" expander></Column>
@@ -82,7 +89,8 @@ onMounted(() => {
 
 const nodes = ref();
 const selectedKey = ref();
-<\/script>`,
+<\/script>
+`,
                 data: `
 {
     key: '0',

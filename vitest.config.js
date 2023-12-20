@@ -2,15 +2,18 @@ import vue from '@vitejs/plugin-vue';
 import path from 'path';
 import { mergeConfig } from 'vite';
 import { defineConfig } from 'vitest/config';
-import viteConfig from './vite.config';
+import aliasConfig from './nuxt-vite.config.js';
 
 export default mergeConfig(
-    viteConfig,
+    aliasConfig,
     defineConfig({
         plugins: [vue()],
         test: {
             globals: true,
             environment: 'jsdom',
+            onConsoleLog: (log, type) => {
+                if (type === 'stderr' && log.includes('Could not parse CSS stylesheet')) return false;
+            },
             coverage: {
                 provider: 'istanbul',
                 reporter: ['text', 'json', 'html']

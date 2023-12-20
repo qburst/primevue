@@ -9,7 +9,8 @@
  */
 import { TransitionProps, VNode } from 'vue';
 import { ComponentHooks } from '../basecomponent';
-import { ClassComponent, GlobalComponentConstructor, PTOptions } from '../ts-helpers';
+import { PassThroughOptions } from '../passthrough';
+import { ClassComponent, GlobalComponentConstructor, PassThrough } from '../ts-helpers';
 
 export declare type ImagePassThroughOptionType = ImagePassThroughAttributes | ((options: ImagePassThroughMethodOptions) => ImagePassThroughAttributes | string) | string | null | undefined;
 
@@ -19,9 +20,30 @@ export declare type ImagePassThroughTransitionType = TransitionProps | ((options
  * Custom passthrough(pt) option method.
  */
 export interface ImagePassThroughMethodOptions {
+    /**
+     * Defines instance.
+     */
     instance: any;
+    /**ˆ
+     * Defines valid properties.
+     */
     props: ImageProps;
+    /**
+     * Defines current inline state.
+     */
     state: ImageState;
+    /**
+     * Defines valid attributes.
+     */
+    attrs: any;
+    /**
+     * Defines parent options.
+     */
+    parent: any;
+    /**
+     * Defines passthrough(pt) options in global config.
+     */
+    global: object | undefined;
 }
 
 /**
@@ -102,7 +124,7 @@ export interface ImagePassThroughOptions {
      */
     preview?: ImagePassThroughOptionType;
     /**
-     * Used to manage all lifecycle hooks
+     * Used to manage all lifecycle hooks.
      * @see {@link BaseComponent.ComponentHooks}
      */
     hooks?: ComponentHooks;
@@ -181,7 +203,12 @@ export interface ImageProps {
      * Used to pass attributes to DOM elements inside the component.
      * @type {ImagePassThroughOptions}
      */
-    pt?: PTOptions<ImagePassThroughOptions>;
+    pt?: PassThrough<ImagePassThroughOptions>;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false
@@ -232,8 +259,13 @@ export interface ImageSlots {
         style: any;
         /**
          * Image error function.
+         * @deprecated since v3.39.0. Use 'errorCallback' property instead.
          */
         onError: () => void;
+        /**
+         * Preview click function.
+         */
+        errorCallback: () => void;
     }): VNode[];
     /**
      * Custom preview template.
@@ -250,8 +282,13 @@ export interface ImageSlots {
         style: any;
         /**
          * Preview click function.
+         * @deprecated since v3.39.0. Use 'previewCallback' property instead.
          */
         onClick: () => void;
+        /**
+         * Preview click function.
+         */
+        previewCallback: () => void;
     }): VNode[];
 }
 

@@ -23,7 +23,8 @@ export default {
             value: '',
             items: [],
             code: {
-                basic: `<AutoComplete
+                basic: `
+<AutoComplete
     v-model="value"
     :suggestions="items"
     @complete="search"
@@ -33,8 +34,10 @@ export default {
             class: context.selected ? 'bg-blue-300' : context.focused ? 'bg-blue-100' : undefined
         })
     }"
-/>`,
-                options: `<template>
+/>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <AutoComplete
             v-model="value"
@@ -64,8 +67,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <AutoComplete
             v-model="value"
@@ -90,7 +95,8 @@ const items = ref([]);
 const search = (event) => {
     items.value = [...Array(10).keys()].map((item) => event.query + '-' + item);
 }
-<\/script>`
+<\/script>
+`
             }
         };
     },

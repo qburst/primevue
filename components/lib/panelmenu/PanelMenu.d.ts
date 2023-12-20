@@ -10,7 +10,8 @@
 import { TransitionProps, VNode } from 'vue';
 import { ComponentHooks } from '../basecomponent';
 import { MenuItem } from '../menuitem';
-import { ClassComponent, GlobalComponentConstructor, PTOptions } from '../ts-helpers';
+import { PassThroughOptions } from '../passthrough';
+import { ClassComponent, GlobalComponentConstructor, PassThrough } from '../ts-helpers';
 
 export declare type PanelMenuPassThroughOptionType = PanelMenuPassThroughAttributes | ((options: PanelMenuPassThroughMethodOptions) => PanelMenuPassThroughAttributes | string) | string | null | undefined;
 
@@ -20,10 +21,34 @@ export declare type PanelMenuPassThroughTransitionType = TransitionProps | ((opt
  * Custom passthrough(pt) option method.
  */
 export interface PanelMenuPassThroughMethodOptions {
+    /**
+     * Defines instance.
+     */
     instance: any;
+    /**
+     * Defines valid properties.
+     */
     props: PanelMenuProps;
+    /**
+     * Defines current inline state.
+     */
     state: PanelMenuState;
+    /**
+     * Defines current options.
+     */
     context: PanelMenuContext;
+    /**
+     * Defines valid attributes.
+     */
+    attrs: any;
+    /**
+     * Defines parent options.
+     */
+    parent: any;
+    /**
+     * Defines passthrough(pt) options in global config.
+     */
+    global: object | undefined;
 }
 
 /**
@@ -104,7 +129,7 @@ export interface PanelMenuPassThroughOptions {
      */
     separator?: PanelMenuPassThroughOptionType;
     /**
-     * Used to manage all lifecycle hooks
+     * Used to manage all lifecycle hooks.
      * @see {@link BaseComponent.ComponentHooks}
      */
     hooks?: ComponentHooks;
@@ -158,6 +183,11 @@ export interface PanelMenuContext {
      * @defaultValue false
      */
     focused: boolean;
+    /**
+     * Current disabled state of menuitem as a boolean.
+     * @defaultValue false
+     */
+    disabled: boolean;
 }
 
 /**
@@ -211,6 +241,14 @@ export interface PanelMenuRouterBindProps {
      * Submenuicon elemnt binding
      */
     submenuicon: object;
+    /**
+     * Header icon element binding
+     */
+    headerIcon: object;
+    /**
+     * Header label element binding
+     */
+    headerLabel: object;
 }
 
 /**
@@ -227,7 +265,13 @@ export interface PanelMenuProps {
      */
     expandedKeys?: PanelMenuExpandedKeys;
     /**
+     * When enabled, multiple root menuitems can be activated at the same time.
+     * @defaultValue false
+     */
+    multiple?: boolean | undefined;
+    /**
      * Whether to apply 'router-link-active-exact' class if route exactly matches the item path.
+     * @deprecated since v3.40.0.
      * @defaultValue true
      */
     exact?: boolean | undefined;
@@ -239,7 +283,12 @@ export interface PanelMenuProps {
      * Used to pass attributes to DOM elements inside the component.
      * @type {PanelMenuPassThroughOptions}
      */
-    pt?: PTOptions<PanelMenuPassThroughOptions>;
+    pt?: PassThrough<PanelMenuPassThroughOptions>;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false
@@ -260,6 +309,14 @@ export interface PanelMenuSlots {
          * Menuitem instance
          */
         item: MenuItem;
+        /**
+         * Whether there is a root menuitem
+         */
+        root: boolean;
+        /**
+         * Current active state of the menuitem
+         */
+        active: boolean;
         /**
          * Label property of the menuitem
          */

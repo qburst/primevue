@@ -16,16 +16,14 @@
 </template>
 
 <script>
-import DownloadDoc from '@/doc/installation/DownloadDoc';
-import ExamplesDoc from '@/doc/installation/ExamplesDoc';
-import NuxtIntegrationDoc from '@/doc/installation/NuxtIntegrationDoc';
-import PluginDoc from '@/doc/installation/PluginDoc';
-import PropCasesDoc from '@/doc/installation/PropCasesDoc';
-import StyledModeDoc from '@/doc/installation/StyledModeDoc';
-import UnstyledModeDoc from '@/doc/installation/UnstyledModeDoc';
-import UsageDoc from '@/doc/installation/UsageDoc';
-import CreateVueDoc from '@/doc/installation/videos/CreateVueDoc';
-import NuxtDoc from '@/doc/installation/videos/NuxtDoc';
+import DownloadDoc from '@/doc/installation/DownloadDoc.vue';
+import ExamplesDoc from '@/doc/installation/ExamplesDoc.vue';
+import PluginDoc from '@/doc/installation/PluginDoc.vue';
+import PropCasesDoc from '@/doc/installation/PropCasesDoc.vue';
+import StyledModeDoc from '@/doc/installation/StyledModeDoc.vue';
+import UnstyledModeDoc from '@/doc/installation/UnstyledModeDoc.vue';
+import UsageDoc from '@/doc/installation/UsageDoc.vue';
+import CreateVueDoc from '@/doc/installation/videos/CreateVueDoc.vue';
 
 export default {
     data() {
@@ -49,7 +47,7 @@ export default {
                 {
                     id: 'theming',
                     label: 'Theming',
-                    description: 'PrimeVue has two theming has modes; styled or unstyled.',
+                    description: 'PrimeVue has two theming modes; styled or unstyled.',
                     children: [
                         {
                             id: 'styled',
@@ -69,31 +67,14 @@ export default {
                     component: PropCasesDoc
                 },
                 {
-                    id: 'nuxtintegration',
-                    label: 'Nuxt Integration',
-                    component: NuxtIntegrationDoc
-                },
-                {
                     id: 'examples',
                     label: 'Examples',
                     component: ExamplesDoc
                 },
                 {
                     id: 'videos',
-                    label: 'Videos',
-                    description: 'Video tutorials to take you through step-by-step.',
-                    children: [
-                        {
-                            id: 'createvue',
-                            label: 'CreateVue',
-                            component: CreateVueDoc
-                        },
-                        {
-                            id: 'nuxt',
-                            label: 'Nuxt',
-                            component: NuxtDoc
-                        }
-                    ]
+                    label: 'Video Tutorial',
+                    component: CreateVueDoc
                 }
             ]
         };

@@ -6,7 +6,7 @@
         <Card>
             <template #title> Simple Card </template>
             <template #content>
-                <p>
+                <p class="m-0">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
                     quas!
                 </p>
@@ -25,19 +25,20 @@ export default {
 <Card>
     <template #title> Simple Card </template>
     <template #content>
-        <p>
+        <p class="m-0">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
             quas!
         </p>
     </template>
-</Card>`,
+</Card>
+`,
                 options: `
 <template>
     <div class="card">
         <Card>
             <template #title> Simple Card </template>
             <template #content>
-                <p>
+                <p class="m-0">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
                     quas!
                 </p>
@@ -47,14 +48,15 @@ export default {
 </template>
 
 <script>
-<\/script>`,
+<\/script>
+`,
                 composition: `
 <template>
     <div class="card">
         <Card>
             <template #title> Simple Card </template>
             <template #content>
-                <p>
+                <p class="m-0">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
                     quas!
                 </p>
@@ -64,7 +66,8 @@ export default {
 </template>
 
 <script setup>
-<\/script>`
+<\/script>
+`
             }
         };
     }

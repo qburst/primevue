@@ -26,7 +26,8 @@ export default {
         return {
             products: null,
             code: {
-                basic: `<Inplace @open="loadData">
+                basic: `
+<Inplace @open="loadData">
     <template #display> View Data </template>
     <template #content>
         <DataTable :value="products">
@@ -36,8 +37,10 @@ export default {
             <Column field="quantity" header="Quantity"></Column>
         </DataTable>
     </template>
-</Inplace>`,
-                options: `<template>
+</Inplace>
+`,
+                options: `
+<template>
     <div class="card">
         <Inplace @open="loadData">
             <template #display> View Data </template>
@@ -68,8 +71,10 @@ export default {
         }
     }
 }
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <Inplace @open="loadData">
             <template #display> View Data </template>
@@ -94,7 +99,8 @@ const products = ref();
 const loadData = () => {
     ProductService.getProductsSmall().then((data) => (products.value = data));
 }
-<\/script>`
+<\/script>
+`
             }
         };
     },

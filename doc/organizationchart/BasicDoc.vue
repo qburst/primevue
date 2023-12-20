@@ -44,12 +44,15 @@ export default {
                 ]
             },
             code: {
-                basic: `<OrganizationChart :value="data">
+                basic: `
+<OrganizationChart :value="data">
     <template #default="slotProps">
         <span>{{ slotProps.node.label }}</span>
     </template>
-</OrganizationChart>`,
-                options: `<template>
+</OrganizationChart>
+`,
+                options: `
+<template>
     <div class="card overflow-x-auto">
         <OrganizationChart :value="data">
             <template #default="slotProps">
@@ -93,8 +96,10 @@ export default {
         };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card overflow-x-auto">
         <OrganizationChart :value="data">
             <template #default="slotProps">
@@ -134,7 +139,8 @@ const data = ref({
         }
     ]
 });
-<\/script>`
+<\/script>
+`
             }
         };
     }

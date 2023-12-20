@@ -8,16 +8,16 @@
 
         <div v-if="selectedProduct" class="p-5 surface-card shadow-2 border-round">
             <div class="relative">
-                <img :src="`https://primefaces.org/cdn/primevue/images/product/${selectedProduct.image}`" :alt="selectedProduct.name" />
+                <img :src="`https://primefaces.org/cdn/primevue/images/product/${selectedProduct.image}`" :alt="selectedProduct.name" class="w-full sm:w-20rem" />
             </div>
             <div class="flex align-items-center justify-content-between mt-3 mb-2">
-                <span class="text-900 font-medium text-xl">{{ selectedProduct.name }}</span>
+                <span class="text-900 font-semibold text-xl">{{ selectedProduct.name }}</span>
                 <span class="text-900 text-xl ml-3">{{ '$' + selectedProduct.price }}</span>
             </div>
             <span class="text-600">{{ selectedProduct.category }}</span>
         </div>
 
-        <OverlayPanel ref="op" appendTo="body">
+        <OverlayPanel ref="op" appendTo="body" showCloseIcon>
             <DataTable v-model:selection="selectedProduct" :value="products" selectionMode="single" :paginator="true" :rows="5" @row-select="onProductSelect">
                 <Column field="name" header="Name" sortable style="min-width: 12rem"></Column>
                 <Column header="Image">
@@ -26,9 +26,7 @@
                     </template>
                 </Column>
                 <Column field="price" header="Price" sortable style="min-width: 8rem">
-                    <template #body="slotProps">
-                        {{ slotProps.data.price }}
-                    </template>
+                    <template #body="slotProps"> $ {{ slotProps.data.price }} </template>
                 </Column>
             </DataTable>
         </OverlayPanel>
@@ -44,52 +42,55 @@ export default {
             products: null,
             selectedProduct: null,
             code: {
-                basic: `<Toast />
+                basic: `
+<Toast />
 <Button type="button" icon="pi pi-search" :label="selectedProduct ? selectedProduct.name : 'Select a Product'" @click="toggle" aria-haspopup="true" aria-controls="overlay_panel" />
 
 <div v-if="selectedProduct" class="p-5 surface-card shadow-2 border-round">
     <div class="relative">
-        <img :src="\`https://primefaces.org/cdn/primevue/images/product/\${selectedProduct.image}\`" :alt="selectedProduct.name" class="w-4rem shadow-1" />
+        <img :src="\`/images/product/\${selectedProduct.image}\`" :alt="selectedProduct.name" class="w-4rem shadow-1" class="w-full sm:w-20rem" />
     </div>
     <div class="flex align-items-center justify-content-between mt-3 mb-2">
-        <span class="text-900 font-medium text-xl">{{ selectedProduct.name }}</span>
+        <span class="text-900 font-semibold text-xl">{{ selectedProduct.name }}</span>
         <span class="text-900 text-xl ml-3">{{ '$' + selectedProduct.price }}</span>
     </div>
     <span class="text-600">{{ selectedProduct.category }}</span>
 </div>
 
-<OverlayPanel ref="op" appendTo="body">
+<OverlayPanel ref="op" appendTo="body" showCloseIcon>
     <DataTable v-model:selection="selectedProduct" :value="products" selectionMode="single" :paginator="true" :rows="5" @row-select="onProductSelect">
         <Column field="name" header="Name" sortable style="width: 50%"></Column>
         <Column header="Image" style="width: 20%">
             <template #body="slotProps">
-                <img :src="\`https://primefaces.org/cdn/primevue/images/product/\${selectedProduct.image}\`" :alt="slotProps.data.image" class="w-4rem shadow-1" />
+                <img :src="\`/images/product/\${selectedProduct.image}\`" :alt="slotProps.data.image" class="w-4rem shadow-1" />
             </template>
         </Column>
         <Column field="price" header="Price" sortable style="width: 30%">
             <template #body="slotProps">
-                {{ slotProps.data.price }}
+                $ {{ slotProps.data.price }}
             </template>
         </Column>
     </DataTable>
-</OverlayPanel>`,
-                options: `<template>
+</OverlayPanel>
+`,
+                options: `
+<template>
     <div class="card flex flex-column align-items-center gap-3">
         <Toast />
         <Button type="button" icon="pi pi-search" :label="selectedProduct ? selectedProduct.name : 'Select a Product'" @click="toggle" aria-haspopup="true" aria-controls="overlay_panel" />
 
         <div v-if="selectedProduct" class="p-5 surface-card shadow-2 border-round">
             <div class="relative">
-                <img :src="\`https://primefaces.org/cdn/primevue/images/product/\${selectedProduct.image}\`" :alt="selectedProduct.name" />
+                <img :src="\`https://primefaces.org/cdn/primevue/images/product/\${selectedProduct.image}\`" :alt="selectedProduct.name" class="w-full sm:w-20rem" />
             </div>
             <div class="flex align-items-center justify-content-between mt-3 mb-2">
-                <span class="text-900 font-medium text-xl">{{ selectedProduct.name }}</span>
+                <span class="text-900 font-semibold text-xl">{{ selectedProduct.name }}</span>
                 <span class="text-900 text-xl ml-3">{{ '$' + selectedProduct.price }}</span>
             </div>
             <span class="text-600">{{ selectedProduct.category }}</span>
         </div>
 
-        <OverlayPanel ref="op" appendTo="body">
+        <OverlayPanel ref="op" appendTo="body" showCloseIcon>
             <DataTable v-model:selection="selectedProduct" :value="products" selectionMode="single" :paginator="true" :rows="5" @row-select="onProductSelect">
                 <Column field="name" header="Name" sortable style="min-width: 12rem"></Column>
                 <Column header="Image">
@@ -99,7 +100,7 @@ export default {
                 </Column>
                 <Column field="price" header="Price" sortable style="min-width: 8rem">
                     <template #body="slotProps">
-                        {{ slotProps.data.price }}
+                        $ {{ slotProps.data.price }}
                     </template>
                 </Column>
             </DataTable>
@@ -132,24 +133,26 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex flex-column align-items-center gap-3">
         <Toast />
         <Button type="button" icon="pi pi-search" :label="selectedProduct ? selectedProduct.name : 'Select a Product'" @click="toggle" aria-haspopup="true" aria-controls="overlay_panel" />
 
         <div v-if="selectedProduct" class="p-5 surface-card shadow-2 border-round">
             <div class="relative">
-                <img :src="\`https://primefaces.org/cdn/primevue/images/product/\${selectedProduct.image}\`" :alt="selectedProduct.name" />
+                <img :src="\`https://primefaces.org/cdn/primevue/images/product/\${selectedProduct.image}\`" :alt="selectedProduct.name" class="w-full sm:w-20rem" />
             </div>
             <div class="flex align-items-center justify-content-between mt-3 mb-2">
-                <span class="text-900 font-medium text-xl">{{ selectedProduct.name }}</span>
+                <span class="text-900 font-semibold text-xl">{{ selectedProduct.name }}</span>
                 <span class="text-900 text-xl ml-3">{{ '$' + selectedProduct.price }}</span>
             </div>
             <span class="text-600">{{ selectedProduct.category }}</span>
         </div>
 
-        <OverlayPanel ref="op" appendTo="body">
+        <OverlayPanel ref="op" appendTo="body" showCloseIcon>
             <DataTable v-model:selection="selectedProduct" :value="products" selectionMode="single" :paginator="true" :rows="5" @row-select="onProductSelect">
                 <Column field="name" header="Name" sortable style="min-width: 12rem"></Column>
                 <Column header="Image">
@@ -159,7 +162,7 @@ export default {
                 </Column>
                 <Column field="price" header="Price" sortable style="min-width: 8rem">
                     <template #body="slotProps">
-                        {{ slotProps.data.price }}
+                        $ {{ slotProps.data.price }}
                     </template>
                 </Column>
             </DataTable>
@@ -191,7 +194,8 @@ const onProductSelect = (event) => {
     op.value.hide();
     toast.add({ severity: 'info', summary: 'Product Selected', detail: event.data.name, life: 3000 });
 }
-<\/script>`,
+<\/script>
+`,
                 data: `
 /* ProductService */
 {

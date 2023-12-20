@@ -20,13 +20,16 @@ export default {
     data() {
         return {
             code: {
-                basic: `<ScrollTop target="parent"
+                basic: `
+<ScrollTop target="parent"
     :pt="{ 
         root: { class: 'w-2rem h-2rem bg-primary' },
         icon: { class: 'w-1rem h-1rem' }
     }"
-/>`,
-                options: `<template>
+/>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <ScrollPanel style="width: 250px; height: 200px">
             <p>
@@ -44,8 +47,10 @@ export default {
             />
         </ScrollPanel>
     </div>
-</template>`,
-                composition: `<template>
+</template>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <ScrollPanel style="width: 250px; height: 200px">
             <p>
@@ -63,7 +68,8 @@ export default {
             />
         </ScrollPanel>
     </div>
-</template>`
+</template>
+`
             }
         };
     }

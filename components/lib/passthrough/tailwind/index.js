@@ -44,7 +44,6 @@ export default {
                 stroke-dasharray: 1, 200;
                 stroke-dashoffset: 0;
             }
-            
             50% {
                 stroke-dasharray: 89, 200;
                 stroke-dashoffset: -35px;
@@ -306,7 +305,7 @@ export default {
             class: 'overflow-hidden relative float-left h-full w-full z-[1]'
         },
         content: {
-            class: 'box-border h-[calc(100%+18px)] overflow-scroll pr-[18px] pb-[18px] pl-0 pt-0 relative scrollbar-none w-[calc(100%+18px)] [&::-webkit-scrollbar]:hidden'
+            class: 'box-border h-[calc(100%+18px)] overflow-scroll pr-[18px] pb-[18px] pl-0 pt-0 relative w-[calc(100%+18px)] [&::-webkit-scrollbar]:hidden'
         },
         barX: {
             class: ['relative bg-gray-100 invisible rounded cursor-pointer h-[9px] bottom-0 z-[2]', 'transition duration-[250ms] ease-linear']
@@ -326,22 +325,22 @@ export default {
             class: 'overflow-y-hidden overscroll-contain overscroll-auto scroll-smooth [&::-webkit-scrollbar]:hidden' // Overflow and scrollbar styles.
         },
         previousButton: {
-            class: ['h-full flex items-center justify-center absolute top-0 z-20', 'left-0', 'bg-white text-blue-500 w-12 shadow-md rounded-none', 'dark:bg-gray-900 dark:border-blue-900/40 dark:text-white/80 ]'] // Flex and absolute positioning styles.
+            class: ['h-full flex items-center justify-center !absolute top-0 z-20', 'left-0', 'bg-white text-blue-500 w-12 shadow-md rounded-none', 'dark:bg-gray-900 dark:border-blue-900/40 dark:text-white/80 ]'] // Flex and absolute positioning styles.
         },
         nextButton: {
-            class: ['h-full flex items-center justify-center absolute top-0 z-20', 'right-0', 'bg-white text-blue-500 w-12 shadow-md rounded-none', 'dark:bg-gray-900 dark:border-blue-900/40 dark:text-white/80 '] // Flex and absolute positioning styles.
+            class: ['h-full flex items-center justify-center !absolute top-0 z-20', 'right-0', 'bg-white text-blue-500 w-12 shadow-md rounded-none', 'dark:bg-gray-900 dark:border-blue-900/40 dark:text-white/80 '] // Flex and absolute positioning styles.
         },
         nav: {
-            class: ['flex flex-1 list-none m-0 p-0', 'bg-white border border-gray-300 border-0 border-b-2', 'dark:bg-gray-900 dark:border-blue-900/40 dark:text-white/80 '] // Flex, list, margin, padding, and border styles.
+            class: ['flex flex-1 list-none m-0 p-0', 'bg-transparent border border-gray-300 border-0 border-b-2', 'dark:border-blue-900/40 dark:text-white/80 '] // Flex, list, margin, padding, and border styles.
         },
         tabpanel: {
             header: ({ props }) => ({
-                class: ['mr-0', { 'cursor-default pointer-events-none select-none user-select-none opacity-60': props?.disabled }] // Margin and condition-based styles.
+                class: ['mr-0', { 'cursor-default pointer-events-none select-none select-none opacity-60': props?.disabled }] // Margin and condition-based styles.
             }),
             headerAction: ({ parent, context }) => ({
                 class: [
-                    'items-center cursor-pointer flex overflow-hidden relative select-none text-decoration-none user-select-none', // Flex and overflow styles.
-                    'border-b-2 p-5 font-bold rounded-t-lg transition-shadow duration-200 m-0', // Border, padding, font, and transition styles.
+                    'items-center cursor-pointer flex overflow-hidden relative select-none text-decoration-none select-none', // Flex and overflow styles.
+                    'border-b-2 p-5 font-bold rounded-t-md transition-shadow duration-200 m-0', // Border, padding, font, and transition styles.
                     'transition-colors duration-200', // Transition duration style.
                     'focus:outline-none focus:outline-offset-0 focus:shadow-[inset_0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[inset_0_0_0_0.2rem_rgba(147,197,253,0.5)]', // Focus styles.
                     {
@@ -356,7 +355,7 @@ export default {
                 class: ['leading-none whitespace-nowrap'] // Leading and whitespace styles.
             },
             content: {
-                class: ['bg-white p-5 border-0 text-gray-700 rounded-bl-2xl rounded-br-2xl', 'dark:bg-gray-900 dark:border-blue-900/40 dark:text-white/80'] // Background, padding, border, and text styles.
+                class: ['bg-white p-5 border-0 text-gray-700 rounded-bl-md rounded-br-md', 'dark:bg-gray-900 dark:border-blue-900/40 dark:text-white/80'] // Background, padding, border, and text styles.
             }
         }
     },
@@ -369,11 +368,6 @@ export default {
                 }
             ]
         }),
-        splitterpanel: {
-            root: {
-                class: 'flex grow'
-            }
-        },
         gutter: ({ props }) => ({
             class: [
                 'flex items-center justify-center shrink-0',
@@ -394,11 +388,16 @@ export default {
             ]
         })
     },
+    splitterpanel: {
+        root: {
+            class: 'flex grow'
+        }
+    },
     dialog: {
         root: ({ state }) => ({
             class: [
                 'rounded-lg shadow-lg border-0',
-                'max-h-90 transform scale-100',
+                'max-h-[90%] transform scale-100',
                 'm-0 w-[50vw]',
                 'dark:border dark:border-blue-900/40',
                 {
@@ -431,7 +430,6 @@ export default {
             class: [
                 'overflow-y-auto',
                 'bg-white text-gray-700 px-6 pb-8 pt-0',
-                ,
                 'dark:bg-gray-900  dark:text-white/80',
                 {
                     grow: state.maximized
@@ -442,7 +440,7 @@ export default {
             ]
         }),
         footer: {
-            class: ['shrink-0 ', 'border-t-0 bg-white text-gray-700 px-6 pb-6 text-right rounded-b-lg', 'dark:bg-gray-900  dark:text-white/80']
+            class: ['flex gap-2 shrink-0 justify-end align-center', 'border-t-0 bg-white text-gray-700 px-6 pb-6 text-right rounded-b-lg', 'dark:bg-gray-900  dark:text-white/80']
         },
         mask: ({ props }) => ({
             class: ['transition duration-200', { 'bg-black/40': props.modal }]
@@ -504,7 +502,7 @@ export default {
             class: 'ml-4'
         },
         footer: {
-            class: 'text-right px-5 py-5 pt-0'
+            class: 'flex gap-2 justify-end align-center text-right px-5 py-5 pt-0'
         },
         transition: TRANSITIONS.overlay
     },
@@ -513,7 +511,7 @@ export default {
             class: [
                 'bg-white text-gray-700 border-0 rounded-md shadow-lg',
                 'z-40 transform origin-center',
-                'absolute left-0 top-0',
+                'absolute left-0 top-0 mt-3',
                 'before:absolute before:w-0 before:-top-3 before:h-0 before:border-transparent before:border-solid before:ml-6 before:border-x-[0.75rem] before:border-b-[0.75rem] before:border-t-0 before:border-b-white dark:before:border-b-gray-900',
                 'dark:border dark:border-blue-900/40 dark:bg-gray-900  dark:text-white/80'
             ]
@@ -741,48 +739,71 @@ export default {
     button: {
         root: ({ props, context }) => ({
             class: [
-                'items-center cursor-pointer inline-flex overflow-hidden relative select-none text-center align-bottom h-full',
+                'items-center cursor-pointer inline-flex overflow-hidden relative select-none text-center align-bottom',
                 'transition duration-200 ease-in-out',
-                'focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(157,193,251,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(147,197,253,0.7),0_1px_2px_0_rgba(0,0,0,0)]', // Primary button focus
+                'focus:outline-none focus:outline-offset-0',
                 {
-                    'text-white bg-blue-500 border border-blue-500 hover:bg-blue-600 hover:border-blue-600': !props.link && props.severity === null && !props.text && !props.outlined && !props.plain,
-                    'text-blue-600 bg-transparent border-transparent': props.link
+                    'text-white dark:text-gray-900 bg-blue-500 dark:bg-blue-400 border border-blue-500 dark:border-blue-400 hover:bg-blue-600 dark:hover:bg-blue-500 hover:border-blue-600 dark:hover:border-blue-500 focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(157,193,251,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(147,197,253,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
+                        !props.link && props.severity === null && !props.text && !props.outlined && !props.plain,
+                    'text-blue-600 bg-transparent border-transparent focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(157,193,251,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(147,197,253,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
+                        props.link
                 },
                 {
-                    'text-white bg-gray-500 border border-gray-500 hover:bg-gray-600 hover:border-gray-600': props.severity === 'secondary' && !props.text && !props.outlined && !props.plain,
-                    'text-white bg-green-500 border border-green-500 hover:bg-green-600 hover:border-green-600': props.severity === 'success' && !props.text && !props.outlined && !props.plain,
-                    'text-white bg-blue-500 border border-blue-500 hover:bg-blue-600 hover:border-blue-600': props.severity === 'info' && !props.text && !props.outlined && !props.plain,
-                    'text-white bg-orange-500 border border-orange-500 hover:bg-orange-600 hover:border-orange-600': props.severity === 'warning' && !props.text && !props.outlined && !props.plain,
-                    'text-white bg-purple-500 border border-purple-500 hover:bg-purple-600 hover:border-purple-600': props.severity === 'help' && !props.text && !props.outlined && !props.plain,
-                    'text-white bg-red-500 border border-red-500 hover:bg-red-600 hover:border-red-600': props.severity === 'danger' && !props.text && !props.outlined && !props.plain
+                    'focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(176,185,198,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(203,213,225,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
+                        props.severity === 'secondary',
+                    'focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(136,234,172,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(134,239,172,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
+                        props.severity === 'success',
+                    'focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(157,193,251,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(147,197,253,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
+                        props.severity === 'info',
+                    'focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(250,207,133,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(252,211,77,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
+                        props.severity === 'warning',
+                    'focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(212,170,251,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(216,180,254,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
+                        props.severity === 'help',
+                    'focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(247,162,162,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(252,165,165,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
+                        props.severity === 'danger'
+                },
+                {
+                    'text-white dark:text-gray-900 bg-gray-500 dark:bg-gray-400 border border-gray-500 dark:border-gray-400 hover:bg-gray-600 dark:hover:bg-gray-500 hover:border-gray-600 dark:hover:border-gray-500':
+                        props.severity === 'secondary' && !props.text && !props.outlined && !props.plain,
+                    'text-white dark:text-gray-900 bg-green-500 dark:bg-green-400 border border-green-500 dark:border-green-400 hover:bg-green-600 dark:hover:bg-green-500 hover:border-green-600 dark:hover:border-green-500':
+                        props.severity === 'success' && !props.text && !props.outlined && !props.plain,
+                    'text-white dark:text-gray-900 dark:bg-blue-400 bg-blue-500 dark:bg-blue-400 border border-blue-500 dark:border-blue-400 hover:bg-blue-600 hover:border-blue-600 dark:hover:bg-blue-500 dark:hover:border-blue-500':
+                        props.severity === 'info' && !props.text && !props.outlined && !props.plain,
+                    'text-white dark:text-gray-900 bg-orange-500 dark:bg-orange-400 border border-orange-500 dark:border-orange-400 hover:bg-orange-600 dark:hover:bg-orange-500 hover:border-orange-600 dark:hover:border-orange-500':
+                        props.severity === 'warning' && !props.text && !props.outlined && !props.plain,
+                    'text-white dark:text-gray-900 bg-purple-500 dark:bg-purple-400 border border-purple-500 dark:border-purple-400 hover:bg-purple-600 dark:hover:bg-purple-500 hover:border-purple-600 dark:hover:border-purple-500':
+                        props.severity === 'help' && !props.text && !props.outlined && !props.plain,
+                    'text-white dark:text-gray-900 bg-red-500 dark:bg-red-400 border border-red-500 dark:border-red-400 hover:bg-red-600 dark:hover:bg-red-500 hover:border-red-600 dark:hover:border-red-500':
+                        props.severity === 'danger' && !props.text && !props.outlined && !props.plain
                 },
                 { 'shadow-lg': props.raised },
                 { 'rounded-md': !props.rounded, 'rounded-full': props.rounded },
                 {
                     'bg-transparent border-transparent': props.text && !props.plain,
-                    'text-blue-500 hover:bg-blue-300/20': props.text && (props.severity === null || props.severity === 'info') && !props.plain,
-                    'text-gray-500 hover:bg-gray-300/20': props.text && props.severity === 'secondary' && !props.plain,
-                    'text-green-500 hover:bg-green-300/20': props.text && props.severity === 'success' && !props.plain,
-                    'text-orange-500 hover:bg-orange-300/20': props.text && props.severity === 'warning' && !props.plain,
-                    'text-purple-500 hover:bg-purple-300/20': props.text && props.severity === 'help' && !props.plain,
-                    'text-red-500 hover:bg-red-300/20': props.text && props.severity === 'danger' && !props.plain
+                    'text-blue-500 dark:text-blue-400 hover:bg-blue-300/20': props.text && (props.severity === null || props.severity === 'info') && !props.plain,
+                    'text-gray-500 dark:text-gray-400 hover:bg-gray-300/20': props.text && props.severity === 'secondary' && !props.plain,
+                    'text-green-500 dark:text-green-400 hover:bg-green-300/20': props.text && props.severity === 'success' && !props.plain,
+                    'text-orange-500 dark:text-orange-400 hover:bg-orange-300/20': props.text && props.severity === 'warning' && !props.plain,
+                    'text-purple-500 dark:text-purple-400 hover:bg-purple-300/20': props.text && props.severity === 'help' && !props.plain,
+                    'text-red-500 dark:text-red-400 hover:bg-red-300/20': props.text && props.severity === 'danger' && !props.plain
                 },
                 { 'shadow-lg': props.raised && props.text },
                 {
-                    'text-gray-500 hover:bg-gray-300/20': props.plain & props.text,
-                    'text-gray-500 border border-gray-500 hover:bg-gray-300/20': props.plain & props.outlined,
-                    'text-white bg-gray-500 border border-gray-500 hover:bg-gray-600 hover:border-gray-600': props.plain & !props.outlined & !props.text
+                    'text-gray-500 hover:bg-gray-300/20': props.plain && props.text,
+                    'text-gray-500 border border-gray-500 hover:bg-gray-300/20': props.plain && props.outlined,
+                    'text-white bg-gray-500 border border-gray-500 hover:bg-gray-600 hover:border-gray-600': props.plain && !props.outlined && !props.text
                 },
                 {
                     'bg-transparent border': props.outlined && !props.plain,
-                    'text-blue-500 border border-blue-500 hover:bg-blue-300/20': props.outlined && (props.severity === null || props.severity === 'info') && !props.plain,
-                    'text-gray-500 border border-gray-500 hover:bg-gray-300/20': props.outlined && props.severity === 'secondary' && !props.plain,
-                    'text-green-500 border border-green-500 hover:bg-green-300/20': props.outlined && props.severity === 'success' && !props.plain,
-                    'text-orange-500 border border-orange-500 hover:bg-orange-300/20': props.outlined && props.severity === 'warning' && !props.plain,
-                    'text-purple-500 border border-purple-500 hover:bg-purple-300/20': props.outlined && props.severity === 'help' && !props.plain,
-                    'text-red-500 border border-red-500 hover:bg-red-300/20': props.outlined && props.severity === 'danger' && !props.plain
+                    'text-blue-500 dark:text-blue-400 border border-blue-500 dark:border-blue-400 hover:bg-blue-300/20': props.outlined && (props.severity === null || props.severity === 'info') && !props.plain,
+                    'text-gray-500 dark:text-gray-400 border border-gray-500 dark:border-gray-400 hover:bg-gray-300/20': props.outlined && props.severity === 'secondary' && !props.plain,
+                    'text-green-500 dark:text-green-400 border border-green-500 dark:border-green-400 hover:bg-green-300/20': props.outlined && props.severity === 'success' && !props.plain,
+                    'text-orange-500 dark:text-orange-400 border border-orange-500 dark:border-orange-400 hover:bg-orange-300/20': props.outlined && props.severity === 'warning' && !props.plain,
+                    'text-purple-500 dark:text-purple-400 border border-purple-500 dark:border-purple-400 hover:bg-purple-300/20': props.outlined && props.severity === 'help' && !props.plain,
+                    'text-red-500 dark:text-red-400 border border-red-500 dark:border-red-400 hover:bg-red-300/20': props.outlined && props.severity === 'danger' && !props.plain
                 },
                 { 'px-4 py-3 text-base': props.size === null, 'text-xs py-2 px-3': props.size === 'small', 'text-xl py-3 px-4': props.size === 'large' },
+                { 'flex-column': props.iconPos == 'top' || props.iconPos == 'bottom' },
                 { 'opacity-60 pointer-events-none cursor-default': context.disabled }
             ]
         }),
@@ -793,7 +814,8 @@ export default {
                 'font-bold',
                 {
                     'hover:underline': props.link
-                }
+                },
+                { 'invisible w-0': props.label == null }
             ]
         }),
         icon: ({ props }) => ({
@@ -801,9 +823,9 @@ export default {
                 'mx-0',
                 {
                     'mr-2': props.iconPos == 'left' && props.label != null,
-                    'ml-2': props.iconPos == 'right' && props.label != null,
+                    'ml-2 order-1': props.iconPos == 'right' && props.label != null,
                     'mb-2': props.iconPos == 'top' && props.label != null,
-                    'mt-2': props.iconPos == 'bottom' && props.label != null
+                    'mt-2 order-2': props.iconPos == 'bottom' && props.label != null
                 }
             ]
         }),
@@ -816,16 +838,24 @@ export default {
             class: 'absolute flex'
         },
         button: {
-            root: ({ parent }) => ({
-                class: [
-                    'w-16 !h-16 !rounded-full justify-center z-10',
-                    {
-                        'rotate-45': parent.state.d_visible
-                    }
-                ]
-            }),
-            label: {
-                class: 'hidden'
+            root: ({ parent }) => {
+                return {
+                    class: [
+                        'text-white dark:text-gray-900 bg-blue-500 dark:bg-blue-400 border border-blue-500 dark:border-blue-400 hover:bg-blue-600 dark:hover:bg-blue-500 hover:border-blue-600 dark:hover:border-blue-500 focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(157,193,251,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(147,197,253,0.7),0_1px_2px_0_rgba(0,0,0,0)]',
+                        'flex items-center justify-center',
+                        'transition duration-200 ease-in-out',
+                        'focus:outline-none focus:outline-offset-0',
+                        'w-16 !h-16 !rounded-full justify-center z-10',
+                        {
+                            'rotate-45': parent.state.d_visible
+                        }
+                    ]
+                };
+            },
+            label: () => {
+                return {
+                    class: 'hidden'
+                };
             }
         },
         menu: {
@@ -862,19 +892,155 @@ export default {
             class: ['inline-flex relative', 'rounded-md', { 'shadow-lg': props.raised }]
         }),
         button: {
-            root: ({ parent }) => ({
-                class: ['rounded-r-none border-r-0', { 'rounded-l-full': parent.props.rounded }]
-            }),
-            icon: {
-                class: 'mr-2'
+            root: ({ props, parent }) => {
+                return {
+                    class: [
+                        'rounded-r-none border-r-0',
+                        { 'rounded-l-full': parent.props.rounded },
+                        {
+                            'text-white dark:text-gray-900 bg-blue-500 dark:bg-blue-400 border border-blue-500 dark:border-blue-400 hover:bg-blue-600 dark:hover:bg-blue-500 hover:border-blue-600 dark:hover:border-blue-500 focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(157,193,251,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(147,197,253,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
+                                !parent.props.link && parent.props.severity === null && !parent.props.text && !parent.props.outlined && !parent.props.plain,
+                            'text-blue-600 bg-transparent border-transparent focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(157,193,251,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(147,197,253,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
+                                parent.props.link
+                        },
+                        {
+                            'focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(176,185,198,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(203,213,225,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
+                                props.severity === 'secondary',
+                            'focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(136,234,172,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(134,239,172,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
+                                props.severity === 'success',
+                            'focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(157,193,251,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(147,197,253,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
+                                props.severity === 'info',
+                            'focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(250,207,133,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(252,211,77,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
+                                props.severity === 'warning',
+                            'focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(212,170,251,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(216,180,254,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
+                                props.severity === 'help',
+                            'focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(247,162,162,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(252,165,165,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
+                                props.severity === 'danger'
+                        },
+                        {
+                            'text-white dark:text-gray-900 bg-gray-500 dark:bg-gray-400 border border-gray-500 dark:border-gray-400 hover:bg-gray-600 dark:hover:bg-gray-500 hover:border-gray-600 dark:hover:border-gray-500':
+                                props.severity === 'secondary' && !props.text && !props.outlined && !props.plain,
+                            'text-white dark:text-gray-900 bg-green-500 dark:bg-green-400 border border-green-500 dark:border-green-400 hover:bg-green-600 dark:hover:bg-green-500 hover:border-green-600 dark:hover:border-green-500':
+                                props.severity === 'success' && !props.text && !props.outlined && !props.plain,
+                            'text-white dark:text-gray-900 dark:bg-blue-400 bg-blue-500 dark:bg-blue-400 border border-blue-500 dark:border-blue-400 hover:bg-blue-600 hover:border-blue-600 dark:hover:bg-blue-500 dark:hover:border-blue-500':
+                                props.severity === 'info' && !props.text && !props.outlined && !props.plain,
+                            'text-white dark:text-gray-900 bg-orange-500 dark:bg-orange-400 border border-orange-500 dark:border-orange-400 hover:bg-orange-600 dark:hover:bg-orange-500 hover:border-orange-600 dark:hover:border-orange-500':
+                                props.severity === 'warning' && !props.text && !props.outlined && !props.plain,
+                            'text-white dark:text-gray-900 bg-purple-500 dark:bg-purple-400 border border-purple-500 dark:border-purple-400 hover:bg-purple-600 dark:hover:bg-purple-500 hover:border-purple-600 dark:hover:border-purple-500':
+                                props.severity === 'help' && !props.text && !props.outlined && !props.plain,
+                            'text-white dark:text-gray-900 bg-red-500 dark:bg-red-400 border border-red-500 dark:border-red-400 hover:bg-red-600 dark:hover:bg-red-500 hover:border-red-600 dark:hover:border-red-500':
+                                props.severity === 'danger' && !props.text && !props.outlined && !props.plain
+                        },
+                        { 'shadow-lg': props.raised },
+                        { 'rounded-md': !props.rounded, 'rounded-full': props.rounded },
+                        {
+                            'bg-transparent border-transparent': props.text && !props.plain,
+                            'text-blue-500 dark:text-blue-400 hover:bg-blue-300/20': props.text && (props.severity === null || props.severity === 'info') && !props.plain,
+                            'text-gray-500 dark:text-gray-400 hover:bg-gray-300/20': props.text && props.severity === 'secondary' && !props.plain,
+                            'text-green-500 dark:text-green-400 hover:bg-green-300/20': props.text && props.severity === 'success' && !props.plain,
+                            'text-orange-500 dark:text-orange-400 hover:bg-orange-300/20': props.text && props.severity === 'warning' && !props.plain,
+                            'text-purple-500 dark:text-purple-400 hover:bg-purple-300/20': props.text && props.severity === 'help' && !props.plain,
+                            'text-red-500 dark:text-red-400 hover:bg-red-300/20': props.text && props.severity === 'danger' && !props.plain
+                        },
+                        { 'shadow-lg': props.raised && props.text },
+                        {
+                            'text-gray-500 hover:bg-gray-300/20': props.plain && props.text,
+                            'text-gray-500 border border-gray-500 hover:bg-gray-300/20': props.plain && props.outlined,
+                            'text-white bg-gray-500 border border-gray-500 hover:bg-gray-600 hover:border-gray-600': props.plain && !props.outlined && !props.text
+                        },
+                        {
+                            'bg-transparent border': props.outlined && !props.plain,
+                            'text-blue-500 dark:text-blue-400 border border-blue-500 dark:border-blue-400 hover:bg-blue-300/20': props.outlined && (props.severity === null || props.severity === 'info') && !props.plain,
+                            'text-gray-500 dark:text-gray-400 border border-gray-500 dark:border-gray-400 hover:bg-gray-300/20': props.outlined && props.severity === 'secondary' && !props.plain,
+                            'text-green-500 dark:text-green-400 border border-green-500 dark:border-green-400 hover:bg-green-300/20': props.outlined && props.severity === 'success' && !props.plain,
+                            'text-orange-500 dark:text-orange-400 border border-orange-500 dark:border-orange-400 hover:bg-orange-300/20': props.outlined && props.severity === 'warning' && !props.plain,
+                            'text-purple-500 dark:text-purple-400 border border-purple-500 dark:border-purple-400 hover:bg-purple-300/20': props.outlined && props.severity === 'help' && !props.plain,
+                            'text-red-500 dark:text-red-400 border border-red-500 dark:border-red-400 hover:bg-red-300/20': props.outlined && props.severity === 'danger' && !props.plain
+                        },
+                        { 'px-4 py-3 text-base': props.size === null, 'text-xs py-2 px-3': props.size === 'small', 'text-xl py-3 px-4': props.size === 'large' }
+                    ]
+                };
+            },
+            icon: () => {
+                return {
+                    class: 'mr-2'
+                };
             }
         },
         menubutton: {
-            root: ({ parent }) => ({
-                class: ['rounded-l-none', { 'rounded-r-full': parent.props.rounded }]
-            }),
-            label: {
-                class: 'hidden'
+            root: ({ props, parent }) => {
+                return {
+                    class: [
+                        'rounded-l-none',
+                        { 'rounded-r-full': parent.props.rounded },
+                        {
+                            'text-white dark:text-gray-900 bg-blue-500 dark:bg-blue-400 border border-blue-500 dark:border-blue-400 hover:bg-blue-600 dark:hover:bg-blue-500 hover:border-blue-600 dark:hover:border-blue-500 focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(157,193,251,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(147,197,253,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
+                                !parent.props.link && parent.props.severity === null && !parent.props.text && !parent.props.outlined && !parent.props.plain,
+                            'text-blue-600 bg-transparent border-transparent focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(157,193,251,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(147,197,253,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
+                                parent.props.link
+                        },
+                        {
+                            'focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(176,185,198,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(203,213,225,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
+                                props.severity === 'secondary',
+                            'focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(136,234,172,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(134,239,172,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
+                                props.severity === 'success',
+                            'focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(157,193,251,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(147,197,253,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
+                                props.severity === 'info',
+                            'focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(250,207,133,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(252,211,77,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
+                                props.severity === 'warning',
+                            'focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(212,170,251,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(216,180,254,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
+                                props.severity === 'help',
+                            'focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(247,162,162,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(252,165,165,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
+                                props.severity === 'danger'
+                        },
+                        {
+                            'text-white dark:text-gray-900 bg-gray-500 dark:bg-gray-400 border border-gray-500 dark:border-gray-400 hover:bg-gray-600 dark:hover:bg-gray-500 hover:border-gray-600 dark:hover:border-gray-500':
+                                props.severity === 'secondary' && !props.text && !props.outlined && !props.plain,
+                            'text-white dark:text-gray-900 bg-green-500 dark:bg-green-400 border border-green-500 dark:border-green-400 hover:bg-green-600 dark:hover:bg-green-500 hover:border-green-600 dark:hover:border-green-500':
+                                props.severity === 'success' && !props.text && !props.outlined && !props.plain,
+                            'text-white dark:text-gray-900 dark:bg-blue-400 bg-blue-500 dark:bg-blue-400 border border-blue-500 dark:border-blue-400 hover:bg-blue-600 hover:border-blue-600 dark:hover:bg-blue-500 dark:hover:border-blue-500':
+                                props.severity === 'info' && !props.text && !props.outlined && !props.plain,
+                            'text-white dark:text-gray-900 bg-orange-500 dark:bg-orange-400 border border-orange-500 dark:border-orange-400 hover:bg-orange-600 dark:hover:bg-orange-500 hover:border-orange-600 dark:hover:border-orange-500':
+                                props.severity === 'warning' && !props.text && !props.outlined && !props.plain,
+                            'text-white dark:text-gray-900 bg-purple-500 dark:bg-purple-400 border border-purple-500 dark:border-purple-400 hover:bg-purple-600 dark:hover:bg-purple-500 hover:border-purple-600 dark:hover:border-purple-500':
+                                props.severity === 'help' && !props.text && !props.outlined && !props.plain,
+                            'text-white dark:text-gray-900 bg-red-500 dark:bg-red-400 border border-red-500 dark:border-red-400 hover:bg-red-600 dark:hover:bg-red-500 hover:border-red-600 dark:hover:border-red-500':
+                                props.severity === 'danger' && !props.text && !props.outlined && !props.plain
+                        },
+                        { 'shadow-lg': props.raised },
+                        { 'rounded-md': !props.rounded, 'rounded-full': props.rounded },
+                        {
+                            'bg-transparent border-transparent': props.text && !props.plain,
+                            'text-blue-500 dark:text-blue-400 hover:bg-blue-300/20': props.text && (props.severity === null || props.severity === 'info') && !props.plain,
+                            'text-gray-500 dark:text-gray-400 hover:bg-gray-300/20': props.text && props.severity === 'secondary' && !props.plain,
+                            'text-green-500 dark:text-green-400 hover:bg-green-300/20': props.text && props.severity === 'success' && !props.plain,
+                            'text-orange-500 dark:text-orange-400 hover:bg-orange-300/20': props.text && props.severity === 'warning' && !props.plain,
+                            'text-purple-500 dark:text-purple-400 hover:bg-purple-300/20': props.text && props.severity === 'help' && !props.plain,
+                            'text-red-500 dark:text-red-400 hover:bg-red-300/20': props.text && props.severity === 'danger' && !props.plain
+                        },
+                        { 'shadow-lg': props.raised && props.text },
+                        {
+                            'text-gray-500 hover:bg-gray-300/20': props.plain && props.text,
+                            'text-gray-500 border border-gray-500 hover:bg-gray-300/20': props.plain && props.outlined,
+                            'text-white bg-gray-500 border border-gray-500 hover:bg-gray-600 hover:border-gray-600': props.plain && !props.outlined && !props.text
+                        },
+                        {
+                            'bg-transparent border': props.outlined && !props.plain,
+                            'text-blue-500 dark:text-blue-400 border border-blue-500 dark:border-blue-400 hover:bg-blue-300/20': props.outlined && (props.severity === null || props.severity === 'info') && !props.plain,
+                            'text-gray-500 dark:text-gray-400 border border-gray-500 dark:border-gray-400 hover:bg-gray-300/20': props.outlined && props.severity === 'secondary' && !props.plain,
+                            'text-green-500 dark:text-green-400 border border-green-500 dark:border-green-400 hover:bg-green-300/20': props.outlined && props.severity === 'success' && !props.plain,
+                            'text-orange-500 dark:text-orange-400 border border-orange-500 dark:border-orange-400 hover:bg-orange-300/20': props.outlined && props.severity === 'warning' && !props.plain,
+                            'text-purple-500 dark:text-purple-400 border border-purple-500 dark:border-purple-400 hover:bg-purple-300/20': props.outlined && props.severity === 'help' && !props.plain,
+                            'text-red-500 dark:text-red-400 border border-red-500 dark:border-red-400 hover:bg-red-300/20': props.outlined && props.severity === 'danger' && !props.plain
+                        },
+                        { 'px-4 py-3 text-base': props.size === null, 'text-xs py-2 px-3': props.size === 'small', 'text-xl py-3 px-4': props.size === 'large' }
+                    ]
+                };
+            },
+            label: () => {
+                return {
+                    class: 'hidden'
+                };
             }
         }
     },
@@ -900,36 +1066,78 @@ export default {
         root: {
             class: 'w-full inline-flex'
         },
-        input: ({ props }) => ({
-            class: [{ 'rounded-tr-none rounded-br-none': props.showButtons && props.buttonLayout == 'stacked' }]
-        }),
+        input: {
+            root: ({ parent }) => {
+                return {
+                    class: [
+                        // { test: parent }
+                        'm-0',
+                        'font-sans text-gray-600 dark:text-white/80 bg-white dark:bg-gray-900 border border-gray-300 dark:border-blue-900/40 transition-colors duration-200 appearance-none rounded-lg',
+                        'p-3 text-base',
+                        {
+                            'rounded-tr-none rounded-br-none': parent.props.showButtons && parent.props.buttonLayout == 'stacked'
+                        },
+                        {
+                            'order-2': parent.props.buttonLayout == 'horizontal'
+                        }
+                    ]
+                };
+            }
+        },
         buttongroup: ({ props }) => ({
             class: [{ 'flex flex-col': props.showButtons && props.buttonLayout == 'stacked' }]
         }),
-        incrementbutton: ({ props }) => ({
-            class: [
-                'flex !items-center !justify-center',
-                {
-                    'rounded-br-none rounded-bl-none rounded-bl-none !p-0 flex-1 w-[3rem]': props.showButtons && props.buttonLayout == 'stacked'
-                }
-            ]
-        }),
-        label: {
-            class: 'hidden'
+        incrementbutton: {
+            root: ({ parent }) => {
+                return {
+                    class: [
+                        'text-white dark:text-gray-900 bg-blue-500 dark:bg-blue-400 border border-blue-500 dark:border-blue-400 hover:bg-blue-600 dark:hover:bg-blue-500 hover:border-blue-600 dark:hover:border-blue-500 focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(157,193,251,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(147,197,253,0.7),0_1px_2px_0_rgba(0,0,0,0)]',
+                        'flex items-center justify-center',
+                        'transition duration-200 ease-in-out',
+                        'focus:outline-none focus:outline-offset-0',
+                        {
+                            'rounded-md rounded-br-none rounded-bl-none rounded-bl-none !p-0 flex-1 w-[3rem]': parent.props.showButtons && parent.props.buttonLayout == 'stacked'
+                        },
+                        {
+                            'order-3 px-4 py-3 text-base rounded-md': parent.props.buttonLayout == 'horizontal'
+                        }
+                    ]
+                };
+            },
+            label: () => {
+                return {
+                    class: 'hidden'
+                };
+            }
         },
-        decrementbutton: ({ props }) => ({
-            class: [
-                'flex !items-center !justify-center',
-                {
-                    'rounded-tr-none rounded-tl-none rounded-tl-none !p-0 flex-1 w-[3rem]': props.showButtons && props.buttonLayout == 'stacked'
-                }
-            ]
-        })
+        decrementbutton: {
+            root: ({ parent }) => {
+                return {
+                    class: [
+                        'text-white dark:text-gray-900 bg-blue-500 dark:bg-blue-400 border border-blue-500 dark:border-blue-400 hover:bg-blue-600 dark:hover:bg-blue-500 hover:border-blue-600 dark:hover:border-blue-500 focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(157,193,251,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(147,197,253,0.7),0_1px_2px_0_rgba(0,0,0,0)]',
+                        'flex items-center justify-center',
+                        'transition duration-200 ease-in-out',
+                        'focus:outline-none focus:outline-offset-0',
+                        {
+                            'rounded-md rounded-tr-none rounded-tl-none rounded-tl-none !p-0 flex-1 w-[3rem]': parent.props.showButtons && parent.props.buttonLayout == 'stacked'
+                        },
+                        {
+                            'order-1 px-4 py-3 text-base rounded-md': parent.props.buttonLayout == 'horizontal'
+                        }
+                    ]
+                };
+            },
+            label: () => {
+                return {
+                    class: 'hidden'
+                };
+            }
+        }
     },
     knob: {
         root: ({ props }) => ({
             class: [
-                'focus:outline-none focus:outline-offset-0 focus:shadow-0',
+                'focus:outline-none focus:outline-offset-0 focus:shadow-none',
                 {
                     'opacity-60 select-none pointer-events-none cursor-default': props.disabled
                 }
@@ -977,7 +1185,7 @@ export default {
             ]
         }),
         label: {
-            class: ['block whitespace-nowrap overflow-hidden flex flex-1 w-1 text-overflow-ellipsis cursor-pointer', 'bg-transparent border-0 p-3 text-gray-700 dark:text-white/80', 'appearance-none rounded-md']
+            class: ['block whitespace-nowrap overflow-hidden flex flex-1 w-1 text-ellipsis cursor-pointer', 'bg-transparent border-0 p-3 text-gray-700 dark:text-white/80', 'appearance-none rounded-md']
         },
         dropdownbutton: {
             class: ['flex items-center justify-center shrink-0', 'bg-transparent text-gray-600 dark:text-white/80 w-[3rem] rounded-tr-6 rounded-br-6']
@@ -1095,7 +1303,7 @@ export default {
         handle: ({ props }) => ({
             class: [
                 'h-4 w-4 bg-white dark:bg-gray-600 border-2 border-blue-500 rounded-full transition duration-200',
-                'cursor-grab touch-action-none block',
+                'cursor-grab touch-none block',
                 'focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]',
                 'hover:bg-blue-500 hover:border hover:border-blue-500',
                 {
@@ -1107,7 +1315,7 @@ export default {
         starthandler: ({ props }) => ({
             class: [
                 'h-4 w-4 bg-white dark:bg-gray-600 border-2 border-blue-500 rounded-full transition duration-200',
-                'cursor-grab touch-action-none block',
+                'cursor-grab touch-none block',
                 'focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]',
                 'hover:bg-blue-500 hover:border hover:border-blue-500',
                 {
@@ -1119,7 +1327,7 @@ export default {
         endhandler: ({ props }) => ({
             class: [
                 'h-4 w-4 bg-white dark:bg-gray-600 border-2 border-blue-500 rounded-full transition duration-200',
-                'cursor-grab touch-action-none block',
+                'cursor-grab touch-none block',
                 'focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]',
                 'hover:bg-blue-500 hover:border hover:border-blue-500',
                 {
@@ -1276,7 +1484,7 @@ export default {
         }),
         input: ({ props }) => ({
             class: [
-                'cursor-pointer block flex flex-auto overflow-hidden overflow-ellipsis whitespace-nowrap relative',
+                'cursor-pointer block flex flex-auto overflow-hidden text-ellipsis whitespace-nowrap relative',
                 'bg-transparent border-0 text-gray-800',
                 'dark:text-white/80',
                 'p-3 transition duration-200 bg-transparent rounded appearance-none font-sans text-base',
@@ -1297,12 +1505,10 @@ export default {
             class: [
                 'cursor-pointer font-normal overflow-hidden relative whitespace-nowrap',
                 'm-0 p-3 border-0  transition-shadow duration-200 rounded-none',
-                'dark:text-white/80 dark:hover:bg-gray-800',
-                'hover:text-gray-700 hover:bg-gray-200',
                 {
-                    'text-gray-700': !context.focused && !context.selected,
-                    'bg-gray-300 text-gray-700 dark:text-white/80 dark:bg-gray-800/90': context.focused && !context.selected,
-                    'bg-blue-400 text-blue-700 dark:bg-blue-400 dark:text-white/80': context.focused && context.selected,
+                    'text-gray-700 hover:text-gray-700 hover:bg-gray-200 dark:text-white/80 dark:hover:bg-gray-800': !context.focused && !context.selected,
+                    'bg-gray-300 text-gray-700 dark:text-white/80 dark:bg-gray-800/90 hover:text-gray-700 hover:bg-gray-200 dark:text-white/80 dark:hover:bg-gray-800': context.focused && !context.selected,
+                    'bg-blue-100 text-blue-700 dark:bg-blue-400 dark:text-white/80': context.focused && context.selected,
                     'bg-blue-50 text-blue-700 dark:bg-blue-300 dark:text-white/80': !context.focused && context.selected
                 }
             ]
@@ -1342,11 +1548,26 @@ export default {
                 }
             ]
         }),
-        input: {
+        input: ({ props }) => ({
             class: [
-                'font-sans text-base text-gray-600 dark:text-white/80 bg-white dark:bg-gray-900 p-3 border border-gray-300 dark:border-blue-900/40 transition-colors duration-200 appearance-none rounded-lg',
-                'hover:border-blue-500' //Hover
+                'font-sans text-base text-gray-600 dark:text-white/80 bg-white dark:bg-gray-900 p-3 border border-gray-300 dark:border-blue-900/40 transition-colors duration-200 appearance-none',
+                'hover:border-blue-500',
+                { 'rounded-lg': !props.showIcon, 'border-r-0 rounded-l-lg': props.showIcon }
             ]
+        }),
+        dropdownbutton: {
+            root: ({ parent }) => {
+                return {
+                    class: [
+                        'text-white dark:text-gray-900 bg-blue-500 dark:bg-blue-400 border border-blue-500 dark:border-blue-400 hover:bg-blue-600 dark:hover:bg-blue-500 hover:border-blue-600 dark:hover:border-blue-500 focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(157,193,251,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(147,197,253,0.7),0_1px_2px_0_rgba(0,0,0,0)]',
+                        'flex items-center justify-center',
+                        'transition duration-200 ease-in-out',
+                        'focus:outline-none focus:outline-offset-0',
+                        'px-4 py-3 text-base rounded-md',
+                        { 'rounded-l-none': parent.props.showIcon }
+                    ]
+                };
+            }
         },
         panel: ({ props }) => ({
             class: [
@@ -1406,7 +1627,7 @@ export default {
                     'cursor-pointer': !context.disabled
                 },
                 {
-                    'text-gray-600 dark:text-white/70 bg-transprent hover:bg-gray-200 dark:hover:bg-gray-800/80': !context.selected && !context.disabled,
+                    'text-gray-600 dark:text-white/70 bg-transparent hover:bg-gray-200 dark:hover:bg-gray-800/80': !context.selected && !context.disabled,
                     'text-blue-700 bg-blue-100 hover:bg-blue-200': context.selected && !context.disabled
                 }
             ]
@@ -1419,7 +1640,7 @@ export default {
                 'w-1/3 inline-flex items-center justify-center cursor-pointer overflow-hidden relative',
                 'p-2 transition-shadow duration-200 rounded-lg',
                 'focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]',
-                { 'text-gray-600 dark:text-white/70 bg-transprent hover:bg-gray-200 dark:hover:bg-gray-800/80': !context.selected && !context.disabled, 'text-blue-700 bg-blue-100 hover:bg-blue-200': context.selected && !context.disabled }
+                { 'text-gray-600 dark:text-white/70 bg-transparent hover:bg-gray-200 dark:hover:bg-gray-800/80': !context.selected && !context.disabled, 'text-blue-700 bg-blue-100 hover:bg-blue-200': context.selected && !context.disabled }
             ]
         }),
         yearpicker: {
@@ -1431,7 +1652,7 @@ export default {
                 'p-2 transition-shadow duration-200 rounded-lg',
                 'focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]',
                 {
-                    'text-gray-600 dark:text-white/70 bg-transprent hover:bg-gray-200 dark:hover:bg-gray-800/80': !context.selected && !context.disabled,
+                    'text-gray-600 dark:text-white/70 bg-transparent hover:bg-gray-200 dark:hover:bg-gray-800/80': !context.selected && !context.disabled,
                     'text-blue-700 bg-blue-100 hover:bg-blue-200': context.selected && !context.disabled
                 }
             ]
@@ -1490,12 +1711,10 @@ export default {
             class: [
                 'cursor-pointer font-normal overflow-hidden relative whitespace-nowrap',
                 'm-0 p-3 border-0  transition-shadow duration-200 rounded-none',
-                'dark:text-white/80 dark:hover:bg-gray-800',
-                'hover:text-gray-700 hover:bg-gray-200',
                 {
-                    'text-gray-700': !context.focused && !context.selected,
-                    'bg-gray-300 text-gray-700 dark:text-white/80 dark:bg-gray-800/90': context.focused && !context.selected,
-                    'bg-blue-400 text-blue-700 dark:bg-blue-400 dark:text-white/80': context.focused && context.selected,
+                    'text-gray-700 hover:text-gray-700 hover:bg-gray-200 dark:text-white/80 dark:hover:bg-gray-800': !context.focused && !context.selected,
+                    'bg-gray-300 text-gray-700 dark:text-white/80 dark:bg-gray-800/90 hover:text-gray-700 hover:bg-gray-200 dark:text-white/80 dark:hover:bg-gray-800': context.focused && !context.selected,
+                    'bg-blue-100 text-blue-700 dark:bg-blue-400 dark:text-white/80': context.focused && context.selected,
                     'bg-blue-50 text-blue-700 dark:bg-blue-300 dark:text-white/80': !context.focused && context.selected
                 }
             ]
@@ -1536,7 +1755,7 @@ export default {
         },
         label: ({ props }) => ({
             class: [
-                'block overflow-hidden whitespace-nowrap cursor-pointer overflow-ellipsis',
+                'block overflow-hidden whitespace-nowrap cursor-pointer text-ellipsis',
                 'text-gray-800 dark:text-white/80',
                 'p-3 transition duration-200',
                 {
@@ -1599,12 +1818,10 @@ export default {
             class: [
                 'cursor-pointer font-normal overflow-hidden relative whitespace-nowrap',
                 'm-0 p-3 border-0  transition-shadow duration-200 rounded-none',
-                'dark:text-white/80 dark:hover:bg-gray-800',
-                'hover:text-gray-700 hover:bg-gray-200',
                 {
-                    'text-gray-700': !context.focused && !context.selected,
-                    'bg-gray-300 text-gray-700 dark:text-white/80 dark:bg-gray-800/90': context.focused && !context.selected,
-                    'bg-blue-400 text-blue-700 dark:bg-blue-400 dark:text-white/80': context.focused && context.selected,
+                    'text-gray-700 hover:text-gray-700 hover:bg-gray-200 dark:text-white/80 dark:hover:bg-gray-800': !context.focused && !context.selected,
+                    'bg-gray-300 text-gray-700 dark:text-white/80 dark:bg-gray-800/90 hover:text-gray-700 hover:bg-gray-200 dark:text-white/80 dark:hover:bg-gray-800': context.focused && !context.selected,
+                    'bg-blue-100 text-blue-700 dark:bg-blue-400 dark:text-white/80': context.focused && context.selected,
                     'bg-blue-50 text-blue-700 dark:bg-blue-300 dark:text-white/80': !context.focused && context.selected
                 }
             ]
@@ -1672,7 +1889,7 @@ export default {
             class: ['overflow-hidden flex flex-auto cursor-pointer']
         },
         label: {
-            class: ['block overflow-hidden whitespace-nowrap cursor-pointer overflow-ellipsis', 'text-gray-800 dark:text-white/80', 'p-3 transition duration-200']
+            class: ['block overflow-hidden whitespace-nowrap cursor-pointer text-ellipsis', 'text-gray-800 dark:text-white/80', 'p-3 transition duration-200']
         },
         trigger: {
             class: ['flex items-center justify-center shrink-0', 'bg-transparent text-gray-600 dark:text-white/70 w-12 rounded-tr-lg rounded-br-lg']
@@ -1727,7 +1944,7 @@ export default {
             }
         },
         panel: {
-            class: ['bg-white text-gray-700 border-0 rounded-md shadow-lg', 'max-h-[200px] overflow-auto', 'bg-white text-gray-700 border-0 rounded-md shadow-lg', 'dark:bg-gray-900 dark:text-white/80']
+            class: ['bg-white text-gray-700 border-0 rounded-md shadow-lg', 'max-h-[200px] overflow-auto', 'dark:bg-gray-900 dark:text-white/80']
         },
         list: {
             class: 'py-3 list-none m-0'
@@ -1736,12 +1953,10 @@ export default {
             class: [
                 'cursor-pointer font-normal overflow-hidden relative whitespace-nowrap',
                 'm-0 p-3 border-0  transition-shadow duration-200 rounded-none',
-                'dark:text-white/80 dark:hover:bg-gray-800',
-                'hover:text-gray-700 hover:bg-gray-200',
                 {
-                    'text-gray-700': !context.focused && !context.selected,
-                    'bg-gray-300 text-gray-700 dark:text-white/80 dark:bg-gray-800/90': context.focused && !context.selected,
-                    'bg-blue-500 text-blue-700 dark:bg-blue-400 dark:text-white/80': context.focused && context.selected,
+                    'text-gray-700 hover:text-gray-700 hover:bg-gray-200 dark:text-white/80 dark:hover:bg-gray-800': !context.focused && !context.selected,
+                    'bg-gray-300 text-gray-700 dark:text-white/80 dark:bg-gray-800/90 hover:text-gray-700 hover:bg-gray-200 dark:text-white/80 dark:hover:bg-gray-800': context.focused && !context.selected,
+                    'bg-blue-100 text-blue-700 dark:bg-blue-400 dark:text-white/80': context.focused && context.selected,
                     'bg-blue-50 text-blue-700 dark:bg-blue-300 dark:text-white/80': !context.focused && context.selected
                 }
             ]
@@ -1876,7 +2091,7 @@ export default {
                     'w-16 h-16 text-2xl': props.size == 'xlarge'
                 },
                 {
-                    '-ml-4 border-2 border-white dark:border-gray-900': parent.instance.$css !== undefined
+                    '-ml-4 border-2 border-white dark:border-gray-900': parent.instance.$css === undefined
                 }
             ]
         }),
@@ -2190,8 +2405,8 @@ export default {
                 'cursor-pointer flex items-center no-underline overflow-hidden relative',
                 'py-3 px-5 select-none',
                 {
-                    'max-[960px]:pl-9': context.level === 1,
-                    'max-[960px]:pl-14': context.level === 2
+                    'pl-9 sm:pl-5': context.level === 1,
+                    'pl-14 sm:pl-5': context.level === 2
                 }
             ]
         }),
@@ -2200,9 +2415,8 @@ export default {
         },
         submenuicon: ({ props }) => ({
             class: [
-                'max-[960px]:ml-auto',
                 {
-                    'ml-2': props.root,
+                    'ml-auto sm:ml-2': props.root,
                     'ml-auto': !props.root
                 }
             ]
@@ -2373,7 +2587,7 @@ export default {
             class: ['flex items-center justify-center', 'text-gray-700 dark:text-white/80 border border-gray-300 dark:border-blue-900/40  bg-white dark:bg-gray-900 w-[2rem] h-[2rem] leading-2rem text-sm z-10 rounded-full']
         },
         label: {
-            class: ['block', 'whitespace-nowrap overflow-hidden overflow-ellipsis max-w-full', 'mt-2 text-gray-500 dark:text-white/60']
+            class: ['block', 'whitespace-nowrap overflow-hidden text-ellipsis max-w-full', 'mt-2 text-gray-500 dark:text-white/60']
         }
     },
     tabmenu: {
@@ -2381,7 +2595,7 @@ export default {
             class: 'overflow-x-auto'
         },
         menu: {
-            class: ['flex m-0 p-0 list-none flex-nowrap', 'bg-white border-solid border-gray-300 border-b-2', 'outline-none no-underline text-base list-none']
+            class: ['flex m-0 p-0 list-none flex-nowrap', 'bg-white border-solid border-gray-300 border-b-2 dark:bg-gray-900 dark:border-blue-900/40', 'outline-none no-underline text-base list-none']
         },
         menuitem: {
             class: 'mr-0'
@@ -2464,7 +2678,7 @@ export default {
             class: ['fixed top-0 left-0 w-full h-full', 'flex items-center justify-center', 'bg-black bg-opacity-90']
         },
         toolbar: {
-            class: ['absolute top-0 right-0 flex', 'p-4']
+            class: ['absolute top-0 right-0 z-10 flex', 'p-4']
         },
         rotaterightbutton: {
             class: [
@@ -2724,7 +2938,7 @@ export default {
                     'text-blue-600 hover:bg-white/30': context.selected
                 },
                 {
-                    hidden: context.leaf
+                    invisible: context.leaf
                 }
             ]
         }),
@@ -2843,7 +3057,7 @@ export default {
     dataview: {
         content: {
             class: [
-                'bg-white blue-gray-700 border-0 p-0',
+                'bg-white text-gray-700 border-0 p-0',
                 'dark:bg-gray-900 dark:text-white/80' // Dark Mode
             ]
         },
@@ -2933,73 +3147,81 @@ export default {
             class: 'flex flex-col justify-center p-5'
         },
         moveupbutton: {
-            root: ({ context }) => ({
-                class: [
-                    'relative inline-flex cursor-pointer user-select-none items-center align-bottom text-center overflow-hidden m-0', // button component
-                    'text-white bg-blue-500 border border-blue-500 rounded-md',
-                    'transition duration-200 ease-in-out',
-                    'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
-                    'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900', //Dark Mode
-                    {
-                        'cursor-default pointer-events-none opacity-60': context.disabled
-                    }
-                ]
-            }),
+            root: ({ context }) => {
+                return {
+                    class: [
+                        'relative inline-flex cursor-pointer select-none items-center align-bottom text-center overflow-hidden m-0', // button component
+                        'text-white bg-blue-500 border border-blue-500 rounded-md',
+                        'transition duration-200 ease-in-out',
+                        'justify-center px-0 py-3', // icon only
+                        'mb-2 w-12', // orderlist button
+                        'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900', //Dark Mode
+                        {
+                            'cursor-default pointer-events-none opacity-60': context.disabled
+                        }
+                    ]
+                };
+            },
             label: {
                 class: 'flex-initial w-0'
             }
         },
         movetopbutton: {
-            root: ({ context }) => ({
-                class: [
-                    'relative inline-flex cursor-pointer user-select-none items-center align-bottom text-center overflow-hidden m-0', // button component
-                    'text-white bg-blue-500 border border-blue-500 rounded-md',
-                    'transition duration-200 ease-in-out',
-                    'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
-                    'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900', //Dark Mode
-                    {
-                        'cursor-default pointer-events-none opacity-60': context.disabled
-                    }
-                ]
-            }),
+            root: ({ context }) => {
+                return {
+                    class: [
+                        'relative inline-flex cursor-pointer select-none items-center align-bottom text-center overflow-hidden m-0', // button component
+                        'text-white bg-blue-500 border border-blue-500 rounded-md',
+                        'transition duration-200 ease-in-out',
+                        'justify-center px-0 py-3', // icon only
+                        'mb-2 w-12', // orderlist button
+                        'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900', //Dark Mode
+                        {
+                            'cursor-default pointer-events-none opacity-60': context.disabled
+                        }
+                    ]
+                };
+            },
             label: {
                 class: 'flex-initial w-0'
             }
         },
         movedownbutton: {
-            root: ({ context }) => ({
-                class: [
-                    'relative inline-flex cursor-pointer user-select-none items-center align-bottom text-center overflow-hidden m-0', // button component
-                    'text-white bg-blue-500 border border-blue-500 rounded-md',
-                    'transition duration-200 ease-in-out',
-                    'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
-                    'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900', //Dark Mode
-                    {
-                        'cursor-default pointer-events-none opacity-60': context.disabled
-                    }
-                ]
-            }),
+            root: ({ context }) => {
+                return {
+                    class: [
+                        'relative inline-flex cursor-pointer select-none items-center align-bottom text-center overflow-hidden m-0', // button component
+                        'text-white bg-blue-500 border border-blue-500 rounded-md',
+                        'transition duration-200 ease-in-out',
+                        'justify-center px-0 py-3', // icon only
+                        'mb-2 w-12', // orderlist button
+                        'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900', //Dark Mode
+                        {
+                            'cursor-default pointer-events-none opacity-60': context.disabled
+                        }
+                    ]
+                };
+            },
             label: {
                 class: 'flex-initial w-0'
             }
         },
         movebottombutton: {
-            root: ({ context }) => ({
-                class: [
-                    'relative inline-flex cursor-pointer user-select-none items-center align-bottom text-center overflow-hidden m-0', // button component
-                    'text-white bg-blue-500 border border-blue-500 rounded-md',
-                    'transition duration-200 ease-in-out',
-                    'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
-                    'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900', //Dark Mode
-                    {
-                        'cursor-default pointer-events-none opacity-60': context.disabled
-                    }
-                ]
-            }),
+            root: ({ context }) => {
+                return {
+                    class: [
+                        'relative inline-flex cursor-pointer select-none items-center align-bottom text-center overflow-hidden m-0', // button component
+                        'text-white bg-blue-500 border border-blue-500 rounded-md',
+                        'transition duration-200 ease-in-out',
+                        'justify-center px-0 py-3', // icon only
+                        'mb-2 w-12', // orderlist button
+                        'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900', //Dark Mode
+                        {
+                            'cursor-default pointer-events-none opacity-60': context.disabled
+                        }
+                    ]
+                };
+            },
             label: {
                 class: 'flex-initial w-0'
             }
@@ -3041,73 +3263,81 @@ export default {
             class: 'flex flex-col justify-center p-5'
         },
         sourcemoveupbutton: {
-            root: ({ context }) => ({
-                class: [
-                    'relative inline-flex cursor-pointer user-select-none items-center align-bottom text-center overflow-hidden m-0', // button component
-                    'text-white bg-blue-500 border border-blue-500 rounded-md',
-                    'transition duration-200 ease-in-out',
-                    'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
-                    'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900', //Dark Mode
-                    {
-                        'cursor-default pointer-events-none opacity-60': context.disabled
-                    }
-                ]
-            }),
+            root: ({ context }) => {
+                return {
+                    class: [
+                        'relative inline-flex cursor-pointer select-none items-center align-bottom text-center overflow-hidden m-0', // button component
+                        'text-white bg-blue-500 border border-blue-500 rounded-md',
+                        'transition duration-200 ease-in-out',
+                        'justify-center px-0 py-3', // icon only
+                        'mb-2 w-12', // orderlist button
+                        'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900', //Dark Mode
+                        {
+                            'cursor-default pointer-events-none opacity-60': context.disabled
+                        }
+                    ]
+                };
+            },
             label: {
                 class: 'flex-initial w-0'
             }
         },
         sourcemovetopbutton: {
-            root: ({ context }) => ({
-                class: [
-                    'relative inline-flex cursor-pointer user-select-none items-center align-bottom text-center overflow-hidden m-0', // button component
-                    'text-white bg-blue-500 border border-blue-500 rounded-md',
-                    'transition duration-200 ease-in-out',
-                    'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
-                    'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900', //Dark Mode
-                    {
-                        'cursor-default pointer-events-none opacity-60': context.disabled
-                    }
-                ]
-            }),
+            root: ({ context }) => {
+                return {
+                    class: [
+                        'relative inline-flex cursor-pointer select-none items-center align-bottom text-center overflow-hidden m-0', // button component
+                        'text-white bg-blue-500 border border-blue-500 rounded-md',
+                        'transition duration-200 ease-in-out',
+                        'justify-center px-0 py-3', // icon only
+                        'mb-2 w-12', // orderlist button
+                        'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900', //Dark Mode
+                        {
+                            'cursor-default pointer-events-none opacity-60': context.disabled
+                        }
+                    ]
+                };
+            },
             label: {
                 class: 'flex-initial w-0'
             }
         },
         sourcemovedownbutton: {
-            root: ({ context }) => ({
-                class: [
-                    'relative inline-flex cursor-pointer user-select-none items-center align-bottom text-center overflow-hidden m-0', // button component
-                    'text-white bg-blue-500 border border-blue-500 rounded-md',
-                    'transition duration-200 ease-in-out',
-                    'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
-                    'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900', //Dark Mode
-                    {
-                        'cursor-default pointer-events-none opacity-60': context.disabled
-                    }
-                ]
-            }),
+            root: ({ context }) => {
+                return {
+                    class: [
+                        'relative inline-flex cursor-pointer select-none items-center align-bottom text-center overflow-hidden m-0', // button component
+                        'text-white bg-blue-500 border border-blue-500 rounded-md',
+                        'transition duration-200 ease-in-out',
+                        'justify-center px-0 py-3', // icon only
+                        'mb-2 w-12', // orderlist button
+                        'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900', //Dark Mode
+                        {
+                            'cursor-default pointer-events-none opacity-60': context.disabled
+                        }
+                    ]
+                };
+            },
             label: {
                 class: 'flex-initial w-0'
             }
         },
         sourcemovebottombutton: {
-            root: ({ context }) => ({
-                class: [
-                    'relative inline-flex cursor-pointer user-select-none items-center align-bottom text-center overflow-hidden m-0', // button component
-                    'text-white bg-blue-500 border border-blue-500 rounded-md',
-                    'transition duration-200 ease-in-out',
-                    'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
-                    'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900', //Dark Mode
-                    {
-                        'cursor-default pointer-events-none opacity-60': context.disabled
-                    }
-                ]
-            }),
+            root: ({ context }) => {
+                return {
+                    class: [
+                        'relative inline-flex cursor-pointer select-none items-center align-bottom text-center overflow-hidden m-0', // button component
+                        'text-white bg-blue-500 border border-blue-500 rounded-md',
+                        'transition duration-200 ease-in-out',
+                        'justify-center px-0 py-3', // icon only
+                        'mb-2 w-12', // orderlist button
+                        'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900', //Dark Mode
+                        {
+                            'cursor-default pointer-events-none opacity-60': context.disabled
+                        }
+                    ]
+                };
+            },
             label: {
                 class: 'flex-initial w-0'
             }
@@ -3144,73 +3374,81 @@ export default {
             class: 'flex flex-col justify-center p-5'
         },
         movetotargetbutton: {
-            root: ({ context }) => ({
-                class: [
-                    'relative inline-flex cursor-pointer user-select-none items-center align-bottom text-center overflow-hidden m-0', // button component
-                    'text-white bg-blue-500 border border-blue-500 rounded-md',
-                    'transition duration-200 ease-in-out',
-                    'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
-                    'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900', //Dark Mode
-                    {
-                        'cursor-default pointer-events-none opacity-60': context.disabled
-                    }
-                ]
-            }),
+            root: ({ context }) => {
+                return {
+                    class: [
+                        'relative inline-flex cursor-pointer select-none items-center align-bottom text-center overflow-hidden m-0', // button component
+                        'text-white bg-blue-500 border border-blue-500 rounded-md',
+                        'transition duration-200 ease-in-out',
+                        'justify-center px-0 py-3', // icon only
+                        'mb-2 w-12', // orderlist button
+                        'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900', //Dark Mode
+                        {
+                            'cursor-default pointer-events-none opacity-60': context.disabled
+                        }
+                    ]
+                };
+            },
             label: {
                 class: 'flex-initial w-0'
             }
         },
         movealltotargetbutton: {
-            root: ({ context }) => ({
-                class: [
-                    'relative inline-flex cursor-pointer user-select-none items-center align-bottom text-center overflow-hidden m-0', // button component
-                    'text-white bg-blue-500 border border-blue-500 rounded-md',
-                    'transition duration-200 ease-in-out',
-                    'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
-                    'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900', //Dark Mode
-                    {
-                        'cursor-default pointer-events-none opacity-60': context.disabled
-                    }
-                ]
-            }),
+            root: ({ context }) => {
+                return {
+                    class: [
+                        'relative inline-flex cursor-pointer select-none items-center align-bottom text-center overflow-hidden m-0', // button component
+                        'text-white bg-blue-500 border border-blue-500 rounded-md',
+                        'transition duration-200 ease-in-out',
+                        'justify-center px-0 py-3', // icon only
+                        'mb-2 w-12', // orderlist button
+                        'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900', //Dark Mode
+                        {
+                            'cursor-default pointer-events-none opacity-60': context.disabled
+                        }
+                    ]
+                };
+            },
             label: {
                 class: 'flex-initial w-0'
             }
         },
         movetosourcebutton: {
-            root: ({ context }) => ({
-                class: [
-                    'relative inline-flex cursor-pointer user-select-none items-center align-bottom text-center overflow-hidden m-0', // button component
-                    'text-white bg-blue-500 border border-blue-500 rounded-md',
-                    'transition duration-200 ease-in-out',
-                    'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
-                    'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900', //Dark Mode
-                    {
-                        'cursor-default pointer-events-none opacity-60': context.disabled
-                    }
-                ]
-            }),
+            root: ({ context }) => {
+                return {
+                    class: [
+                        'relative inline-flex cursor-pointer select-none items-center align-bottom text-center overflow-hidden m-0', // button component
+                        'text-white bg-blue-500 border border-blue-500 rounded-md',
+                        'transition duration-200 ease-in-out',
+                        'justify-center px-0 py-3', // icon only
+                        'mb-2 w-12', // orderlist button
+                        'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900', //Dark Mode
+                        {
+                            'cursor-default pointer-events-none opacity-60': context.disabled
+                        }
+                    ]
+                };
+            },
             label: {
                 class: 'flex-initial w-0'
             }
         },
         movealltosourcebutton: {
-            root: ({ context }) => ({
-                class: [
-                    'relative inline-flex cursor-pointer user-select-none items-center align-bottom text-center overflow-hidden m-0', // button component
-                    'text-white bg-blue-500 border border-blue-500 rounded-md',
-                    'transition duration-200 ease-in-out',
-                    'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
-                    'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900', //Dark Mode
-                    {
-                        'cursor-default pointer-events-none opacity-60': context.disabled
-                    }
-                ]
-            }),
+            root: ({ context }) => {
+                return {
+                    class: [
+                        'relative inline-flex cursor-pointer select-none items-center align-bottom text-center overflow-hidden m-0', // button component
+                        'text-white bg-blue-500 border border-blue-500 rounded-md',
+                        'transition duration-200 ease-in-out',
+                        'justify-center px-0 py-3', // icon only
+                        'mb-2 w-12', // orderlist button
+                        'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900', //Dark Mode
+                        {
+                            'cursor-default pointer-events-none opacity-60': context.disabled
+                        }
+                    ]
+                };
+            },
             label: {
                 class: 'flex-initial w-0'
             }
@@ -3219,73 +3457,81 @@ export default {
             class: 'flex flex-col justify-center p-5'
         },
         targetmoveupbutton: {
-            root: ({ context }) => ({
-                class: [
-                    'relative inline-flex cursor-pointer user-select-none items-center align-bottom text-center overflow-hidden m-0', // button component
-                    'text-white bg-blue-500 border border-blue-500 rounded-md',
-                    'transition duration-200 ease-in-out',
-                    'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
-                    'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900', //Dark Mode
-                    {
-                        'cursor-default pointer-events-none opacity-60': context.disabled
-                    }
-                ]
-            }),
+            root: ({ context }) => {
+                return {
+                    class: [
+                        'relative inline-flex cursor-pointer select-none items-center align-bottom text-center overflow-hidden m-0', // button component
+                        'text-white bg-blue-500 border border-blue-500 rounded-md',
+                        'transition duration-200 ease-in-out',
+                        'justify-center px-0 py-3', // icon only
+                        'mb-2 w-12', // orderlist button
+                        'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900', //Dark Mode
+                        {
+                            'cursor-default pointer-events-none opacity-60': context.disabled
+                        }
+                    ]
+                };
+            },
             label: {
                 class: 'flex-initial w-0'
             }
         },
         targetmovetopbutton: {
-            root: ({ context }) => ({
-                class: [
-                    'relative inline-flex cursor-pointer user-select-none items-center align-bottom text-center overflow-hidden m-0', // button component
-                    'text-white bg-blue-500 border border-blue-500 rounded-md',
-                    'transition duration-200 ease-in-out',
-                    'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
-                    'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900', //Dark Mode
-                    {
-                        'cursor-default pointer-events-none opacity-60': context.disabled
-                    }
-                ]
-            }),
+            root: ({ context }) => {
+                return {
+                    class: [
+                        'relative inline-flex cursor-pointer select-none items-center align-bottom text-center overflow-hidden m-0', // button component
+                        'text-white bg-blue-500 border border-blue-500 rounded-md',
+                        'transition duration-200 ease-in-out',
+                        'justify-center px-0 py-3', // icon only
+                        'mb-2 w-12', // orderlist button
+                        'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900', //Dark Mode
+                        {
+                            'cursor-default pointer-events-none opacity-60': context.disabled
+                        }
+                    ]
+                };
+            },
             label: {
                 class: 'flex-initial w-0'
             }
         },
         targetmovedownbutton: {
-            root: ({ context }) => ({
-                class: [
-                    'relative inline-flex cursor-pointer user-select-none items-center align-bottom text-center overflow-hidden m-0', // button component
-                    'text-white bg-blue-500 border border-blue-500 rounded-md',
-                    'transition duration-200 ease-in-out',
-                    'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
-                    'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900', //Dark Mode
-                    {
-                        'cursor-default pointer-events-none opacity-60': context.disabled
-                    }
-                ]
-            }),
+            root: ({ context }) => {
+                return {
+                    class: [
+                        'relative inline-flex cursor-pointer select-none items-center align-bottom text-center overflow-hidden m-0', // button component
+                        'text-white bg-blue-500 border border-blue-500 rounded-md',
+                        'transition duration-200 ease-in-out',
+                        'justify-center px-0 py-3', // icon only
+                        'mb-2 w-12', // orderlist button
+                        'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900', //Dark Mode
+                        {
+                            'cursor-default pointer-events-none opacity-60': context.disabled
+                        }
+                    ]
+                };
+            },
             label: {
                 class: 'flex-initial w-0'
             }
         },
         targetmovebottombutton: {
-            root: ({ context }) => ({
-                class: [
-                    'relative inline-flex cursor-pointer user-select-none items-center align-bottom text-center overflow-hidden m-0', // button component
-                    'text-white bg-blue-500 border border-blue-500 rounded-md',
-                    'transition duration-200 ease-in-out',
-                    'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
-                    'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900', //Dark Mode
-                    {
-                        'cursor-default pointer-events-none opacity-60': context.disabled
-                    }
-                ]
-            }),
+            root: ({ context }) => {
+                return {
+                    class: [
+                        'relative inline-flex cursor-pointer select-none items-center align-bottom text-center overflow-hidden m-0', // button component
+                        'text-white bg-blue-500 border border-blue-500 rounded-md',
+                        'transition duration-200 ease-in-out',
+                        'justify-center px-0 py-3', // icon only
+                        'mb-2 w-12', // orderlist button
+                        'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900', //Dark Mode
+                        {
+                            'cursor-default pointer-events-none opacity-60': context.disabled
+                        }
+                    ]
+                };
+            },
             label: {
                 class: 'flex-initial w-0'
             }
@@ -3323,7 +3569,7 @@ export default {
         },
         firstpagebutton: ({ context }) => ({
             class: [
-                'relative inline-flex items-center justify-center user-none overflow-hidden leading-none',
+                'relative inline-flex items-center justify-center select-none overflow-hidden leading-none',
                 'border-0 text-gray-500  min-w-[3rem] h-12 m-[0.143rem] rounded-md',
                 'transition duration-200',
                 'dark:text-white', //Dark Mode
@@ -3335,7 +3581,7 @@ export default {
         }),
         previouspagebutton: ({ context }) => ({
             class: [
-                'relative inline-flex items-center justify-center user-none overflow-hidden leading-none',
+                'relative inline-flex items-center justify-center select-none overflow-hidden leading-none',
                 'border-0 text-gray-500 min-w-[3rem] h-12 m-[0.143rem] rounded-md',
                 'transition duration-200',
                 'dark:text-white', //Dark Mode
@@ -3347,7 +3593,7 @@ export default {
         }),
         nextpagebutton: ({ context }) => ({
             class: [
-                'relative inline-flex items-center justify-center user-none overflow-hidden leading-none',
+                'relative inline-flex items-center justify-center select-none overflow-hidden leading-none',
                 'border-0 text-gray-500 min-w-[3rem] h-12 m-[0.143rem] rounded-md',
                 'transition duration-200',
                 'dark:text-white', //Dark Mode
@@ -3359,7 +3605,7 @@ export default {
         }),
         lastpagebutton: ({ context }) => ({
             class: [
-                'relative inline-flex items-center justify-center user-none overflow-hidden leading-none',
+                'relative inline-flex items-center justify-center select-none overflow-hidden leading-none',
                 'border-0 text-gray-500 min-w-[3rem] h-12 m-[0.143rem] rounded-md',
                 'transition duration-200',
                 'dark:text-white', //Dark Mode
@@ -3371,7 +3617,7 @@ export default {
         }),
         pagebutton: ({ context }) => ({
             class: [
-                'relative inline-flex items-center justify-center user-none overflow-hidden leading-none',
+                'relative inline-flex items-center justify-center select-none overflow-hidden leading-none',
                 'border-0 text-gray-500 min-w-[3rem] h-12 m-[0.143rem] rounded-md',
                 'transition duration-200',
                 'dark:border-blue-300 dark:text-white', // Dark Mode
@@ -3398,7 +3644,7 @@ export default {
             }),
             input: {
                 class: [
-                    'font-sans text-base text-gray-600 p-3 m-0 rounded-md apperance-none',
+                    'font-sans text-base text-gray-600 p-3 m-0 rounded-md appearance-none',
                     'block whitespace-nowrap overflow-hidden flex-auto w-[1%] cursor-pointer text-ellipsis border-0 pr-0',
                     'focus:outline-none focus:outline-offset-0',
                     'dark:text-white' //Dark Mode
@@ -3421,7 +3667,7 @@ export default {
             },
             item: ({ context }) => ({
                 class: [
-                    'relative font-normal cursor-pointer space-nowrap overflow-hidden',
+                    'relative font-normal cursor-pointer whitespace-nowrap overflow-hidden',
                     'm-0 py-3 px-5 border-none text-gray-600 rounded-none',
                     'transition duration-200',
                     'dark:text-white/80', // Dark Mode
@@ -3439,7 +3685,7 @@ export default {
             },
             input: {
                 class: [
-                    'font-sans text-base text-gray-600 p-3 m-0 rounded-md apperance-none',
+                    'font-sans text-base text-gray-600 p-3 m-0 rounded-md appearance-none',
                     'block whitespace-nowrap overflow-hidden flex-auto w-[1%] cursor-pointer text-ellipsis border border-gray-300 pr-0',
                     'focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] focus:border-blue-300',
                     'dark:text-white dark:bg-gray-950 dark:border-blue-900/40', //Dark Mode
@@ -3464,7 +3710,7 @@ export default {
             }),
             input: {
                 class: [
-                    'font-sans text-base text-gray-600 p-3 m-0 rounded-md apperance-none',
+                    'font-sans text-base text-gray-600 p-3 m-0 rounded-md appearance-none',
                     'block whitespace-nowrap overflow-hidden flex-auto w-[1%] cursor-pointer text-ellipsis border-0 pr-0',
                     'focus:outline-none focus:outline-offset-0',
                     'dark:text-white' //Dark Mode
@@ -3487,7 +3733,7 @@ export default {
             },
             item: ({ context }) => ({
                 class: [
-                    'relative font-normal cursor-pointer space-nowrap overflow-hidden',
+                    'relative font-normal cursor-pointer whitespace-nowrap overflow-hidden',
                     'm-0 py-3 px-5 border-none text-gray-600 rounded-none',
                     'transition duration-200',
                     'dark:text-white/80', // Dark Mode
@@ -3616,12 +3862,15 @@ export default {
             }),
             rowtoggler: ({ context }) => ({
                 class: [
-                    'relative inline-flex items-center justify-center align-center cursor-pointer select-none overflow-hidden bg-transparent',
+                    'relative inline-flex items-center justify-center cursor-pointer select-none overflow-hidden bg-transparent',
                     'w-8 h-8 border-0 rounded mr-0.5',
                     context.selected ? 'text-blue-700' : 'text-gray-500',
                     'dark:text-white/70' //Dark Mode
                 ]
             }),
+            sort: {
+                class: 'inline-block align-middle'
+            },
             sorticon: ({ context }) => ({
                 class: ['ml-2', context.sorted ? 'text-blue-700 dark:text-white/80' : 'text-slate-700 dark:text-white/70']
             }),
@@ -3734,9 +3983,9 @@ export default {
                     context.sorted ? 'bg-blue-50 text-blue-700' : 'bg-slate-50 text-slate-700', // Sort
                     context.sorted ? 'dark:text-white/80 dark:bg-blue-300' : 'dark:text-white/80 dark:bg-gray-900', // Dark Mode
                     {
-                        'sticky z-[1]': props.frozen || props.frozen === '', // Frozen Columns
+                        'sticky z-[1]': context.frozen || context.frozen === '', // Frozen Columns
                         'border-x border-y': context?.showGridlines,
-                        'overflow-hidden space-nowrap border-y relative bg-clip-padding': context.resizable // Resizable
+                        'overflow-hidden whitespace-nowrap border-y relative bg-clip-padding': context.resizable // Resizable
                     }
                 ]
             }),
@@ -3966,7 +4215,7 @@ export default {
         bodyrow: ({ context }) => ({
             class: [
                 context.selected ? 'bg-blue-50 text-blue-700 dark:bg-blue-300' : 'bg-white text-gray-600 dark:bg-gray-900',
-                context.stripedRows ? (context.index % 2 === 0 ? 'bg-white text-gray-600 dark:bg-gray-900' : 'bg-blue-50/50 text-gray-600 dark:bg-gray-950') : '',
+                context.stripedRows ? (context.index % 2 === 0 ? 'bg-white text-gray-600 dark:bg-gray-900' : 'bg-blue-100/50 text-gray-600 dark:bg-gray-950') : '',
                 'transition duration-200',
                 'focus:outline focus:outline-[0.15rem] focus:outline-blue-200 focus:outline-offset-[-0.15rem]', // Focus
                 'dark:text-white/80 dark:focus:outline dark:focus:outline-[0.15rem] dark:focus:outline-blue-300 dark:focus:outline-offset-[-0.15rem]', // Dark Mode
@@ -3999,12 +4248,6 @@ export default {
         },
         resizehelper: {
             class: 'absolute hidden w-px z-10 bg-blue-500 dark:bg-blue-300'
-        }
-    },
-    // CHART
-    chart: {
-        root: {
-            class: 'relative'
         }
     }
 };

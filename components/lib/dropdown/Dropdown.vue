@@ -47,7 +47,7 @@
         >
             <slot name="value" :value="modelValue" :placeholder="placeholder">{{ label === 'p-emptylabel' ? '&nbsp;' : label || 'empty' }}</slot>
         </span>
-        <slot v-if="showClear && modelValue != null" name="clearicon" :class="cx('clearIcon')" :onClick="onClearClick">
+        <slot v-if="showClear && modelValue != null" name="clearicon" :class="cx('clearIcon')" :onClick="onClearClick" :clearCallback="onClearClick">
             <component :is="clearIcon ? 'i' : 'TimesIcon'" ref="clearIcon" :class="[cx('clearIcon'), clearIcon]" @click="onClearClick" v-bind="{ ...clearIconProps, ...ptm('clearIcon') }" data-pc-section="clearicon" />
         </slot>
         <div :class="cx('trigger')" v-bind="ptm('trigger')">
@@ -125,7 +125,7 @@
                                             :data-p-highlight="isSelected(option)"
                                             :data-p-focused="focusedOptionIndex === getOptionIndex(i, getItemOptions)"
                                             :data-p-disabled="isOptionDisabled(option)"
-                                            v-bind="getPTOptions(option, getItemOptions, i, 'item')"
+                                            v-bind="getPTItemOptions(option, getItemOptions, i, 'item')"
                                         >
                                             <slot name="option" :option="option" :index="getOptionIndex(i, getItemOptions)">{{ getOptionLabel(option) }}</slot>
                                         </li>
@@ -253,7 +253,7 @@ export default {
         getOptionRenderKey(option, index) {
             return (this.dataKey ? ObjectUtils.resolveFieldData(option, this.dataKey) : this.getOptionLabel(option)) + '_' + index;
         },
-        getPTOptions(option, itemOptions, index, key) {
+        getPTItemOptions(option, itemOptions, index, key) {
             return this.ptm(key, {
                 context: {
                     selected: this.isSelected(option),
@@ -317,7 +317,7 @@ export default {
             this.$emit('blur', event);
         },
         onKeyDown(event) {
-            if (this.disabled) {
+            if (this.disabled || DomHandler.isAndroid()) {
                 event.preventDefault();
 
                 return;
@@ -402,6 +402,8 @@ export default {
             !matched && (this.focusedOptionIndex = -1);
 
             this.updateModel(event, value);
+
+            !this.overlayVisible && ObjectUtils.isNotEmpty(value) && this.show();
         },
         onContainerClick(event) {
             if (this.disabled || this.loading) {
@@ -471,6 +473,7 @@ export default {
                     break;
 
                 case 'Enter':
+                case 'NumpadEnter':
                     this.onEnterKey(event);
                     break;
 
@@ -711,7 +714,7 @@ export default {
             return this.isValidOption(option) && this.getOptionLabel(option).toLocaleLowerCase(this.filterLocale).startsWith(this.searchValue.toLocaleLowerCase(this.filterLocale));
         },
         isValidOption(option) {
-            return option && !(this.isOptionDisabled(option) || this.isOptionGroup(option));
+            return ObjectUtils.isNotEmpty(option) && !(this.isOptionDisabled(option) || this.isOptionGroup(option));
         },
         isValidSelectedOption(option) {
             return this.isValidOption(option) && this.isSelected(option);

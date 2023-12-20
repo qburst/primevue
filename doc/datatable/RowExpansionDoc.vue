@@ -79,7 +79,8 @@ export default {
             products: null,
             expandedRows: [],
             code: {
-                basic: `<DataTable v-model:expandedRows="expandedRows" :value="products" dataKey="id"
+                basic: `
+<DataTable v-model:expandedRows="expandedRows" :value="products" dataKey="id"
         @rowExpand="onRowExpand" @rowCollapse="onRowCollapse" tableStyle="min-width: 60rem">
     <template #header>
         <div class="flex flex-wrap justify-content-end gap-2">
@@ -135,8 +136,10 @@ export default {
             </DataTable>
         </div>
     </template>
-</DataTable>`,
-                options: `<template>
+</DataTable>
+`,
+                options: `
+<template>
     <div class="card">
         <DataTable v-model:expandedRows="expandedRows" :value="products" dataKey="id"
                 @rowExpand="onRowExpand" @rowCollapse="onRowCollapse" tableStyle="min-width: 60rem">
@@ -220,7 +223,7 @@ export default {
             this.$toast.add({ severity: 'success', summary: 'Product Collapsed', detail: event.data.name, life: 3000 });
         },
         expandAll() {
-            this.expandedRows = this.products.filter((p) => p.id);
+            this.expandedRows = this.products.reduce((acc, p) => (acc[p.id] = true) && acc, {});
         },
         collapseAll() {
             this.expandedRows = null;
@@ -263,8 +266,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <DataTable v-model:expandedRows="expandedRows" :value="products" dataKey="id"
                 @rowExpand="onRowExpand" @rowCollapse="onRowCollapse" tableStyle="min-width: 60rem">
@@ -347,7 +352,7 @@ const onRowCollapse = (event) => {
     toast.add({ severity: 'success', summary: 'Product Collapsed', detail: event.data.name, life: 3000 });
 };
 const expandAll = () => {
-    expandedRows.value = products.value.filter((p) => p.id);
+    expandedRows.value = products.value.reduce((acc, p) => (acc[p.id] = true) && acc, {});
 };
 const collapseAll = () => {
     expandedRows.value = null;
@@ -389,7 +394,8 @@ const getOrderSeverity = (order) => {
     }
 };
 
-<\/script>`,
+<\/script>
+`,
                 data: `
 {
     id: '1000',
@@ -431,7 +437,7 @@ const getOrderSeverity = (order) => {
             this.$toast.add({ severity: 'success', summary: 'Product Collapsed', detail: event.data.name, life: 3000 });
         },
         expandAll() {
-            this.expandedRows = this.products.filter((p) => p.id);
+            this.expandedRows = this.products.reduce((acc, p) => (acc[p.id] = true) && acc, {});
         },
         collapseAll() {
             this.expandedRows = null;

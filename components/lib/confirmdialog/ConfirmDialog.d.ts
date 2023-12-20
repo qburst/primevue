@@ -11,7 +11,8 @@ import { VNode } from 'vue';
 import { ComponentHooks } from '../basecomponent';
 import { ButtonPassThroughOptions } from '../button';
 import { ConfirmationOptions } from '../confirmationoptions';
-import { ClassComponent, GlobalComponentConstructor, PTOptions } from '../ts-helpers';
+import { PassThroughOptions } from '../passthrough';
+import { ClassComponent, GlobalComponentConstructor, PassThrough } from '../ts-helpers';
 
 export declare type ConfirmDialogPassThroughOptionType = ConfirmDialogPassThroughAttributes | ((options: ConfirmDialogPassThroughMethodOptions) => ConfirmDialogPassThroughAttributes | string) | string | null | undefined;
 
@@ -19,8 +20,43 @@ export declare type ConfirmDialogPassThroughOptionType = ConfirmDialogPassThroug
  * Custom passthrough(pt) option method.
  */
 export interface ConfirmDialogPassThroughMethodOptions {
+    /**
+     * Defines instance.
+     */
     instance: any;
+    /**
+     * Defines valid properties.
+     */
     props: ConfirmDialogProps;
+    /**
+     * Defines current inline state.
+     */
+    state: ConfirmDialogState;
+    /**
+     * Defines valid attributes.
+     */
+    attrs: any;
+    /**
+     * Defines parent options.
+     */
+    parent: any;
+    /**
+     * Defines passthrough(pt) options in global config.
+     */
+    global: object | undefined;
+}
+
+/**
+ * Custom shared passthrough(pt) option method.
+ */
+export interface ConfirmDialogSharedPassThroughMethodOptions {
+    /**
+     * Defines valid properties.
+     */
+    props: ConfirmDialogProps;
+    /**
+     * Defines current inline state.
+     */
     state: ConfirmDialogState;
 }
 
@@ -40,11 +76,11 @@ export interface ConfirmDialogPassThroughOptions {
     /**
      * Used to pass attributes to the header title's DOM element.
      */
-    headerTitle?: ConfirmDialogPassThroughOptionType;
+    title?: ConfirmDialogPassThroughOptionType;
     /**
      * Used to pass attributes to the header icons' DOM element.
      */
-    headerIcons?: ConfirmDialogPassThroughOptionType;
+    icons?: ConfirmDialogPassThroughOptionType;
     /**
      * Used to pass attributes to the close button's component.
      */
@@ -73,14 +109,14 @@ export interface ConfirmDialogPassThroughOptions {
      * Used to pass attributes to the Button component.
      * @see {@link ButtonPassThroughOptions}
      */
-    rejectButton?: ButtonPassThroughOptions;
+    rejectButton?: ButtonPassThroughOptions<ConfirmDialogSharedPassThroughMethodOptions>;
     /**
      * Used to pass attributes to the Button component.
      * @see {@link ButtonPassThroughOptions}
      */
-    acceptButton?: ButtonPassThroughOptions;
+    acceptButton?: ButtonPassThroughOptions<ConfirmDialogSharedPassThroughMethodOptions>;
     /**
-     * Used to manage all lifecycle hooks
+     * Used to manage all lifecycle hooks.
      * @see {@link BaseComponent.ComponentHooks}
      */
     hooks?: ComponentHooks;
@@ -152,7 +188,12 @@ export interface ConfirmDialogProps {
      * Used to pass attributes to DOM elements inside the component.
      * @type {ConfirmDialogPassThroughOptions}
      */
-    pt?: PTOptions<ConfirmDialogPassThroughOptions>;
+    pt?: PassThrough<ConfirmDialogPassThroughOptions>;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false
@@ -192,6 +233,43 @@ export interface ConfirmDialogSlots {
      * Custom icon template.
      */
     rejecticon(): VNode[];
+    /**
+     * Custom container slot.
+     * @param {Object} scope - container slot's params.
+     */
+    container(scope: {
+        /**
+         * Message of the component
+         */
+        message: any;
+        /**
+         * Close dialog function.
+         * @deprecated since v3.39.0. Use 'closeCallback' property instead.
+         */
+        onClose: () => void;
+        /**
+         * Accept function of the component
+         * @deprecated since v3.39.0. Use 'acceptCallback' property instead.
+         */
+        onAccept: () => void;
+        /**
+         * Reject function of the component
+         * @deprecated since v3.39.0. Use 'rejectCallback' property instead.
+         */
+        onReject: () => void;
+        /**
+         * Close dialog function.
+         */
+        closeCallback: () => void;
+        /**
+         * Accept function of the component
+         */
+        acceptCallback: () => void;
+        /**
+         * Reject function of the component
+         */
+        rejectCallback: () => void;
+    }): VNode[];
 }
 
 /**

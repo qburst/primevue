@@ -21,7 +21,8 @@ export default {
     data() {
         return {
             code: {
-                basic: `<Inplace>
+                basic: `
+<Inplace>
     <template #display>
         <span class="pi pi-search" style="vertical-align: middle"></span>
         <span style="margin-left: 0.5rem; vertical-align: middle">View Picture</span>
@@ -29,8 +30,10 @@ export default {
     <template #content>
         <img class="w-full" alt="Nature" src="/images/nature/nature1.jpg" />
     </template>
-</Inplace>`,
-                options: `<template>
+</Inplace>
+`,
+                options: `
+<template>
     <div class="card">
         <Inplace>
             <template #display>
@@ -45,8 +48,10 @@ export default {
 </template>
 <script>
 
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <Inplace>
             <template #display>
@@ -62,7 +67,8 @@ export default {
 
 <script setup>
 
-<\/script>`
+<\/script>
+`
             }
         };
     }

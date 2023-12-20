@@ -23,12 +23,15 @@ export default {
                 { status: 'Delivered', date: '16/10/2020 10:00', icon: 'pi pi-check', color: '#607D8B' }
             ],
             code: {
-                basic: `<Timeline :value="events">
+                basic: `
+<Timeline :value="events">
     <template #content="slotProps">
         {{ slotProps.item.status }}
     </template>
-</Timeline>`,
-                options: `<template>
+</Timeline>
+`,
+                options: `
+<template>
     <div class="card">
         <Timeline :value="events">
             <template #content="slotProps">
@@ -51,8 +54,10 @@ export default {
         };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <Timeline :value="events">
             <template #content="slotProps">
@@ -72,7 +77,8 @@ const events = ref([
     { status: 'Delivered', date: '16/10/2020 10:00', icon: 'pi pi-check', color: '#607D8B' }
 ]);
 
-<\/script>`
+<\/script>
+`
             }
         };
     }

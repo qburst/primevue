@@ -29,7 +29,8 @@ export default {
         return {
             products: null,
             code: {
-                basic: `<DataTable :value="products" sortField="price" :sortOrder="-1" tableStyle="min-width: 50rem">
+                basic: `
+<DataTable :value="products" sortField="price" :sortOrder="-1" tableStyle="min-width: 50rem">
     <Column field="code" header="Code" sortable style="width: 20%"></Column>
     <Column field="name" header="Name" sortable style="width: 20%"></Column>
     <Column field="price" header="Price" :sortable="true">
@@ -39,8 +40,10 @@ export default {
     </Column>
     <Column field="category" header="Category" sortable style="width: 20%"></Column>
     <Column field="quantity" header="Quantity" sortable style="width: 20%"></Column>
-</DataTable>`,
-                options: `<template>
+</DataTable>
+`,
+                options: `
+<template>
     <div class="card">
         <DataTable :value="products" sortField="price" :sortOrder="-1" tableStyle="min-width: 50rem">
             <Column field="code" header="Code" sortable style="width: 20%"></Column>
@@ -74,8 +77,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <DataTable :value="products" sortField="price" :sortOrder="-1" tableStyle="min-width: 50rem">
             <Column field="code" header="Code" sortable style="width: 20%"></Column>
@@ -104,7 +109,8 @@ const formatCurrency = (value) => {
     return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
 }
 
-<\/script>`,
+<\/script>
+`,
                 data: `
 {
     id: '1000',

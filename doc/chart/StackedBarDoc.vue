@@ -9,14 +9,19 @@
 </template>
 
 <script>
+import EventBus from '@/layouts/AppEventBus';
+
 export default {
     data() {
         return {
             chartData: null,
             chartOptions: null,
             code: {
-                basic: `<Chart type="bar" :data="chartData" :options="chartOptions" class="h-30rem" />`,
-                options: `<template>
+                basic: `
+<Chart type="bar" :data="chartData" :options="chartOptions" class="h-30rem" />
+`,
+                options: `
+<template>
     <div class="card">
         <Chart type="bar" :data="chartData" :options="chartOptions" class="h-30rem" />
     </div>
@@ -106,8 +111,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <Chart type="bar" :data="chartData" :options="chartOptions" class="h-30rem" />
     </div>
@@ -193,13 +200,20 @@ const setChartOptions = () =>  {
         }
     };
 }
-<\/script>`
+<\/script>
+`
             }
         };
     },
     mounted() {
         this.chartData = this.setChartData();
         this.chartOptions = this.setChartOptions();
+
+        this.themeChangeListener = () => {
+            this.chartOptions = this.setChartOptions();
+        };
+
+        EventBus.on('theme-change-complete', this.themeChangeListener);
     },
     methods: {
         setChartData() {

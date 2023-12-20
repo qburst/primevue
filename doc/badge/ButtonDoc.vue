@@ -4,7 +4,7 @@
     </DocSectionText>
     <div class="card flex flex-wrap justify-content-center gap-2">
         <Button type="button" label="Emails" badge="8" />
-        <Button type="button" label="Messages" icon="pi pi-users" severity="warning" badge="8" badgeClass="p-badge-danger" />
+        <Button type="button" label="Messages" icon="pi pi-users" severity="secondary" badge="4" badgeSeverity="info" />
     </div>
     <DocSectionCode :code="code" />
 </template>
@@ -14,28 +14,32 @@ export default {
     data() {
         return {
             code: {
-                basic: `<Button type="button" label="Emails" badge="8" />
-<Button type="button" label="Messages" icon="pi pi-users" severity="warning" badge="8" badgeClass="p-badge-danger" />`,
-                options: `<template>
+                basic: `
+<Button type="button" label="Emails" badge="8" />
+<Button type="button" label="Messages" icon="pi pi-users" severity="secondary" badge="4" badgeSeverity="info" />
+`,
+                options: `
+<template>
     <div class="card flex flex-wrap justify-content-center gap-2">
         <Button type="button" label="Emails" badge="8" />
-        <Button type="button" label="Messages" icon="pi pi-users" severity="warning" badge="8" badgeClass="p-badge-danger" />
+        <Button type="button" label="Messages" icon="pi pi-users" severity="secondary" badge="4" badgeSeverity="info" />
     </div>
 </template>
 
 <script>
-
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex flex-wrap justify-content-center gap-2">
         <Button type="button" label="Emails" badge="8" />
-        <Button type="button" label="Messages" icon="pi pi-users" severity="warning" badge="8" badgeClass="p-badge-danger" />
+        <Button type="button" label="Messages" icon="pi pi-users" severity="secondary" badge="4" badgeSeverity="info" />
     </div>
 </template>
 
 <script setup>
-
-<\/script>`
+<\/script>
+`
             }
         };
     }

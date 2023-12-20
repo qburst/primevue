@@ -19,10 +19,13 @@ export default {
             nodes: null,
             columns: null,
             code: {
-                basic: `<TreeTable :value="nodes">
+                basic: `
+<TreeTable :value="nodes">
     <Column v-for="col of columns" :key="col.field" :field="col.field" :header="col.header" :expander="col.expander"></Column>
-</TreeTable>`,
-                options: `<template>
+</TreeTable>
+`,
+                options: `
+<template>
     <div class="card">
         <TreeTable :value="nodes">
             <Column v-for="col of columns" :key="col.field" :field="col.field" :header="col.header" :expander="col.expander"></Column>
@@ -51,8 +54,10 @@ export default {
         NodeService.getTreeTableNodes().then((data) => (this.nodes = data));
     }
 }
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <TreeTable :value="nodes">
             <Column v-for="col of columns" :key="col.field" :field="col.field" :header="col.header" :expander="col.expander"></Column>
@@ -74,7 +79,8 @@ const columns = ref([
     { field: 'size', header: 'Size' },
     { field: 'type', header: 'Type' }
 ]);
-<\/script>`,
+<\/script>
+`,
                 data: `
 {
     key: '0',

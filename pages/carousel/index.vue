@@ -11,13 +11,12 @@
 </template>
 
 <script>
-import AccessibilityDoc from '@/doc/carousel/AccessibilityDoc';
-import BasicDoc from '@/doc/carousel/BasicDoc';
-import CircularDoc from '@/doc/carousel/CircularDoc';
-import ImportDoc from '@/doc/carousel/ImportDoc';
-import NumScrollDoc from '@/doc/carousel/NumScrollDoc';
-import ResponsiveDoc from '@/doc/carousel/ResponsiveDoc';
-import VerticalDoc from '@/doc/carousel/VerticalDoc';
+import AccessibilityDoc from '@/doc/carousel/AccessibilityDoc.vue';
+import BasicDoc from '@/doc/carousel/BasicDoc.vue';
+import CircularDoc from '@/doc/carousel/CircularDoc.vue';
+import ImportDoc from '@/doc/carousel/ImportDoc.vue';
+import ResponsiveDoc from '@/doc/carousel/ResponsiveDoc.vue';
+import VerticalDoc from '@/doc/carousel/VerticalDoc.vue';
 import PTComponent from '@/doc/carousel/pt/index.vue';
 import ThemingDoc from '@/doc/carousel/theming/index.vue';
 
@@ -39,11 +38,6 @@ export default {
                     id: 'circular',
                     label: 'Circular',
                     component: CircularDoc
-                },
-                {
-                    id: 'numscroll',
-                    label: 'Num Scroll',
-                    component: NumScrollDoc
                 },
                 {
                     id: 'responsive',

@@ -147,7 +147,7 @@ export default {
             return this.optionGroupLabel ? ObjectUtils.resolveFieldData(optionGroup, this.optionGroupLabel) : null;
         },
         getOptionGroupChildren(optionGroup, level) {
-            return ObjectUtils.resolveFieldData(optionGroup, this.optionGroupChildren[level]);
+            return ObjectUtils.isString(this.optionGroupChildren) ? ObjectUtils.resolveFieldData(optionGroup, this.optionGroupChildren) : ObjectUtils.resolveFieldData(optionGroup, this.optionGroupChildren[level]);
         },
         isOptionGroup(option, level) {
             return Object.prototype.hasOwnProperty.call(option, this.optionGroupChildren[level]);
@@ -243,6 +243,7 @@ export default {
                     break;
 
                 case 'Enter':
+                case 'NumpadEnter':
                     this.onEnterKey(event);
                     break;
 
@@ -528,7 +529,7 @@ export default {
             return this.isValidOption(processedOption) && this.getProccessedOptionLabel(processedOption).toLocaleLowerCase(this.searchLocale).startsWith(this.searchValue.toLocaleLowerCase(this.searchLocale));
         },
         isValidOption(processedOption) {
-            return !!processedOption && !this.isOptionDisabled(processedOption.option);
+            return ObjectUtils.isNotEmpty(processedOption) && !this.isOptionDisabled(processedOption.option);
         },
         isValidSelectedOption(processedOption) {
             return this.isValidOption(processedOption) && this.isSelected(processedOption);

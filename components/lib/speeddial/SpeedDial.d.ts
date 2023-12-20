@@ -11,7 +11,8 @@ import { VNode } from 'vue';
 import { ComponentHooks } from '../basecomponent';
 import { ButtonPassThroughOptions } from '../button';
 import { MenuItem } from '../menuitem';
-import { ClassComponent, GlobalComponentConstructor, PTOptions } from '../ts-helpers';
+import { PassThroughOptions } from '../passthrough';
+import { ClassComponent, GlobalComponentConstructor, PassThrough } from '../ts-helpers';
 
 export declare type SpeedDialPassThroughOptionType = SpeedDialPassThroughAttributes | ((options: SpeedDialPassThroughMethodOptions) => SpeedDialPassThroughAttributes | string) | string | null | undefined;
 
@@ -19,10 +20,48 @@ export declare type SpeedDialPassThroughOptionType = SpeedDialPassThroughAttribu
  * Custom passthrough(pt) option method.
  */
 export interface SpeedDialPassThroughMethodOptions {
+    /**
+     * Defines instance.
+     */
     instance: any;
+    /**
+     * Defines valid properties.
+     */
     props: SpeedDialProps;
+    /**
+     * Defines current inline state.
+     */
     state: SpeedDialState;
+    /**
+     * Defines current options.
+     */
     context: SpeedDialContext;
+    /**
+     * Defines valid attributes.
+     */
+    attrs: any;
+    /**
+     * Defines parent options.
+     */
+    parent: any;
+    /**
+     * Defines passthrough(pt) options in global config.
+     */
+    global: object | undefined;
+}
+
+/**
+ * Custom shared passthrough(pt) option method.
+ */
+export interface SpeedDialSharedPassThroughMethodOptions {
+    /**
+     * Defines valid properties.
+     */
+    props: SpeedDialProps;
+    /**
+     * Defines current inline state.
+     */
+    state: SpeedDialState;
 }
 
 /**
@@ -38,7 +77,7 @@ export interface SpeedDialPassThroughOptions {
      * Used to pass attributes to the Button component.
      *  @see {@link ButtonPassThroughOptions}
      */
-    button?: ButtonPassThroughOptions;
+    button?: ButtonPassThroughOptions<SpeedDialSharedPassThroughMethodOptions>;
     /**
      * Used to pass attributes to the menu's DOM element.
      */
@@ -60,7 +99,7 @@ export interface SpeedDialPassThroughOptions {
      */
     mask?: SpeedDialPassThroughOptionType;
     /**
-     * Used to manage all lifecycle hooks
+     * Used to manage all lifecycle hooks.
      * @see {@link BaseComponent.ComponentHooks}
      */
     hooks?: ComponentHooks;
@@ -230,16 +269,21 @@ export interface SpeedDialProps {
     /**
      * Defines a string value that labels an interactive list element.
      */
-    'aria-label'?: string | undefined;
+    ariaLabel?: string | undefined;
     /**
      * Identifier of the underlying list element.
      */
-    'aria-labelledby'?: string | undefined;
+    ariaLabelledby?: string | undefined;
     /**
      * Used to pass attributes to DOM elements inside the component.
      * @type {SpeedDialPassThroughOptions}
      */
-    pt?: PTOptions<SpeedDialPassThroughOptions>;
+    pt?: PassThrough<SpeedDialPassThroughOptions>;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false
@@ -275,8 +319,14 @@ export interface SpeedDialSlots {
         /**
          * Button click function
          * @param {Event} event - Browser event.
+         * @deprecated since v3.39.0. Use 'toggleCallback' property instead.
          */
         onClick: (event: Event) => void;
+        /**
+         * Button click function
+         * @param {Event} event - Browser event.
+         */
+        toggleCallback: (event: Event) => void;
     }): VNode[];
     /**
      * Custom icon template.

@@ -126,10 +126,12 @@ export default {
     data() {
         return {
             code: {
-                basic: `<span id="lb">Options</span>
+                basic: `
+<span id="lb">Options</span>
 <PickList aria-labelledby="lb" />
 
-<PickList aria-label="City" />`
+<PickList aria-label="City" />
+`
             }
         };
     }

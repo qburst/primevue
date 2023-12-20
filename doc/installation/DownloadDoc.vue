@@ -1,8 +1,8 @@
 <template>
     <DocSectionText v-bind="$attrs">
-        <p>PrimeVue is available for download at <a href="https://www.npmjs.com/package/primevue">npm</a>.</p>
+        <p>PrimeVue is available for download on <a href="https://www.npmjs.com/package/primevue">npm Registry</a>.</p>
     </DocSectionText>
-    <DocSectionCode :code="code" hideToggleCode importCode hideCodeSandbox hideStackBlitz />
+    <DocSectionCode :code="code" hideToggleCode hideCodeSandbox hideStackBlitz />
 </template>
 
 <script>
@@ -10,11 +10,16 @@ export default {
     data() {
         return {
             code: {
-                basic: `// with npm
+                basic: `
+# Using npm
 npm install primevue
 
-// with yarn
-yarn add primevue`
+# Using yarn
+yarn add primevue
+
+# Using pnpm
+pnpm add primevue
+`
             }
         };
     }

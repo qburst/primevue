@@ -9,7 +9,8 @@
  */
 import { ButtonHTMLAttributes, HTMLAttributes, TransitionProps, VNode } from 'vue';
 import { ComponentHooks } from '../basecomponent';
-import { ClassComponent, GlobalComponentConstructor, PTOptions } from '../ts-helpers';
+import { PassThroughOptions } from '../passthrough';
+import { ClassComponent, GlobalComponentConstructor, PassThrough } from '../ts-helpers';
 
 export declare type GalleriaPassThroughOptionType = GalleriaPassThroughAttributes | ((options: GalleriaPassThroughMethodOptions) => GalleriaPassThroughAttributes | string) | string | null | undefined;
 
@@ -19,10 +20,34 @@ export declare type GalleriaPassThroughTransitionType = TransitionProps | ((opti
  * Custom passthrough(pt) option method.
  */
 export interface GalleriaPassThroughMethodOptions {
+    /**
+     * Defines instance.
+     */
     instance: any;
+    /**
+     * Defines valid properties.
+     */
     props: GalleriaProps;
+    /**
+     * Defines current inline state.
+     */
     state: GalleriaState;
+    /**
+     * Defines current options.
+     */
     context: GalleriaContext;
+    /**
+     * Defines valid attributes.
+     */
+    attrs: any;
+    /**
+     * Defines parent options.
+     */
+    parent: any;
+    /**
+     * Defines passthrough(pt) options in global config.
+     */
+    global: object | undefined;
 }
 
 export interface GalleriaResponsiveOptions {
@@ -154,7 +179,7 @@ export interface GalleriaPassThroughOptions {
      */
     mask?: GalleriaPassThroughOptionType;
     /**
-     * Used to manage all lifecycle hooks
+     * Used to manage all lifecycle hooks.
      * @see {@link BaseComponent.ComponentHooks}
      */
     hooks?: ComponentHooks;
@@ -374,10 +399,23 @@ export interface GalleriaProps {
      */
     nextButtonProps?: ButtonHTMLAttributes | undefined;
     /**
+     * Defines a string value that labels an interactive element.
+     */
+    ariaLabel?: string | undefined;
+    /**
+     * Defines a string value that description for the role of the component.
+     */
+    ariaRoledescription?: string | undefined;
+    /**
      * Used to pass attributes to DOM elements inside the component.
      * @type {GalleriaPassThroughOptions}
      */
-    pt?: PTOptions<GalleriaPassThroughOptions>;
+    pt?: PassThrough<GalleriaPassThroughOptions>;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false

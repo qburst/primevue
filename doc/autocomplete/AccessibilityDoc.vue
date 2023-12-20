@@ -161,13 +161,15 @@ export default {
     data() {
         return {
             code: {
-                basic: `<label for="ac1">;Username</label>
+                basic: `
+<label for="ac1">;Username</label>
 <AutoComplete inputId="ac1" />
 
 <span id="ac2">Email</span>
 <AutoComplete aria-labelledby="ac2" />
 
-<AutoComplete aria-label="City" />`
+<AutoComplete aria-label="City" />
+`
             }
         };
     }

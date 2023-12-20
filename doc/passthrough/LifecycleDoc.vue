@@ -14,10 +14,13 @@ export default {
     data() {
         return {
             code: {
-                basic: `<Panel header="Header" :pt="panelPT">
+                basic: `
+<Panel header="Header" :pt="panelPT">
     Content
-</Panel>`,
-                options: `<template>
+</Panel>
+`,
+                options: `
+<template>
     <Panel header="Header" :pt="panelPT">
         Content
     </Panel>
@@ -40,8 +43,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <Panel header="Header" :pt="panelPT">
         Content
     </Panel>
@@ -60,7 +65,8 @@ const panelPt = ref({
         }
     }
 );
-<\/script>`
+<\/script>
+`
             }
         };
     }

@@ -1,9 +1,11 @@
+import aliasConfig from './nuxt-vite.config.js';
+
 const baseUrl = '/';
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     typescript: false,
-    modules: ['nuxt-gtag'],
+    modules: ['nuxt-gtag', '~/modules/nuxt-primevue/module'],
     components: [
         '~/components',
         {
@@ -11,6 +13,21 @@ export default defineNuxtConfig({
             prefetch: false
         }
     ],
+    vite: aliasConfig,
+    nitro: {
+        alias: aliasConfig.resolve.alias
+    },
+    primevue: {
+        options: {
+            ripple: true
+        },
+        layerOrder: 'primevue',
+        resolvePath: function ({ as, from, type }) {
+            const resolvedPath = from.replace('primevue', '@/components/lib');
+
+            return type === 'component' ? `${resolvedPath}/${as}.vue` : `${resolvedPath}/${as}.js`;
+        }
+    },
     app: {
         baseURL: baseUrl,
         head: {
@@ -35,12 +52,12 @@ export default defineNuxtConfig({
                 {
                     id: 'home-table-link',
                     rel: 'stylesheet',
-                    href: baseUrl + 'styles/landing/themes/lara-light-blue/theme.css'
+                    href: baseUrl + 'styles/landing/themes/lara-light-green/theme.css'
                 },
                 {
                     id: 'theme-link',
                     rel: 'stylesheet',
-                    href: baseUrl + 'themes/lara-light-blue/theme.css'
+                    href: baseUrl + 'themes/lara-light-green/theme.css'
                 },
                 { rel: 'icon', href: baseUrl + 'favicon.ico' }
             ],
@@ -60,5 +77,5 @@ export default defineNuxtConfig({
     gtag: {
         id: 'G-48TTQ6G6KV'
     },
-    css: ['/node_modules/primeflex/primeflex.css', '/node_modules/primeicons/primeicons.css', '@/assets/styles/flags.css']
+    css: ['/node_modules/primeflex/primeflex.css', '/node_modules/primeicons/primeicons.css', '@/assets/styles/flags.css', '@docsearch/css/dist/style.css', '@/assets/styles/layout/landing/_landing.scss', '@/assets/styles/layout/layout.scss']
 });

@@ -42,7 +42,8 @@ export default {
     data() {
         return {
             code: {
-                basic: `<template>
+                basic: `
+<template>
     <div class="card p-fluid">
         <form @submit="onSubmit" class="flex flex-column gap-2">
             <Chips v-model="value" :class="{ 'p-invalid': errorMessage }" aria-describedby="chips-error" />
@@ -51,8 +52,10 @@ export default {
         </form>
         <Toast />
     </div>
-</template>`,
-                options: `<template>
+</template>
+`,
+                options: `
+<template>
     <div class="card p-fluid">
         <form @submit="onSubmit" class="flex flex-column gap-2">
             <Chips v-model="value" :class="{ 'p-invalid': errorMessage }" aria-describedby="chips-error" />
@@ -91,8 +94,10 @@ export default {
         return { value, handleSubmit, onSubmit, errorMessage };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card p-fluid">
         <form @submit="onSubmit" class="flex flex-column gap-2">
             <Chips v-model="value" :class="{ 'p-invalid': errorMessage }" aria-describedby="chips-error" />

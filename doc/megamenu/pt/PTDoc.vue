@@ -134,15 +134,18 @@ export default {
                 }
             ],
             code: {
-                basic: `<MegaMenu
+                basic: `
+<MegaMenu
     :model="items"
     :pt="{
         action: ({ props, state, context }) => ({
             class: context.active ? 'bg-primary-200 border-round-sm' : context.focused ? 'bg-primary-300 border-round-sm' : undefined
         })
     }"
-/>`,
-                options: `<template>
+/>
+`,
+                options: `
+<template>
     <div class="card">
         <MegaMenu
             :model="items"
@@ -278,8 +281,10 @@ export default {
         };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <MegaMenu
             :model="items"
@@ -411,7 +416,8 @@ const items = ref([
         ]
     }
 ]);
-<\/script>`
+<\/script>
+`
             }
         };
     }

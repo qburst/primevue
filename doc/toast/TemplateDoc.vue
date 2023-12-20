@@ -1,23 +1,21 @@
 <template>
     <DocSectionText v-bind="$attrs">
-        <p>Custom content inside a message is defined with the <i>content</i> option.</p>
+        <p>Custom content inside a message is defined with the <i>content</i> template.</p>
     </DocSectionText>
     <div class="card flex justify-content-center">
-        <Toast position="bottom-center" group="bc">
+        <Toast position="bottom-center" group="bc" @close="onClose">
             <template #message="slotProps">
-                <div class="flex flex-column align-items-center" style="flex: 1">
-                    <div class="text-center">
-                        <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
-                        <div class="font-bold text-xl my-3">{{ slotProps.message.summary }}</div>
+                <div class="flex flex-column align-items-start" style="flex: 1">
+                    <div class="flex align-items-center gap-2">
+                        <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
+                        <span class="font-bold text-900">Amy Elsner</span>
                     </div>
-                    <div class="flex gap-2">
-                        <Button severity="success" label="Yes" @click="onConfirm()"></Button>
-                        <Button severity="secondary" label="No" @click="onReject()"></Button>
-                    </div>
+                    <div class="font-medium text-lg my-3 text-900">{{ slotProps.message.summary }}</div>
+                    <Button class="p-button-sm" label="Reply" @click="onReply()"></Button>
                 </div>
             </template>
         </Toast>
-        <Button @click="showTemplate" label="Confirm" />
+        <Button @click="showTemplate" label="View" />
     </div>
     <DocSectionCode :code="code" />
 </template>
@@ -26,91 +24,125 @@
 export default {
     data() {
         return {
+            visible: false,
             code: {
-                basic: `<Toast position="bottom-center" group="bc">
+                basic: `
+<Toast position="bottom-center" group="bc" @close="onClose">
     <template #message="slotProps">
-        <div class="flex flex-column align-items-center" style="flex: 1">
-            <div class="text-center">
-                <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
-                <div class="font-bold text-xl my-3">{{ slotProps.message.summary }}</div>
+        <div class="flex flex-column align-items-start" style="flex: 1">
+            <div class="flex align-items-center gap-2">
+                <Avatar image="/images/avatar/amyelsner.png" shape="circle" />
+                <span class="font-bold text-900">Amy Elsner</span>
             </div>
-            <div class="flex gap-2">
-                <Button severity="success" label="Yes" @click="onConfirm()"></Button>
-                <Button severity="secondary" label="No" @click="onReject()"></Button>
-            </div>
+            <div class="font-medium text-lg my-3 text-900">{{ slotProps.message.summary }}</div>
+            <Button class="p-button-sm" label="Reply" @click="onReply()"></Button>
         </div>
     </template>
 </Toast>
-<Button @click="showTemplate" label="Confirm" />`,
-                options: `<template>
+<Button @click="showTemplate" label="View" />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
-        <Toast position="bottom-center" group="bc">
+        <Toast position="bottom-center" group="bc" @close="onClose">
             <template #message="slotProps">
-                <div class="flex flex-column align-items-center" style="flex: 1">
-                    <div class="text-center">
-                        <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
-                        <div class="font-bold text-xl my-3">{{ slotProps.message.summary }}</div>
+                <div class="flex flex-column align-items-start" style="flex: 1">
+                    <div class="flex align-items-center gap-2">
+                        <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
+                        <span class="font-bold text-900">Amy Elsner</span>
                     </div>
-                    <div class="flex gap-2">
-                        <Button severity="success" label="Yes" @click="onConfirm()"></Button>
-                        <Button severity="secondary" label="No" @click="onReject()"></Button>
-                    </div>
+                    <div class="font-medium text-lg my-3 text-900">{{ slotProps.message.summary }}</div>
+                    <Button class="p-button-sm" label="Reply" @click="onReply()"></Button>
                 </div>
             </template>
         </Toast>
-        <Button @click="showTemplate" label="Confirm" />
+        <Button @click="showTemplate" label="View" />
     </div>
 </template>
 
 <script>
 export default {
+    data() {
+        return {
+            visible: false
+        }
+    },
     methods: {
         showTemplate() {
-            this.$toast.add({ severity: 'warn', summary: 'Are you sure?', detail: 'Proceed to confirm', group: 'bc' });
+            if (!this.visible) {
+                this.$toast.add({ severity: 'success', summary: 'Can you send me the report?', group: 'bc' });
+                this.visible = true;
+            }
+        },
+        onReply() {
+            this.$toast.removeGroup('bc');
+            this.visible = false;
+        },
+        onClose() {
+            this.visible = false;
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
-        <Toast position="bottom-center" group="bc">
+        <Toast position="bottom-center" group="bc" @close="onClose">
             <template #message="slotProps">
-                <div class="flex flex-column align-items-center" style="flex: 1">
-                    <div class="text-center">
-                        <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
-                        <div class="font-bold text-xl my-3">{{ slotProps.message.summary }}</div>
+                <div class="flex flex-column align-items-start" style="flex: 1">
+                    <div class="flex align-items-center gap-2">
+                        <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
+                        <span class="font-bold text-900">Amy Elsner</span>
                     </div>
-                    <div class="flex gap-2">
-                        <Button severity="success" label="Yes" @click="onConfirm()"></Button>
-                        <Button severity="secondary" label="No" @click="onReject()"></Button>
-                    </div>
+                    <div class="font-medium text-lg my-3 text-900">{{ slotProps.message.summary }}</div>
+                    <Button class="p-button-sm" label="Reply" @click="onReply()"></Button>
                 </div>
             </template>
         </Toast>
-        <Button @click="showTemplate" label="Confirm" />
+        <Button @click="showTemplate" label="View" />
     </div>
 </template>
 
 <script setup>
 import { useToast } from "primevue/usetoast";
+import { ref } from 'vue';
 const toast = useToast();
+const visible = ref(false);
 
 const showTemplate = () => {
-    toast.add({ severity: 'warn', summary: 'Are you sure?', detail: 'Proceed to confirm', group: 'bc' });
+    if (!visible.value) {
+        toast.add({ severity: 'success', summary: 'Can you send me the report?', group: 'bc' });
+        visible.value = true;
+    } 
 };
-<\/script>`
+
+const onReply = () => {
+    toast.removeGroup('bc');
+    visible.value = false;
+}
+
+const onClose = () => {
+    visible.value = false;
+}
+<\/script>
+`
             }
         };
     },
     methods: {
         showTemplate() {
-            this.$toast.add({ severity: 'warn', summary: 'Are you sure?', detail: 'Proceed to confirm', group: 'bc' });
+            if (!this.visible) {
+                this.$toast.add({ severity: 'success', summary: 'Can you send me the report?', group: 'bc' });
+                this.visible = true;
+            }
         },
-        onConfirm() {
+        onReply() {
             this.$toast.removeGroup('bc');
+            this.visible = false;
         },
-        onReject() {
-            this.$toast.removeGroup('bc');
+        onClose() {
+            this.visible = false;
         }
     }
 };

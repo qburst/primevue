@@ -9,8 +9,9 @@
  */
 import { ButtonHTMLAttributes, HTMLAttributes, TransitionProps, VNode } from 'vue';
 import { ComponentHooks } from '../basecomponent';
-import { ButtonPassThroughOptionType } from '../button';
-import { ClassComponent, GlobalComponentConstructor, PTOptions } from '../ts-helpers';
+import { ButtonPassThroughOptions } from '../button';
+import { PassThroughOptions } from '../passthrough';
+import { ClassComponent, GlobalComponentConstructor, PassThrough } from '../ts-helpers';
 
 export declare type PickListPassThroughOptionType = PickListPassThroughAttributes | ((options: PickListPassThroughMethodOptions) => PickListPassThroughAttributes | string) | string | null | undefined;
 
@@ -20,10 +21,48 @@ export declare type PickListPassThroughTransitionType = TransitionProps | ((opti
  * Custom passthrough(pt) option method.
  */
 export interface PickListPassThroughMethodOptions {
+    /**
+     * Defines instance.
+     */
     instance: any;
+    /**
+     * Defines valid properties.
+     */
     props: PickListProps;
+    /**
+     * Defines current inline state.
+     */
     state: PickListState;
+    /**
+     * Defines current options.
+     */
     context: PickListContext;
+    /**
+     * Defines valid attributes.
+     */
+    attrs: any;
+    /**
+     * Defines parent options.
+     */
+    parent: any;
+    /**
+     * Defines passthrough(pt) options in global config.
+     */
+    global: object | undefined;
+}
+
+/**
+ * Custom shared passthrough(pt) option method.
+ */
+export interface PickListSharedPassThroughMethodOptions {
+    /**
+     * Defines valid properties.
+     */
+    props: PickListProps;
+    /**
+     * Defines current inline state.
+     */
+    state: PickListState;
 }
 
 /**
@@ -116,19 +155,19 @@ export interface PickListPassThroughOptions {
     /**
      * Used to pass attributes to the Button component.
      */
-    sourceMoveUpButton?: ButtonPassThroughOptionType;
+    sourceMoveUpButton?: ButtonPassThroughOptions<PickListSharedPassThroughMethodOptions>;
     /**
      * Used to pass attributes to the Button component.
      */
-    sourceMoveTopButton?: ButtonPassThroughOptionType;
+    sourceMoveTopButton?: ButtonPassThroughOptions<PickListSharedPassThroughMethodOptions>;
     /**
      * Used to pass attributes to the Button component.
      */
-    sourceMoveDownButton?: ButtonPassThroughOptionType;
+    sourceMoveDownButton?: ButtonPassThroughOptions<PickListSharedPassThroughMethodOptions>;
     /**
      * Used to pass attributes to the Button component.
      */
-    sourceMoveBottomButton?: ButtonPassThroughOptionType;
+    sourceMoveBottomButton?: ButtonPassThroughOptions<PickListSharedPassThroughMethodOptions>;
     /**
      * Used to pass attributes to the source wrapper's DOM element.
      */
@@ -148,19 +187,19 @@ export interface PickListPassThroughOptions {
     /**
      * Used to pass attributes to the Button component.
      */
-    moveToTargetButton?: ButtonPassThroughOptionType;
+    moveToTargetButton?: ButtonPassThroughOptions<PickListSharedPassThroughMethodOptions>;
     /**
      * Used to pass attributes to the Button component.
      */
-    moveAllToTargetButton?: ButtonPassThroughOptionType;
+    moveAllToTargetButton?: ButtonPassThroughOptions<PickListSharedPassThroughMethodOptions>;
     /**
      * Used to pass attributes to the Button component.
      */
-    moveToSourceButton?: ButtonPassThroughOptionType;
+    moveToSourceButton?: ButtonPassThroughOptions<PickListSharedPassThroughMethodOptions>;
     /**
      * Used to pass attributes to the Button component.
      */
-    moveAllToSourceButton?: ButtonPassThroughOptionType;
+    moveAllToSourceButton?: ButtonPassThroughOptions<PickListSharedPassThroughMethodOptions>;
     /**
      * Used to pass attributes to the target wrapper's DOM element.
      */
@@ -184,21 +223,21 @@ export interface PickListPassThroughOptions {
     /**
      * Used to pass attributes to the Button component.
      */
-    targetMoveUpButton?: ButtonPassThroughOptionType;
+    targetMoveUpButton?: ButtonPassThroughOptions<PickListSharedPassThroughMethodOptions>;
     /**
      * Used to pass attributes to the Button component.
      */
-    targetMoveTopButton?: ButtonPassThroughOptionType;
+    targetMoveTopButton?: ButtonPassThroughOptions<PickListSharedPassThroughMethodOptions>;
     /**
      * Used to pass attributes to the Button component.
      */
-    targetMoveDownButton?: ButtonPassThroughOptionType;
+    targetMoveDownButton?: ButtonPassThroughOptions<PickListSharedPassThroughMethodOptions>;
     /**
      * Used to pass attributes to the Button component.
      */
-    targetMoveBottomButton?: ButtonPassThroughOptionType;
+    targetMoveBottomButton?: ButtonPassThroughOptions<PickListSharedPassThroughMethodOptions>;
     /**
-     * Used to manage all lifecycle hooks
+     * Used to manage all lifecycle hooks.
      * @see {@link BaseComponent.ComponentHooks}
      */
     hooks?: ComponentHooks;
@@ -293,7 +332,7 @@ export interface PickListProps {
      * Defines whether metaKey is requred or not for the selection.
      * When true metaKey needs to be pressed to select or unselect an item and
      * when set to false selection of each item can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.
-     * @defaultValue true
+     * @defaultValue false
      */
     metaKeySelection?: boolean | undefined;
     /**
@@ -373,7 +412,12 @@ export interface PickListProps {
      * Used to pass attributes to DOM elements inside the component.
      * @type {PickListPassThroughOptions}
      */
-    pt?: PTOptions<PickListPassThroughOptions>;
+    pt?: PassThrough<PickListPassThroughOptions>;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false

@@ -21,13 +21,16 @@ export default {
         return {
             products: null,
             code: {
-                basic: `<DataTable :value="products" resizableColumns columnResizeMode="expand" showGridlines tableStyle="min-width: 50rem">
+                basic: `
+<DataTable :value="products" resizableColumns columnResizeMode="expand" showGridlines tableStyle="min-width: 50rem">
     <Column field="code" header="Code"></Column>
     <Column field="name" header="Name"></Column>
     <Column field="category" header="Category"></Column>
     <Column field="quantity" header="Quantity"></Column>
-</DataTable>`,
-                options: `<template>
+</DataTable>
+`,
+                options: `
+<template>
     <div class="card">
         <DataTable :value="products" resizableColumns columnResizeMode="expand" showGridlines tableStyle="min-width: 50rem">
             <Column field="code" header="Code"></Column>
@@ -51,8 +54,10 @@ export default {
         ProductService.getProductsMini().then((data) => (this.products = data));
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <DataTable :value="products" resizableColumns columnResizeMode="expand" showGridlines tableStyle="min-width: 50rem">
             <Column field="code" header="Code"></Column>
@@ -68,11 +73,12 @@ import { ref, onMounted } from 'vue';
 import { ProductService } from '@/service/ProductService';
 
 onMounted(() => {
-    productService.value.getProductsMini().then(data => products.value = data);
+    ProductService.getProductsMini().then(data => products.value = data);
 });
 
 const products = ref();
-<\/script>`,
+<\/script>
+`,
                 data: `
 {
     id: '1000',

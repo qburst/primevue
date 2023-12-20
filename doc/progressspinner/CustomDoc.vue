@@ -13,9 +13,12 @@ export default {
     data() {
         return {
             code: {
-                basic: `<ProgressSpinner style="width: 50px; height: 50px" strokeWidth="8" fill="var(--surface-ground)"
-    animationDuration=".5s" aria-label="Custom ProgressSpinner" />`,
-                options: `<template>
+                basic: `
+<ProgressSpinner style="width: 50px; height: 50px" strokeWidth="8" fill="var(--surface-ground)"
+    animationDuration=".5s" aria-label="Custom ProgressSpinner" />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <ProgressSpinner style="width: 50px; height: 50px" strokeWidth="8" fill="var(--surface-ground)"
             animationDuration=".5s" aria-label="Custom ProgressSpinner" />
@@ -23,8 +26,10 @@ export default {
 </template>
 
 <script>
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <ProgressSpinner style="width: 50px; height: 50px" strokeWidth="8" fill="var(--surface-ground)"
             animationDuration=".5s" aria-label="Custom ProgressSpinner" />
@@ -32,22 +37,10 @@ export default {
 </template>
 
 <script setup>
-<\/script>`
+<\/script>
+`
             }
         };
     }
 };
 </script>
-
-<style scoped>
-::v-deep(.styled-box-green .p-ink) {
-    background: rgba(75, 175, 80, 0.3);
-}
-::v-deep(.styled-box-orange .p-ink) {
-    background: rgba(#ffc106, 0.3);
-}
-
-::v-deep(.styled-box-purple .p-ink) {
-    background: rgba(#9c27b0, 0.3);
-}
-</style>

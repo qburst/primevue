@@ -15,8 +15,11 @@ export default {
             value: 0,
             interval: null,
             code: {
-                basic: `<ProgressBar :value="value"></ProgressBar>`,
-                options: `<template>
+                basic: `
+<ProgressBar :value="value"></ProgressBar>
+`,
+                options: `
+<template>
     <div class="card">
         <Toast></Toast>
         <ProgressBar :value="value1" />
@@ -56,8 +59,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <Toast></Toast>
         <ProgressBar :value="value1" />
@@ -93,7 +98,8 @@ const endProgress = () => {
     clearInterval(interval.value);
     interval.value = null;
 };
-<\/script>`
+<\/script>
+`
             }
         };
     },

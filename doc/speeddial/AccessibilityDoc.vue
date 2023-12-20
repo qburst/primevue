@@ -122,7 +122,9 @@ export default {
     data() {
         return {
             code: {
-                basic: `<SpeedDial aria-label="Options" />`
+                basic: `
+<SpeedDial aria-label="Options" />
+`
             }
         };
     }

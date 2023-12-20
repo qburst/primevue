@@ -18,9 +18,11 @@ export default {
     data() {
         return {
             code: {
-                basic: `<Card role="region">
+                basic: `
+<Card role="region">
     Content
-</Card>`
+</Card>
+`
             }
         };
     }

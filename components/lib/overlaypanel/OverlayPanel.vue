@@ -2,14 +2,17 @@
     <Portal :appendTo="appendTo">
         <transition name="p-overlaypanel" @enter="onEnter" @leave="onLeave" @after-leave="onAfterLeave" v-bind="ptm('transition')">
             <div v-if="visible" :ref="containerRef" v-focustrap role="dialog" :aria-modal="visible" @click="onOverlayClick" :class="cx('root')" v-bind="{ ...$attrs, ...ptm('root') }">
-                <div :class="cx('content')" @click="onContentClick" @mousedown="onContentClick" @keydown="onContentKeydown" v-bind="ptm('content')">
-                    <slot></slot>
-                </div>
-                <button v-if="showCloseIcon" v-ripple :class="cx('closeButton')" :aria-label="closeAriaLabel" type="button" autofocus @click="hide" @keydown="onButtonKeydown" v-bind="ptm('closeButton')">
-                    <slot name="closeicon">
-                        <component :is="closeIcon ? 'span' : 'TimesIcon'" :class="[cx('closeIcon'), closeIcon]" v-bind="ptm('closeIcon')"></component>
-                    </slot>
-                </button>
+                <slot v-if="$slots.container" name="container" :onClose="hide" :onKeydown="(event) => onButtonKeydown(event)" :closeCallback="hide" :keydownCallback="(event) => onButtonKeydown(event)"></slot>
+                <template v-else>
+                    <div :class="cx('content')" @click="onContentClick" @mousedown="onContentClick" @keydown="onContentKeydown" v-bind="ptm('content')">
+                        <slot></slot>
+                    </div>
+                    <button v-if="showCloseIcon" v-ripple :class="cx('closeButton')" :aria-label="closeAriaLabel" type="button" autofocus @click="hide" @keydown="onButtonKeydown" v-bind="ptm('closeButton')">
+                        <slot name="closeicon">
+                            <component :is="closeIcon ? 'span' : 'TimesIcon'" :class="[cx('closeIcon'), closeIcon]" v-bind="ptm('closeIcon')"></component>
+                        </slot>
+                    </button>
+                </template>
             </div>
         </transition>
     </Portal>
@@ -55,6 +58,7 @@ export default {
     container: null,
     styleElement: null,
     overlayEventListener: null,
+    documentKeydownListener: null,
     beforeUnmount() {
         if (this.dismissable) {
             this.unbindOutsideClickListener();
@@ -126,11 +130,16 @@ export default {
             this.focus();
             OverlayEventBus.on('overlay-click', this.overlayEventListener);
             this.$emit('show');
+
+            if (this.closeOnEscape) {
+                this.bindDocumentKeyDownListener();
+            }
         },
         onLeave() {
             this.unbindOutsideClickListener();
             this.unbindScrollListener();
             this.unbindResizeListener();
+            this.unbindDocumentKeyDownListener();
             OverlayEventBus.off('overlay-click', this.overlayEventListener);
             this.overlayEventListener = null;
             this.$emit('hide');
@@ -159,7 +168,7 @@ export default {
             }
         },
         onContentKeydown(event) {
-            if (event.code === 'Escape') {
+            if (event.code === 'Escape' && this.closeOnEscape) {
                 this.hide();
                 DomHandler.focus(this.target);
             }
@@ -181,6 +190,23 @@ export default {
 
             if (focusTarget) {
                 focusTarget.focus();
+            }
+        },
+        onKeyDown(event) {
+            if (event.code === 'Escape' && this.closeOnEscape) {
+                this.visible = false;
+            }
+        },
+        bindDocumentKeyDownListener() {
+            if (!this.documentKeydownListener) {
+                this.documentKeydownListener = this.onKeyDown.bind(this);
+                window.document.addEventListener('keydown', this.documentKeydownListener);
+            }
+        },
+        unbindDocumentKeyDownListener() {
+            if (this.documentKeydownListener) {
+                window.document.removeEventListener('keydown', this.documentKeydownListener);
+                this.documentKeydownListener = null;
             }
         },
         bindOutsideClickListener() {

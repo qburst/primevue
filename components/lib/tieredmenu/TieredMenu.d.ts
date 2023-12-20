@@ -10,69 +10,90 @@
 import { TransitionProps, VNode } from 'vue';
 import { ComponentHooks } from '../basecomponent';
 import { MenuItem } from '../menuitem';
-import { ClassComponent, GlobalComponentConstructor, PTOptions } from '../ts-helpers';
+import { PassThroughOptions } from '../passthrough';
+import { ClassComponent, GlobalComponentConstructor, PassThrough } from '../ts-helpers';
 
-export declare type TieredMenuPassThroughOptionType = TieredMenuPassThroughAttributes | ((options: TieredMenuPassThroughMethodOptions) => TieredMenuPassThroughAttributes | string) | string | null | undefined;
+export declare type TieredMenuPassThroughOptionType<T = any> = TieredMenuPassThroughAttributes | ((options: TieredMenuPassThroughMethodOptions<T>) => TieredMenuPassThroughAttributes | string) | string | null | undefined;
 
-export declare type TieredMenuPassThroughTransitionType = TransitionProps | ((options: TieredMenuPassThroughMethodOptions) => TransitionProps) | undefined;
+export declare type TieredMenuPassThroughTransitionType<T = any> = TransitionProps | ((options: TieredMenuPassThroughMethodOptions<T>) => TransitionProps) | undefined;
 
 /**
  * Custom passthrough(pt) option method.
  */
-export interface TieredMenuPassThroughMethodOptions {
+export interface TieredMenuPassThroughMethodOptions<T> {
+    /**
+     * Defines instance.
+     */
     instance: any;
+    /**
+     * Defines valid properties.
+     */
     props: TieredMenuProps;
+    /**
+     * Defines current inline state.
+     */
     state: TieredMenuState;
+    /**
+     * Defines parent instance.
+     */
+    parent: T;
+    /**
+     * Defines current options.
+     */
     context: TieredMenuContext;
+    /**
+     * Defines passthrough(pt) options in global config.
+     */
+    global: object | undefined;
 }
 
 /**
  * Custom passthrough(pt) options.
  * @see {@link TieredMenuProps.pt}
  */
-export interface TieredMenuPassThroughOptions {
+export interface TieredMenuPassThroughOptions<T = any> {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: TieredMenuPassThroughOptionType;
+    root?: TieredMenuPassThroughOptionType<T>;
     /**
      * Used to pass attributes to the list's DOM element.
      */
-    menu?: TieredMenuPassThroughOptionType;
+    menu?: TieredMenuPassThroughOptionType<T>;
     /**
      * Used to pass attributes to the list item's DOM element.
      */
-    menuitem?: TieredMenuPassThroughOptionType;
+    menuitem?: TieredMenuPassThroughOptionType<T>;
     /**
      * Used to pass attributes to the content's DOM element.
      */
-    content?: TieredMenuPassThroughOptionType;
+    content?: TieredMenuPassThroughOptionType<T>;
     /**
      * Used to pass attributes to the action's DOM element.
      */
-    action?: TieredMenuPassThroughOptionType;
+    action?: TieredMenuPassThroughOptionType<T>;
     /**
      * Used to pass attributes to the icon's DOM element.
      */
-    icon?: TieredMenuPassThroughOptionType;
+    icon?: TieredMenuPassThroughOptionType<T>;
     /**
      * Used to pass attributes to the label's DOM element.
      */
-    label?: TieredMenuPassThroughOptionType;
+    label?: TieredMenuPassThroughOptionType<T>;
     /**
      * Used to pass attributes to the submenu icon's DOM element.
      */
-    submenuIcon?: TieredMenuPassThroughOptionType;
+    submenuIcon?: TieredMenuPassThroughOptionType<T>;
     /**
      * Used to pass attributes to the separator's DOM element.
      */
-    separator?: TieredMenuPassThroughOptionType;
+    separator?: TieredMenuPassThroughOptionType<T>;
     /**
      * Used to pass attributes to the submenu's DOM element.
      */
-    submenu?: TieredMenuPassThroughOptionType;
+    submenu?: TieredMenuPassThroughOptionType<T>;
     /**
-     * Used to manage all lifecycle hooks
+     * Used to manage all lifecycle hooks.
      * @see {@link BaseComponent.ComponentHooks}
      */
     hooks?: ComponentHooks;
@@ -159,12 +180,17 @@ export interface TieredMenuContext {
      * @defaultValue false
      */
     focused: boolean;
+    /**
+     * Current disabled state of menuitem as a boolean.
+     * @defaultValue false
+     */
+    disabled: boolean;
 }
 
 /**
- * Defines valid router binding props in TabMenu component.
+ * Defines valid router binding props in TieredMenu component.
  */
-export interface TabMenuRouterBindProps {
+export interface TieredMenuRouterBindProps {
     /**
      * Action element binding
      */
@@ -213,6 +239,7 @@ export interface TieredMenuProps {
     baseZIndex?: number | undefined;
     /**
      * Whether to apply 'router-link-active-exact' class if route exactly matches the item path.
+     * @deprecated since v3.40.0.
      * @defaultValue true
      */
     exact?: boolean | undefined;
@@ -228,16 +255,21 @@ export interface TieredMenuProps {
     /**
      * Defines a string value that labels an interactive element.
      */
-    'aria-label'?: string | undefined;
+    ariaLabel?: string | undefined;
     /**
      * Identifier of the underlying menu element.
      */
-    'aria-labelledby'?: string | undefined;
+    ariaLabelledby?: string | undefined;
     /**
      * Used to pass attributes to DOM elements inside the component.
      * @type {TieredMenuPassThroughOptions}
      */
-    pt?: PTOptions<TieredMenuPassThroughOptions>;
+    pt?: PassThrough<TieredMenuPassThroughOptions>;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false
@@ -265,7 +297,7 @@ export interface TieredMenuSlots {
         /**
          * Binding properties of the menuitem
          */
-        props: TabMenuRouterBindProps;
+        props: TieredMenuRouterBindProps;
         /**
          * Whether or not there is a submenu
          */
@@ -295,6 +327,14 @@ export interface TieredMenuSlots {
          */
         class: any;
     }): VNode[];
+    /**
+     * Custom start template.
+     */
+    start(): VNode[];
+    /**
+     * Custom end template.
+     */
+    end(): VNode[];
 }
 
 /**

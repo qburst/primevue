@@ -15,10 +15,13 @@ export default {
     data() {
         return {
             code: {
-                basic: `<Badge value="6" size="xlarge" severity="success"></Badge>
+                basic: `
+<Badge value="6" size="xlarge" severity="success"></Badge>
 <Badge value="4" size="large" severity="warning"></Badge>
-<Badge value="2"></Badge>`,
-                options: `<template>
+<Badge value="2"></Badge>
+`,
+                options: `
+<template>
     <div class="card flex flex-wrap justify-content-center align-items-end gap-2">
         <Badge value="6" size="xlarge" severity="success"></Badge>
         <Badge value="4" size="large" severity="warning"></Badge>
@@ -28,8 +31,10 @@ export default {
 
 <script>
 
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex flex-wrap justify-content-center align-items-end gap-2">
         <Badge value="6" size="xlarge" severity="success"></Badge>
         <Badge value="4" size="large" severity="warning"></Badge>
@@ -39,7 +44,8 @@ export default {
 
 <script setup>
 
-<\/script>`
+<\/script>
+`
             }
         };
     }

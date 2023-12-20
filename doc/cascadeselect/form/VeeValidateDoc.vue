@@ -127,7 +127,8 @@ export default {
                 }
             ],
             code: {
-                basic: `<template>
+                basic: `
+<template>
     <div class="card flex justify-content-center">
         <form @submit="onSubmit" class="flex flex-column gap-2">
             <CascadeSelect v-model="value" :class="{ 'p-invalid': errorMessage }" :options="countries" optionLabel="cname"
@@ -137,8 +138,10 @@ export default {
         </form>
         <Toast />
     </div>
-</template>`,
-                options: `<template>
+</template>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <form @submit="onSubmit" class="flex flex-column gap-2">
             <CascadeSelect v-model="value" :class="{ 'p-invalid': errorMessage }" :options="countries" optionLabel="cname"
@@ -257,8 +260,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <form @submit="onSubmit" class="flex flex-column gap-2">
             <CascadeSelect v-model="value" :class="{ 'p-invalid': errorMessage }" :options="countries" optionLabel="cname"

@@ -14,8 +14,11 @@ export default {
         return {
             value: '',
             code: {
-                basic: `<InputMask mask="99-999999" placeholder="99-999999" disabled />`,
-                options: `<template>
+                basic: `
+<InputMask mask="99-999999" placeholder="99-999999" disabled />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <InputMask mask="99-999999" placeholder="99-999999" disabled />
     </div>
@@ -30,8 +33,10 @@ export default {
     }
 }
 <\/script>
-        `,
-                composition: `<template>
+        
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <InputMask mask="99-999999" placeholder="99-999999" disabled />
     </div>

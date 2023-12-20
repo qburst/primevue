@@ -9,8 +9,9 @@
  */
 import { HTMLAttributes, InputHTMLAttributes, TransitionProps, VNode } from 'vue';
 import { ComponentHooks } from '../basecomponent';
-import { ButtonPassThroughOptionType } from '../button';
-import { ClassComponent, GlobalComponentConstructor, PTOptions } from '../ts-helpers';
+import { ButtonPassThroughOptions } from '../button';
+import { PassThroughOptions } from '../passthrough';
+import { ClassComponent, GlobalComponentConstructor, PassThrough } from '../ts-helpers';
 
 export declare type CalendarPassThroughOptionType = CalendarPassThroughAttributes | ((options: CalendarPassThroughMethodOptions) => CalendarPassThroughAttributes | string) | string | null | undefined;
 
@@ -20,10 +21,48 @@ export declare type CalendarPassThroughTransitionType = TransitionProps | ((opti
  * Custom passthrough(pt) option method.
  */
 export interface CalendarPassThroughMethodOptions {
+    /**
+     * Defines instance.
+     */
     instance: any;
+    /**
+     * Defines valid properties.
+     */
     props: CalendarProps;
+    /**
+     * Defines current inline state.
+     */
     state: CalendarState;
+    /**
+     * Defines current options.
+     */
     context: CalendarContext;
+    /**
+     * Defines valid attributes.
+     */
+    attrs: any;
+    /**
+     * Defines parent options.
+     */
+    parent: any;
+    /**
+     * Defines passthrough(pt) options in global config.
+     */
+    global: object | undefined;
+}
+
+/**
+ * Custom shared passthrough(pt) option method.
+ */
+export interface CalendarSharedPassThroughMethodOptions {
+    /**
+     * Defines valid properties.
+     */
+    props: CalendarProps;
+    /**
+     * Defines current inline state.
+     */
+    state: CalendarState;
 }
 
 /**
@@ -31,7 +70,7 @@ export interface CalendarPassThroughMethodOptions {
  */
 export interface CalendarResponsiveOptions {
     /**
-     * Breakpoint for responsive mode. Exp; @media screen and (max-width: ${breakpoint}) {...}
+     * Breakpoint for responsive mode. Exp; \@media screen and (max-width: ${breakpoint}) {...}
      */
     breakpoint: string;
     /**
@@ -100,9 +139,9 @@ export interface CalendarPassThroughOptions {
     input?: CalendarPassThroughOptionType;
     /**
      * Used to pass attributes to the Button component.
-     * @see {@link ButtonPassThroughOptionType}
+     * @see {@link ButtonPassThroughOptions}
      */
-    dropdownButton?: ButtonPassThroughOptionType;
+    dropdownButton?: ButtonPassThroughOptions<CalendarSharedPassThroughMethodOptions>;
     /**
      * Used to pass attributes to the panel's DOM element.
      */
@@ -121,9 +160,9 @@ export interface CalendarPassThroughOptions {
     header?: CalendarPassThroughOptionType;
     /**
      * Used to pass attributes to the Button component.
-     * @see {@link ButtonPassThroughOptionType}
+     * @see {@link ButtonPassThroughOptions}
      */
-    previousButton?: ButtonPassThroughOptionType;
+    previousButton?: ButtonPassThroughOptions<CalendarSharedPassThroughMethodOptions>;
     /**
      * Used to pass attributes to the title's DOM element.
      */
@@ -142,9 +181,9 @@ export interface CalendarPassThroughOptions {
     decadeTitle?: CalendarPassThroughOptionType;
     /**
      * Used to pass attributes to the Button component.
-     * @see {@link ButtonPassThroughOptionType}
+     * @see {@link ButtonPassThroughOptions}
      */
-    nextButton?: ButtonPassThroughOptionType;
+    nextButton?: ButtonPassThroughOptions<CalendarSharedPassThroughMethodOptions>;
     /**
      * Used to pass attributes to the container's DOM element.
      */
@@ -165,6 +204,10 @@ export interface CalendarPassThroughOptions {
      * Used to pass attributes to the week header's DOM element.
      */
     weekHeader?: CalendarPassThroughOptionType;
+    /**
+     * Used to pass attributes to the week header label's DOM element.
+     */
+    weekHeaderLabel?: CalendarPassThroughOptionType;
     /**
      * Used to pass attributes to the table header cell's DOM element.
      */
@@ -267,14 +310,14 @@ export interface CalendarPassThroughOptions {
     buttonbar?: CalendarPassThroughOptionType;
     /**
      * Used to pass attributes to the Button component.
-     * @see {@link ButtonPassThroughOptionType}
+     * @see {@link ButtonPassThroughOptions}
      */
-    todayButton?: ButtonPassThroughOptionType;
+    todayButton?: ButtonPassThroughOptions<CalendarSharedPassThroughMethodOptions>;
     /**
      * Used to pass attributes to the Button component.
-     * @see {@link ButtonPassThroughOptionType}
+     * @see {@link ButtonPassThroughOptions}
      */
-    clearButton?: ButtonPassThroughOptionType;
+    clearButton?: ButtonPassThroughOptions<CalendarSharedPassThroughMethodOptions>;
     /**
      * Used to pass attributes to the aria selected day's DOM element.
      */
@@ -288,7 +331,11 @@ export interface CalendarPassThroughOptions {
      */
     hiddenYear?: CalendarPassThroughOptionType;
     /**
-     * Used to manage all lifecycle hooks
+     * Used to pass attributes to the datepicker mask's DOM element.
+     */
+    datepickerMask?: CalendarPassThroughOptionType;
+    /**
+     * Used to manage all lifecycle hooks.
      * @see {@link BaseComponent.ComponentHooks}
      */
     hooks?: ComponentHooks;
@@ -393,7 +440,7 @@ export interface CalendarContext {
 }
 
 /**
- * Defines cuurent month options.
+ * Defines current month options.
  */
 export interface CalendarMonthOptions {
     /**
@@ -459,6 +506,11 @@ export interface CalendarProps {
      */
     showIcon?: boolean | undefined;
     /**
+     * Icon position of the component. This only applies if the showIcon option is set to true.
+     * @defaultValue 'button'
+     */
+    iconDisplay?: 'button' | 'input' | undefined;
+    /**
      * Icon of the calendar button.
      * @deprecated since v3.27.0. Use 'dropdownicon' slot.
      */
@@ -492,6 +544,11 @@ export interface CalendarProps {
      * An array of options for responsive design.
      */
     responsiveOptions?: CalendarResponsiveOptions[];
+    /**
+     * The breakpoint to define the maximum width boundary for datepicker panel.
+     * @defaultValue 769px
+     */
+    breakpoint?: string | undefined;
     /**
      * Type of view to display.
      * @defaultValue date
@@ -682,16 +739,21 @@ export interface CalendarProps {
     /**
      * Establishes relationships between the component and label(s) where its value should be one or more element IDs.
      */
-    'aria-labelledby'?: string | undefined;
+    ariaLabelledby?: string | undefined;
     /**
      * Establishes a string value that labels the component.
      */
-    'aria-label'?: string | undefined;
+    ariaLabel?: string | undefined;
     /**
      * Used to pass attributes to DOM elements inside the component.
      * @type {CalendarPassThroughOptions}
      */
-    pt?: PTOptions<CalendarPassThroughOptions>;
+    pt?: PassThrough<CalendarPassThroughOptions>;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false
@@ -730,16 +792,50 @@ export interface CalendarSlots {
         years: string[] | undefined;
     }): VNode[];
     /**
-     * Custom dropdown icon template.
+     * Custom week header label template.
      */
-    dropdownicon(): VNode[];
+    weekheaderlabel(): VNode[];
+    /**
+     * Custom week label template.
+     * @param {Object} scope - weeklabel slot's params.
+     */
+    weeklabel(scope: {
+        /**
+         * Number of the week
+         */
+        weekNumber: number;
+    }): VNode[];
+    /**
+     * Custom dropdown icon template.
+     * @param {Object} scope - dropdown icon slot's params.
+     */
+    dropdownicon(scope: {
+        /**
+         * Style class of the dropdown icon
+         */
+        class: any;
+    }): VNode[];
+    /**
+     * Custom input icon template.
+     * @param {Object} scope - input icon slot's params.
+     */
+    inputicon(scope: {
+        /**
+         * Style class of the input icon
+         */
+        class: any;
+        /**
+         * Click callback
+         */
+        clickCallback: () => void;
+    }): VNode[];
     /**
      * Custom previous icon template.
      * @param {Object} scope - previous icon slot's params.
      */
     previousicon(scope: {
         /**
-         * Style class of the dropdown icon
+         * Style class of the previous icon
          */
         class: any;
     }): VNode[];
@@ -749,7 +845,7 @@ export interface CalendarSlots {
      */
     nexticon(scope: {
         /**
-         * Style class of the dropdown icon
+         * Style class of the next icon
          */
         class: any;
     }): VNode[];
@@ -759,7 +855,7 @@ export interface CalendarSlots {
      */
     incrementicon(scope: {
         /**
-         * Style class of the dropdown icon
+         * Style class of the increment icon
          */
         class: any;
     }): VNode[];
@@ -769,7 +865,7 @@ export interface CalendarSlots {
      */
     decrementicon(scope: {
         /**
-         * Style class of the dropdown icon
+         * Style class of the decrement icon
          */
         class: any;
     }): VNode[];

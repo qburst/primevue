@@ -4,7 +4,7 @@
     </DocSectionText>
     <div class="card flex flex-column align-items-center">
         <p>Scroll down the page to display the ScrollTop component.</p>
-        <i class="pi pi-angle-down fadeout animation-duration-1000 animation-iteration-infinite" style="fontsize: 2rem"></i>
+        <i class="pi pi-angle-down fadeout animation-duration-1000 animation-iteration-infinite" style="fontsize: 2rem; margin-bottom: 30rem"></i>
         <ScrollTop />
     </div>
     <DocSectionCode :code="code" />
@@ -15,8 +15,11 @@ export default {
     data() {
         return {
             code: {
-                basic: `<ScrollTop />`,
-                options: `<template>
+                basic: `
+<ScrollTop />
+`,
+                options: `
+<template>
     <div class="card flex flex-column align-items-center" style="height: 2000px">
         <p>Scroll down the page to display the ScrollTop component.</p>
         <i class="pi pi-angle-down fadeout animation-duration-1000 animation-iteration-infinite" style="fontsize: 2rem"></i>
@@ -25,8 +28,10 @@ export default {
 </template>
 
 <script>
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex flex-column align-items-center" style="height: 2000px">
         <p>Scroll down the page to display the ScrollTop component.</p>
         <i class="pi pi-angle-down fadeout animation-duration-1000 animation-iteration-infinite" style="fontsize: 2rem"></i>
@@ -35,7 +40,8 @@ export default {
 </template>
 
 <script setup>
-<\/script>`
+<\/script>
+`
             }
         };
     }

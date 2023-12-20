@@ -1,17 +1,17 @@
 <template>
     <DocSectionText v-bind="$attrs">
-        <p>Templating allows customizing the content where the message instance is available as the implicit variable.</p>
+        <p>Templating allows customizing the message content.</p>
     </DocSectionText>
-    <ConfirmPopup group="demo">
+    <ConfirmPopup group="templating">
         <template #message="slotProps">
-            <div class="flex p-4">
-                <i :class="slotProps.message.icon" style="font-size: 1.5rem"></i>
-                <p class="pl-2">{{ slotProps.message.message }}</p>
+            <div class="flex flex-column align-items-center w-full gap-3 border-bottom-1 surface-border p-3 mb-3">
+                <i :class="slotProps.message.icon" class="text-6xl text-primary-500"></i>
+                <p>{{ slotProps.message.message }}</p>
             </div>
         </template>
     </ConfirmPopup>
-    <div class="card flex flex-wrap gap-2 justify-content-center">
-        <Button @click="showTemplate($event)" icon="pi pi-check" label="Terms and Conditions"></Button>
+    <div class="card flex justify-content-center">
+        <Button @click="showTemplate($event)" icon="pi pi-check" label="Confirm"></Button>
     </div>
     <DocSectionCode :code="code" />
 </template>
@@ -21,29 +21,30 @@ export default {
     data() {
         return {
             code: {
-                basic: `<ConfirmPopup group="demo">
+                basic: `
+<ConfirmPopup group="templating">
     <template #message="slotProps">
-        <div class="flex p-4">
-            <i :class="slotProps.message.icon" style="font-size: 1.5rem"></i>
-            <p class="pl-2">{{ slotProps.message.message }}</p>
+        <div class="flex flex-column align-items-center w-full gap-3 border-bottom-1 surface-border p-3 mb-3">
+            <i :class="slotProps.message.icon" class="text-6xl text-primary-500"></i>
+            <p>{{ slotProps.message.message }}</p>
         </div>
     </template>
 </ConfirmPopup>
-<div class="card flex flex-wrap gap-2 justify-content-center">
-    <Button @click="showTemplate($event)" icon="pi pi-check" label="Terms and Conditions"></Button>
-</div>`,
-                options: `<template>
+<Button @click="showTemplate($event)" icon="pi pi-check" label="Confirm"></Button>
+`,
+                options: `
+<template>
     <Toast />
-    <ConfirmPopup group="demo">
+    <ConfirmPopup group="templating">
         <template #message="slotProps">
-            <div class="flex p-4">
-                <i :class="slotProps.message.icon" style="font-size: 1.5rem"></i>
-                <p class="pl-2">{{ slotProps.message.message }}</p>
+            <div class="flex flex-column align-items-center w-full gap-3 border-bottom-1 surface-border p-3 mb-3">
+                <i :class="slotProps.message.icon" class="text-6xl text-primary-500"></i>
+                <p>{{ slotProps.message.message }}</p>
             </div>
         </template>
     </ConfirmPopup>
-    <div class="card flex flex-wrap gap-2 justify-content-center">
-        <Button @click="showTemplate($event)" icon="pi pi-check" label="Terms and Conditions"></Button>
+    <div class="card flex justify-content-center">
+        <Button @click="showTemplate($event)" icon="pi pi-check" label="Confirm"></Button>
     </div>
 </template>
 
@@ -53,11 +54,13 @@ export default {
         showTemplate(event) {
             this.$confirm.require({
                 target: event.currentTarget,
-                group: 'demo',
-                message: 'Do you accept that?',
-                icon: 'pi pi-question-circle',
+                group: 'templating',
+                message: 'Please confirm to proceed moving forward.',
+                icon: 'pi pi-exclamation-circle',
                 acceptIcon: 'pi pi-check',
                 rejectIcon: 'pi pi-times',
+                rejectClass: 'p-button-sm',
+                acceptClass: 'p-button-outlined p-button-sm',
                 accept: () => {
                     this.$toast.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
                 },
@@ -68,19 +71,21 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <Toast />
-    <ConfirmPopup group="demo">
+    <ConfirmPopup group="templating">
         <template #message="slotProps">
-            <div class="flex p-4">
-                <i :class="slotProps.message.icon" style="font-size: 1.5rem"></i>
-                <p class="pl-2">{{ slotProps.message.message }}</p>
+            <div class="flex flex-column align-items-center w-full gap-3 border-bottom-1 surface-border p-3 mb-3">
+                <i :class="slotProps.message.icon" class="text-6xl text-primary-500"></i>
+                <p>{{ slotProps.message.message }}</p>
             </div>
         </template>
     </ConfirmPopup>
-    <div class="card flex flex-wrap gap-2 justify-content-center">
-        <Button @click="showTemplate($event)" icon="pi pi-check" label="Terms and Conditions"></Button>
+    <div class="card flex justify-content-center">
+        <Button @click="showTemplate($event)" icon="pi pi-check" label="Confirm"></Button>
     </div>
 </template>
 
@@ -94,11 +99,13 @@ const toast = useToast();
 const showTemplate = (event) => {
     confirm.require({
         target: event.currentTarget,
-        group: 'demo',
-        message: 'Do you accept that?',
-        icon: 'pi pi-question-circle',
+        group: 'templating',
+        message: 'Please confirm to proceed moving forward.',
+        icon: 'pi pi-exclamation-circle',
         acceptIcon: 'pi pi-check',
         rejectIcon: 'pi pi-times',
+        rejectClass: 'p-button-sm',
+        acceptClass: 'p-button-outlined p-button-sm',
         accept: () => {
             toast.add({severity:'info', summary:'Confirmed', detail:'You have accepted', life: 3000});
         },
@@ -107,7 +114,8 @@ const showTemplate = (event) => {
         }
     });
 }
-<\/script>`
+<\/script>
+`
             }
         };
     },
@@ -115,11 +123,13 @@ const showTemplate = (event) => {
         showTemplate(event) {
             this.$confirm.require({
                 target: event.currentTarget,
-                group: 'demo',
-                message: 'Do you accept that?',
-                icon: 'pi pi-question-circle',
+                group: 'templating',
+                message: 'Please confirm to proceed moving forward.',
+                icon: 'pi pi-exclamation-circle',
                 acceptIcon: 'pi pi-check',
                 rejectIcon: 'pi pi-times',
+                rejectClass: 'p-button-sm',
+                acceptClass: 'p-button-outlined p-button-sm',
                 accept: () => {
                     this.$toast.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
                 },

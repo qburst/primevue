@@ -14,9 +14,12 @@ export default {
     data() {
         return {
             code: {
-                basic: `<Button type="button" label="Emails" badge="8" />
-<Button type="button" label="Messages" icon="pi pi-users" badge="8" badgeClass="p-badge-danger" outlined />`,
-                options: `<template>
+                basic: `
+<Button type="button" label="Emails" badge="8" />
+<Button type="button" label="Messages" icon="pi pi-users" badge="8" badgeClass="p-badge-danger" outlined />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center flex-wrap gap-3">
         <Button type="button" label="Emails" badge="8" />
         <Button type="button" label="Messages" icon="pi pi-users" badge="8" badgeClass="p-badge-danger" outlined />
@@ -24,8 +27,10 @@ export default {
 </template>
 
 <script>
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center flex-wrap gap-3">
         <Button type="button" label="Emails" badge="8" />
         <Button type="button" label="Messages" icon="pi pi-users" badge="8" badgeClass="p-badge-danger" outlined />
@@ -33,7 +38,8 @@ export default {
 </template>
 
 <script setup>
-<\/script>`
+<\/script>
+`
             }
         };
     }

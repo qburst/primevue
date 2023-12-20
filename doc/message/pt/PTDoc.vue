@@ -17,14 +17,17 @@ export default {
     data() {
         return {
             code: {
-                basic: `<Message
+                basic: `
+<Message
     :pt="{
         root: { class: 'bg-yellow-100' }
     }"
 >
     Message Content
-</Message>`,
-                options: `<template>
+</Message>
+`,
+                options: `
+<template>
     <div class="card">
         <Message
             :pt="{
@@ -37,8 +40,10 @@ export default {
 </template>
 
 <script>
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <Message
             :pt="{
@@ -51,7 +56,8 @@ export default {
 </template>
 
 <script setup>
-<\/script>`
+<\/script>
+`
             }
         };
     }

@@ -28,7 +28,8 @@ export default {
         return {
             value: null,
             code: {
-                basic: `<Password v-model="value">
+                basic: `
+<Password v-model="value">
     <template #header>
         <h6>Pick a password</h6>
     </template>
@@ -42,8 +43,10 @@ export default {
             <li>Minimum 8 characters</li>
         </ul>
     </template>
-</Password>`,
-                options: `<template>
+</Password>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <Password v-model="value">
             <template #header>
@@ -71,8 +74,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <Password v-model="value">
             <template #header>
@@ -96,7 +101,8 @@ export default {
 import { ref } from 'vue';
 
 const value = ref(null);
-<\/script>`
+<\/script>
+`
             }
         };
     }

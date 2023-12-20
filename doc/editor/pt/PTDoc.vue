@@ -18,14 +18,17 @@ export default {
         return {
             value: '',
             code: {
-                basic: `<Editor
+                basic: `
+<Editor
     v-model="value"
     :pt="{
         content: { style: { height: '320px' } },
         toolbar: { class: 'surface-ground' }
     }"
-/>`,
-                options: `<template>
+/>
+`,
+                options: `
+<template>
     <div class="card">
         <Editor
             v-model="value"
@@ -45,8 +48,10 @@ export default {
         }
     }
 }
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <Editor
             v-model="value"
@@ -62,7 +67,8 @@ export default {
 import { ref } from "vue";
 
 const value = ref('');
-<\/script>`
+<\/script>
+`
             }
         };
     }

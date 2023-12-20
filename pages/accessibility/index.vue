@@ -9,8 +9,7 @@
             <div class="doc-main">
                 <div class="doc-intro">
                     <h1>Accessibility</h1>
-                    <p>An introduction to accessibility and how it translates to Vue UI Components.</p>
-                    <p class="line-height-3 bg-indigo-600 text-white p-3 text-lg" style="border-radius: 10px">PrimeVue has WCAG 2.1 AA level compliancy. Refer to the accessibility documentation of each component for detailed information.</p>
+                    <p>PrimeVue has WCAG 2.1 AA level compliance, refer to the accessibility documentation of each component for detailed information.</p>
                 </div>
                 <DocSections :docs="docs" />
             </div>
@@ -20,12 +19,12 @@
 </template>
 
 <script>
-import ColorsDoc from '@/doc/accessibility/ColorsDoc';
-import FormControlsDoc from '@/doc/accessibility/FormControlsDoc';
-import IntroductionDoc from '@/doc/accessibility/IntroductionDoc';
-import SemanticHTMLDoc from '@/doc/accessibility/SemanticHTMLDoc';
-import WAIAriaDoc from '@/doc/accessibility/WAIAriaDoc';
-import WCAGDoc from '@/doc/accessibility/WCAGDoc';
+import ColorsDoc from '@/doc/accessibility/ColorsDoc.vue';
+import FormControlsDoc from '@/doc/accessibility/FormControlsDoc.vue';
+import IntroductionDoc from '@/doc/accessibility/IntroductionDoc.vue';
+import SemanticHTMLDoc from '@/doc/accessibility/SemanticHTMLDoc.vue';
+import WAIAriaDoc from '@/doc/accessibility/WAIAriaDoc.vue';
+import WCAGDoc from '@/doc/accessibility/WCAGDoc.vue';
 
 export default {
     data() {

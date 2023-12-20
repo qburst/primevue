@@ -16,11 +16,14 @@ export default {
     data() {
         return {
             code: {
-                basic: `<Chip label="Action" />
+                basic: `
+<Chip label="Action" />
 <Chip label="Comedy" />
 <Chip label="Mystery" />
-<Chip label="Thriller" removable />`,
-                options: `<template>
+<Chip label="Thriller" removable />
+`,
+                options: `
+<template>
     <div class="card flex flex-wrap gap-2">
         <Chip label="Action" />
         <Chip label="Comedy" />
@@ -31,8 +34,10 @@ export default {
 
 <script>
 
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex flex-wrap gap-2">
         <Chip label="Action" />
         <Chip label="Comedy" />
@@ -43,7 +48,8 @@ export default {
 
 <script setup>
 
-<\/script>`
+<\/script>
+`
             }
         };
     }

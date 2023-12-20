@@ -33,17 +33,23 @@
             <template v-if="$slots.paginatorend" #end>
                 <slot name="paginatorend"></slot>
             </template>
-            <template v-if="$slots.paginatorfirstpagelinkicon" #firstpagelinkicon>
-                <slot name="paginatorfirstpagelinkicon"></slot>
+            <template v-if="$slots.paginatorfirstpagelinkicon" #firstpagelinkicon="slotProps">
+                <slot name="paginatorfirstpagelinkicon" :class="slotProps.class"></slot>
             </template>
-            <template v-if="$slots.paginatorprevpagelinkicon" #prevpagelinkicon>
-                <slot name="paginatorprevpagelinkicon"></slot>
+            <template v-if="$slots.paginatorprevpagelinkicon" #prevpagelinkicon="slotProps">
+                <slot name="paginatorprevpagelinkicon" :class="slotProps.class"></slot>
             </template>
-            <template v-if="$slots.paginatornextpagelinkicon" #nextpagelinkicon>
-                <slot name="paginatornextpagelinkicon"></slot>
+            <template v-if="$slots.paginatornextpagelinkicon" #nextpagelinkicon="slotProps">
+                <slot name="paginatornextpagelinkicon" :class="slotProps.class"></slot>
             </template>
-            <template v-if="$slots.paginatorlastpagelinkicon" #lastpagelinkicon>
-                <slot name="paginatorlastpagelinkicon"></slot>
+            <template v-if="$slots.paginatorlastpagelinkicon" #lastpagelinkicon="slotProps">
+                <slot name="paginatorlastpagelinkicon" :class="slotProps.class"></slot>
+            </template>
+            <template v-if="$slots.paginatorjumptopagedropdownicon" #jumptopagedropdownicon="slotProps">
+                <slot name="paginatorjumptopagedropdownicon" :class="slotProps.class"></slot>
+            </template>
+            <template v-if="$slots.paginatorrowsperpagedropdownicon" #rowsperpagedropdownicon="slotProps">
+                <slot name="paginatorrowsperpagedropdownicon" :class="slotProps.class"></slot>
             </template>
         </DTPaginator>
         <div :class="cx('wrapper')" :style="[sx('wrapper'), { maxHeight: virtualScrollerDisabled ? scrollHeight : '' }]" v-bind="ptm('wrapper')">
@@ -81,7 +87,6 @@
                             :filtersStore="filters"
                             :filterDisplay="filterDisplay"
                             :filterInputProps="filterInputProps"
-                            :headerCheckboxIconTemplate="$slots.headercheckboxicon"
                             @column-click="onColumnHeaderClick($event)"
                             @column-mousedown="onColumnHeaderMouseDown($event)"
                             @filter-change="onFilterChange"
@@ -119,7 +124,6 @@
                             :expandedRowIcon="expandedRowIcon"
                             :collapsedRowIcon="collapsedRowIcon"
                             :expandedRows="expandedRows"
-                            :expandedRowKeys="d_expandedRowKeys"
                             :expandedRowGroups="expandedRowGroups"
                             :editingRows="editingRows"
                             :editingRowKeys="d_editingRowKeys"
@@ -176,7 +180,6 @@
                             :expandedRowIcon="expandedRowIcon"
                             :collapsedRowIcon="collapsedRowIcon"
                             :expandedRows="expandedRows"
-                            :expandedRowKeys="d_expandedRowKeys"
                             :expandedRowGroups="expandedRowGroups"
                             :editingRows="editingRows"
                             :editingRowKeys="d_editingRowKeys"
@@ -245,17 +248,23 @@
             <template v-if="$slots.paginatorend" #end>
                 <slot name="paginatorend"></slot>
             </template>
-            <template v-if="$slots.paginatorfirstpagelinkicon" #firstpagelinkicon>
-                <slot name="paginatorfirstpagelinkicon"></slot>
+            <template v-if="$slots.paginatorfirstpagelinkicon" #firstpagelinkicon="slotProps">
+                <slot name="paginatorfirstpagelinkicon" :class="slotProps.class"></slot>
             </template>
-            <template v-if="$slots.paginatorprevpagelinkicon" #prevpagelinkicon>
-                <slot name="paginatorprevpagelinkicon"></slot>
+            <template v-if="$slots.paginatorprevpagelinkicon" #prevpagelinkicon="slotProps">
+                <slot name="paginatorprevpagelinkicon" :class="slotProps.class"></slot>
             </template>
-            <template v-if="$slots.paginatornextpagelinkicon" #nextpagelinkicon>
-                <slot name="paginatornextpagelinkicon"></slot>
+            <template v-if="$slots.paginatornextpagelinkicon" #nextpagelinkicon="slotProps">
+                <slot name="paginatornextpagelinkicon" :class="slotProps.class"></slot>
             </template>
-            <template v-if="$slots.paginatorlastpagelinkicon" #lastpagelinkicon>
-                <slot name="paginatorlastpagelinkicon"></slot>
+            <template v-if="$slots.paginatorlastpagelinkicon" #lastpagelinkicon="slotProps">
+                <slot name="paginatorlastpagelinkicon" :class="slotProps.class"></slot>
+            </template>
+            <template v-if="$slots.paginatorjumptopagedropdownicon" #jumptopagedropdownicon="slotProps">
+                <slot name="paginatorjumptopagedropdownicon" :class="slotProps.class"></slot>
+            </template>
+            <template v-if="$slots.paginatorrowsperpagedropdownicon" #rowsperpagedropdownicon="slotProps">
+                <slot name="paginatorrowsperpagedropdownicon" :class="slotProps.class"></slot>
             </template>
         </DTPaginator>
         <div ref="resizeHelper" :class="cx('resizeHelper')" style="display: none" v-bind="ptm('resizeHelper')"></div>
@@ -330,10 +339,10 @@ export default {
             d_rows: this.rows,
             d_sortField: this.sortField,
             d_sortOrder: this.sortOrder,
+            d_nullSortOrder: this.nullSortOrder,
             d_multiSortMeta: this.multiSortMeta ? [...this.multiSortMeta] : [],
             d_groupRowsSortMeta: null,
             d_selectionKeys: null,
-            d_expandedRowKeys: null,
             d_columnOrder: null,
             d_editingRowKeys: null,
             d_editingMeta: {},
@@ -351,6 +360,7 @@ export default {
     colReorderIconWidth: null,
     colReorderIconHeight: null,
     draggedColumn: null,
+    draggedColumnElement: null,
     draggedRowIndex: null,
     droppedRowIndex: null,
     rowDragging: null,
@@ -370,6 +380,9 @@ export default {
         sortOrder(newValue) {
             this.d_sortOrder = newValue;
         },
+        nullSortOrder(newValue) {
+            this.d_nullSortOrder = newValue;
+        },
         multiSortMeta(newValue) {
             this.d_multiSortMeta = newValue;
         },
@@ -381,13 +394,8 @@ export default {
                 }
             }
         },
-        expandedRows(newValue) {
-            if (this.dataKey) {
-                this.updateExpandedRowKeys(newValue);
-            }
-        },
         editingRows: {
-            deep: true,
+            immediate: true,
             handler(newValue) {
                 if (this.dataKey) {
                     this.updateEditingRowKeys(newValue);
@@ -401,11 +409,6 @@ export default {
             }
         }
     },
-    beforeMount() {
-        if (this.isStateful()) {
-            this.restoreState();
-        }
-    },
     mounted() {
         this.$el.setAttribute(this.attributeSelector, '');
 
@@ -413,8 +416,10 @@ export default {
             this.createResponsiveStyle();
         }
 
-        if (this.isStateful() && this.resizableColumns) {
-            this.restoreColumnWidths();
+        if (this.isStateful()) {
+            this.restoreState();
+
+            this.resizableColumns && this.restoreColumnWidths();
         }
 
         if (this.editMode === 'row' && this.dataKey && !this.d_editingRowKeys) {
@@ -453,7 +458,9 @@ export default {
             this.$emit('update:first', this.d_first);
             this.$emit('update:rows', this.d_rows);
             this.$emit('page', pageEvent);
-            this.$emit('value-change', this.processedData);
+            this.$nextTick(() => {
+                this.$emit('value-change', this.processedData);
+            });
         },
         onColumnHeaderClick(e) {
             const event = e.originalEvent;
@@ -502,7 +509,9 @@ export default {
                     }
 
                     this.$emit('sort', this.createLazyLoadEvent(event));
-                    this.$emit('value-change', this.processedData);
+                    this.$nextTick(() => {
+                        this.$emit('value-change', this.processedData);
+                    });
                 }
             }
         },
@@ -519,27 +528,19 @@ export default {
             }
 
             let data = [...value];
-            let resolvedFieldDatas = new Map();
+            let resolvedFieldData = new Map();
 
             for (let item of data) {
-                resolvedFieldDatas.set(item, ObjectUtils.resolveFieldData(item, this.d_sortField));
+                resolvedFieldData.set(item, ObjectUtils.resolveFieldData(item, this.d_sortField));
             }
 
-            const comparer = new Intl.Collator(undefined, { numeric: true }).compare;
+            const comparer = ObjectUtils.localeComparator();
 
             data.sort((data1, data2) => {
-                let value1 = resolvedFieldDatas.get(data1);
-                let value2 = resolvedFieldDatas.get(data2);
+                let value1 = resolvedFieldData.get(data1);
+                let value2 = resolvedFieldData.get(data2);
 
-                let result = null;
-
-                if (value1 == null && value2 != null) result = -1;
-                else if (value1 != null && value2 == null) result = 1;
-                else if (value1 == null && value2 == null) result = 0;
-                else if (typeof value1 === 'string' && typeof value2 === 'string') result = comparer(value1, value2);
-                else result = value1 < value2 ? -1 : value1 > value2 ? 1 : 0;
-
-                return this.d_sortOrder * result;
+                return ObjectUtils.sort(value1, value2, this.d_sortOrder, comparer, this.d_nullSortOrder);
             });
 
             return data;
@@ -568,23 +569,13 @@ export default {
         multisortField(data1, data2, index) {
             const value1 = ObjectUtils.resolveFieldData(data1, this.d_multiSortMeta[index].field);
             const value2 = ObjectUtils.resolveFieldData(data2, this.d_multiSortMeta[index].field);
-            let result = null;
-
-            if (typeof value1 === 'string' || value1 instanceof String) {
-                if (value1.localeCompare && value1 !== value2) {
-                    const comparer = new Intl.Collator(undefined, { numeric: true }).compare;
-
-                    return this.d_multiSortMeta[index].order * comparer(value1, value2);
-                }
-            } else {
-                result = value1 < value2 ? -1 : 1;
-            }
+            const comparer = ObjectUtils.localeComparator();
 
             if (value1 === value2) {
                 return this.d_multiSortMeta.length - 1 > index ? this.multisortField(data1, data2, index + 1) : 0;
             }
 
-            return this.d_multiSortMeta[index].order * result;
+            return ObjectUtils.sort(value1, value2, this.d_multiSortMeta[index].order, comparer, this.d_nullSortOrder);
         },
         addMultiSortField(field) {
             let index = this.d_multiSortMeta.findIndex((meta) => meta.field === field);
@@ -696,7 +687,9 @@ export default {
 
             filterEvent.filteredValue = filteredValue;
             this.$emit('filter', filterEvent);
-            this.$emit('value-change', filteredValue);
+            this.$nextTick(() => {
+                this.$emit('value-change', this.processedData);
+            });
 
             return filteredValue;
         },
@@ -710,7 +703,6 @@ export default {
         },
         onRowClick(e) {
             const event = e.originalEvent;
-            const index = e.index;
             const body = this.$refs.bodyRef && this.$refs.bodyRef.$el;
             const focusedItem = DomHandler.findSingle(body, 'tr[data-p-selectable-row="true"][tabindex="0"]');
 
@@ -791,8 +783,12 @@ export default {
             this.rowTouched = false;
 
             if (focusedItem) {
+                if (e.originalEvent.target.getAttribute('data-pc-section') === 'rowtogglericon' || e.originalEvent.target.parentElement.getAttribute('data-pc-section') === 'rowtogglericon') return;
+
+                const targetRow = e.originalEvent.target.closest('tr[data-p-selectable-row="true"]');
+
                 focusedItem.tabIndex = '-1';
-                DomHandler.find(body, 'tr[data-p-selectable-row="true"]')[index].tabIndex = '0';
+                targetRow.tabIndex = '0';
             }
         },
         onRowDblClick(e) {
@@ -843,6 +839,7 @@ export default {
                         break;
 
                     case 'Enter':
+                    case 'NumpadEnter':
                         this.onEnterKey(event, rowData, rowIndex);
                         break;
 
@@ -859,6 +856,7 @@ export default {
                             const data = this.dataToRender(slotProps.rows);
 
                             this.$emit('update:selection', data);
+                            event.preventDefault();
                         }
 
                         break;
@@ -1089,17 +1087,6 @@ export default {
                 this.d_selectionKeys[String(ObjectUtils.resolveFieldData(selection, this.dataKey))] = 1;
             }
         },
-        updateExpandedRowKeys(expandedRows) {
-            if (expandedRows && expandedRows.length) {
-                this.d_expandedRowKeys = {};
-
-                for (let data of expandedRows) {
-                    this.d_expandedRowKeys[String(ObjectUtils.resolveFieldData(data, this.dataKey))] = 1;
-                }
-            } else {
-                this.d_expandedRowKeys = null;
-            }
-        },
         updateEditingRowKeys(editingRows) {
             if (editingRows && editingRows.length) {
                 this.d_editingRowKeys = {};
@@ -1303,7 +1290,7 @@ export default {
             this.createStyleElement();
 
             let innerHTML = '';
-            let selector = `[data-pc-name="datatable"][${this.attributeSelector}] > [data-pc-section="wrapper"] ${this.virtualScrollerDisabled ? '' : '> [data-pc-section="virtualscroller"]'} > table[data-pc-section="table"]`;
+            let selector = `[data-pc-name="datatable"][${this.attributeSelector}] > [data-pc-section="wrapper"] ${this.virtualScrollerDisabled ? '' : '> [data-pc-name="virtualscroller"]'} > table[data-pc-section="table"]`;
 
             widths.forEach((width, index) => {
                 let colWidth = index === colIndex ? newColumnWidth : nextColumnWidth && index === colIndex + 1 ? nextColumnWidth : width;
@@ -1358,7 +1345,9 @@ export default {
                 else event.currentTarget.draggable = true;
             }
         },
-        onColumnHeaderDragStart(event) {
+        onColumnHeaderDragStart(e) {
+            const { originalEvent: event, column } = e;
+
             if (this.columnResizing) {
                 event.preventDefault();
 
@@ -1368,18 +1357,20 @@ export default {
             this.colReorderIconWidth = DomHandler.getHiddenElementOuterWidth(this.$refs.reorderIndicatorUp);
             this.colReorderIconHeight = DomHandler.getHiddenElementOuterHeight(this.$refs.reorderIndicatorUp);
 
-            this.draggedColumn = this.findParentHeader(event.target);
+            this.draggedColumn = column;
+            this.draggedColumnElement = this.findParentHeader(event.target);
             event.dataTransfer.setData('text', 'b'); // Firefox requires this to make dragging possible
         },
-        onColumnHeaderDragOver(event) {
+        onColumnHeaderDragOver(e) {
+            const { originalEvent: event, column } = e;
             let dropHeader = this.findParentHeader(event.target);
 
-            if (this.reorderableColumns && this.draggedColumn && dropHeader) {
+            if (this.reorderableColumns && this.draggedColumnElement && dropHeader && !this.columnProp(column, 'frozen')) {
                 event.preventDefault();
                 let containerOffset = DomHandler.getOffset(this.$el);
                 let dropHeaderOffset = DomHandler.getOffset(dropHeader);
 
-                if (this.draggedColumn !== dropHeader) {
+                if (this.draggedColumnElement !== dropHeader) {
                     let targetLeft = dropHeaderOffset.left - containerOffset.left;
                     let columnCenter = dropHeaderOffset.left + dropHeader.offsetWidth / 2;
 
@@ -1401,18 +1392,22 @@ export default {
                 }
             }
         },
-        onColumnHeaderDragLeave(event) {
-            if (this.reorderableColumns && this.draggedColumn) {
+        onColumnHeaderDragLeave(e) {
+            const { originalEvent: event } = e;
+
+            if (this.reorderableColumns && this.draggedColumnElement) {
                 event.preventDefault();
                 this.$refs.reorderIndicatorUp.style.display = 'none';
                 this.$refs.reorderIndicatorDown.style.display = 'none';
             }
         },
-        onColumnHeaderDrop(event) {
+        onColumnHeaderDrop(e) {
+            const { originalEvent: event, column } = e;
+
             event.preventDefault();
 
-            if (this.draggedColumn) {
-                let dragIndex = DomHandler.index(this.draggedColumn);
+            if (this.draggedColumnElement) {
+                let dragIndex = DomHandler.index(this.draggedColumnElement);
                 let dropIndex = DomHandler.index(this.findParentHeader(event.target));
                 let allowDrop = dragIndex !== dropIndex;
 
@@ -1421,19 +1416,42 @@ export default {
                 }
 
                 if (allowDrop) {
-                    ObjectUtils.reorderArray(this.columns, dragIndex, dropIndex);
+                    let isSameColumn = (col1, col2) =>
+                        this.columnProp(col1, 'columnKey') || this.columnProp(col2, 'columnKey') ? this.columnProp(col1, 'columnKey') === this.columnProp(col2, 'columnKey') : this.columnProp(col1, 'field') === this.columnProp(col2, 'field');
+                    let dragColIndex = this.columns.findIndex((child) => isSameColumn(child, this.draggedColumn));
+                    let dropColIndex = this.columns.findIndex((child) => isSameColumn(child, column));
+                    let widths = [];
+                    let headers = DomHandler.find(this.$el, 'thead[data-pc-section="thead"] > tr > th');
+
+                    headers.forEach((header) => widths.push(DomHandler.getOuterWidth(header)));
+                    const movedItem = widths.find((_, index) => index === dragColIndex);
+                    const remainingItems = widths.filter((_, index) => index !== dragColIndex);
+                    const reorderedWidths = [...remainingItems.slice(0, dropColIndex), movedItem, ...remainingItems.slice(dropColIndex)];
+
+                    this.addColumnWidthStyles(reorderedWidths);
+
+                    if (dropColIndex < dragColIndex && this.dropPosition === 1) {
+                        dropColIndex++;
+                    }
+
+                    if (dropColIndex > dragColIndex && this.dropPosition === -1) {
+                        dropColIndex--;
+                    }
+
+                    ObjectUtils.reorderArray(this.columns, dragColIndex, dropColIndex);
                     this.updateReorderableColumns();
 
                     this.$emit('column-reorder', {
                         originalEvent: event,
-                        dragIndex: dragIndex,
-                        dropIndex: dropIndex
+                        dragIndex: dragColIndex,
+                        dropIndex: dropColIndex
                     });
                 }
 
                 this.$refs.reorderIndicatorUp.style.display = 'none';
                 this.$refs.reorderIndicatorDown.style.display = 'none';
-                this.draggedColumn.draggable = false;
+                this.draggedColumnElement.draggable = false;
+                this.draggedColumnElement = null;
                 this.draggedColumn = null;
                 this.dropPosition = null;
             }
@@ -1466,7 +1484,7 @@ export default {
             return null;
         },
         onRowMouseDown(event) {
-            if (DomHandler.getAttribute(event.target, 'data-pc-section') === 'rowreordericon') event.currentTarget.draggable = true;
+            if (DomHandler.getAttribute(event.target, 'data-pc-section') === 'rowreordericon' || DomHandler.getAttribute(event.target.parentElement, 'data-pc-section') === 'rowreordericon') event.currentTarget.draggable = true;
             else event.currentTarget.draggable = false;
         },
         onRowDragStart(e) {
@@ -1559,31 +1577,22 @@ export default {
             event.preventDefault();
         },
         toggleRow(event) {
-            let rowData = event.data;
-            let expanded;
-            let expandedRowIndex;
-            let _expandedRows = this.expandedRows ? [...this.expandedRows] : [];
+            const { expanded, ...rest } = event;
+            const rowData = event.data;
+            let expandedRows;
 
             if (this.dataKey) {
-                expanded = this.d_expandedRowKeys ? this.d_expandedRowKeys[ObjectUtils.resolveFieldData(rowData, this.dataKey)] !== undefined : false;
+                const value = ObjectUtils.resolveFieldData(rowData, this.dataKey);
+
+                expandedRows = this.expandedRows ? { ...this.expandedRows } : {};
+                expanded ? (expandedRows[value] = true) : delete expandedRows[value];
             } else {
-                expandedRowIndex = this.findIndex(rowData, this.expandedRows);
-                expanded = expandedRowIndex > -1;
+                expandedRows = this.expandedRows ? [...this.expandedRows] : [];
+                expanded ? expandedRows.push(rowData) : (expandedRows = expandedRows.filter((d) => !this.equals(rowData, d)));
             }
 
-            if (expanded) {
-                if (expandedRowIndex == null) {
-                    expandedRowIndex = this.findIndex(rowData, this.expandedRows);
-                }
-
-                _expandedRows.splice(expandedRowIndex, 1);
-                this.$emit('update:expandedRows', _expandedRows);
-                this.$emit('row-collapse', event);
-            } else {
-                _expandedRows.push(rowData);
-                this.$emit('update:expandedRows', _expandedRows);
-                this.$emit('row-expand', event);
-            }
+            this.$emit('update:expandedRows', expandedRows);
+            expanded ? this.$emit('row-expand', rest) : this.$emit('row-collapse', rest);
         },
         toggleRowGroup(e) {
             const event = e.originalEvent;
@@ -1657,7 +1666,6 @@ export default {
 
             if (this.expandedRows) {
                 state.expandedRows = this.expandedRows;
-                state.expandedRowKeys = this.d_expandedRowKeys;
             }
 
             if (this.expandedRowGroups) {
@@ -1719,7 +1727,6 @@ export default {
                 }
 
                 if (restoredState.expandedRows) {
-                    this.d_expandedRowKeys = restoredState.expandedRowKeys;
                     this.$emit('update:expandedRows', restoredState.expandedRows);
                 }
 
@@ -1746,6 +1753,26 @@ export default {
                 state.tableWidth = DomHandler.getOuterWidth(this.$refs.table) + 'px';
             }
         },
+        addColumnWidthStyles(widths) {
+            this.createStyleElement();
+
+            let innerHTML = '';
+            let selector = `[data-pc-name="datatable"][${this.attributeSelector}] > [data-pc-section="wrapper"] ${this.virtualScrollerDisabled ? '' : '> [data-pc-name="virtualscroller"]'} > table[data-pc-section="table"]`;
+
+            widths.forEach((width, index) => {
+                let style = `width: ${width}px !important; max-width: ${width}px !important`;
+
+                innerHTML += `
+        ${selector} > thead[data-pc-section="thead"] > tr > th:nth-child(${index + 1}),
+        ${selector} > tbody[data-pc-section="tbody"] > tr > td:nth-child(${index + 1}),
+        ${selector} > tfoot[data-pc-section="tfoot"] > tr > td:nth-child(${index + 1}) {
+            ${style}
+        }
+    `;
+            });
+
+            this.styleElement.innerHTML = innerHTML;
+        },
         restoreColumnWidths() {
             if (this.columnWidthsState) {
                 let widths = this.columnWidthsState.split(',');
@@ -1753,28 +1780,10 @@ export default {
                 if (this.columnResizeMode === 'expand' && this.tableWidthState) {
                     this.$refs.table.style.width = this.tableWidthState;
                     this.$refs.table.style.minWidth = this.tableWidthState;
-                    this.$el.style.width = this.tableWidthState;
                 }
 
                 if (ObjectUtils.isNotEmpty(widths)) {
-                    this.createStyleElement();
-
-                    let innerHTML = '';
-                    let selector = `[data-pc-name="datatable"][${this.attributeSelector}] > [data-pc-section="wrapper"] ${this.virtualScrollerDisabled ? '' : '> [data-pc-section="virtualscroller"]'} > table[data-pc-section="table"]`;
-
-                    widths.forEach((width, index) => {
-                        let style = `width: ${width}px !important; max-width: ${width}px !important`;
-
-                        innerHTML += `
-                            ${selector} > thead[data-pc-section="thead"] > tr > th:nth-child(${index + 1}),
-                            ${selector} > tbody[data-pc-section="tbody"] > tr > td:nth-child(${index + 1}),
-                            ${selector} > tfoot[data-pc-section="tfoot"] > tr > td:nth-child(${index + 1}) {
-                                ${style}
-                            }
-                        `;
-                    });
-
-                    this.styleElement.innerHTML = innerHTML;
+                    this.addColumnWidthStyles(widths);
                 }
             }
         },

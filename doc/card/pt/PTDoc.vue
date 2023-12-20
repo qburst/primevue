@@ -19,7 +19,8 @@ export default {
     data() {
         return {
             code: {
-                basic: `<Card :pt="{ body: { class: 'bg-primary border-round-lg' } }">
+                basic: `
+<Card :pt="{ body: { class: 'bg-primary border-round-lg' } }">
     <template #title> Simple Card </template>
     <template #content>
         <p>
@@ -27,8 +28,10 @@ export default {
             quas!
         </p>
     </template>
-</Card>`,
-                options: `<template>
+</Card>
+`,
+                options: `
+<template>
     <div class="card">
         <Card :pt="{ body: { class: 'bg-primary border-round-lg' } }">
             <template #title> Simple Card </template>
@@ -40,8 +43,10 @@ export default {
             </template>
         </Card>
     </div>
-</template>`,
-                composition: `<template>
+</template>
+`,
+                composition: `
+<template>
     <div class="card">
         <Card :pt="{ body: { class: 'bg-primary border-round-lg' } }">
             <template #title> Simple Card </template>
@@ -53,7 +58,8 @@ export default {
             </template>
         </Card>
     </div>
-</template>`
+</template>
+`
             }
         };
     }

@@ -14,8 +14,11 @@ export default {
         return {
             value: null,
             code: {
-                basic: `<Password class="p-invalid" />`,
-                options: `<template>
+                basic: `
+<Password class="p-invalid" />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <Password class="p-invalid" />
     </div>
@@ -29,8 +32,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <Password class="p-invalid" />
     </div>
@@ -40,7 +45,8 @@ export default {
 import { ref } from 'vue';
 
 const value = ref(null);
-<\/script>`
+<\/script>
+`
             }
         };
     }

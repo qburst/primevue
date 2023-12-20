@@ -1,18 +1,18 @@
 <template>
     <DocSectionText v-bind="$attrs">
-        <p>Galleria responsiveness is defined with the <i>responsiveOptions</i> property.</p>
+        <p>Settings per screen size is defined via the <i>responsiveOptions</i> property.</p>
     </DocSectionText>
-    <div class="card md:flex md:justify-content-center">
-        <div>
-            <Galleria :value="images" :responsiveOptions="responsiveOptions" :numVisible="7" :circular="true" containerStyle="max-width: 800px">
-                <template #item="slotProps">
-                    <img :src="slotProps.item.itemImageSrc" :alt="slotProps.item.alt" style="width: 100%; display: block" />
-                </template>
-                <template #thumbnail="slotProps">
-                    <img :src="slotProps.item.thumbnailImageSrc" :alt="slotProps.item.alt" style="display: block" />
-                </template>
-            </Galleria>
-        </div>
+    <div class="card">
+        <Galleria :value="images" :responsiveOptions="responsiveOptions" :numVisible="5" :circular="true" containerStyle="max-width: 640px">
+            <template #item="slotProps">
+                <img :src="slotProps.item.itemImageSrc" :alt="slotProps.item.alt" style="width: 100%; display: block" />
+            </template>
+            <template #thumbnail="slotProps">
+                <div class="grid grid-nogutter justify-content-center">
+                    <img :src="slotProps.item.thumbnailImageSrc" :alt="slotProps.item.alt" style="width: 100%; display: block" />
+                </div>
+            </template>
+        </Galleria>
     </div>
     <DocSectionCode :code="code" :service="['PhotoService']" />
 </template>
@@ -26,12 +26,8 @@ export default {
             images: null,
             responsiveOptions: [
                 {
-                    breakpoint: '991px',
+                    breakpoint: '1300px',
                     numVisible: 4
-                },
-                {
-                    breakpoint: '767px',
-                    numVisible: 3
                 },
                 {
                     breakpoint: '575px',
@@ -39,22 +35,29 @@ export default {
                 }
             ],
             code: {
-                basic: `<Galleria :value="images" :responsiveOptions="responsiveOptions" :numVisible="7" :circular="true" containerStyle="max-width: 800px">
+                basic: `
+<Galleria :value="images" :responsiveOptions="responsiveOptions" :numVisible="5" :circular="true" containerStyle="max-width: 640px">
     <template #item="slotProps">
         <img :src="slotProps.item.itemImageSrc" :alt="slotProps.item.alt" style="width: 100%; display: block" />
     </template>
     <template #thumbnail="slotProps">
-        <img :src="slotProps.item.thumbnailImageSrc" :alt="slotProps.item.alt" style="display: block" />
+        <div class="grid grid-nogutter justify-content-center">
+            <img :src="slotProps.item.thumbnailImageSrc" :alt="slotProps.item.alt" style="width: 100%; display: block" />
+        </div>
     </template>
-</Galleria>`,
-                options: `<template>
-    <div class="card md:flex md:justify-content-center">
-        <Galleria :value="images" :responsiveOptions="responsiveOptions" :numVisible="7" :circular="true" containerStyle="max-width: 800px">
+</Galleria>
+`,
+                options: `
+<template>
+    <div class="card">
+        <Galleria :value="images" :responsiveOptions="responsiveOptions" :numVisible="5" :circular="true" containerStyle="max-width: 640px">
             <template #item="slotProps">
                 <img :src="slotProps.item.itemImageSrc" :alt="slotProps.item.alt" style="width: 100%; display: block" />
             </template>
             <template #thumbnail="slotProps">
-                <img :src="slotProps.item.thumbnailImageSrc" :alt="slotProps.item.alt" style="display: block" />
+                <div class="grid grid-nogutter justify-content-center">
+                    <img :src="slotProps.item.thumbnailImageSrc" :alt="slotProps.item.alt" style="width: 100%; display: block" />
+                </div>
             </template>
         </Galleria>
     </div>
@@ -69,12 +72,8 @@ export default {
             images: null,
             responsiveOptions: [
                 {
-                    breakpoint: '991px',
+                    breakpoint: '1300px',
                     numVisible: 4
-                },
-                {
-                    breakpoint: '767px',
-                    numVisible: 3
                 },
                 {
                     breakpoint: '575px',
@@ -87,15 +86,19 @@ export default {
         PhotoService.getImages().then((data) => (this.images = data));
     }
 };
-<\/script>`,
-                composition: `<template>
-    <div class="card md:flex md:justify-content-center">
-        <Galleria :value="images" :responsiveOptions="responsiveOptions" :numVisible="7" :circular="true" containerStyle="max-width: 800px">
+<\/script>
+`,
+                composition: `
+<template>
+    <div class="card">
+        <Galleria :value="images" :responsiveOptions="responsiveOptions" :numVisible="5" :circular="true" containerStyle="max-width: 640px">
             <template #item="slotProps">
                 <img :src="slotProps.item.itemImageSrc" :alt="slotProps.item.alt" style="width: 100%; display: block" />
             </template>
             <template #thumbnail="slotProps">
-                <img :src="slotProps.item.thumbnailImageSrc" :alt="slotProps.item.alt" style="display: block" />
+                <div class="grid grid-nogutter justify-content-center">
+                    <img :src="slotProps.item.thumbnailImageSrc" :alt="slotProps.item.alt" style="width: 100%; display: block" />
+                </div>
             </template>
         </Galleria>
     </div>
@@ -112,19 +115,16 @@ onMounted(() => {
 const images = ref();
 const responsiveOptions = ref([
     {
-        breakpoint: '991px',
+        breakpoint: '1300px',
         numVisible: 4
-    },
-    {
-        breakpoint: '767px',
-        numVisible: 3
     },
     {
         breakpoint: '575px',
         numVisible: 1
     }
 ]);
-<\/script>`,
+<\/script>
+`,
                 data: `
 /* PhotoService */
 {

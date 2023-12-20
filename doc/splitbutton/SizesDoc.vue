@@ -39,10 +39,13 @@ export default {
                 { label: 'Upload', icon: 'pi pi-upload', to: '/fileupload' }
             ],
             code: {
-                basic: `<SplitButton label="Save" :model="items" icon="pi pi-plus" size="small"></SplitButton>
+                basic: `
+<SplitButton label="Save" :model="items" icon="pi pi-plus" size="small"></SplitButton>
 <SplitButton label="Save" :model="items" icon="pi pi-plus"></SplitButton>
-<SplitButton label="Save" :model="items" icon="pi pi-plus" size="large"></SplitButton>`,
-                options: `<template>
+<SplitButton label="Save" :model="items" icon="pi pi-plus" size="large"></SplitButton>
+`,
+                options: `
+<template>
     <div class="card flex align-items-center justify-content-center flex-wrap gap-3">
         <Toast />
         <SplitButton label="Save" :model="items" icon="pi pi-plus" size="small"></SplitButton>
@@ -87,8 +90,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex align-items-center justify-content-center flex-wrap gap-3">
         <Toast />
         <SplitButton label="Save" :model="items" icon="pi pi-plus" size="small"></SplitButton>
@@ -128,7 +133,8 @@ const items = [
 const save = () => {
     toast.add({ severity: 'success', summary: 'Success', detail: 'Data Saved', life: 3000 });
 };
-<\/script>`
+<\/script>
+`
             }
         };
     },

@@ -10,7 +10,8 @@
 import { VNode } from 'vue';
 import { ComponentHooks } from '../basecomponent';
 import { MenuItem } from '../menuitem';
-import { ClassComponent, GlobalComponentConstructor, PTOptions } from '../ts-helpers';
+import { PassThroughOptions } from '../passthrough';
+import { ClassComponent, GlobalComponentConstructor, PassThrough } from '../ts-helpers';
 
 export declare type StepsPassThroughOptionType = StepsPassThroughAttributes | ((options: StepsPassThroughMethodOptions) => StepsPassThroughAttributes | string) | string | null | undefined;
 
@@ -18,9 +19,30 @@ export declare type StepsPassThroughOptionType = StepsPassThroughAttributes | ((
  * Custom passthrough(pt) option method.
  */
 export interface StepsPassThroughMethodOptions {
+    /**
+     * Defines instance.
+     */
     instance: any;
+    /**
+     * Defines valid properties.
+     */
     props: StepsProps;
+    /**
+     * Defines current options.
+     */
     context: StepsContext;
+    /**
+     * Defines valid attributes.
+     */
+    attrs: any;
+    /**
+     * Defines parent options.
+     */
+    parent: any;
+    /**
+     * Defines passthrough(pt) options in global config.
+     */
+    global: object | undefined;
 }
 
 /**
@@ -53,7 +75,7 @@ export interface StepsPassThroughOptions {
      */
     label?: StepsPassThroughOptionType;
     /**
-     * Used to manage all lifecycle hooks
+     * Used to manage all lifecycle hooks.
      * @see {@link BaseComponent.ComponentHooks}
      */
     hooks?: ComponentHooks;
@@ -101,7 +123,7 @@ export interface StepsRouterBindProps {
     /**
      * Icon element binding
      */
-    icon: object;
+    step: object;
     /**
      * Label element binding
      */
@@ -127,14 +149,25 @@ export interface StepsProps {
     readonly?: boolean | undefined;
     /**
      * Whether to apply 'router-link-active-exact' class if route exactly matches the item path.
+     * @deprecated since v3.40.0.
      * @defaultValue true
      */
     exact?: boolean | undefined;
     /**
+     * Active step index of menuitem.
+     * @defaultValue 0
+     */
+    activeStep?: number | undefined;
+    /**
      * Used to pass attributes to DOM elements inside the component.
      * @type {StepsPassThroughOptions}
      */
-    pt?: PTOptions<StepsPassThroughOptions>;
+    pt?: PassThrough<StepsPassThroughOptions>;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false
@@ -155,6 +188,10 @@ export interface StepsSlots {
          * Menuitem instance
          */
         item: MenuItem;
+        /**
+         * Current active state of the menuitem
+         */
+        active: boolean;
         /**
          * Label property of the menuitem
          */

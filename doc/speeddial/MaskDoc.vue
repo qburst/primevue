@@ -2,9 +2,9 @@
     <DocSectionText v-bind="$attrs">
         <p>Adding <i>mask</i> property displays a modal layer behind the popup items.</p>
     </DocSectionText>
-    <div class="card">
+    <div class="card p-3">
         <div :style="{ position: 'relative', height: '350px' }">
-            <SpeedDial :model="items" direction="up" mask :style="{ right: 0, bottom: 0 }" />
+            <SpeedDial :model="items" direction="up" mask :style="{ right: '1rem', bottom: '1rem' }" />
         </div>
     </div>
     <DocSectionCode :code="code" />
@@ -52,12 +52,14 @@ export default {
                 }
             ],
             code: {
-                basic: `<SpeedDial :model="items" direction="up" mask :style="{ right: 0, bottom: 0 }" />`,
-                options: `<template>
-    <div class="card">
+                basic: `
+<SpeedDial :model="items" direction="up" mask :style="{ right: '1rem', bottom: '1rem' }" />
+`,
+                options: `
+<template>
+    <div class="card p-3">
         <div :style="{ position: 'relative', height: '350px' }">
-            <SpeedDial :model="items" direction="up" mask :style="{ right: 0, bottom: 0 }" />
-            <Toast />
+            <SpeedDial :model="items" direction="up" mask :style="{ right: '1rem', bottom: '1rem' }" />
         </div>
     </div>
 </template>
@@ -106,12 +108,13 @@ data() {
     }
 }
 };
-<\/script>`,
-                composition: `<template>
-    <div class="card">
+<\/script>
+`,
+                composition: `
+<template>
+    <div class="card p-3">
         <div :style="{ position: 'relative', height: '350px' }">
-            <SpeedDial :model="items" direction="up" mask :style="{ right: 0, bottom: 0 }" />
-            <Toast />
+            <SpeedDial :model="items" direction="up" mask :style="{ right: '1rem', bottom: '1rem' }" />
         </div>
     </div>
 </template>
@@ -161,7 +164,8 @@ const items = ref([
         }
     }
 ])
-<\/script>`
+<\/script>
+`
             }
         };
     }

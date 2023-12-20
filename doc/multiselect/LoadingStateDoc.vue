@@ -13,23 +13,29 @@ export default {
     data() {
         return {
             code: {
-                basic: `<MultiSelect placeholder="Loading..." loading class="w-full md:w-20rem"></MultiSelect>`,
-                options: `<template>
+                basic: `
+<MultiSelect placeholder="Loading..." loading class="w-full md:w-20rem"></MultiSelect>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <MultiSelect placeholder="Loading..." loading class="w-full md:w-20rem"></MultiSelect>
     </div>
 </template>
 
 <script>
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <MultiSelect placeholder="Loading..." loading class="w-full md:w-20rem"></MultiSelect>
     </div>
 </template>
 
 <script setup>
-<\/script>`
+<\/script>
+`
             }
         };
     }

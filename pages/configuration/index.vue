@@ -16,16 +16,17 @@
 </template>
 
 <script>
-import ImportDoc from '@/doc/configuration/ImportDoc';
-import InputStyleDoc from '@/doc/configuration/InputStyleDoc';
+import ImportDoc from '@/doc/configuration/ImportDoc.vue';
+import InputStyleDoc from '@/doc/configuration/InputStyleDoc.vue';
 import PTDoc from '@/doc/configuration/PTDoc.vue';
-import RippleDoc from '@/doc/configuration/RippleDoc';
-import UnstyledDoc from '@/doc/configuration/UnstyledDoc';
-import ZIndexDoc from '@/doc/configuration/ZIndexDoc';
-import NonceDoc from '@/doc/configuration/csp/NonceDoc';
-import LocaleApiDoc from '@/doc/configuration/locale/LocaleApiDoc';
-import RepositoryDoc from '@/doc/configuration/locale/RepositoryDoc';
-import SetLocaleDoc from '@/doc/configuration/locale/SetLocaleDoc';
+import PTOptionsDoc from '@/doc/configuration/PTOptionsDoc.vue';
+import RippleDoc from '@/doc/configuration/RippleDoc.vue';
+import UnstyledDoc from '@/doc/configuration/UnstyledDoc.vue';
+import ZIndexDoc from '@/doc/configuration/ZIndexDoc.vue';
+import NonceDoc from '@/doc/configuration/csp/NonceDoc.vue';
+import LocaleApiDoc from '@/doc/configuration/locale/LocaleApiDoc.vue';
+import RepositoryDoc from '@/doc/configuration/locale/RepositoryDoc.vue';
+import SetLocaleDoc from '@/doc/configuration/locale/SetLocaleDoc.vue';
 
 export default {
     data() {
@@ -47,6 +48,11 @@ export default {
                     component: PTDoc
                 },
                 {
+                    id: 'ptoptions',
+                    label: 'Pass Through Options',
+                    component: PTOptionsDoc
+                },
+                {
                     id: 'ripple',
                     label: 'Ripple',
                     component: RippleDoc
@@ -63,7 +69,7 @@ export default {
                 },
                 {
                     id: 'csp',
-                    label: 'Content Security Policy (CSP)',
+                    label: 'CSP',
                     children: [
                         {
                             id: 'nonce',

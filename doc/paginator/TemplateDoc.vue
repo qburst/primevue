@@ -32,12 +32,15 @@ export default {
         return {
             first: 0,
             code: {
-                basic: `<Paginator v-model:first="first" :rows="1" :totalRecords="1" template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink" />
+                basic: `
+<Paginator v-model:first="first" :rows="1" :totalRecords="1" template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink" />
 
 <div class="p-3 text-center">
     <img :src="\`https://primefaces.org/cdn/primevue/images/nature/nature\${first + 1}.jpg\`" :alt="first" class="shadow-2 border-round w-full sm:w-30rem" />
-</div>`,
-                options: `<template>
+</div>
+`,
+                options: `
+<template>
     <div class="card">
         <Paginator v-model:first="first" :rows="1" :totalRecords="12" template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink" />
 
@@ -55,8 +58,10 @@ export default {
         };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <Paginator v-model:first="first" :rows="1" :totalRecords="12" template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink" />
 
@@ -70,7 +75,8 @@ export default {
 import { ref } from 'vue';
 
 const first = ref(0);
-<\/script>`
+<\/script>
+`
             }
         };
     }

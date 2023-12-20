@@ -18,15 +18,18 @@ export default {
     data() {
         return {
             code: {
-                basic: `<InlineMessage
+                basic: `
+<InlineMessage
     :pt="{
         root: { class: 'bg-yellow-100' },
         icon: { class: 'hidden' }
     }"
 >
     Username is required
-</InlineMessage>`,
-                options: `<template>
+</InlineMessage>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <InlineMessage
             :pt="{
@@ -40,8 +43,10 @@ export default {
 </template>
 
 <script>
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <InlineMessage
             :pt="{
@@ -55,7 +60,8 @@ export default {
 </template>
 
 <script setup>
-<\/script>`
+<\/script>
+`
             }
         };
     }

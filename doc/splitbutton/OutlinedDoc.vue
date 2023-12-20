@@ -3,13 +3,13 @@
         <p>Outlined buttons display a border without a background initially.</p>
     </DocSectionText>
     <div class="card flex justify-content-center flex-wrap gap-3">
-        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined class="mb-2"></SplitButton>
-        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="secondary" class="mb-2"></SplitButton>
-        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="success" class="mb-2"></SplitButton>
-        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="info" class="mb-2"></SplitButton>
-        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="warning" class="mb-2"></SplitButton>
-        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="help" class="mb-2"></SplitButton>
-        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="danger" class="mb-2"></SplitButton>
+        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined></SplitButton>
+        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="secondary"></SplitButton>
+        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="success"></SplitButton>
+        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="info"></SplitButton>
+        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="warning"></SplitButton>
+        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="help"></SplitButton>
+        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="danger"></SplitButton>
     </div>
     <DocSectionCode :code="code" />
 </template>
@@ -43,23 +43,26 @@ export default {
                 { label: 'Upload', icon: 'pi pi-upload', to: '/fileupload' }
             ],
             code: {
-                basic: `<SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined class="mb-2"></SplitButton>
-<SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="secondary" class="mb-2"></SplitButton>
-<SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="success" class="mb-2"></SplitButton>
-<SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="info" class="mb-2"></SplitButton>
-<SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="warning" class="mb-2"></SplitButton>
-<SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="help" class="mb-2"></SplitButton>
-<SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="danger" class="mb-2"></SplitButton>`,
-                options: `<template>
+                basic: `
+<SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined></SplitButton>
+<SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="secondary"></SplitButton>
+<SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="success"></SplitButton>
+<SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="info"></SplitButton>
+<SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="warning"></SplitButton>
+<SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="help"></SplitButton>
+<SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="danger"></SplitButton>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center flex-wrap gap-3">
         <Toast />
-        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined class="mb-2"></SplitButton>
-        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="secondary" class="mb-2"></SplitButton>
-        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="success" class="mb-2"></SplitButton>
-        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="info" class="mb-2"></SplitButton>
-        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="warning" class="mb-2"></SplitButton>
-        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="help" class="mb-2"></SplitButton>
-        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="danger" class="mb-2"></SplitButton>
+        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined></SplitButton>
+        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="secondary"></SplitButton>
+        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="success"></SplitButton>
+        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="info"></SplitButton>
+        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="warning"></SplitButton>
+        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="help"></SplitButton>
+        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="danger"></SplitButton>
     </div>
 </template>
 
@@ -99,17 +102,19 @@ export default {
         }
     }
 }
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center flex-wrap gap-3">
         <Toast />
-        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined class="mb-2"></SplitButton>
-        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="secondary" class="mb-2"></SplitButton>
-        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="success" class="mb-2"></SplitButton>
-        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="info" class="mb-2"></SplitButton>
-        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="warning" class="mb-2"></SplitButton>
-        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="help" class="mb-2"></SplitButton>
-        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="danger" class="mb-2"></SplitButton>
+        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined></SplitButton>
+        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="secondary"></SplitButton>
+        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="success"></SplitButton>
+        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="info"></SplitButton>
+        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="warning"></SplitButton>
+        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="help"></SplitButton>
+        <SplitButton label="Save" :model="items" icon="pi pi-plus" @click="save" outlined severity="danger"></SplitButton>
     </div>
 </template>
 
@@ -145,7 +150,8 @@ const items = [
 const save = () => {
     toast.add({ severity: 'success', summary: 'Success', detail: 'Data Saved', life: 3000 });
 };
-<\/script>`
+<\/script>
+`
             }
         };
     },

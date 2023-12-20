@@ -38,7 +38,8 @@ export default {
         return {
             products: null,
             code: {
-                basic: `<OrderList
+                basic: `
+<OrderList
     v-model="products"
     dataKey="id"
     :pt="{
@@ -62,8 +63,10 @@ export default {
             <span class="font-bold text-900">$ {{ slotProps.item.price }}</span>
         </div>
     </template>
-</OrderList>`,
-                options: `<template>
+</OrderList>
+`,
+                options: `
+<template>
     <div class="card xl:flex xl:justify-content-center">
         <OrderList
             v-model="products"
@@ -105,8 +108,10 @@ export default {
         ProductService.getProductsSmall().then((data) => (this.products = data));
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card xl:flex xl:justify-content-center">
         <OrderList
             v-model="products"
@@ -145,7 +150,8 @@ const products = ref(null);
 onMounted(() => {
     ProductService.getProductsSmall().then((data) => (this.products = data));
 });
-<\/script>`,
+<\/script>
+`,
                 data: `
 /* ProductService */        
 {

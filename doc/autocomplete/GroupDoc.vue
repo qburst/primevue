@@ -57,15 +57,18 @@ export default {
                 }
             ],
             code: {
-                basic: `<AutoComplete v-model="selectedCity" :suggestions="filteredCities" @complete="search" optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" placeholder="Hint: type 'a'">
+                basic: `
+<AutoComplete v-model="selectedCity" :suggestions="filteredCities" @complete="search" optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" placeholder="Hint: type 'a'">
     <template #optiongroup="slotProps">
         <div class="flex align-items-center country-item">
             <img :alt="slotProps.item.label" src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png" :class="\`flag flag-\${slotProps.item.code.toLowerCase()} mr-2\`" style="width: 18px" />
             <div>{{ slotProps.item.label }}</div>
         </div>
     </template>
-</AutoComplete>`,
-                options: `<template>
+</AutoComplete>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <AutoComplete v-model="selectedCity" :suggestions="filteredCities" @complete="search" optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" placeholder="Hint: type 'a'">
             <template #optiongroup="slotProps">
@@ -138,8 +141,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <AutoComplete v-model="selectedCity" :suggestions="filteredCities" @complete="search" optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" placeholder="Hint: type 'a'">
             <template #optiongroup="slotProps">
@@ -206,7 +211,8 @@ const search = (event) => {
     filteredCities.value = newFilteredCities;
 
 }
-<\/script>`
+<\/script>
+`
             }
         };
     },

@@ -21,15 +21,18 @@ export default {
         return {
             value: null,
             code: {
-                basic: `<Chips v-model="value">
+                basic: `
+<Chips v-model="value">
     <template #chip="slotProps">
         <div>
             <span>{{ slotProps.value }} - (active) </span>
             <i class="pi pi-user-plus" style="font-size: 14px"></i>
         </div>
     </template>
-</Chips>`,
-                options: `<template>
+</Chips>
+`,
+                options: `
+<template>
     <div class="card p-fluid">
         <Chips v-model="value">
             <template #chip="slotProps">
@@ -50,8 +53,10 @@ export default {
         };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card p-fluid">
         <Chips v-model="value">
             <template #chip="slotProps">
@@ -68,7 +73,8 @@ export default {
 import { ref } from "vue";
 
 const value = ref();
-<\/script>`
+<\/script>
+`
             }
         };
     }

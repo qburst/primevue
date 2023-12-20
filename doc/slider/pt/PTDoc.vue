@@ -19,15 +19,18 @@ export default {
         return {
             value: null,
             code: {
-                basic: `<Slider
+                basic: `
+<Slider
     v-model="value"
     :pt="{
         root: { class: 'w-14rem' },
         handle: { class: 'bg-orange-400 border-900' },
         range: { class: 'bg-orange-400' }
     }"
-/>`,
-                options: `<template>
+/>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <Slider
             v-model="value"
@@ -48,8 +51,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <Slider
             v-model="value"
@@ -66,7 +71,8 @@ export default {
 import { ref } from 'vue';
 
 const value = ref(null);
-<\/script>`
+<\/script>
+`
             }
         };
     }

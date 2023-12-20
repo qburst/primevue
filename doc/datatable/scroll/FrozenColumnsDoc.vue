@@ -34,7 +34,8 @@ export default {
             customers: null,
             balanceFrozen: false,
             code: {
-                basic: `<ToggleButton v-model="balanceFrozen" onIcon="pi pi-lock" offIcon="pi pi-lock-open" onLabel="Balance" offLabel="Balance" />
+                basic: `
+<ToggleButton v-model="balanceFrozen" onIcon="pi pi-lock" offIcon="pi pi-lock-open" onLabel="Balance" offLabel="Balance" />
 <DataTable :value="customers" scrollable scrollHeight="400px" class="mt-4">
     <Column field="name" header="Name" style="min-width: 200px" frozen class="font-bold"></Column>
     <Column field="id" header="Id" style="min-width: 100px"></Column>
@@ -50,8 +51,10 @@ export default {
             <span class="font-bold">{{ formatCurrency(data.balance) }}</span>
         </template>
     </Column>
-</DataTable>`,
-                options: `<template>
+</DataTable>
+`,
+                options: `
+<template>
     <div class="card">
         <ToggleButton v-model="balanceFrozen" onIcon="pi pi-lock" offIcon="pi pi-lock-open" onLabel="Balance" offLabel="Balance" />
 
@@ -95,8 +98,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <ToggleButton v-model="balanceFrozen" onIcon="pi pi-lock" offIcon="pi pi-lock-open" onLabel="Balance" offLabel="Balance" />
 
@@ -134,7 +139,8 @@ const balanceFrozen = ref(false);
 const formatCurrency = (value) => {
     return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 };
-<\/script>`,
+<\/script>
+`,
                 data: `
 {
     id: 1000,

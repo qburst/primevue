@@ -14,8 +14,11 @@ export default {
         return {
             checked: false,
             code: {
-                basic: `<Checkbox v-model="checked" disabled />`,
-                options: `<template>
+                basic: `
+<Checkbox v-model="checked" disabled />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <Checkbox v-model="checked" disabled />
     </div>
@@ -29,8 +32,10 @@ export default {
         };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <Checkbox v-model="checked" disabled />
     </div>
@@ -40,7 +45,8 @@ export default {
 import { ref } from "vue";
 
 const checked = ref(false);
-<\/script>`
+<\/script>
+`
             }
         };
     }

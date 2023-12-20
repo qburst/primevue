@@ -9,7 +9,8 @@
  */
 import { VNode } from 'vue';
 import { ComponentHooks } from '../basecomponent';
-import { ClassComponent, GlobalComponentConstructor, PTOptions } from '../ts-helpers';
+import { PassThroughOptions } from '../passthrough';
+import { ClassComponent, GlobalComponentConstructor, PassThrough } from '../ts-helpers';
 
 export declare type SelectButtonPassThroughOptionType = SelectButtonPassThroughAttributes | ((options: SelectButtonPassThroughMethodOptions) => SelectButtonPassThroughAttributes | string) | string | null | undefined;
 
@@ -17,10 +18,34 @@ export declare type SelectButtonPassThroughOptionType = SelectButtonPassThroughA
  * Custom passthrough(pt) option method.
  */
 export interface SelectButtonPassThroughMethodOptions {
+    /**
+     * Defines instance.
+     */
     instance: any;
+    /**
+     * Defines valid properties.
+     */
     props: SelectButtonProps;
+    /**
+     * Defines current inline state.
+     */
     state: SelectButtonState;
+    /**
+     * Defines current options.
+     */
     context: SelectButtonContext;
+    /**
+     * Defines valid attributes.
+     */
+    attrs: any;
+    /**
+     * Defines parent options.
+     */
+    parent: any;
+    /**
+     * Defines passthrough(pt) options in global config.
+     */
+    global: object | undefined;
 }
 
 /**
@@ -41,7 +66,7 @@ export interface SelectButtonPassThroughOptions {
      */
     label?: SelectButtonPassThroughOptionType;
     /**
-     * Used to manage all lifecycle hooks
+     * Used to manage all lifecycle hooks.
      * @see {@link BaseComponent.ComponentHooks}
      */
     hooks?: ComponentHooks;
@@ -139,18 +164,29 @@ export interface SelectButtonProps {
     dataKey?: string | undefined;
     /**
      * Whether selection can be cleared.
-     * @defaultValue false
+     * @defaultValue true
+     * @deprecated Use 'allowEmpty' property instead.
      */
     unselectable?: boolean | undefined;
     /**
+     * Whether selection can be cleared.
+     * @defaultValue true
+     */
+    allowEmpty?: boolean | undefined;
+    /**
      * Identifier of the underlying element.
      */
-    'aria-labelledby'?: string | undefined;
+    ariaLabelledby?: string | undefined;
     /**
      * Used to pass attributes to DOM elements inside the component.
      * @type {SelectButtonPassThroughOptions}
      */
-    pt?: PTOptions<SelectButtonPassThroughOptions>;
+    pt?: PassThrough<SelectButtonPassThroughOptions>;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false

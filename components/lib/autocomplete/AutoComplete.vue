@@ -55,7 +55,7 @@
                 <slot name="chip" :value="option">
                     <span :class="cx('tokenLabel')" v-bind="ptm('tokenLabel')">{{ getOptionLabel(option) }}</span>
                 </slot>
-                <slot name="removetokenicon" :class="cx('removeTokenIcon')" :index="i" :onClick="(event) => removeOption(event, i)">
+                <slot name="removetokenicon" :class="cx('removeTokenIcon')" :index="i" :onClick="(event) => removeOption(event, i)" :removeCallback="(event) => removeOption(event, i)">
                     <component :is="removeTokenIcon ? 'span' : 'TimesCircleIcon'" :class="[cx('removeTokenIcon'), removeTokenIcon]" @click="removeOption($event, i)" aria-hidden="true" v-bind="ptm('removeTokenIcon')" />
                 </slot>
             </li>
@@ -106,7 +106,7 @@
         >
             <template #icon>
                 <slot name="dropdownicon" :class="dropdownIcon">
-                    <component :is="dropdownIcon ? 'span' : 'ChevronDownIcon'" :class="dropdownIcon" v-bind="ptm('dropdownButton')['icon']" />
+                    <component :is="dropdownIcon ? 'span' : 'ChevronDownIcon'" :class="dropdownIcon" v-bind="ptm('dropdownButton')['icon']" data-pc-section="dropdownicon" />
                 </slot>
             </template>
         </Button>
@@ -424,7 +424,8 @@ export default {
             if (this.forceSelection) {
                 let valid = false;
 
-                if (this.visibleOptions) {
+                // when forceSelection is on, prevent called twice onOptionSelect()
+                if (this.visibleOptions && !this.multiple) {
                     const matchedValue = this.visibleOptions.find((option) => this.isOptionMatched(option, this.$refs.focusInput.value || ''));
 
                     if (matchedValue !== undefined) {
@@ -765,7 +766,7 @@ export default {
             return this.isValidOption(option) && this.getOptionLabel(option).toLocaleLowerCase(this.searchLocale) === value.toLocaleLowerCase(this.searchLocale);
         },
         isValidOption(option) {
-            return option && !(this.isOptionDisabled(option) || this.isOptionGroup(option));
+            return ObjectUtils.isNotEmpty(option) && !(this.isOptionDisabled(option) || this.isOptionGroup(option));
         },
         isValidSelectedOption(option) {
             return this.isValidOption(option) && this.isSelected(option);
@@ -884,7 +885,7 @@ export default {
             return this.optionGroupLabel ? this.flatOptions(this.suggestions) : this.suggestions || [];
         },
         inputValue() {
-            if (this.modelValue) {
+            if (ObjectUtils.isNotEmpty(this.modelValue)) {
                 if (typeof this.modelValue === 'object') {
                     const label = this.getOptionLabel(this.modelValue);
 

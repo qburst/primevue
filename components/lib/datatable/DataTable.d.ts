@@ -12,8 +12,9 @@ import { ComponentHooks } from '../basecomponent';
 import { ColumnPassThroughOptionType } from '../column';
 import { ColumnGroupPassThroughOptionType } from '../columngroup';
 import { PaginatorPassThroughOptionType } from '../paginator';
+import { PassThroughOptions } from '../passthrough';
 import { RowPassThroughOptionType } from '../row';
-import { ClassComponent, GlobalComponentConstructor, Nullable, PTOptions } from '../ts-helpers';
+import { ClassComponent, GlobalComponentConstructor, Nullable, PassThrough } from '../ts-helpers';
 import { VirtualScrollerPassThroughOptionType, VirtualScrollerProps } from '../virtualscroller';
 
 export declare type DataTablePassThroughOptionType = DataTablePassThroughAttributes | ((options: DataTablePassThroughMethodOptions) => DataTablePassThroughAttributes | string) | string | null | undefined;
@@ -24,10 +25,48 @@ export declare type DataTablePassThroughTransitionType = TransitionProps | ((opt
  * Custom passthrough(pt) option method.
  */
 export interface DataTablePassThroughMethodOptions {
+    /**
+     * Defines instance.
+     */
     instance: any;
+    /**
+     * Defines valid properties.
+     */
     props: DataTableProps;
+    /**
+     * Defines current inline state.
+     */
     state: DataTableState;
+    /**
+     * Defines current options.
+     */
     context: DataTableContext;
+    /**
+     * Defines valid attributes.
+     */
+    attrs: any;
+    /**
+     * Defines parent options.
+     */
+    parent: any;
+    /**
+     * Defines passthrough(pt) options in global config.
+     */
+    global: object | undefined;
+}
+
+/**
+ * Custom shared passthrough(pt) option method.
+ */
+export interface DataTableSharedPassThroughMethodOptions {
+    /**
+     * Defines valid properties.
+     */
+    props: DataTableProps;
+    /**
+     * Defines current inline state.
+     */
+    state: DataTableState;
 }
 
 /**
@@ -361,7 +400,7 @@ export interface DataTableRowExpandEvent {
     /**
      * Expanded row data
      */
-    data: any[];
+    data: any;
 }
 
 /**
@@ -565,7 +604,7 @@ export interface DataTablePassThroughOptions {
      * Used to pass attributes to the Paginator component.
      * @see {@link PaginatorPassThroughOptionType}
      */
-    paginator?: PaginatorPassThroughOptionType;
+    paginator?: PaginatorPassThroughOptionType<DataTableSharedPassThroughMethodOptions>;
     /**
      * Used to pass attributes to the wrapper's DOM element.
      */
@@ -668,7 +707,7 @@ export interface DataTablePassThroughOptions {
      */
     column?: ColumnPassThroughOptionType;
     /**
-     * Used to manage all lifecycle hooks
+     * Used to manage all lifecycle hooks.
      * @see {@link BaseComponent.ComponentHooks}
      */
     hooks?: ComponentHooks;
@@ -871,6 +910,11 @@ export interface DataTableProps {
      */
     sortOrder?: number | undefined;
     /**
+     * Determines how null values are sorted.
+     * @defaultValue 1
+     */
+    nullSortOrder?: number;
+    /**
      * Default sort order of an unsorted column.
      * @defaultValue 1
      */
@@ -922,7 +966,7 @@ export interface DataTableProps {
     /**
      * Defines whether metaKey is requred or not for the selection. When true metaKey needs to be pressed to select or unselect an item and
      * when set to false selection of each item can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.
-     * @defaultValue true
+     * @defaultValue false
      */
     metaKeySelection?: boolean | undefined;
     /**
@@ -1085,7 +1129,12 @@ export interface DataTableProps {
      * Used to pass attributes to DOM elements inside the component.
      * @type {DataTablePassThroughOptions}
      */
-    pt?: PTOptions<DataTablePassThroughOptions>;
+    pt?: PassThrough<DataTablePassThroughOptions>;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false
@@ -1189,19 +1238,63 @@ export interface DataTableSlots {
     /**
      * Custom paginator first page link icon template.
      */
-    paginatorfirstpagelinkicon(): VNode[];
+    paginatorfirstpagelinkicon(scope: {
+        /**
+         * Style class of the paginator first page link icon.
+         * @param {Object} scope - paginatorfirstpagelinkicon's params.
+         */
+        class: string;
+    }): VNode[];
     /**
      * Custom paginator previous page link icon template.
      */
-    paginatorprevpagelinkicon(): VNode[];
+    paginatorprevpagelinkicon(scope: {
+        /**
+         * Style class of the paginator prev page link icon.
+         * @param {Object} scope - paginatorprevpagelinkicon's params.
+         */
+        class: string;
+    }): VNode[];
     /**
      * Custom paginator next page link icon template.
      */
-    paginatornextpagelinkicon(): VNode[];
+    paginatornextpagelinkicon(scope: {
+        /**
+         * Style class of the paginator next page link icon.
+         * @param {Object} scope - paginatornextpagelinkicon's params.
+         */
+        class: string;
+    }): VNode[];
     /**
      * Custom paginator last page link icon template.
      */
-    paginatorlastpagelinkicon(): VNode[];
+    paginatorlastpagelinkicon(scope: {
+        /**
+         * Style class of the paginator last page link icon.
+         * @param {Object} scope - paginatorlastpagelinkicon's params.
+         */
+        class: string;
+    }): VNode[];
+    /**
+     * Custom paginatorrowsperpagedropdownicon template.
+     * @param {Object} scope - paginatorrowsperpagedropdownicon's params.
+     */
+    paginatorrowsperpagedropdownicon(scope: {
+        /**
+         * Style class of the paginator rows per page dropdown icon.
+         */
+        class: string;
+    }): VNode[];
+    /**
+     * Custom paginatorjumptopagedropdownicon template.
+     * @param {Object} scope - paginatorjumptopagedropdownicon's params.
+     */
+    paginatorjumptopagedropdownicon(scope: {
+        /**
+         * Style class of the paginator jump to page dropdown icon.
+         */
+        class: string;
+    }): VNode[];
 }
 /**
  * Defines valid emits in Datatable component.

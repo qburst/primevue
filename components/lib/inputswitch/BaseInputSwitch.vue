@@ -1,46 +1,6 @@
 <script>
 import BaseComponent from 'primevue/basecomponent';
-import { useStyle } from 'primevue/usestyle';
-
-const styles = `
-.p-inputswitch {
-    display: inline-block;
-}
-
-.p-inputswitch-slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border: 1px solid transparent;
-}
-
-.p-inputswitch-slider:before {
-    position: absolute;
-    content: '';
-    top: 50%;
-}
-`;
-
-const inlineStyles = {
-    root: { position: 'relative' }
-};
-
-const classes = {
-    root: ({ instance, props }) => [
-        'p-inputswitch p-component',
-        {
-            'p-inputswitch-checked': instance.checked,
-            'p-disabled': props.disabled,
-            'p-focus': instance.focused
-        }
-    ],
-    slider: 'p-inputswitch-slider'
-};
-
-const { load: loadStyle } = useStyle(styles, { name: 'inputswitch', manual: true });
+import InputSwitchStyle from 'primevue/inputswitch/style';
 
 export default {
     name: 'BaseInputSwitch',
@@ -78,20 +38,16 @@ export default {
             type: null,
             default: null
         },
-        'aria-labelledby': {
+        ariaLabelledby: {
             type: String,
             default: null
         },
-        'aria-label': {
+        ariaLabel: {
             type: String,
             default: null
         }
     },
-    css: {
-        classes,
-        inlineStyles,
-        loadStyle
-    },
+    style: InputSwitchStyle,
     provide() {
         return {
             $parentInstance: this

@@ -62,7 +62,8 @@ export default {
             lazyLoading: false,
             loadLazyTimeout: null,
             code: {
-                basic: `<DataTable :value="virtualCars" scrollable scrollHeight="400px" tableStyle="min-width: 50rem"
+                basic: `
+<DataTable :value="virtualCars" scrollable scrollHeight="400px" tableStyle="min-width: 50rem"
         :virtualScrollerOptions="{ lazy: true, onLazyLoad: loadCarsLazy, itemSize: 46, delay: 200, showLoader: true, loading: lazyLoading, numToleratedItems: 10 }">
     <Column field="id" header="Id" style="width: 20%">
         <template #loading>
@@ -99,8 +100,10 @@ export default {
             </div>
         </template>
     </Column>
-</DataTable>`,
-                options: `<template>
+</DataTable>
+`,
+                options: `
+<template>
     <div class="card">
         <DataTable :value="virtualCars" scrollable scrollHeight="400px" tableStyle="min-width: 50rem"
                 :virtualScrollerOptions="{ lazy: true, onLazyLoad: loadCarsLazy, itemSize: 46, delay: 200, showLoader: true, loading: lazyLoading, numToleratedItems: 10 }">
@@ -183,8 +186,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <DataTable :value="virtualCars" scrollable scrollHeight="400px" tableStyle="min-width: 50rem"
                 :virtualScrollerOptions="{ lazy: true, onLazyLoad: loadCarsLazy, itemSize: 46, delay: 200, showLoader: true, loading: lazyLoading, numToleratedItems: 10 }">
@@ -262,7 +267,8 @@ const loadCarsLazy = (event) => {
         lazyLoading.value = false;
     }, Math.random() * 1000 + 250);
 };
-<\/script>`,
+<\/script>
+`,
                 data: `
 {
     id: 1

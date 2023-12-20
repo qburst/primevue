@@ -40,15 +40,18 @@ export default {
                 }
             ],
             code: {
-                basic: `<TabMenu
+                basic: `
+<TabMenu
     :model="items"
     :pt="{
         action: ({ props, state, context }) => ({
             class: context.order === state.d_activeIndex ? 'bg-primary' : undefined
         })
     }"
-/>`,
-                options: `<template>
+/>
+`,
+                options: `
+<template>
     <div class="card">
         <TabMenu
             :model="items"
@@ -90,8 +93,10 @@ export default {
         };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <TabMenu
             :model="items"
@@ -129,7 +134,8 @@ const items = ref([
         icon: 'pi pi-fw pi-cog'
     }
 ]);
-<\/script>`
+<\/script>
+`
             }
         };
     }

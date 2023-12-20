@@ -1,8 +1,8 @@
 <template>
     <DocSectionText v-bind="$attrs">
         <p>
-            More than one node is selectable by setting <i>selectionMode</i> to <i>multiple</i>. By default in multiple selection mode, metaKey press (e.g. <i>⌘</i>) is necessary to add to existing selections however this can be configured with
-            disabling the <i>metaKeySelection</i> property. Note that in touch enabled devices, TreeTable always ignores metaKey.
+            More than one node is selectable by setting <i>selectionMode</i> to <i>multiple</i>. By default in multiple selection mode, metaKey press (e.g. <i>⌘</i>) is not necessary to add to existing selections. When the optional
+            <i>metaKeySelection</i> is present, behavior is changed in a way that selecting a new node requires meta key to be present. Note that in touch enabled devices, TreeTable always ignores metaKey.
         </p>
         <p>In multiple selection mode, value binding should be a key-value pair where key is the node key and value is a boolean to indicate selection.</p>
     </DocSectionText>
@@ -30,14 +30,17 @@ export default {
             selectedKey: null,
             metaKey: true,
             code: {
-                basic: `<InputSwitch v-model="metaKey" inputId="input-metakey" />
+                basic: `
+<InputSwitch v-model="metaKey" inputId="input-metakey" />
 
 <TreeTable v-model:selectionKeys="selectedKey" :value="nodes" selectionMode="multiple" :metaKeySelection="metaKey">
     <Column field="name" header="Name" expander></Column>
     <Column field="size" header="Size"></Column>
     <Column field="type" header="Type"></Column>
-</TreeTable>`,
-                options: `<template>
+</TreeTable>
+`,
+                options: `
+<template>
     <div class="card">
         <div class="flex justify-content-center align-items-center mb-4 gap-2">
             <InputSwitch v-model="metaKey" inputId="input-metakey" />
@@ -66,8 +69,10 @@ export default {
         NodeService.getTreeTableNodes().then((data) => (this.nodes = data));
     }
 }
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <div class="flex justify-content-center align-items-center mb-4 gap-2">
             <InputSwitch v-model="metaKey" inputId="input-metakey" />
@@ -92,7 +97,8 @@ onMounted(() => {
 const nodes = ref();
 const selectedKey = ref();
 const metaKey = ref(true);
-<\/script>`,
+<\/script>
+`,
                 data: `
 {
     key: '0',

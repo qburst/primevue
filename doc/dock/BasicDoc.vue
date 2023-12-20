@@ -1,6 +1,6 @@
 <template>
     <DocSectionText v-bind="$attrs">
-        <p>Menu requires a collection of menuitems as its <i>model</i>. Default location is <i>bottom</i> and other sides are also available when defined with the <i>position</i> property.</p>
+        <p>Menu requires a collection of menuitems as its <i>model</i> and an <i>icon</i> template. Default location is <i>bottom</i> and other edges are also available when defined with the <i>position</i> property.</p>
     </DocSectionText>
     <div class="card dock-demo">
         <div class="flex flex-wrap gap-3 mb-5">
@@ -62,12 +62,15 @@ export default {
                 }
             ],
             code: {
-                basic: `<Dock :model="items" :position="position">
+                basic: `
+<Dock :model="items" :position="position">
     <template #icon="{ item }">
         <img :alt="item.label" :src="item.icon" style="width: 100%" />
     </template>
-</Dock>`,
-                options: `<template>
+</Dock>
+`,
+                options: `
+<template>
     <div class="card dock-demo">
         <div class="flex flex-wrap gap-3 mb-5">
             <div v-for="pos of positions" :key="pos.label" class="flex align-items-center">
@@ -145,8 +148,10 @@ export default {
 .dock-demo > .p-dock {
     z-index: 1000;
 }
-</style>`,
-                composition: `<template>
+</style>
+`,
+                composition: `
+<template>
     <div class="card dock-demo">
         <div class="flex flex-wrap gap-3 mb-5">
             <div v-for="pos of positions" :key="pos.label" class="flex align-items-center">
@@ -221,7 +226,8 @@ const positions = ref([
 .dock-demo > .p-dock {
     z-index: 1000;
 }
-</style>`
+</style>
+`
             }
         };
     }

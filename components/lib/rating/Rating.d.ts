@@ -9,7 +9,8 @@
  */
 import { VNode } from 'vue';
 import { ComponentHooks } from '../basecomponent';
-import { ClassComponent, GlobalComponentConstructor, PTOptions } from '../ts-helpers';
+import { PassThroughOptions } from '../passthrough';
+import { ClassComponent, GlobalComponentConstructor, PassThrough } from '../ts-helpers';
 
 export declare type RatingPassThroughOptionType = RatingPassThroughAttributes | ((options: RatingPassThroughMethodOptions) => RatingPassThroughAttributes | string) | string | null | undefined;
 
@@ -17,10 +18,34 @@ export declare type RatingPassThroughOptionType = RatingPassThroughAttributes | 
  * Custom passthrough(pt) option method.
  */
 export interface RatingPassThroughMethodOptions {
+    /**
+     * Defines instance.
+     */
     instance: any;
+    /**
+     * Defines valid properties.
+     */
     props: RatingProps;
+    /**
+     * Defines current inline state.
+     */
     state: RatingState;
+    /**
+     * Defines current options.
+     */
     context: RatingContext;
+    /**
+     * Defines valid attributes.
+     */
+    attrs: any;
+    /**
+     * Defines parent options.
+     */
+    parent: any;
+    /**
+     * Defines passthrough(pt) options in global config.
+     */
+    global: object | undefined;
 }
 
 /**
@@ -69,7 +94,7 @@ export interface RatingPassThroughOptions {
      */
     hiddenItemInput?: RatingPassThroughOptionType;
     /**
-     * Used to manage all lifecycle hooks
+     * Used to manage all lifecycle hooks.
      * @see {@link BaseComponent.ComponentHooks}
      */
     hooks?: ComponentHooks;
@@ -178,7 +203,12 @@ export interface RatingProps {
      * Used to pass attributes to DOM elements inside the component.
      * @type {RatingPassThroughOptions}
      */
-    pt?: PTOptions<RatingPassThroughOptions>;
+    pt?: PassThrough<RatingPassThroughOptions>;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false

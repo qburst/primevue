@@ -9,7 +9,8 @@
  */
 import { DirectiveBinding, ObjectDirective } from 'vue';
 import { DirectiveHooks } from '../basedirective';
-import { PTOptions } from '../ts-helpers';
+import { PassThroughOptions } from '../passthrough';
+import { PassThrough } from '../ts-helpers';
 
 export declare type TooltipDirectivePassThroughOptionType = TooltipDirectivePassThroughAttributes | ((options: TooltipPassThroughMethodOptions) => TooltipDirectivePassThroughAttributes) | null | undefined;
 
@@ -18,6 +19,18 @@ export declare type TooltipDirectivePassThroughOptionType = TooltipDirectivePass
  */
 export interface TooltipPassThroughMethodOptions {
     context: TooltipContext;
+    /**
+     * Defines valid attributes.
+     */
+    attrs: any;
+    /**
+     * Defines parent options.
+     */
+    parent: any;
+    /**
+     * Defines passthrough(pt) options in global config.
+     */
+    global: object | undefined;
 }
 
 /**
@@ -42,8 +55,8 @@ export interface TooltipOptions {
      */
     class?: string | undefined;
     /**
-     * By default the tooltip contents are not rendered as text. Set to true to support html tags in the content.
-     * @defaultValue false
+     * By default the tooltip contents are not rendered as text. Set to false to support html tags in the content.
+     * @defaultValue true
      */
     escape?: boolean | undefined;
     /**
@@ -62,10 +75,20 @@ export interface TooltipOptions {
      */
     hideDelay?: number | undefined;
     /**
-     * Used to pass attributes to DOM elements inside the component.
+     * Whether to hide tooltip when hovering over tooltip content.
+     * @defaultValue true
+     */
+    autoHide?: boolean | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
      * @type {TooltipDirectivePassThroughOptions}
      */
-    pt?: PTOptions<TooltipDirectivePassThroughOptions>;
+    pt?: PassThrough<TooltipDirectivePassThroughOptions>;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false
@@ -91,7 +114,7 @@ export interface TooltipDirectivePassThroughOptions {
      */
     arrow?: TooltipDirectivePassThroughOptionType;
     /**
-     * Used to manage all lifecycle hooks
+     * Used to manage all lifecycle hooks.
      * @see {@link BaseDirective.DirectiveHooks}
      */
     hooks?: DirectiveHooks;

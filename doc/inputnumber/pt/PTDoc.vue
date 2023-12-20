@@ -11,8 +11,16 @@
             mode="currency"
             currency="EUR"
             :pt="{
-                incrementButton: { class: 'bg-teal-500 border-teal-500' },
-                decrementButton: { class: 'bg-orange-500 border-orange-500' }
+                decrementButton: {
+                    root: {
+                        class: 'bg-orange-500 border-orange-500'
+                    }
+                },
+                incrementButton: {
+                    root: {
+                        class: 'bg-teal-500 border-teal-500'
+                    }
+                }
             }"
         />
     </div>
@@ -25,7 +33,8 @@ export default {
         return {
             value: 20,
             code: {
-                basic: `<InputNumber
+                basic: `
+<InputNumber
     v-model="value"
     showButtons
     buttonLayout="horizontal"
@@ -35,11 +44,21 @@ export default {
     mode="currency"
     currency="EUR"
     :pt="{
-        incrementButton: { class: 'bg-teal-500 border-teal-500' },
-        decrementButton: { class: 'bg-orange-500 border-orange-500' }
+        decrementButton: {
+            root: {
+                class: 'bg-orange-500 border-orange-500'
+            }
+        },
+        incrementButton: {
+            root: {
+                class: 'bg-teal-500 border-teal-500'
+            }
+        }
     }"
-/>`,
-                options: `<template>
+/>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <InputNumber
             v-model="value"
@@ -51,8 +70,16 @@ export default {
             mode="currency"
             currency="EUR"
             :pt="{
-                incrementButton: { class: 'bg-teal-500 border-teal-500' },
-                decrementButton: { class: 'bg-orange-500 border-orange-500' }
+                decrementButton: {
+                    root: {
+                        class: 'bg-orange-500 border-orange-500'
+                    }
+                },
+                incrementButton: {
+                    root: {
+                        class: 'bg-teal-500 border-teal-500'
+                    }
+                }
             }"
         />
     </div>
@@ -66,8 +93,10 @@ export default {
         };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <InputNumber
             v-model="value"
@@ -79,8 +108,16 @@ export default {
             mode="currency"
             currency="EUR"
             :pt="{
-                incrementButton: { class: 'bg-teal-500 border-teal-500' },
-                decrementButton: { class: 'bg-orange-500 border-orange-500' }
+                decrementButton: {
+                    root: {
+                        class: 'bg-orange-500 border-orange-500'
+                    }
+                },
+                incrementButton: {
+                    root: {
+                        class: 'bg-teal-500 border-teal-500'
+                    }
+                }
             }"
         />
     </div>
@@ -90,7 +127,8 @@ export default {
 import { ref } from "vue";
 
 const value = ref(20);
-<\/script>`
+<\/script>
+`
             }
         };
     }

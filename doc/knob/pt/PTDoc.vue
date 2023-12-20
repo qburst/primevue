@@ -17,13 +17,16 @@ export default {
         return {
             value: 0,
             code: {
-                basic: `<Knob
+                basic: `
+<Knob
     v-model="value"
     :pt="{
         value: { style: { stroke: 'var(--cyan-500)' } }
     }"
-/>`,
-                options: `<template>
+/>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <Knob
             v-model="value"
@@ -42,8 +45,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <Knob
             v-model="value"
@@ -58,7 +63,8 @@ export default {
 import { ref } from 'vue';
 
 const value = ref(0);
-<\/script>`
+<\/script>
+`
             }
         };
     }

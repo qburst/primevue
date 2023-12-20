@@ -23,7 +23,8 @@ export default {
     data() {
         return {
             code: {
-                basic: `<Terminal
+                basic: `
+<Terminal
     welcomeMessage="Welcome to PrimeVue"
     prompt="primevue $"
     :pt="{
@@ -32,8 +33,10 @@ export default {
         prompt: { class: 'text-yellow-500' },
         response: { class: 'text-purple-500' }
     }"
-/>`,
-                options: `<template>
+/>
+`,
+                options: `
+<template>
     <div>
         <p>Enter "date" to display the current date, "greet {0}" for a message and "random" to get a random number.</p>
         <Terminal
@@ -86,8 +89,10 @@ export default {
         TerminalService.off('command', this.commandHandler);
     }
 }
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div>
         <p>Enter "date" to display the current date, "greet {0}" for a message and "random" to get a random number.</p>
         <Terminal
@@ -139,7 +144,8 @@ const commandHandler = (text) => {
     
     TerminalService.emit('response', response);
 }
-<\/script>`
+<\/script>
+`
             }
         };
     },

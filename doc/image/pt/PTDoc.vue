@@ -20,7 +20,8 @@ export default {
     data() {
         return {
             code: {
-                basic: `<Image
+                basic: `
+<Image
     src="https://primefaces.org/cdn/primevue/images/galleria/galleria10.jpg"
     alt="Image"
     width="250"
@@ -28,8 +29,10 @@ export default {
     :pt="{
         image: { class: 'w-15rem' }
     }"
-/>`,
-                options: `<template>
+/>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <Image
             src="https://primefaces.org/cdn/primevue/images/galleria/galleria10.jpg"
@@ -41,8 +44,10 @@ export default {
             }"
         />
     </div>
-</template>`,
-                composition: `<template>
+</template>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <Image
             src="https://primefaces.org/cdn/primevue/images/galleria/galleria10.jpg"
@@ -54,7 +59,8 @@ export default {
             }"
         />
     </div>
-</template>`
+</template>
+`
             }
         };
     }

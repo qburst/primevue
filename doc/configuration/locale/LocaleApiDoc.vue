@@ -229,6 +229,10 @@
                         <td>0</td>
                     </tr>
                     <tr>
+                        <td>showMonthAfterYear</td>
+                        <td>false</td>
+                    </tr>
+                    <tr>
                         <td>dateFormat</td>
                         <td>mm/dd/yy</td>
                     </tr>
@@ -354,7 +358,7 @@
                     </tr>
                     <tr>
                         <td>aria.pageLabel</td>
-                        <td>{page}</td>
+                        <td>Page {page}</td>
                     </tr>
                     <tr>
                         <td>aria.firstPageLabel</td>

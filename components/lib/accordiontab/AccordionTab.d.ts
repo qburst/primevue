@@ -8,8 +8,8 @@
  *
  */
 import { AnchorHTMLAttributes, HTMLAttributes, TransitionProps, VNode } from 'vue';
-import { AccordionPassThroughOptions } from '../accordion';
-import { ClassComponent, GlobalComponentConstructor, PTOptions } from '../ts-helpers';
+import { PassThroughOptions } from '../passthrough';
+import { ClassComponent, GlobalComponentConstructor, PassThrough } from '../ts-helpers';
 
 export declare type AccordionTabPassThroughOptionType = AccordionTabPassThroughAttributes | ((options: AccordionTabPassThroughMethodOptions) => AccordionTabPassThroughAttributes | string) | string | null | undefined;
 
@@ -19,10 +19,30 @@ export declare type AccordionTabPassThroughTransitionType = TransitionProps | ((
  * Custom passthrough(pt) option method.
  */
 export interface AccordionTabPassThroughMethodOptions {
+    /**
+     * Defines instance.
+     */
     instance: any;
+    /**
+     * Defines valid properties.
+     */
     props: AccordionTabProps;
-    parent: AccordionPassThroughOptions;
+    /**
+     * Defines valid attributes.
+     */
+    attrs: any;
+    /**
+     * Defines parent options.
+     */
+    parent: any;
+    /**
+     * Defines current options.
+     */
     context: AccordionTabContext;
+    /**
+     * Defines passthrough(pt) options in global config.
+     */
+    global: object | undefined;
 }
 
 /**
@@ -119,7 +139,12 @@ export interface AccordionTabProps {
      * Used to pass attributes to DOM elements inside the component.
      * @type {AccordionTabPassThroughOptions}
      */
-    pt?: PTOptions<AccordionTabPassThroughOptions>;
+    pt?: PassThrough<AccordionTabPassThroughOptions>;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
 }
 
 /**
@@ -172,8 +197,14 @@ export interface AccordionTabSlots {
         /**
          * Whether the tab is active
          * @param {number} index - Index of the tab
+         * @deprecated since v3.40.0. Use 'active' property instead.
          */
         isTabActive: (index: number) => void;
+        /**
+         * Whether the tab is active
+         * @param {number} index - Index of the tab
+         */
+        active: (index: number) => void;
     }): VNode[];
 }
 

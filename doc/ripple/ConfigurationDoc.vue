@@ -13,17 +13,20 @@ export default {
                 basic: `
 mounted() {
     this.$primevue.config.ripple = true;
-}`,
+}
+`,
                 options: `
 mounted() {
     this.$primevue.config.ripple = true;
-}`,
+}
+`,
                 composition: `
 import { usePrimeVue } from 'primevue/config';
 
 const PrimeVue = usePrimeVue();
 
-PrimeVue.config.ripple = true;`
+PrimeVue.config.ripple = true;
+`
             }
         };
     }

@@ -32,11 +32,14 @@ export default {
             value3: 10,
             value4: 20,
             code: {
-                basic: `<InputNumber v-model="value1" inputId="mile" suffix=" mi" />
+                basic: `
+<InputNumber v-model="value1" inputId="mile" suffix=" mi" />
 <InputNumber v-model="value2" inputId="percent" prefix="%" />
 <InputNumber v-model="value3" inputId="expiry" prefix="Expires in " suffix=" days" />
-<InputNumber v-model="value4" inputId="temperature" prefix="&uarr; " suffix="℃" :min="0" :max="40" />`,
-                options: `<template>
+<InputNumber v-model="value4" inputId="temperature" prefix="&uarr; " suffix="℃" :min="0" :max="40" />
+`,
+                options: `
+<template>
     <div class="card flex flex-wrap gap-3 p-fluid">
         <div class="flex-auto">
             <label for="mile" class="font-bold block mb-2"> Mile </label>
@@ -68,8 +71,10 @@ export default {
         };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex flex-wrap gap-3 p-fluid">
         <div class="flex-auto">
             <label for="mile" class="font-bold block mb-2"> Mile </label>
@@ -97,7 +102,8 @@ const value1 = ref(20);
 const value2 = ref(50);
 const value3 = ref(10);
 const value4 = ref(20);
-<\/script>`
+<\/script>
+`
             }
         };
     }

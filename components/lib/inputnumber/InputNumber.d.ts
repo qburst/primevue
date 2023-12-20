@@ -9,18 +9,50 @@
  */
 import { ButtonHTMLAttributes, InputHTMLAttributes, VNode } from 'vue';
 import { ComponentHooks } from '../basecomponent';
-import { ButtonPassThroughOptionType } from '../button';
-import { InputTextPassThroughOptionType } from '../inputtext';
-import { ClassComponent, GlobalComponentConstructor, Nullable, PTOptions } from '../ts-helpers';
+import { ButtonPassThroughOptions } from '../button';
+import { InputTextPassThroughOptions } from '../inputtext';
+import { PassThroughOptions } from '../passthrough';
+import { ClassComponent, GlobalComponentConstructor, Nullable, PassThrough } from '../ts-helpers';
 
-export declare type InputNumberPassThroughOptionType = InputNumberPassThroughAttributes | ((options: InputNumberPassThroughMethodOptions) => InputNumberPassThroughAttributes | string) | string | null | undefined;
+export declare type InputNumberPassThroughOptionType<T = any> = InputNumberPassThroughAttributes | ((options: InputNumberPassThroughMethodOptions<T>) => InputNumberPassThroughAttributes | string) | string | null | undefined;
 
 /**
  * Custom passthrough(pt) option method.
  */
-export interface InputNumberPassThroughMethodOptions {
+export interface InputNumberPassThroughMethodOptions<T> {
+    /**
+     * Defines instance.
+     */
     instance: any;
+    /**
+     * Defines valid properties.
+     */
     props: InputNumberProps;
+    /**
+     * Defines current inline state.
+     */
+    state: InputNumberState;
+    /**
+     * Defines parent instance.
+     */
+    parent: T;
+    /**
+     * Defines passthrough(pt) options in global config.
+     */
+    global: object | undefined;
+}
+
+/**
+ * Custom shared passthrough(pt) option method.
+ */
+export interface InputNumberSharedPassThroughMethodOptions {
+    /**
+     * Defines valid properties.
+     */
+    props: InputNumberProps;
+    /**
+     * Defines current inline state.
+     */
     state: InputNumberState;
 }
 
@@ -58,32 +90,32 @@ export interface InputNumberBlurEvent {
  * Custom passthrough(pt) options.
  * @see {@link InputNumberProps.pt}
  */
-export interface InputNumberPassThroughOptions {
+export interface InputNumberPassThroughOptions<T = any> {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: InputNumberPassThroughOptionType;
+    root?: InputNumberPassThroughOptionType<T>;
     /**
-     * Used to pass attributes to the Input component.
-     * @see {@link InputTextPassThroughOptionType}
+     * Used to pass attributes to the InputText component.
+     * @see {@link InputTextPassThroughOptions}
      */
-    input?: InputTextPassThroughOptionType;
+    input?: InputTextPassThroughOptions<InputNumberSharedPassThroughMethodOptions>;
     /**
      * Used to pass attributes to the button group's DOM element.
      */
-    buttonGroup?: InputNumberPassThroughOptionType;
+    buttonGroup?: InputNumberPassThroughOptionType<T>;
     /**
      * Used to pass attributes to the Button component.
      * @see {@link ButtonPassThroughOptions}
      */
-    incrementButton?: ButtonPassThroughOptionType;
+    incrementButton?: ButtonPassThroughOptions<InputNumberSharedPassThroughMethodOptions>;
     /**
      * Used to pass attributes to the Button component.
      * @see {@link ButtonPassThroughOptions}
      */
-    decrementButton?: ButtonPassThroughOptionType;
+    decrementButton?: ButtonPassThroughOptions<InputNumberSharedPassThroughMethodOptions>;
     /**
-     * Used to manage all lifecycle hooks
+     * Used to manage all lifecycle hooks.
      * @see {@link BaseComponent.ComponentHooks}
      */
     hooks?: ComponentHooks;
@@ -264,16 +296,21 @@ export interface InputNumberProps {
     /**
      * Establishes relationships between the component and label(s) where its value should be one or more element IDs.
      */
-    'aria-labelledby'?: string | undefined;
+    ariaLabelledby?: string | undefined;
     /**
      * Establishes a string value that labels the component.
      */
-    'aria-label'?: string | undefined;
+    ariaLabel?: string | undefined;
     /**
      * Used to pass attributes to DOM elements inside the component.
      * @type {InputNumberPassThroughOptions}
      */
-    pt?: PTOptions<InputNumberPassThroughOptions>;
+    pt?: PassThrough<InputNumberPassThroughOptions>;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false

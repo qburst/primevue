@@ -31,9 +31,12 @@ export default {
             selectAll: false,
             items: Array.from({ length: 100000 }, (_, i) => ({ label: `Item #${i}`, value: i })),
             code: {
-                basic: `<MultiSelect v-model="selectedItems" :options="items" :maxSelectedLabels="3" :selectAll="selectAll" optionLabel="label" optionValue="value"
-    @selectall-change="onSelectAllChange($event)" @change="onChange($event)" :virtualScrollerOptions="{ itemSize: 44 }" placeholder="Select Item" class="w-full md:w-20rem" />`,
-                options: `<template>
+                basic: `
+<MultiSelect v-model="selectedItems" :options="items" :maxSelectedLabels="3" :selectAll="selectAll" optionLabel="label" optionValue="value"
+    @selectall-change="onSelectAllChange($event)" @change="onChange($event)" :virtualScrollerOptions="{ itemSize: 44 }" placeholder="Select Item" class="w-full md:w-20rem" />
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <MultiSelect v-model="selectedItems" :options="items" :maxSelectedLabels="3" :selectAll="selectAll" optionLabel="label" optionValue="value"
             @selectall-change="onSelectAllChange($event)" @change="onChange($event)" :virtualScrollerOptions="{ itemSize: 44 }" placeholder="Select Item" class="w-full md:w-20rem" />
@@ -59,8 +62,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <MultiSelect v-model="selectedItems" :options="items" :maxSelectedLabels="3" :selectAll="selectAll" optionLabel="label" optionValue="value"
             @selectall-change="onSelectAllChange($event)" @change="onChange($event)" :virtualScrollerOptions="{ itemSize: 44 }" placeholder="Select Item" class="w-full md:w-20rem" />
@@ -79,11 +84,12 @@ const onSelectAllChange = (event) => {
     selectedItems.value = event.checked ? items.value.map((item) => item.value) : [];
     selectAll.value = event.checked;
 };
-onChange(event) {
+const onChange = (event) => {
     selectAll.value = event.value.length === items.value.length;
 }
 
-<\/script>`
+<\/script>
+`
             }
         };
     },

@@ -43,7 +43,8 @@ export default {
         return {
             options: ['Off', 'On'],
             code: {
-                basic: `<div class="card flex justify-content-center">
+                basic: `
+<div class="card flex justify-content-center">
     <form @submit="onSubmit" class="flex flex-column align-items-center gap-2">
         <label for="item" :class="['flex justify-content-center', { 'p-error': errorMessage }]"> Engine State </label>
         <SelectButton id="item" v-model="value" :class="{ 'p-invalid': errorMessage }" aria-describedby="text-error" :options="options" />
@@ -51,8 +52,10 @@ export default {
         <Button type="submit" label="Submit" />
     </form>
     <Toast />
-</div>`,
-                options: `<template>
+</div>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <form @submit="onSubmit" class="flex flex-column align-items-center gap-2">
             <label for="item" :class="['flex justify-content-center', { 'p-error': errorMessage }]"> Engine State </label>
@@ -96,8 +99,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <form @submit="onSubmit" class="flex flex-column align-items-center gap-2">
             <label for="item" :class="['flex justify-content-center', { 'p-error': errorMessage }]"> Engine State </label>
@@ -133,7 +138,8 @@ const onSubmit = handleSubmit((values) => {
         resetForm();
     }
 });
-<\/script>`
+<\/script>
+`
             }
         };
     }

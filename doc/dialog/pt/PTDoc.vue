@@ -26,7 +26,8 @@ export default {
         return {
             visible: false,
             code: {
-                basic: `<Dialog
+                basic: `
+<Dialog
     v-model:visible="visible"
     modal
     header="Header"
@@ -35,8 +36,10 @@ export default {
     }"
 >
     <p>Lorem ipsum </p>
-</Dialog>`,
-                options: `<template>
+</Dialog>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <Button label="Show" icon="pi pi-external-link" @click="visible = true" />
 
@@ -64,8 +67,10 @@ export default {
         };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <Button label="Show" icon="pi pi-external-link" @click="visible = true" />
 
@@ -89,7 +94,8 @@ export default {
 import { ref } from "vue";
 
 const visible = ref(false);
-<\/script>`
+<\/script>
+`
             }
         };
     }

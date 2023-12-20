@@ -33,7 +33,7 @@
                             <slot name="chip" :value="item">
                                 <span :class="cx('tokenLabel')" v-bind="ptm('tokenLabel')">{{ getLabelByValue(item) }}</span>
                             </slot>
-                            <slot v-if="!disabled" name="removetokenicon" :class="cx('removeTokenIcon')" :item="item" :onClick="(event) => removeOption(event, item)">
+                            <slot v-if="!disabled" name="removetokenicon" :class="cx('removeTokenIcon')" :item="item" :onClick="(event) => removeOption(event, item)" :removeCallback="(event) => removeOption(event, item)">
                                 <span v-if="removeTokenIcon" :class="[cx('removeTokenIcon'), removeTokenIcon]" @click.stop="removeOption($event, item)" v-bind="ptm('removeTokenIcon')" />
                                 <TimesCircleIcon v-else :class="cx('removeTokenIcon')" @click.stop="removeOption($event, item)" v-bind="ptm('removeTokenIcon')" />
                             </slot>
@@ -379,6 +379,7 @@ export default {
                     break;
 
                 case 'Enter':
+                case 'NumpadEnter':
                 case 'Space':
                     this.onEnterKey(event);
                     break;
@@ -511,6 +512,7 @@ export default {
                     break;
 
                 case 'Enter':
+                case 'NumpadEnter':
                     this.onEnterKey(event);
                     break;
 
@@ -770,12 +772,13 @@ export default {
         },
         getSelectedItemsLabel() {
             let pattern = /{(.*?)}/;
+            const selectedItemsLabel = this.selectedItemsLabel || this.$primevue.config.locale.selectionMessage;
 
-            if (pattern.test(this.selectedItemsLabel)) {
-                return this.selectedItemsLabel.replace(this.selectedItemsLabel.match(pattern)[0], this.modelValue.length + '');
+            if (pattern.test(selectedItemsLabel)) {
+                return selectedItemsLabel.replace(selectedItemsLabel.match(pattern)[0], this.modelValue.length + '');
             }
 
-            return this.selectedItemsLabel;
+            return selectedItemsLabel;
         },
         onToggleAll(event) {
             if (this.selectAll !== null) {
@@ -803,7 +806,7 @@ export default {
             return this.isValidOption(option) && this.getOptionLabel(option).toLocaleLowerCase(this.filterLocale).startsWith(this.searchValue.toLocaleLowerCase(this.filterLocale));
         },
         isValidOption(option) {
-            return option && !(this.isOptionDisabled(option) || this.isOptionGroup(option));
+            return ObjectUtils.isNotEmpty(option) && !(this.isOptionDisabled(option) || this.isOptionGroup(option));
         },
         isValidSelectedOption(option) {
             return this.isValidOption(option) && this.isSelected(option);

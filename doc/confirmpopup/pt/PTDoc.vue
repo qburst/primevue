@@ -17,13 +17,16 @@ export default {
     data() {
         return {
             code: {
-                basic: `<ConfirmPopup
+                basic: `
+<ConfirmPopup
     group="pt"
     :pt="{
         root: { class: 'surface-100' }
     }"
-/>`,
-                options: `<template>
+/>
+`,
+                options: `
+<template>
     <ConfirmPopup
         group="pt"
         :pt="{
@@ -55,8 +58,10 @@ export default {
         }
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <ConfirmPopup
         group="pt"
         :pt="{
@@ -90,7 +95,8 @@ const confirm = (event) => {
         }
     });
 };
-<\/script>`
+<\/script>
+`
             }
         };
     },

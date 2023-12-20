@@ -25,7 +25,8 @@ export default {
         return {
             items: null,
             code: {
-                basic: `<VirtualScroller
+                basic: `
+<VirtualScroller
     :items="items"
     :itemSize="50"
     :pt="{
@@ -34,8 +35,10 @@ export default {
             style: { width: '200px', height: '200px' }
         }
     }"
->`,
-                options: `<template>
+>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <VirtualScroller
             :items="items"
@@ -61,8 +64,10 @@ export default {
         this.items = Array.from({ length: 100000 }).map((_, i) => \`Item #\${i}\`);
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <VirtualScroller
             :items="items"
@@ -81,7 +86,8 @@ export default {
 import { ref } from 'vue';
 
 const items = ref(Array.from({ length: 100000 }).map((_, i) => \`Item #\${i}\`));
-<\/script>`
+<\/script>
+`
             }
         };
     },

@@ -15,11 +15,14 @@ export default {
     data() {
         return {
             code: {
-                basic: `<Button icon="pi pi-check" aria-label="Submit" />
+                basic: `
+<Button icon="pi pi-check" aria-label="Submit" />
 <Button label="Submit" icon="pi pi-check" />
-<Button label="Submit" icon="pi pi-check" iconPos="right" />`,
-                options: `<template>
-    <div class="card flex flex-wrap gap-3  justify-content-center">
+<Button label="Submit" icon="pi pi-check" iconPos="right" />
+`,
+                options: `
+<template>
+    <div class="card flex flex-wrap gap-3 justify-content-center">
         <Button icon="pi pi-check" aria-label="Submit" />
         <Button label="Submit" icon="pi pi-check" />
         <Button label="Submit" icon="pi pi-check" iconPos="right" />
@@ -27,9 +30,11 @@ export default {
 </template>
 
 <script>
-<\/script>`,
-                composition: `<template>
-    <div class="card flex flex-wrap gap-3  justify-content-center">
+<\/script>
+`,
+                composition: `
+<template>
+    <div class="card flex flex-wrap gap-3 justify-content-center">
         <Button icon="pi pi-check" aria-label="Submit" />
         <Button label="Submit" icon="pi pi-check" />
         <Button label="Submit" icon="pi pi-check" iconPos="right" />
@@ -37,7 +42,8 @@ export default {
 </template>
 
 <script setup>
-<\/script>`
+<\/script>
+`
             }
         };
     }

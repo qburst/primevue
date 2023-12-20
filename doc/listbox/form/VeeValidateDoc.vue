@@ -49,7 +49,8 @@ export default {
                 { name: 'Paris', code: 'PRS' }
             ],
             code: {
-                basic: `<template>
+                basic: `
+<template>
     <div class="card flex justify-content-center">
         <form @submit="onSubmit" class="flex flex-column align-items-center gap-2">
             <Listbox v-model="value" :class="{ 'p-invalid': errorMessage }" class="w-full md:w-14rem" :options="cities" optionLabel="name" placeholder="Select Cities" :maxSelectedLabels="3" aria-describedby="text-error" />
@@ -58,8 +59,10 @@ export default {
         </form>
         <Toast />
     </div>
-</template>`,
-                options: `<template>
+</template>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <form @submit="onSubmit" class="flex flex-column align-items-center gap-2">
             <Listbox v-model="value" :class="{ 'p-invalid': errorMessage }" class="w-full md:w-14rem" :options="cities" optionLabel="name" placeholder="Select Cities" :maxSelectedLabels="3" aria-describedby="text-error" />
@@ -109,8 +112,10 @@ export default {
         };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <form @submit="onSubmit" class="flex flex-column align-items-center gap-2">
             <Listbox v-model="value" :class="{ 'p-invalid': errorMessage }" class="w-full md:w-14rem" :options="cities" optionLabel="name" placeholder="Select Cities" :maxSelectedLabels="3" aria-describedby="text-error" />

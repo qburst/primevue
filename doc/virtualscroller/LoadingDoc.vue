@@ -37,7 +37,8 @@ export default {
         return {
             items: null,
             code: {
-                basic: `<VirtualScroller :items="items" :itemSize="50" showLoader :delay="250" class="border-1 surface-border border-round" style="width: 200px; height: 200px">
+                basic: `
+<VirtualScroller :items="items" :itemSize="50" showLoader :delay="250" class="border-1 surface-border border-round" style="width: 200px; height: 200px">
     <template v-slot:item="{ item, options }">
         <div :class="['flex align-items-center p-2', { 'surface-hover': options.odd }]" style="height: 50px">{{ item }}</div>
     </template>
@@ -52,8 +53,10 @@ export default {
             <Skeleton :width="options.even ? '60%' : '50%'" height="1.3rem" />
         </div>
     </template>
-</VirtualScroller>`,
-                options: `<template>
+</VirtualScroller>
+`,
+                options: `
+<template>
     <div class="card flex flex-wrap justify-content-center gap-5">
         <div>
             <span class="font-bold block mb-2">Modal</span>
@@ -90,8 +93,10 @@ export default {
         this.items = Array.from({ length: 100000 }).map((_, i) => \`Item #\${i}\`);
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex flex-wrap justify-content-center gap-5">
         <div>
             <span class="font-bold block mb-2">Modal</span>
@@ -121,7 +126,8 @@ export default {
 import { ref } from 'vue';
 
 const items = ref(Array.from({ length: 100000 }).map((_, i) => \`Item #\${i}\`));
-<\/script>`
+<\/script>
+`
             }
         };
     },

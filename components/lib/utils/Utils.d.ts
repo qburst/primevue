@@ -16,7 +16,8 @@ export declare class DomHandler {
     static getViewport(): { width: number; height: number };
     static getOffset(el: HTMLElement): { top: any; left: any };
     static index(el: HTMLElement): number;
-    static addMultipleClasses(el: HTMLElement, className: string): void;
+    static addMultipleClasses(el: HTMLElement, classNames: string | string[]): void;
+    static addRemoveClasses(el: HTMLElement, classNames: string | string[]): void;
     static addClass(el: HTMLElement, className: string): void;
     static removeClass(el: HTMLElement, className: string): void;
     static hasClass(el: HTMLElement, className: string): boolean;
@@ -33,6 +34,7 @@ export declare class DomHandler {
     static getWidth(el: HTMLElement): number;
     static absolutePosition(el: HTMLElement, target: HTMLElement): void;
     static relativePosition(el: HTMLElement, target: HTMLElement): void;
+    static nestedPosition(el: HTMLElement, level: number): void;
     static getParents(el: HTMLElement, parents?: any[]): any[];
     static getScrollableParents(el: HTMLElement): any[];
     static getHiddenElementOuterHeight(el: HTMLElement): number;
@@ -46,6 +48,7 @@ export declare class DomHandler {
     static clearSelection(): void;
     static getSelection(): string | null;
     static calculateScrollbarWidth(): number;
+    static calculateBodyScrollbarWidth(): number;
     static getBrowser(): object;
     static resolveUserAgent(): { browser: string; version: string };
     static isVisible(el: HTMLElement): boolean;
@@ -56,6 +59,8 @@ export declare class DomHandler {
     static getFocusableElements(el: HTMLElement, selector?: string): any[];
     static getFirstFocusableElement(el: HTMLElement, selector?: string): any;
     static getLastFocusableElement(el: HTMLElement, selector?: string): any;
+    static getPreviousElementSibling(el: HTMLElement, selector?: string): any;
+    static getNextElementSibling(el: HTMLElement, selector?: string): any;
     static isClickable(el: HTMLElement): boolean;
     static applyStyle(el: HTMLElement, style: any): void;
     static isIOS(): boolean;
@@ -64,6 +69,8 @@ export declare class DomHandler {
     static hasCSSAnimation(el: HTMLElement): boolean;
     static hasCSSTransition(el: HTMLElement): boolean;
     static exportCSV(csv: any, filename: string): void;
+    static blockBodyScroll(className?: string): void;
+    static unblockBodyScroll(className?: string): void;
 }
 
 export declare class ObjectUtils {
@@ -89,7 +96,10 @@ export declare class ObjectUtils {
     static isPrintableCharacter(char: string): boolean;
     static findLast(value: any[], callback: () => any): any;
     static findLastIndex(value: any[], callback: () => any): number;
+    static sort(value1: any, value2: any, order: number, comparator: (a: any, b: any) => any, nullSortOrder: number): number;
+    static compare(value1: any, value2: any, comparator: (a: any, b: any) => any, order: number): number;
     static nestedKeys(obj: object, parentKey?: string): string[];
+    static stringify(value: any, indent?: number, currentIndent?: number): string;
 }
 
 export declare namespace ZIndexUtils {

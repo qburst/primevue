@@ -124,7 +124,7 @@ export default {
                             ]
                         },
                         {
-                            label: 'Archieve',
+                            label: 'Archive',
                             icon: 'pi pi-fw pi-calendar-times',
                             items: [
                                 {
@@ -144,15 +144,18 @@ export default {
                 }
             ],
             code: {
-                basic: `<TieredMenu
+                basic: `
+<TieredMenu
     :model="items"
     :pt="{
         action: ({ props, state, context }) => ({
             class: context.active ? 'bg-primary-200 border-round-sm' : context.focused ? 'bg-primary-300 border-round-sm' : undefined
         })
     }"
-/>`,
-                options: `<template>
+/>
+`,
+                options: `
+<template>
     <div class="card flex justify-content-center">
         <TieredMenu
             :model="items"
@@ -276,7 +279,7 @@ export default {
                             ]
                         },
                         {
-                            label: 'Archieve',
+                            label: 'Archive',
                             icon: 'pi pi-fw pi-calendar-times',
                             items: [
                                 {
@@ -298,8 +301,10 @@ export default {
         };
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex justify-content-center">
         <TieredMenu
             :model="items"
@@ -314,7 +319,7 @@ export default {
 
 <script setup>
 import { ref } from "vue";
-            
+
 const items = ref([
     {
         label: 'File',
@@ -422,7 +427,7 @@ const items = ref([
                 ]
             },
             {
-                label: 'Archieve',
+                label: 'Archive',
                 icon: 'pi pi-fw pi-calendar-times',
                 items: [
                     {
@@ -441,7 +446,8 @@ const items = ref([
         icon: 'pi pi-fw pi-power-off'
     }
 ]);
-<\/script>`
+<\/script>
+`
             }
         };
     }

@@ -52,7 +52,8 @@ export default {
     data() {
         return {
             code: {
-                basic: `<div class="border-round border-1 surface-border p-4 surface-card">
+                basic: `
+<div class="border-round border-1 surface-border p-4 surface-card">
     <ul class="m-0 p-0 list-none">
         <li class="mb-3">
             <div class="flex">
@@ -91,8 +92,10 @@ export default {
             </div>
         </li>
     </ul>
-</div>`,
-                options: `<template>
+</div>
+`,
+                options: `
+<template>
     <div class="border-round border-1 surface-border p-4 surface-card">
         <ul class="m-0 p-0 list-none">
             <li class="mb-3">
@@ -136,8 +139,10 @@ export default {
 </template>
 
 <script>
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="border-round border-1 surface-border p-4 surface-card">
         <ul class="m-0 p-0 list-none">
             <li class="mb-3">
@@ -181,7 +186,8 @@ export default {
 </template>
 
 <script setup>
-<\/script>`
+<\/script>
+`
             }
         };
     }

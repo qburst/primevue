@@ -43,7 +43,8 @@ export default {
         return {
             products: null,
             code: {
-                basic: `<PickList
+                basic: `
+<PickList
     v-model="products"
     dataKey="id"
     :pt="{
@@ -72,8 +73,10 @@ export default {
             <span class="font-bold text-900">$ {{ slotProps.item.price }}</span>
         </div>
     </template>
-</PickList>`,
-                options: `<template>
+</PickList>
+`,
+                options: `
+<template>
     <div class="card">
         <PickList
             v-model="products"
@@ -120,8 +123,10 @@ export default {
         ProductService.getProductsSmall().then((data) => (this.products = [data, []]));
     }
 };
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card">
         <PickList
             v-model="products"
@@ -165,7 +170,8 @@ const products = ref(null);
 onMounted(() => {
     ProductService.getProductsSmall().then((data) => (products.value = [data, []]));
 });
-<\/script>`,
+<\/script>
+`,
                 data: `
 /* ProductService */
 {

@@ -16,11 +16,14 @@ export default {
     data() {
         return {
             code: {
-                basic: `<Chip label="Apple" icon="pi pi-apple" />
+                basic: `
+<Chip label="Apple" icon="pi pi-apple" />
 <Chip label="Facebook" icon="pi pi-facebook" />
 <Chip label="Google" icon="pi pi-google" />
-<Chip label="Microsoft" icon="pi pi-microsoft" removable />`,
-                options: `<template>
+<Chip label="Microsoft" icon="pi pi-microsoft" removable />
+`,
+                options: `
+<template>
     <div class="card flex flex-wrap gap-2">
         <Chip label="Apple" icon="pi pi-apple" />
         <Chip label="Facebook" icon="pi pi-facebook" />
@@ -30,8 +33,10 @@ export default {
 </template>
 <script>
 
-<\/script>`,
-                composition: `<template>
+<\/script>
+`,
+                composition: `
+<template>
     <div class="card flex flex-wrap gap-2">
         <Chip label="Apple" icon="pi pi-apple" />
         <Chip label="Facebook" icon="pi pi-facebook" />
@@ -41,7 +46,8 @@ export default {
 </template>
 <script setup>
 
-<\/script>`
+<\/script>
+`
             }
         };
     }
